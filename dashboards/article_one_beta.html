@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Article One — Beta Preview</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:       #1e3a5f;
+  --navy-deep:  #122540;
+  --navy-mid:   #2a4f7c;
+  --gold:       #c9963a;
+  --gold-light: #f0d9a8;
+  --gold-pale:  #fdf6e8;
+  --slate:      #4a5568;
+  --slate-light:#718096;
+  --muted:      #a0aec0;
+  --border:     #dde3ec;
+  --border-soft:#eaecf2;
+  --bg:         #f7f6f3;
+  --bg-warm:    #f2f0eb;
+  --surface:    #ffffff;
+  --text:       #1a2433;
+  --text-2:     #4a5568;
+  --text-3:     #718096;
+  --green:      #2d6a4f;
+  --green-bg:   #d8f0e5;
+  --red:        #9b2335;
+  --red-bg:     #f5dde0;
+  --amber:      #92600a;
+  --amber-bg:   #fef3c7;
+  --radius-sm:  6px;
+  --radius:     10px;
+  --radius-lg:  14px;
+  --shadow-sm:  0 1px 3px rgba(30,58,95,.08), 0 1px 2px rgba(30,58,95,.06);
+  --shadow:     0 4px 12px rgba(30,58,95,.10), 0 1px 3px rgba(30,58,95,.06);
+  --shadow-lg:  0 8px 32px rgba(30,58,95,.14), 0 2px 8px rgba(30,58,95,.08);
+  --transition: 200ms cubic-bezier(.4,0,.2,1);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Georgia', serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── PLATFORM BAR (Article One OS level) ── */
+.platform-bar {
+  background: var(--navy-deep);
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 300;
+}
+.platform-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #fff;
+  text-decoration: none;
+}
+.platform-mark {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--gold), #e8b85a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 10px;
+  color: var(--navy-deep);
+  letter-spacing: -.5px;
+  flex: none;
+}
+.platform-name {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.9);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.platform-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255,255,255,.15);
+}
+.platform-context {
+  font-size: 11px;
+  color: rgba(255,255,255,.5);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500;
+  letter-spacing: .03em;
+}
+.platform-context span {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+.platform-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.platform-btn {
+  font-size: 11px;
+  color: rgba(255,255,255,.5);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  cursor: pointer;
+  transition: color var(--transition);
+  font-weight: 500;
+  letter-spacing: .03em;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.platform-btn:hover { color: rgba(255,255,255,.9); }
+.platform-member-chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 20px;
+  padding: 3px 10px 3px 5px;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.platform-member-chip:hover { background: rgba(255,255,255,.14); }
+.platform-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #e8b85a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--navy-deep);
+  flex: none;
+}
+.platform-member-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,.85);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ── PROFILE NAV (member profile level) ── */
+.profile-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 36px;
+  z-index: 200;
+  box-shadow: var(--shadow-sm);
+}
+.profile-nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.profile-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px 10px 0;
+  border-right: 1px solid var(--border-soft);
+  margin-right: 8px;
+  flex: none;
+}
+.profile-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 13px;
+  color: #fff;
+  letter-spacing: -.5px;
+  flex: none;
+}
+.profile-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.profile-meta {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 1px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.profile-tabs {
+  display: flex;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.profile-tabs::-webkit-scrollbar { display: none; }
+.ptab {
+  flex-shrink: 0;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--text-3);
+  border-bottom: 2px solid transparent;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color var(--transition), border-color var(--transition);
+  height: 52px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.ptab:hover { color: var(--text); }
+.ptab.active {
+  color: var(--navy);
+  border-bottom-color: var(--navy);
+  font-weight: 600;
+}
+.ptab.module {
+  color: var(--gold);
+  border-bottom-color: transparent;
+}
+.ptab.module.active {
+  color: var(--amber);
+  border-bottom-color: var(--gold);
+}
+.ptab .badge {
+  background: var(--red-bg);
+  color: var(--red);
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ── PAGES ── */
+.page { display: none; padding: 28px 24px; max-width: 1400px; margin: 0 auto; }
+.page.active { display: block; }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.page-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.2;
+  letter-spacing: -.3px;
+}
+.page-sub {
+  font-size: 13px;
+  color: var(--text-3);
+  margin-top: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  max-width: 600px;
+}
+.page-actions {
+  display: flex;
+  gap: 8px;
+  flex: none;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: 1.5px solid;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  text-decoration: none;
+}
+.btn-primary {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--navy-mid); border-color: var(--navy-mid); }
+.btn-secondary {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-2);
+}
+.btn-secondary:hover { background: var(--bg); border-color: var(--muted); }
+
+/* ── FILTER PILLS ── */
+.filter-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 20px;
+}
+.filter-row::-webkit-scrollbar { display: none; }
+.fpill {
+  flex-shrink: 0;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  color: var(--text-3);
+  transition: all var(--transition);
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--surface);
+}
+.fpill:hover { color: var(--text); border-color: var(--muted); }
+.fpill.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+
+/* ── STAT CARDS ── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: all var(--transition);
+  border-top: 3px solid transparent;
+  box-shadow: var(--shadow-sm);
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.stat-label {
+  font-size: 10px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.stat-value {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 4px;
+  letter-spacing: -.5px;
+}
+.stat-sub {
+  font-size: 11.5px;
+  color: var(--text-3);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ── SECTION LABELS ── */
+.sec-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin: 28px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.sec-label::after { content: ''; flex: 1; height: 1px; background: var(--border-soft); }
+
+/* ── CHART CARDS ── */
+.chart-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.ccard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.ctitle {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  color: var(--text);
+}
+.csub {
+  font-size: 11.5px;
+  color: var(--text-3);
+  margin-bottom: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.chart-placeholder {
+  background: var(--bg);
+  border-radius: var(--radius);
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ── NOTES ── */
+.note {
+  font-size: 12.5px;
+  color: var(--text-2);
+  padding: 10px 14px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-left: 3px solid var(--border);
+  background: var(--bg);
+  margin: -8px 0 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+}
+.note.warn { border-left-color: var(--gold); background: var(--gold-pale); color: var(--amber); }
+.note.info { border-left-color: var(--navy-mid); background: #eef3fa; color: var(--navy); }
+
+/* ── FLAG CARDS ── */
+.flag-filter-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  align-items: center;
+}
+.flag-pill {
+  padding: 5px 13px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  color: var(--text-3);
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--surface);
+}
+.flag-pill.active.all { background: var(--navy); border-color: var(--navy); color: #fff; }
+.flag-pill.active.high { background: var(--red); border-color: var(--red); color: #fff; }
+.flag-pill.active.notable { background: var(--amber); border-color: var(--amber); color: #fff; }
+.flag-pill.active.review { background: var(--navy-mid); border-color: var(--navy-mid); color: #fff; }
+
+.flag-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid;
+  border-radius: var(--radius-lg);
+  margin-bottom: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition);
+}
+.flag-card.high { border-left-color: var(--red); }
+.flag-card.notable { border-left-color: var(--gold); }
+.flag-card.review { border-left-color: var(--navy-mid); }
+.flag-card:hover { box-shadow: var(--shadow); }
+
+.flag-summary {
+  padding: 14px 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  user-select: none;
+}
+.flag-sev {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 4px;
+  flex: none;
+  margin-top: 2px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.high .flag-sev { background: var(--red-bg); color: var(--red); }
+.notable .flag-sev { background: var(--gold-pale); color: var(--amber); }
+.review .flag-sev { background: #eef3fa; color: var(--navy-mid); }
+.flag-title { font-weight: 700; font-size: 14px; flex: 1; line-height: 1.4; }
+.flag-preview {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-top: 2px;
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.flag-chevron { font-size: 11px; color: var(--muted); transition: transform var(--transition); flex: none; margin-top: 4px; }
+.flag-card.open .flag-chevron { transform: rotate(90deg); }
+.flag-review-btn {
+  flex: none;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  color: var(--text-3);
+  cursor: pointer;
+  white-space: nowrap;
+  background: var(--surface);
+  transition: all var(--transition);
+  margin-top: 2px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.flag-review-btn:hover { background: var(--bg); border-color: var(--muted); }
+.flag-review-btn.done { background: var(--green-bg); border-color: #6ee7b7; color: var(--green); }
+
+.flag-detail {
+  display: none;
+  border-top: 1px solid var(--border-soft);
+  padding: 16px 20px;
+  background: #fafbfc;
+}
+.flag-card.open .flag-detail { display: block; }
+.flag-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+  margin-bottom: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.flag-reason {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.7;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ── PRUDENCE MODULE HERO ── */
+.prudence-hero {
+  background: linear-gradient(135deg, var(--navy-deep) 0%, #1a3a6b 100%);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  color: #fff;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.prudence-hero::after {
+  content: '';
+  position: absolute;
+  right: -60px;
+  top: -60px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: rgba(201,150,58,.08);
+  pointer-events: none;
+}
+.prudence-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.prudence-hero h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; letter-spacing: -.3px; }
+.prudence-hero p {
+  font-size: 13px;
+  color: rgba(255,255,255,.72);
+  max-width: 700px;
+  line-height: 1.65;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.prudence-subnav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.p-subpill {
+  flex: 1;
+  min-width: 220px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  box-shadow: var(--shadow-sm);
+}
+.p-subpill:hover { border-color: var(--navy-mid); box-shadow: var(--shadow); }
+.p-subpill.active {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 2px rgba(30,58,95,.15);
+  background: #f4f7fb;
+}
+.p-subpill .ico { font-size: 20px; line-height: 1; }
+.p-subpill .pt { font-weight: 700; font-size: 13.5px; color: var(--text); }
+.p-subpill .pd {
+  font-size: 11.5px;
+  color: var(--text-3);
+  margin-top: 2px;
+  line-height: 1.4;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.verdict-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.vcard {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.vcard.pass { border-top-color: var(--green); }
+.vcard.review { border-top-color: var(--gold); }
+.vcard.context { border-top-color: var(--navy-mid); }
+.vcard .vn { font-size: 30px; font-weight: 800; line-height: 1; }
+.vcard.pass .vn { color: var(--green); }
+.vcard.review .vn { color: var(--amber); }
+.vcard.context .vn { color: var(--navy-mid); }
+.vcard .vl {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-top: 5px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.check-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid;
+  border-radius: var(--radius-lg);
+  margin-bottom: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition);
+}
+.check-card[data-sev=pass] { border-left-color: var(--green); }
+.check-card[data-sev=review] { border-left-color: var(--gold); }
+.check-card[data-sev=context] { border-left-color: var(--navy-mid); }
+.check-card:hover { box-shadow: var(--shadow); }
+.check-summary {
+  padding: 15px 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+}
+.sev-badge {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.sev-badge.pass { background: var(--green-bg); color: var(--green); }
+.sev-badge.review { background: var(--gold-pale); color: var(--amber); }
+.sev-badge.context { background: #eef3fa; color: var(--navy-mid); }
+.check-title { font-weight: 700; font-size: 14px; flex: 1; }
+.check-amt { font-size: 13px; font-weight: 700; color: var(--text-2); white-space: nowrap; font-family: ui-monospace, monospace; }
+.check-arrow { color: var(--muted); transition: transform var(--transition); font-size: 11px; }
+.check-card.open .check-arrow { transform: rotate(90deg); }
+.check-body {
+  display: none;
+  padding: 0 18px 18px;
+  border-top: 1px solid var(--border-soft);
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-2);
+  background: #fafbfc;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  padding-top: 14px;
+}
+.check-card.open .check-body { display: block; }
+
+/* ── DISCLAIMER ── */
+.disclaimer {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  font-size: 11.5px;
+  color: var(--text-3);
+  margin-top: 28px;
+  line-height: 1.7;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ── INNER TABS ── */
+.inner-tab-bar {
+  display: flex;
+  gap: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.itab {
+  flex: 1;
+  min-width: 90px;
+  text-align: center;
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-3);
+  transition: all var(--transition);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.itab:hover { color: var(--text); }
+.itab.active { background: var(--navy); color: #fff; box-shadow: 0 2px 8px rgba(30,58,95,.25); }
+
+/* ── SHAI VIEW ── */
+.shai-view { display: none; }
+.shai-view.active { display: block; }
+
+/* ── RESPONSIVE ── */
+@media(max-width: 800px) { .chart-row { grid-template-columns: 1fr; } }
+@media(max-width: 640px) {
+  .page { padding: 16px 14px; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .platform-context { display: none; }
+}
+@media(min-width: 1024px) { .page { padding: 28px 36px; } }
+</style>
+</head>
+<body>
+
+<!-- ── ARTICLE ONE PLATFORM BAR ── -->
+<div class="platform-bar">
+  <div class="platform-logo">
+    <div class="platform-mark">A1</div>
+    <div class="platform-name">Article One</div>
+  </div>
+  <div class="platform-divider"></div>
+  <div class="platform-context">Political Intelligence OS &nbsp;·&nbsp; <span>CA-14 Profile</span></div>
+  <div class="platform-right">
+    <button class="platform-btn">All Members</button>
+    <button class="platform-btn">Export</button>
+    <div class="platform-member-chip">
+      <div class="platform-avatar">ES</div>
+      <div class="platform-member-name">Swalwell</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PROFILE NAV ── -->
+<nav class="profile-nav">
+  <div class="profile-nav-inner">
+    <div class="profile-identity">
+      <div class="profile-badge">ES</div>
+      <div>
+        <div class="profile-name">Eric Swalwell</div>
+        <div class="profile-meta">CA-14 · D · 119th Congress · 7 terms</div>
+      </div>
+    </div>
+    <div class="profile-tabs">
+      <button class="ptab active" onclick="showPage('overview', this)">Financial Overview</button>
+      <button class="ptab" onclick="showPage('entities', this)">Entities</button>
+      <button class="ptab" onclick="showPage('vendors', this)">Vendor Intelligence</button>
+      <button class="ptab" onclick="showPage('timeline', this)">Timeline</button>
+      <button class="ptab module" onclick="showPage('prudence', this)">⚖ Prudence <span class="badge">3</span></button>
+      <button class="ptab" onclick="showPage('sources', this)">Sources</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── FINANCIAL OVERVIEW ── -->
+<div id="page-overview" class="page active">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Financial Universe Overview</div>
+      <div class="page-sub">All publicly-available political financial data for this member · rebuilt from primary sources · click any card to filter</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-secondary">↓ Export</button>
+      <button class="btn btn-primary">🔍 Deep Search</button>
+    </div>
+  </div>
+
+  <!-- Year filter -->
+  <div class="filter-row">
+    <div class="fpill active">All years</div>
+    <div class="fpill">2024–26</div>
+    <div class="fpill">2020–23</div>
+    <div class="fpill">2016–19</div>
+    <div class="fpill">2012–15</div>
+  </div>
+
+  <!-- Stat cards -->
+  <div class="stat-grid">
+    <div class="stat-card" style="border-top-color:#1e3a5f">
+      <div class="stat-label">Total Universe</div>
+      <div class="stat-value">$18.4M</div>
+      <div class="stat-sub">All entities · all years</div>
+    </div>
+    <div class="stat-card" style="border-top-color:#2a4f7c">
+      <div class="stat-label">House Campaign</div>
+      <div class="stat-value">$9.1M</div>
+      <div class="stat-sub">FEC · 2012–2026</div>
+    </div>
+    <div class="stat-card" style="border-top-color:#c9963a">
+      <div class="stat-label">Presidential 2020</div>
+      <div class="stat-value">$2.6M</div>
+      <div class="stat-sub">FEC · 87-day campaign</div>
+    </div>
+    <div class="stat-card" style="border-top-color:#9b2335">
+      <div class="stat-label">Gov. Race 2025–26</div>
+      <div class="stat-value">$6.3M</div>
+      <div class="stat-sub">FPPC · withdrew early 2026</div>
+    </div>
+    <div class="stat-card" style="border-top-color:#4a5568">
+      <div class="stat-label">House Office (MRA)</div>
+      <div class="stat-value">$3.8M</div>
+      <div class="stat-sub">SOD · taxpayer funds</div>
+    </div>
+    <div class="stat-card" style="border-top-color:#2d6a4f">
+      <div class="stat-label">Unique Vendors</div>
+      <div class="stat-value">340+</div>
+      <div class="stat-sub">Across all entities</div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="sec-label">Spending by entity</div>
+  <div class="chart-row">
+    <div class="ccard">
+      <div class="ctitle">Total outflow by entity</div>
+      <div class="csub">Click any bar to jump to entity detail</div>
+      <div class="chart-placeholder">[ Bar chart renders here — Chart.js ]</div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">Spending mix</div>
+      <div class="csub">Share of total universe</div>
+      <div class="chart-placeholder">[ Doughnut chart ]</div>
+    </div>
+  </div>
+
+  <div class="sec-label">Year-over-year spending</div>
+  <div class="note info">Covers dated sources only (FEC campaign + House Office). CA Governor file carries no transaction dates.</div>
+  <div class="chart-row">
+    <div class="ccard">
+      <div class="ctitle">Annual spend — all dated entities stacked</div>
+      <div class="csub">2012–2026</div>
+      <div class="chart-placeholder">[ Stacked bar chart ]</div>
+    </div>
+    <div class="ccard">
+      <div class="ctitle">Top 10 vendors / payees</div>
+      <div class="csub">Cross-entity · largest by total</div>
+      <div class="chart-placeholder">[ Horizontal bar chart ]</div>
+    </div>
+  </div>
+
+  <!-- Flags -->
+  <div class="sec-label" style="margin-top:32px">Flags & Data Integrity</div>
+  <div class="note warn">Every flag is generated from the data and traceable to its source · click a flag to expand · mark reviewed to track analysis</div>
+  <div class="flag-filter-row">
+    <div class="flag-pill active all">All <span style="font-size:10px;font-weight:800;background:rgba(0,0,0,.12);border-radius:10px;padding:1px 6px">9</span></div>
+    <div class="flag-pill">HIGH <span style="font-size:10px;font-weight:800;background:rgba(0,0,0,.08);border-radius:10px;padding:1px 6px">2</span></div>
+    <div class="flag-pill">NOTABLE <span style="font-size:10px;font-weight:800;background:rgba(0,0,0,.08);border-radius:10px;padding:1px 6px">4</span></div>
+    <div class="flag-pill">REVIEW <span style="font-size:10px;font-weight:800;background:rgba(0,0,0,.08);border-radius:10px;padding:1px 6px">3</span></div>
+  </div>
+
+  <div class="flag-card high open" onclick="this.classList.toggle('open')">
+    <div class="flag-summary">
+      <div class="flag-sev">High</div>
+      <div style="flex:1">
+        <div class="flag-title">$30,903 private jet gift — Stephen Cloobeck</div>
+        <div class="flag-preview">Burbank → Nice, France · disclosed on 2024 annual report · Cloobeck arrested May 2026</div>
+      </div>
+      <button class="flag-review-btn" onclick="event.stopPropagation();this.classList.toggle('done');this.textContent=this.classList.contains('done')?'✓ Reviewed':'Mark reviewed'">Mark reviewed</button>
+      <div class="flag-chevron">▶</div>
+    </div>
+    <div class="flag-detail">
+      <div class="flag-section-label">Why flagged</div>
+      <div class="flag-reason">A $30,903 private jet flight (Burbank to Nice, France) was disclosed as a gift from hotel billionaire Stephen Cloobeck on Swalwell's 2024 annual financial disclosure. In May 2026, Cloobeck was arrested on felony witness intimidation charges and publicly denounced Swalwell after leaving the Democratic Party. The combination of the gift's value, the donor's subsequent legal troubles, and the foreign destination warrants close scrutiny.</div>
+    </div>
+  </div>
+
+  <div class="flag-card notable" onclick="this.classList.toggle('open')">
+    <div class="flag-summary">
+      <div class="flag-sev">Notable</div>
+      <div style="flex:1">
+        <div class="flag-title">Sara Azari — $313K billed as "Campaign Legal Compliance"</div>
+        <div class="flag-preview">Criminal defense attorney · cross-entity billing pattern</div>
+      </div>
+      <button class="flag-review-btn" onclick="event.stopPropagation();this.classList.toggle('done');this.textContent=this.classList.contains('done')?'✓ Reviewed':'Mark reviewed'">Mark reviewed</button>
+      <div class="flag-chevron">▶</div>
+    </div>
+    <div class="flag-detail">
+      <div class="flag-section-label">Why flagged</div>
+      <div class="flag-reason">Sara Azari is a well-known criminal defense attorney, not a campaign compliance lawyer. $313K billed under "Campaign Legal Compliance" across multiple entities is unusual and warrants inquiry into what specific legal matters were being addressed.</div>
+    </div>
+  </div>
+
+  <div class="flag-card review" onclick="this.classList.toggle('open')">
+    <div class="flag-summary">
+      <div class="flag-sev">Review</div>
+      <div style="flex:1">
+        <div class="flag-title">Tucker Group — billed all entities for 14 consecutive years</div>
+        <div class="flag-preview">$6.37M across 13 firms · media consultant with unusual continuity</div>
+      </div>
+      <button class="flag-review-btn" onclick="event.stopPropagation();this.classList.toggle('done');this.textContent=this.classList.contains('done')?'✓ Reviewed':'Mark reviewed'">Mark reviewed</button>
+      <div class="flag-chevron">▶</div>
+    </div>
+    <div class="flag-detail">
+      <div class="flag-section-label">Why flagged</div>
+      <div class="flag-reason">Tucker Group has billed every controlled entity for 14 consecutive years at a combined $6.37M. This level of continuity across separate legal entities — including the Governor's race — is unusual and suggests a very tight relationship worth documenting.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── ENTITIES (stub) ── -->
+<div id="page-entities" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Entity Profiles</div>
+      <div class="page-sub">Click a card to view · click multiple to compare across entities and find shared payees</div>
+    </div>
+  </div>
+  <div class="note info">This tab is fully functional in the production dashboard — showing design shell only in this preview.</div>
+</div>
+
+<!-- ── VENDORS (stub) ── -->
+<div id="page-vendors" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Vendor Intelligence</div>
+      <div class="page-sub">Every vendor across all entities · categorized by function · hotel tier · legal controversy correlation</div>
+    </div>
+  </div>
+  <div class="inner-tab-bar">
+    <div class="itab active">Overview</div>
+    <div class="itab">📺 Media & Advertising</div>
+    <div class="itab">🏨 Hotels & Lodging</div>
+    <div class="itab">⚖️ Legal Services</div>
+  </div>
+  <div class="note info">Fully functional in production — showing design shell only in this preview.</div>
+</div>
+
+<!-- ── TIMELINE (stub) ── -->
+<div id="page-timeline" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Political Career Timeline</div>
+      <div class="page-sub">Eric Swalwell · comprehensive chronology 1980–2026</div>
+    </div>
+  </div>
+  <div class="note info">Fully functional in production — showing design shell only in this preview.</div>
+</div>
+
+<!-- ── PRUDENCE MODULE ── -->
+<div id="page-prudence" class="page">
+  <div class="prudence-hero">
+    <div class="prudence-eyebrow">⚖ Prudence · Automated Compliance Screen</div>
+    <h2>Ethics & Spending Analysis</h2>
+    <p>An automated review of Rep. Swalwell's taxpayer-funded office spending and staffing structure, screened against the Members' Congressional Handbook and published research. This is a first-pass screen to surface items for human review — not a finding of wrongdoing.</p>
+  </div>
+
+  <div class="prudence-subnav">
+    <div class="p-subpill active" onclick="showShaiView('spending', this)">
+      <div class="ico">💵</div>
+      <div>
+        <div class="pt">① MRA Spending & Rules Check</div>
+        <div class="pd">Taxpayer money screened line-by-line against the Members' Handbook & House Rules.</div>
+      </div>
+    </div>
+    <div class="p-subpill" onclick="showShaiView('structure', this)">
+      <div class="ico">🧭</div>
+      <div>
+        <div class="pt">② Workplace Structure Screen</div>
+        <div class="pd">Office staffing structure screened against published research on workplace power imbalances.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shai-view active" id="shai-spending">
+    <div class="note warn" style="margin-bottom:20px"><strong>Read first.</strong> Every item is either compliant or flagged only because the disbursement record alone cannot confirm the purpose. Flags are questions to ask, not conclusions.</div>
+
+    <div class="verdict-grid">
+      <div class="vcard pass"><div class="vn">14</div><div class="vl">Compliant</div></div>
+      <div class="vcard review"><div class="vn">3</div><div class="vl">For Review</div></div>
+      <div class="vcard context"><div class="vn">2</div><div class="vl">Needs Context</div></div>
+    </div>
+
+    <div class="sec-label">Check results</div>
+
+    <div class="check-card" data-sev="review" onclick="this.classList.toggle('open')">
+      <div class="check-summary">
+        <div class="sev-badge review">Review</div>
+        <div class="check-title">Staff travel — purpose not documented in disbursements</div>
+        <div class="check-amt">$42,100</div>
+        <div class="check-arrow">▶</div>
+      </div>
+      <div class="check-body">The Statement of Disbursements records travel payments to staff but does not specify whether these are official constituent-service trips or other travel. The Members' Handbook requires that travel be for official business. Request trip documentation to confirm compliance.</div>
+    </div>
+
+    <div class="check-card" data-sev="pass" onclick="this.classList.toggle('open')">
+      <div class="check-summary">
+        <div class="sev-badge pass">Compliant</div>
+        <div class="check-title">Franked mail — within MRA cap</div>
+        <div class="check-amt">$187,400</div>
+        <div class="check-arrow">▶</div>
+      </div>
+      <div class="check-body">Franking costs are within the statutory cap. Total franked mail for the reporting period is consistent with prior cycles and does not approach the 90-day pre-election restriction window.</div>
+    </div>
+
+    <div class="check-card" data-sev="context" onclick="this.classList.toggle('open')">
+      <div class="check-summary">
+        <div class="sev-badge context">Context</div>
+        <div class="check-title">Equipment lease — vendor is non-standard</div>
+        <div class="check-amt">$18,600</div>
+        <div class="check-arrow">▶</div>
+      </div>
+      <div class="check-body">Equipment leased from a vendor not on the standard GSA schedule. This is not prohibited, but requires confirmation that the rate is comparable to GSA pricing and that the purchase was appropriately authorized. Common for district office setups in high-cost areas.</div>
+    </div>
+  </div>
+
+  <div class="shai-view" id="shai-structure">
+    <div class="note info" style="margin-bottom:20px">Staffing structure analysis — showing design shell in this preview.</div>
+  </div>
+
+  <div class="disclaimer"><strong>Sources:</strong> U.S. House Statement of Disbursements · Members' Congressional Handbook · House Rules · Office of Congressional Ethics precedents. All analysis generated from primary sources. No legal conclusions asserted.</div>
+</div>
+
+<!-- ── SOURCES (stub) ── -->
+<div id="page-sources" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Sources & Provenance</div>
+      <div class="page-sub">Every figure rebuilt from these primary sources · no hand-typed numbers</div>
+    </div>
+  </div>
+  <div class="note info">Fully functional in production — showing design shell only in this preview.</div>
+</div>
+
+<script>
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+}
+
+function showShaiView(id, el) {
+  document.querySelectorAll('.shai-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.p-subpill').forEach(p => p.classList.remove('active'));
+  document.getElementById('shai-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+}
+</script>
+</body>
+</html>

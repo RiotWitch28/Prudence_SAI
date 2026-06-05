@@ -1,0 +1,80 @@
+Sovereign AI — Folder Organization Overview
+═══════════════════════════════════════════════════════════════════════════
+
+📦 Sovereign AI/
+│
+├── 📊 dashboards/                    [ACTIVE DASHBOARD APP]
+│   ├── swalwell_dashboard copy.html  → Main dashboard (deploy this)
+│   ├── swalwell_data.js              → Data payload (all entities & transactions)
+│   ├── swalwell_data.json            → Same data in JSON format
+│   └── chart.umd.min.js              → Chart.js library
+│
+├── 📁 data/                          [PROCESSED DATA]
+│   ├── swalwell/                     → Cleaned Swalwell-specific data
+│   ├── sod_raw/                      → Statement of Disbursements (raw)
+│   └── master/                       → Master datasets
+│
+├── 📋 _source-data/                  [RAW DATA EXPORTS]
+│   ├── Swalwell for Congress FEC.csv         → FEC campaign filings
+│   ├── SWALWELL-PRESIDENTIAL-RACE-2019.csv  → 2019 presidential campaign
+│   ├── schedule_b-*.csv                      → FEC vendor payments (dated)
+│   ├── 119th_MASTER_LIST.xlsx               → All House members (FY2024)
+│   ├── Swalwell Gov.xls                     → Governor-era FPPC data
+│   ├── download_sod_files copy.sh           → Script to fetch SOD data
+│   ├── fec_secrets.txt.txt                  → FEC API credentials
+│   └── INDEX.md                             → What each file is and when to use it
+│
+├── 🏛️ _reference/                   [REFERENCE & GUIDELINES]
+│   ├── House Admin/                         → Official House handbooks & rules
+│   ├── Swalwell Hotel Vendors 2.xlsx        → Vendor analysis
+│   ├── Swalwell Legal Fees Report.docx      → Legal expenses
+│   ├── swalwell vendor profile report.pdf   → Vendor spending patterns
+│   └── INDEX.md                             → When to reference these docs
+│
+├── 📚 _research/                     [RESEARCH & FRAMEWORKS]
+│   ├── papers/                              → Academic research documents
+│   │   ├── EEOC 2016 workplace harassment 12 factors
+│   │   ├── Grooming models & organizational dynamics
+│   │   ├── CRS staffing benchmarks
+│   │   ├── Congressional reporting & abuse prevention
+│   │   └── INDEX.md                         → How frameworks are used
+│   └──
+│
+├── 🗃️ _archive/                     [OLD CODE & LIBRARIES — NOT ACTIVE]
+│   ├── api.congress.gov-main/       → Congress API client reference
+│   ├── build/                       → Build artifacts
+│   ├── MRA 2/                       → Earlier MRA analysis prototype
+│   └── INDEX.md                     → What's here and why
+│
+├── 📄 README.md                      [START HERE — Overview of everything]
+├── 📊 STRUCTURE.txt                  [This file]
+└── ✅ CLAUDE.md (optional)           [Project-specific instructions for Claude]
+
+═══════════════════════════════════════════════════════════════════════════
+
+KEY WORKFLOWS
+─────────────
+
+💾 TO REFRESH DATA:
+   1. Export new files → place in _source-data/
+   2. Process/clean → save to data/
+   3. Update dashboard data files in dashboards/
+   4. Deploy dashboards/ folder to Netlify
+
+📖 TO UNDERSTAND THE DATA:
+   • Read: _source-data/INDEX.md (what's available)
+   • Read: README.md (data types, sources, formats)
+   • Check: _research/papers/ (frameworks & analysis)
+
+🔧 TO DEPLOY DASHBOARD:
+   • Drag dashboards/ folder → netlify.com/drop
+   • (Keep swalwell_dashboard copy.html as the active version)
+
+🔍 TO FIND SOMETHING:
+   • Active data?        → Look in dashboards/ or data/
+   • Raw exports?        → Look in _source-data/
+   • Policy guidelines?  → Look in _reference/House Admin/
+   • Research source?    → Look in _research/papers/
+   • Old code/library?   → Look in _archive/
+
+═══════════════════════════════════════════════════════════════════════════

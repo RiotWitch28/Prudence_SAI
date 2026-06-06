@@ -204,16 +204,14 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);position:sti
 .sec-note.good{border-left-color:var(--green);background:var(--green-bg);color:var(--green)}
 
 /* ── FINANCIAL DISCLOSURE ── */
-.disclosure-hero{background:linear-gradient(135deg,#fff7ed,#fef2f2);border:1px solid #fdba74;border-radius:var(--radius-lg);padding:20px;margin-bottom:20px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow-sm)}
-body.dark .disclosure-hero{background:linear-gradient(135deg,#1a1f2e,#1f1015);border-color:#5a1a10}
+.disclosure-hero{background:linear-gradient(135deg,var(--surface),var(--gold-pale));border:1px solid var(--gold);border-radius:var(--radius-lg);padding:20px;margin-bottom:20px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow-sm)}
 .disclosure-hero-title{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3)}
 .disclosure-hero-name{font-size:22px;font-weight:800;color:var(--text)}
 .disclosure-hero-sub{font-size:12px;color:var(--text-3)}
 .disclosure-hero-meta{display:flex;flex-wrap:wrap;gap:8px}
 .disclosure-meta-chip{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:11px;color:var(--text-3)}
 .disclosure-meta-chip strong{color:var(--text)}
-.net-worth-block{background:var(--surface);border:2px solid #f3b0a8;border-radius:var(--radius-lg);padding:18px;margin-bottom:14px;text-align:center;box-shadow:var(--shadow-sm)}
-body.dark .net-worth-block{border-color:#5a1a10}
+.net-worth-block{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--red);border-radius:var(--radius-lg);padding:18px;margin-bottom:14px;text-align:center;box-shadow:var(--shadow-sm)}
 .net-worth-label{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3);margin-bottom:6px}
 .net-worth-range{font-size:28px;font-weight:800;color:var(--red)}
 .net-worth-sub{font-size:11px;color:var(--text-3);margin-top:4px}
@@ -225,32 +223,32 @@ body.dark .net-worth-block{border-color:#5a1a10}
 .salary-bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden}
 .salary-value{font-size:12px;font-weight:700;white-space:nowrap;width:90px;text-align:right;flex-shrink:0}
 .disc-flag-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:20px}
-.disc-flag-card{background:var(--surface);border:1px solid var(--border);border-left:4px solid #f85149;border-radius:var(--radius-lg);padding:16px;box-shadow:var(--shadow-sm)}
-.disc-flag-card.amber{border-left-color:#f59e0b}
-.disc-flag-card.purple{border-left-color:#bc8cff}
+.disc-flag-card{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--red);border-radius:var(--radius-lg);padding:16px;box-shadow:var(--shadow-sm)}
+.disc-flag-card.amber{border-left-color:var(--gold)}
+.disc-flag-card.purple{border-left-color:var(--navy-mid)}
 .disc-flag-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px;flex-wrap:wrap}
 .disc-flag-title{font-weight:700;font-size:13px;color:var(--text)}
 .disc-flag-sev{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;white-space:nowrap}
 .disc-flag-sev.high{background:var(--red-bg);color:var(--red)}
-.disc-flag-sev.medium{background:var(--amber-bg);color:var(--amber)}
-.disc-flag-sev.notable{background:#efe5fb;color:#7c3aed}
-body.dark .disc-flag-sev.notable{background:#2d1f3d;color:#bc8cff}
+.disc-flag-sev.medium{background:var(--gold-pale);color:var(--amber)}
+.disc-flag-sev.notable{background:#e7eef7;color:var(--navy-mid)}
+body.dark .disc-flag-sev.notable{background:#0d1520}
 .disc-flag-body{font-size:12px;color:var(--text-3);line-height:1.7}
-.disc-flag-amount{font-size:18px;font-weight:700;color:#f85149;margin-bottom:4px}
-.disc-flag-amount.amber{color:#f59e0b}
-.disc-flag-amount.purple{color:#bc8cff}
+.disc-flag-amount{font-size:18px;font-weight:700;color:var(--red);margin-bottom:4px}
+.disc-flag-amount.amber{color:var(--gold)}
+.disc-flag-amount.purple{color:var(--navy-mid)}
 .travel-item{background:var(--bg);border-radius:8px;padding:12px 14px;border-left:3px solid var(--border);display:flex;flex-direction:column;gap:4px}
-.travel-item.foreign-gov{border-left-color:#f85149}
-.travel-item.pharma{border-left-color:#f59e0b}
-.travel-item.private{border-left-color:#bc8cff}
+.travel-item.foreign-gov{border-left-color:var(--red)}
+.travel-item.pharma{border-left-color:var(--gold)}
+.travel-item.private{border-left-color:var(--navy-mid)}
 .travel-source{font-weight:700;font-size:13px;color:var(--text)}
 .travel-route{font-size:12px;color:var(--text-3)}
 .travel-dates{font-size:11px;color:var(--text-3)}
 .travel-tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700}
 .travel-tag.fg{background:var(--red-bg);color:var(--red)}
-.travel-tag.ph{background:var(--amber-bg);color:var(--amber)}
-.travel-tag.pr{background:#efe5fb;color:#7c3aed}
-body.dark .travel-tag.pr{background:#2d1f3d;color:#bc8cff}
+.travel-tag.ph{background:var(--gold-pale);color:var(--amber)}
+.travel-tag.pr{background:#e7eef7;color:var(--navy-mid)}
+body.dark .travel-tag.pr{background:#0d1520}
 @media(min-width:640px){.disc-flag-grid{grid-template-columns:repeat(2,1fr)};.salary-label{width:200px}}
 @media(min-width:1024px){.disc-flag-grid{grid-template-columns:repeat(3,1fr)}}
 
@@ -966,9 +964,9 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
 
   <div class="chart-row">
     <div class="ccard">
-      <div class="ctitle">Assets vs. Liabilities — Disclosed Ranges</div>
-      <div class="csub">Both the minimum and maximum disclosed scenarios</div>
-      <div class="cwrap tall"><canvas id="d-assets-liab"></canvas></div>
+      <div class="ctitle">Liabilities by Creditor</div>
+      <div class="csub">Schedule D · minimum disclosed value of each obligation</div>
+      <div class="cwrap tall"><canvas id="d-liab-creditor"></canvas></div>
     </div>
     <div class="ccard">
       <div class="ctitle">Annual Salary Reality Check</div>
@@ -982,41 +980,41 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
     <div style="font-size:11px;color:var(--text-3);margin-bottom:14px">Congressional salary frozen at $174,000 since 2009. All bars shown relative to annual gross salary.</div>
     <div class="salary-row">
       <div class="salary-label">Annual Salary (gross)</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:100%;background:#3fb950">$174,000</div></div>
-      <div class="salary-value" style="color:#3fb950">$174,000</div>
+      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:100%;background:#2d6a4f">$174,000</div></div>
+      <div class="salary-value" style="color:var(--green)">$174,000</div>
     </div>
     <div class="salary-row">
       <div class="salary-label">Outside Income (C Street)</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:18%;background:#58a6ff">$31,815</div></div>
-      <div class="salary-value" style="color:#58a6ff">$31,815</div>
+      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:18%;background:#2a4f7c">$31,815</div></div>
+      <div class="salary-value" style="color:var(--navy-mid)">$31,815</div>
     </div>
     <div class="salary-row">
       <div class="salary-label">Est. Federal Income Tax (~32%)</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:32%;background:#8b949e">~$55,680</div></div>
+      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:32%;background:#718096">~$55,680</div></div>
       <div class="salary-value" style="color:var(--text-3)">~$55,680</div>
     </div>
     <div class="salary-row">
       <div class="salary-label">Est. Take-Home Pay</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:68%;background:#f97316">~$118,320</div></div>
-      <div class="salary-value" style="color:#f97316">~$118,320</div>
+      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:68%;background:#b45309">~$118,320</div></div>
+      <div class="salary-value" style="color:var(--amber)">~$118,320</div>
     </div>
     <div class="salary-row">
       <div class="salary-label">Home Loan (min est. payment)</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:35%;background:#f85149">~$60,804</div></div>
-      <div class="salary-value" style="color:#f85149">~$60,804</div>
+      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:35%;background:#9b2335">~$60,804</div></div>
+      <div class="salary-value" style="color:var(--red)">~$60,804</div>
     </div>
     <div class="salary-row">
       <div class="salary-label">Credit Card Debt (combined)</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:17%;background:#f85149aa">$30K–$100K</div></div>
-      <div class="salary-value" style="color:#f85149">$30K–$100K</div>
+      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:17%;background:#9b2335b3">$30K–$100K</div></div>
+      <div class="salary-value" style="color:var(--red)">$30K–$100K</div>
     </div>
     <div class="salary-row">
       <div class="salary-label">Student Loans (outstanding)</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:29%;background:#f59e0b">$50K–$100K</div></div>
-      <div class="salary-value" style="color:#f59e0b">$50K–$100K</div>
+      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:29%;background:#c9963a">$50K–$100K</div></div>
+      <div class="salary-value" style="color:var(--gold)">$50K–$100K</div>
     </div>
     <div style="margin-top:12px;padding:10px 12px;background:var(--bg);border-radius:8px;font-size:11px;color:var(--text-3);line-height:1.7">
-      <strong style="color:var(--text)">Key ratio:</strong> At the minimum home loan value ($1M+), estimated annual mortgage payments (~$60,804) consume approximately <strong style="color:#f85149">35% of gross salary</strong> or <strong style="color:#f85149">51% of estimated take-home pay</strong> — before credit card payments, student loans, or living expenses. The salary has been frozen since 2009 and has lost ~30% of its purchasing power to inflation since then.
+      <strong style="color:var(--text)">Key ratio:</strong> At the minimum home loan value ($1M+), estimated annual mortgage payments (~$60,804) consume approximately <strong style="color:var(--red)">35% of gross salary</strong> or <strong style="color:var(--red)">51% of estimated take-home pay</strong> — before credit card payments, student loans, or living expenses. The salary has been frozen since 2009 and has lost ~30% of its purchasing power to inflation since then.
     </div>
   </div>
 
@@ -1048,7 +1046,7 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
       <div class="disc-flag-body">Two trips sponsored by Center Forward — a 501(c)(4) identified by Kaiser Health News and OpenSecrets as heavily funded by pharmaceutical industry lobbying entities. Includes a 5-day Lisbon, Portugal trip (Jun 2024). Creates a potential conflict for a lawmaker voting on drug pricing legislation.</div>
     </div>
     <div class="disc-flag-card purple">
-      <div class="disc-flag-header"><div class="disc-flag-title">Rockbridge Capital Travel — Spouse's Employer</div><div class="disc-flag-sev notable">NOTABLE</div></div>
+      <div class="disc-flag-header"><div class="disc-flag-title">Rockbridge Capital Travel — Spouse's Employer</div><div class="disc-flag-sev notable">REVIEW</div></div>
       <div class="disc-flag-amount purple">Baku, Azerbaijan · 3 days</div>
       <div class="disc-flag-body">Rockbridge Capital paid for a Sept 13–16, 2024 trip to Baku, Azerbaijan. Schedule C of this disclosure lists "Rockbridge Holdings" as the source of Swalwell's spouse's salary — both are in the same Rockbridge investment firm family. All expenses paid; 0 days at own expense.</div>
     </div>
@@ -1061,7 +1059,7 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
       <tbody>
         <tr><td>Bank of America</td><td>Self</td><td>$15,001–$50,000</td><td style="color:var(--text-3);font-size:11px">None</td></tr>
         <tr><td>CA Public Employees Retirement System</td><td>Self</td><td>$1,001–$15,000</td><td style="color:var(--text-3);font-size:11px">Tax-Deferred</td></tr>
-        <tr><td><strong style="color:#f59e0b">Findraiser LLC ⚑</strong><br><span style="font-size:11px;color:var(--text-3)">AI fundraising tool · Pleasanton, CA · Co-founded with Chief of Staff</span></td><td>Self</td><td style="color:#f59e0b;font-weight:700">$250,001–$500,000</td><td style="color:var(--text-3);font-size:11px">None</td></tr>
+        <tr><td><strong style="color:var(--gold)">Findraiser LLC ⚑</strong><br><span style="font-size:11px;color:var(--text-3)">AI fundraising tool · Pleasanton, CA · Co-founded with Chief of Staff</span></td><td>Self</td><td style="color:var(--gold);font-weight:700">$250,001–$500,000</td><td style="color:var(--text-3);font-size:11px">None</td></tr>
       </tbody>
     </table></div>
   </div>
@@ -1071,7 +1069,7 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
     <div class="tscroll"><table>
       <thead><tr><th>Source</th><th>Type</th><th class="num">Amount</th></tr></thead>
       <tbody>
-        <tr><td><strong>The C Street</strong><br><span style="font-size:11px;color:var(--text-3)">Outside earned income — centrist political nonprofit, DC</span></td><td style="font-size:11px;color:var(--text-3)">Outside Earned Income</td><td class="num" style="color:#3fb950">$31,815</td></tr>
+        <tr><td><strong>The C Street</strong><br><span style="font-size:11px;color:var(--text-3)">Outside earned income — centrist political nonprofit, DC</span></td><td style="font-size:11px;color:var(--text-3)">Outside Earned Income</td><td class="num" style="color:var(--green)">$31,815</td></tr>
         <tr><td><strong>Rockbridge Holdings ⚑</strong><br><span style="font-size:11px;color:var(--text-3)">Hotel investment firm — same family as Rockbridge Capital (paid for Azerbaijan trip)</span></td><td style="font-size:11px;color:var(--text-3)">Spouse Salary</td><td class="num" style="color:var(--text-3)">N/A</td></tr>
       </tbody>
     </table></div>
@@ -1082,11 +1080,11 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
     <div class="tscroll"><table>
       <thead><tr><th>Creditor</th><th>Date</th><th>Type</th><th class="num">Amount Range</th></tr></thead>
       <tbody>
-        <tr><td>Ed Financial</td><td>May 2006</td><td style="font-size:11px;color:var(--text-3)">Student Loans</td><td class="num" style="color:#f59e0b">$50,001–$100,000</td></tr>
-        <tr><td>Chase Bank</td><td>Oct 2016</td><td style="font-size:11px;color:var(--text-3)">Credit Card</td><td class="num" style="color:#f85149">$15,001–$50,000</td></tr>
-        <tr><td>American Express</td><td>Oct 2016</td><td style="font-size:11px;color:var(--text-3)">Credit Card</td><td class="num" style="color:#f85149">$15,001–$50,000</td></tr>
-        <tr><td><strong style="color:#f85149">Apple Federal Credit Union ⚑</strong></td><td>Apr 2022</td><td style="font-size:11px;color:var(--text-3)">Home Loan</td><td class="num" style="color:#f85149;font-size:15px;font-weight:800">$1,000,001–$5,000,000</td></tr>
-        <tr style="font-weight:700;border-top:2px solid var(--border)"><td colspan="3">TOTAL LIABILITIES RANGE</td><td class="num" style="color:#f85149">$1,080,004–$5,200,000</td></tr>
+        <tr><td>Ed Financial</td><td>May 2006</td><td style="font-size:11px;color:var(--text-3)">Student Loans</td><td class="num" style="color:var(--gold)">$50,001–$100,000</td></tr>
+        <tr><td>Chase Bank</td><td>Oct 2016</td><td style="font-size:11px;color:var(--text-3)">Credit Card</td><td class="num" style="color:var(--red)">$15,001–$50,000</td></tr>
+        <tr><td>American Express</td><td>Oct 2016</td><td style="font-size:11px;color:var(--text-3)">Credit Card</td><td class="num" style="color:var(--red)">$15,001–$50,000</td></tr>
+        <tr><td><strong style="color:var(--red)">Apple Federal Credit Union ⚑</strong></td><td>Apr 2022</td><td style="font-size:11px;color:var(--text-3)">Home Loan</td><td class="num" style="color:var(--red);font-size:15px;font-weight:800">$1,000,001–$5,000,000</td></tr>
+        <tr style="font-weight:700;border-top:2px solid var(--border)"><td colspan="3">TOTAL LIABILITIES RANGE</td><td class="num" style="color:var(--red)">$1,080,004–$5,200,000</td></tr>
       </tbody>
     </table></div>
   </div>
@@ -1098,7 +1096,7 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
       <tbody>
         <tr><td>Board of Visitors, Member</td><td>University of Maryland Francis King Carey School of Law</td><td style="font-size:11px;color:var(--text-3)">Unpaid advisory</td></tr>
         <tr><td>Advisory Board Member</td><td>Panda Investments</td><td style="font-size:11px;color:var(--text-3)">Investment firm</td></tr>
-        <tr><td><strong style="color:#f59e0b">Member ⚑</strong></td><td><strong style="color:#f59e0b">Findraiser LLC</strong></td><td style="font-size:11px;color:var(--text-3)">Co-founded with Chief of Staff Wolf; valued $250K–$500K</td></tr>
+        <tr><td><strong style="color:var(--gold)">Member ⚑</strong></td><td><strong style="color:var(--gold)">Findraiser LLC</strong></td><td style="font-size:11px;color:var(--text-3)">Co-founded with Chief of Staff Wolf; valued $250K–$500K</td></tr>
       </tbody>
     </table></div>
   </div>
@@ -1113,7 +1111,7 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
       </div>
       <div class="travel-item foreign-gov">
         <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px"><div class="travel-source">Government of Rwanda ⚑</div><span class="travel-tag fg">Foreign Government</span></div>
-        <div class="travel-route">📍 San Francisco, CA → Kigali, Rwanda → <strong style="color:#f85149">Phuket, Thailand</strong></div>
+        <div class="travel-route">📍 San Francisco, CA → Kigali, Rwanda → <strong style="color:var(--red)">Phuket, Thailand</strong></div>
         <div class="travel-dates">April 1–6, 2024 · 6 days · Phuket, Thailand is not a logical transit stop between Rwanda and California</div>
       </div>
       <div class="travel-item pharma">
@@ -1140,9 +1138,9 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
       <thead><tr><th>Source</th><th>Description</th><th class="num">Value</th><th>Note</th></tr></thead>
       <tbody>
         <tr>
-          <td><strong style="color:#f85149">Stephen Cloobeck ⚑</strong><br><span style="font-size:11px;color:var(--text-3)">Burbank, CA · Hotel billionaire · Former major Democratic donor</span></td>
+          <td><strong style="color:var(--red)">Stephen Cloobeck ⚑</strong><br><span style="font-size:11px;color:var(--text-3)">Burbank, CA · Hotel billionaire · Former major Democratic donor</span></td>
           <td style="font-size:12px">Private air transportation: Burbank, CA → Nice, France</td>
-          <td class="num" style="color:#f85149;font-size:16px;font-weight:800">$30,903</td>
+          <td class="num" style="color:var(--red);font-size:16px;font-weight:800">$30,903</td>
           <td style="font-size:11px;color:var(--text-3)">Cloobeck arrested May 2026 on felony witness intimidation charges. Has since left Democratic Party and publicly denounced Swalwell.</td>
         </tr>
       </tbody>
@@ -1988,23 +1986,24 @@ function showPage(id,el){
 let _discInit=false;
 function initDisclosure(){
   if(_discInit)return; _discInit=true;
-  const grid='rgba(128,128,128,.15)';
-  new Chart(document.getElementById('d-assets-liab'),{
+  // Liabilities by creditor (Schedule D, minimum disclosed value) — horizontal bar
+  new Chart(document.getElementById('d-liab-creditor'),{
     type:'bar',
-    data:{labels:['Minimum Scenario','Maximum Scenario'],datasets:[
-      {label:'Total Assets',data:[266003,565000],backgroundColor:'#3fb95066',borderColor:'#3fb950',borderWidth:1,borderRadius:4},
-      {label:'Total Liabilities',data:[1080004,5200000],backgroundColor:'#f8514966',borderColor:'#f85149',borderWidth:1,borderRadius:4}
-    ]},
-    options:{maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11},padding:8}}},
-      scales:{y:{ticks:{callback:v=>'$'+Math.round(v/1000)+'K'},grid:{color:grid}},x:{grid:{display:false}}}}
+    data:{labels:['Apple FCU — Home Loan','Ed Financial — Student Loans','Chase — Credit Card','Amex — Credit Card'],
+      datasets:[{data:[1000001,50001,15001,15001],
+        backgroundColor:['#9b2335','#c9963a','#b45309','#b45309'],borderRadius:5,borderSkipped:false}]},
+    options:{maintainAspectRatio:false,indexAxis:'y',
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)+' (minimum)'}}},
+      scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},
+              y:{ticks:{color:'#4a5568',font:{size:11}},grid:{display:false}}}}
   });
+  // Where the salary goes — doughnut
   new Chart(document.getElementById('d-salary-chart'),{
     type:'doughnut',
     data:{labels:['Est. Take-Home After Tax','Est. Min. Mortgage Payment','Credit Cards (min)','Student Loans (min)','Remaining'],
       datasets:[{data:[118320,60804,30002,50001,118320-60804-30002-50001],
-        backgroundColor:['#f9731666','#f8514966','#f8514999','#f59e0b66','#3fb95066'],
-        borderColor:['#f97316','#f85149','#f85149','#f59e0b','#3fb950'],borderWidth:1}]},
-    options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},padding:8,boxWidth:12}}},cutout:'52%'}
+        backgroundColor:['#b45309','#9b2335','#9b2335b3','#c9963a','#2d6a4f'],borderWidth:2,borderColor:'#fff'}]},
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#4a5568',font:{size:10},padding:8,boxWidth:12}},tooltip:{callbacks:{label:c=>`${c.label}: ${fmt(c.parsed)}`}}},cutout:'62%'}
   });
 }
 

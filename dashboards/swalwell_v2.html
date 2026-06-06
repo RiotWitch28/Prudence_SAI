@@ -39,6 +39,88 @@
   --shadow-lg:  0 8px 32px rgba(30,58,95,.14),0 2px 8px rgba(30,58,95,.08);
   --t:          200ms cubic-bezier(.4,0,.2,1);
 }
+
+body.dark {
+  --navy:       #4a90d9;
+  --navy-deep:  #0a0f1a;
+  --navy-mid:   #5a9fe8;
+  --gold:       #d4a84b;
+  --gold-light: #f0d9a8;
+  --gold-pale:  #2a2010;
+  --slate:      #8899aa;
+  --slate-light:#6b7a8d;
+  --muted:      #4a5568;
+  --border:     #2a3340;
+  --border-soft:#222b38;
+  --bg:         #0f1520;
+  --surface:    #161f2e;
+  --text:       #e8edf4;
+  --text-2:     #a8b8cc;
+  --text-3:     #6b7a8d;
+  --green:      #4ade80;
+  --green-bg:   #0d2818;
+  --red:        #f87171;
+  --red-bg:     #2a0f12;
+  --amber:      #fbbf24;
+  --amber-bg:   #2a1f05;
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.4),0 1px 2px rgba(0,0,0,.3);
+  --shadow:     0 4px 12px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.3);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,.6),0 2px 8px rgba(0,0,0,.4);
+}
+
+/* dark mode overrides for elements with hardcoded colours */
+body.dark nav{background:var(--surface);border-bottom-color:var(--border)}
+body.dark .member-pill{background:var(--bg);border-color:var(--border)}
+body.dark .tl-narrative{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
+body.dark .shai-hero{background:linear-gradient(135deg,#0a0f1a 0%,#111a2a 100%)}
+body.dark .ent-hero::before,body.dark .ent-hero::after{background:rgba(255,255,255,.03)}
+body.dark .airec-banner{background:linear-gradient(135deg,#1a1205 0%,#2a1e08 100%)}
+body.dark .vi-insight{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
+body.dark .sec-note.warn{background:#1a1205;color:var(--amber)}
+body.dark .sec-note.info{background:#0d1520;color:var(--navy-mid)}
+body.dark .sec-note.good{background:#0a1f12;color:var(--green)}
+body.dark .check .body{background:var(--bg)}
+body.dark .prud-principles .prud-pcard{border-left-color:var(--navy-mid)}
+body.dark th{background:var(--surface)}
+
+/* dark mode toggle button */
+.dark-toggle{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:3px 10px;cursor:pointer;transition:background var(--t);font-size:11px;font-weight:600;color:rgba(255,255,255,.75);white-space:nowrap}
+.dark-toggle:hover{background:rgba(255,255,255,.15)}
+
+/* ── dark mode: hardcoded class colours ── */
+body.dark .tl-cat-badge.election{background:#0d1a2a;color:#7ab3e0}
+body.dark .tl-cat-badge.career{background:#1a1030;color:#a78bfa}
+body.dark .tl-cat-badge.legislation{background:#051a1f;color:#38bdf8}
+body.dark .tl-cat-badge.personal{background:#1f0a18;color:#f472b6}
+body.dark .tl-source-link{background:#0d1520;border-color:rgba(74,144,217,.25)}
+body.dark .tl-source-link:hover{background:#111e30}
+body.dark .status-chip.flags-chip{background:#1a0a0c}
+body.dark .shai-subpill.active{background:var(--bg)}
+body.dark .sec-note.info{background:#0d1520;color:var(--navy-mid)}
+body.dark .tl-source-link{background:#0d1520;border-color:rgba(74,144,217,.2)}
+body.dark .tl-source-link:hover{background:#111e30}
+body.dark .ent-clear-btn:hover{background:#0d1520}
+body.dark .tl-chip{background:var(--bg);color:var(--text-3);border-color:var(--border)}
+body.dark .tl-chip.highlight{background:var(--amber-bg);color:var(--amber);border-color:var(--gold)}
+
+/* dark mode: inline-style overrides (JS-generated HTML) */
+body.dark [style*="background:#f7f6f3"]{background:var(--bg)!important}
+body.dark [style*="background:#fff"]{background:var(--surface)!important}
+body.dark [style*="background:#ffffff"]{background:var(--surface)!important}
+body.dark [style*="background:#fffbeb"]{background:#1a1205!important}
+body.dark [style*="background:#eef3fa"]{background:#0d1520!important}
+body.dark [style*="background:#d8f0e5"]{background:var(--green-bg)!important}
+body.dark [style*="background:#fef3c7"]{background:var(--amber-bg)!important}
+body.dark [style*="color:#718096"]{color:var(--text-3)!important}
+body.dark [style*="color:#a0aec0"]{color:var(--muted)!important}
+body.dark [style*="color:#1a2433"]{color:var(--text)!important}
+body.dark [style*="color:#2a4f7c"]{color:var(--navy-mid)!important}
+body.dark [style*="color:#4a5568"]{color:var(--text-2)!important}
+body.dark [style*="color:#f59e0b"]{color:var(--amber)!important}
+body.dark [style*="color:#2d6a4f"]{color:var(--green)!important}
+body.dark [style*="border:1px solid #eaecf2"]{border-color:var(--border-soft)!important}
+body.dark [style*="border-color:#eaecf2"]{border-color:var(--border-soft)!important}
+
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;overflow-x:hidden}
 a{color:var(--navy-mid);text-decoration:none}
 
@@ -183,6 +265,9 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .HIGH .flag-sev{background:var(--red-bg);color:var(--red)}
 .NOTABLE .flag-sev{background:var(--gold-pale);color:var(--amber)}
 .REVIEW .flag-sev{background:#eef3fa;color:var(--navy-mid)}
+body.dark .HIGH .flag-sev{background:var(--red-bg);color:var(--red)}
+body.dark .NOTABLE .flag-sev{background:var(--amber-bg);color:var(--amber)}
+body.dark .REVIEW .flag-sev{background:#0d1520;color:var(--navy-mid)}
 .flag-title{font-weight:700;font-size:14px;flex:1;line-height:1.4}
 .flag-preview{font-size:12px;color:var(--text-3);margin-top:2px;font-weight:400}
 .flag-chevron{font-size:11px;color:var(--muted);transition:transform var(--t);flex:none;margin-top:4px}
@@ -191,7 +276,7 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .flag-review-btn:hover{background:var(--bg);border-color:var(--muted)}
 .flag-review-btn.done{background:var(--green-bg);border-color:#6ee7b7;color:var(--green)}
 
-.flag-detail{display:none;border-top:1px solid var(--border-soft);padding:16px 20px;background:#fafbfc}
+.flag-detail{display:none;border-top:1px solid var(--border-soft);padding:16px 20px;background:#f7f6f3}
 .flag-card.open .flag-detail{display:block}
 .flag-section{margin-bottom:14px}
 .flag-section:last-child{margin-bottom:0}
@@ -229,7 +314,7 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .tl-pill:hover{border-color:var(--muted)}
 .tl-pill.active{color:#fff}
 .tl-pill[data-cat=all].active{background:var(--navy-deep);border-color:var(--navy-deep)}
-.tl-pill[data-cat=election].active{background:#1d4ed8;border-color:#1d4ed8}
+.tl-pill[data-cat=election].active{background:#2a4f7c;border-color:#2a4f7c}
 .tl-pill[data-cat=career].active{background:#5b21b6;border-color:#5b21b6}
 .tl-pill[data-cat=committee].active{background:var(--green);border-color:var(--green)}
 .tl-pill[data-cat=campaign].active{background:var(--amber);border-color:var(--amber)}
@@ -243,7 +328,7 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .tl-card{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--border);border-radius:var(--radius-lg);margin-bottom:10px;overflow:hidden;transition:all var(--t);cursor:pointer;box-shadow:var(--shadow-sm)}
 .tl-card:hover{box-shadow:var(--shadow);transform:translateX(2px)}
 .tl-card.open{box-shadow:var(--shadow)}
-.tl-card[data-cat=election]{border-left-color:#1d4ed8}
+.tl-card[data-cat=election]{border-left-color:#2a4f7c}
 .tl-card[data-cat=career]{border-left-color:#5b21b6}
 .tl-card[data-cat=committee]{border-left-color:var(--green)}
 .tl-card[data-cat=campaign]{border-left-color:var(--amber)}
@@ -254,7 +339,7 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .tl-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:3px}
 .tl-title{font-weight:700;font-size:14px}
 .tl-cat-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0}
-.tl-cat-badge.election{background:#dbeafe;color:#1d4ed8}
+.tl-cat-badge.election{background:#eef3fa;color:#2a4f7c}
 .tl-cat-badge.career{background:#ede9fe;color:#5b21b6}
 .tl-cat-badge.committee{background:var(--green-bg);color:var(--green)}
 .tl-cat-badge.campaign{background:var(--amber-bg);color:var(--amber)}
@@ -338,6 +423,29 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .modal-bg{position:fixed;inset:0;background:rgba(18,36,64,.5);backdrop-filter:blur(4px);z-index:400;display:none;align-items:center;justify-content:center;padding:20px}
 .modal-bg.show{display:flex}
 .modal{background:var(--surface);border-radius:var(--radius-lg);max-width:860px;width:100%;max-height:84vh;display:flex;flex-direction:column;box-shadow:var(--shadow-lg)}
+
+/* ── MEMBER ROSTER ── */
+.roster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;padding:20px}
+.roster-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:16px;display:flex;gap:14px;align-items:flex-start;cursor:pointer;transition:all var(--t);position:relative}
+.roster-card:hover{border-color:var(--navy-mid);box-shadow:var(--shadow);background:var(--surface)}
+.roster-card.active{border-color:var(--navy);background:var(--surface);box-shadow:0 0 0 2px rgba(30,58,95,.15)}
+.roster-card.stub{cursor:default;opacity:.55}
+.roster-card.stub:hover{border-color:var(--border);box-shadow:none;background:var(--bg)}
+.rc-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--navy-mid));display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;flex:none;letter-spacing:-.5px}
+.roster-card.active .rc-avatar{background:linear-gradient(135deg,var(--gold),#e8b85a);color:var(--navy-deep)}
+.rc-body{flex:1;min-width:0}
+.rc-name{font-size:14px;font-weight:700;color:var(--text);line-height:1.2}
+.rc-meta{font-size:11.5px;color:var(--text-3);margin-top:3px}
+.rc-stats{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.rc-stat{font-size:11px;color:var(--text-3);display:flex;align-items:center;gap:4px}
+.rc-stat strong{color:var(--text);font-weight:700}
+.rc-flag{font-size:11px;font-weight:700;color:var(--red);background:var(--red-bg);padding:1px 7px;border-radius:10px}
+.rc-active-badge{position:absolute;top:10px;right:12px;font-size:10px;font-weight:700;background:var(--navy);color:#fff;padding:2px 8px;border-radius:10px;letter-spacing:.04em}
+.rc-soon{position:absolute;top:10px;right:12px;font-size:10px;font-weight:700;background:var(--bg);color:var(--muted);padding:2px 8px;border-radius:10px;border:1px solid var(--border)}
+.roster-intro{padding:16px 20px 0;font-size:13px;color:var(--text-3);border-bottom:1px solid var(--border-soft);padding-bottom:14px}
+/* per-member Prudence containers */
+.prudence-member-content{display:none}
+.prudence-member-content.active{display:block}
 .modal .mh{padding:16px 20px;border-bottom:1px solid var(--border-soft);display:flex;align-items:flex-start;gap:10px}
 .modal .mh .mt{font-weight:700;font-size:15px;color:var(--text)}.modal .mh .ms{font-size:12px;color:var(--text-3);margin-top:2px}
 .modal .mh .x{margin-left:auto;cursor:pointer;color:var(--muted);font-size:22px;line-height:1;transition:color var(--t)}
@@ -362,9 +470,96 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .disclaimer{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;font-size:11.5px;color:var(--text-3);margin-top:28px;line-height:1.7}
 
 @media(max-width:640px){
-  .page{padding:14px 12px}.stat-grid{grid-template-columns:repeat(2,1fr)}
-  .inner-tab-bar{flex-wrap:nowrap;overflow-x:auto}.itab{min-width:80px;font-size:12px}
+  /* Layout */
+  .page{padding:12px 10px}
+  .stat-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .stat-value{font-size:20px}
+  .stat-card{padding:14px}
+
+  /* Platform bar */
   .platform-context{display:none}
+  .platform-btn{display:none}
+
+  /* Nav */
+  .nav-inner{padding:0 8px}
+  .nav-brand .title,.nav-brand .sub{display:none}
+  .nav-brand{padding:6px 10px 6px 0;margin-right:2px}
+  .nav-right{display:none}
+  .nav-tab{padding:0 11px;font-size:12px;height:44px}
+
+  /* Inner tabs */
+  .inner-tab-bar{flex-wrap:nowrap;overflow-x:auto}
+  .itab{min-width:80px;font-size:12px}
+
+  /* Charts */
+  .cwrap{height:190px}
+  .cwrap.tall{height:220px}
+
+  /* Entity hero — stack total below name */
+  .ent-hero{padding:16px}
+  .ent-hero-top{flex-direction:column;gap:8px}
+  .ent-hero-total-block{text-align:left}
+  .ent-hero-amount{font-size:28px;letter-spacing:-.5px}
+  .ent-hero-name{font-size:18px}
+  .ent-hero-badge{width:44px;height:44px;font-size:16px}
+
+  /* Entity selector cards */
+  .ent-selector{grid-template-columns:repeat(2,1fr);gap:8px}
+
+  /* Cross-entity tiles */
+  .cross-ent-tile{min-width:130px}
+  .cross-ent-tile .ct-amt{font-size:16px}
+
+  /* Bar rows */
+  .bar-label{width:100px;font-size:11px}
+  .bar-val{width:64px;font-size:11px}
+
+  /* Tables */
+  .tcard-head{flex-direction:column;align-items:flex-start;gap:8px}
+  .tsearch{width:100%}
+
+  /* Timeline */
+  .tl-search{width:100%}
+  .tl-toolbar{flex-direction:column;align-items:stretch}
+
+  /* Member detail grid */
+  .detail-grid{grid-template-columns:1fr}
+
+  /* Prudence */
+  .shai-hero{padding:18px 16px}
+  .shai-hero h2{font-size:18px}
+  .shai-subnav{flex-direction:column;gap:8px}
+  .shai-subpill{min-width:unset;flex:1 1 100%}
+  .shai-verdict{grid-template-columns:repeat(2,1fr)}
+  .prud-principles{grid-template-columns:1fr}
+  .prud-event{flex-direction:column;gap:6px}
+  .prud-event .pe-date{flex:none;padding-left:22px}
+
+  /* Modal — slide up from bottom */
+  .modal-bg{align-items:flex-end;padding:0}
+  .modal{max-height:90vh;border-radius:var(--radius-lg) var(--radius-lg) 0 0;width:100%}
+
+  /* Status chips */
+  .status-chip{min-width:100%}
+
+  /* Prudence summary */
+  .prudence-summary-card{flex-direction:column;align-items:flex-start}
+
+  /* Vi detail */
+  .vi-detail-body{grid-template-columns:1fr}
+  .vi-chart-col{border-right:none;border-bottom:1px solid var(--border-soft)}
+
+  /* Hotel grid */
+  .hotel-grid{grid-template-columns:repeat(2,1fr)}
+
+  /* Legal firm row */
+  .legal-firm-row{flex-wrap:wrap}
+  .legal-firm-row .lfr-name{flex:1 1 100%;margin-bottom:4px}
+
+  /* Shai map — allow horizontal scroll */
+  .shai-map{font-size:11.5px}
+  .check summary{padding:12px 14px;gap:8px}
+  .check summary .ttl{font-size:13px}
 }
 
 /* ── VENDOR INTELLIGENCE ── */
@@ -416,7 +611,7 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .vi-ent-pill.active{color:#fff;background:var(--navy-deep);border-color:var(--navy-deep)}
 
 /* ── Prudence ── */
-.shai-hero{background:linear-gradient(135deg,var(--navy-deep) 0%,#1a3a6b 100%);border-radius:var(--radius-lg);padding:28px 32px;color:#fff;margin-bottom:18px;position:relative;overflow:hidden}
+.shai-hero{background:linear-gradient(135deg,var(--navy-deep) 0%,#1e3a5f 100%);border-radius:var(--radius-lg);padding:28px 32px;color:#fff;margin-bottom:18px;position:relative;overflow:hidden}
 .shai-hero::after{content:'';position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;background:rgba(201,150,58,.08);pointer-events:none}
 .shai-hero .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .shai-hero h2{font-size:23px;font-weight:800;margin:0 0 8px;letter-spacing:-.3px}
@@ -436,6 +631,7 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .shai-meta li{margin-bottom:4px}
 .shai-meta .docs{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .shai-meta .docs span{background:#eef3fa;color:var(--navy-mid);border-radius:var(--radius-sm);padding:3px 9px;font-size:11px;font-weight:600}
+body.dark .shai-meta .docs span{background:#0d1520;color:var(--navy-mid);border:1px solid rgba(74,144,217,.2)}
 .check{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:10px;overflow:hidden;border-left:4px solid var(--border);box-shadow:var(--shadow-sm);transition:box-shadow var(--t)}
 .check:hover{box-shadow:var(--shadow)}
 .check[data-sev="pass"]{border-left-color:var(--green)}
@@ -451,7 +647,8 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .sev-badge.pass{background:var(--green-bg);color:var(--green)}
 .sev-badge.review{background:var(--gold-pale);color:var(--amber)}
 .sev-badge.context{background:#eef3fa;color:var(--navy-mid)}
-.check .body{padding:0 18px 18px;font-size:13px;line-height:1.65;color:var(--text-2);border-top:1px solid var(--border-soft);padding-top:14px;background:#fafbfc}
+body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
+.check .body{padding:0 18px 18px;font-size:13px;line-height:1.65;color:var(--text-2);border-top:1px solid var(--border-soft);padding-top:14px;background:#f7f6f3}
 .check .body .row{margin-bottom:10px}
 .check .body .lbl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:3px}
 .check .body .cite{font-size:12px;color:var(--text-3);font-style:italic}
@@ -465,7 +662,7 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .shai-subnav{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
 .shai-subpill{flex:1;min-width:240px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 18px;cursor:pointer;transition:all var(--t);display:flex;gap:12px;align-items:flex-start;box-shadow:var(--shadow-sm)}
 .shai-subpill:hover{border-color:var(--navy-mid);box-shadow:var(--shadow)}
-.shai-subpill.active{border-color:var(--navy);box-shadow:0 0 0 2px rgba(30,58,95,.15);background:#f4f7fb}
+.shai-subpill.active{border-color:var(--navy);box-shadow:0 0 0 2px rgba(30,58,95,.15);background:#f7f6f3}
 .shai-subpill .sp-ico{font-size:20px;line-height:1}
 .shai-subpill .sp-t{font-weight:700;font-size:13.5px;color:var(--text)}
 .shai-subpill .sp-d{font-size:11.5px;color:var(--text-3);margin-top:2px;line-height:1.4}
@@ -488,8 +685,10 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .status-chip-detail{font-size:11.5px;color:var(--text-3);margin-top:2px}
 .status-chip-arrow{font-size:12px;color:var(--muted);flex:none;transition:transform var(--t)}
 .status-chip:hover .status-chip-arrow{transform:translateX(3px)}
-.status-chip.flags-chip{border-left:3px solid var(--red)}
-.status-chip.prudence-chip{border-left:3px solid var(--gold)}
+.status-chip.flags-chip{border-left:3px solid var(--red);background:#fff5f6}
+.status-chip.flags-chip .status-chip-count{color:var(--red)}
+.status-chip.prudence-chip{border-left:3px solid var(--gold);background:var(--gold-pale)}
+.status-chip.prudence-chip .status-chip-count{color:var(--amber)}
 
 /* ── FLAG PREVIEW (top HIGH flags on overview) ── */
 .flag-preview-section{margin-bottom:28px}
@@ -536,9 +735,9 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .airec-banner .ab-d{font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.6}
 .airec-grid{display:grid;grid-template-columns:1fr;gap:14px}
 .airec{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:var(--radius-lg);padding:0;box-shadow:var(--shadow-sm);overflow:hidden}
-.airec-flag{display:flex;align-items:center;gap:8px;background:repeating-linear-gradient(135deg,var(--gold-pale),var(--gold-pale) 10px,#fdf3dc 10px,#fdf3dc 20px);border-bottom:1px solid var(--gold-light);padding:8px 16px}
+.airec-flag{display:flex;align-items:center;gap:10px;background:var(--gold-pale);border-bottom:1px solid var(--gold-light);padding:10px 16px}
 .airec-flag .af-badge{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--navy-deep);font-size:10.5px;font-weight:800;padding:3px 11px;border-radius:20px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
-.airec-flag .af-note{font-size:11px;font-weight:700;color:var(--amber)}
+.airec-flag .af-note{font-size:11px;font-weight:600;color:var(--amber);font-style:italic}
 .airec-in{padding:16px 20px 18px}
 .airec-in h4{font-size:15px;font-weight:800;color:var(--text);margin:0 0 10px;line-height:1.3}
 .airec-in .row{margin-bottom:10px}
@@ -559,8 +758,9 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
   <div class="platform-divider"></div>
   <div class="platform-context">Political Intelligence OS &nbsp;·&nbsp; <strong>CA-14 Profile</strong></div>
   <div class="platform-right">
-    <button class="platform-btn">All Members</button>
+    <button class="platform-btn" id="allMembersBtn" onclick="openRoster()">All Members</button>
     <button class="platform-btn">Export</button>
+    <button class="dark-toggle" id="darkToggle" onclick="toggleDark()">☀ Light</button>
     <div class="platform-member-chip" id="platformMemberChip" onclick="document.getElementById('profileModalBg').classList.add('show')" style="cursor:pointer">
       <div class="platform-avatar" id="platformAvatar">ES</div>
       <div class="platform-member-name" id="platformMemberName">Swalwell</div>
@@ -581,9 +781,6 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
       <div class="nav-tab" data-p="vendors" onclick="showPage('vendors',this)">Vendor Intelligence</div>
       <div class="nav-tab module-tab" data-p="houseai" onclick="showPage('houseai',this)">⚖ Prudence <span class="nb" id="prudenceBadge">4</span></div>
       <div class="nav-tab" data-p="sources" onclick="showPage('sources',this)">Sources</div>
-    </div>
-    <div class="nav-right">
-      <div class="member-pill" id="memberPill" onclick="document.getElementById('profileModalBg').classList.add('show')" style="cursor:pointer"></div>
     </div>
   </div>
 </nav>
@@ -609,7 +806,7 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 
   <!-- command center status row -->
   <div class="status-row" id="statusRow">
-    <div class="status-chip flags-chip" onclick="document.getElementById('flagFullSection').classList.add('open');document.getElementById('flagPreviewSection').scrollIntoView({behavior:'smooth'})">
+    <div class="status-chip flags-chip" onclick="document.getElementById('flagPreviewSection').scrollIntoView({behavior:'smooth'})">
       <div class="status-chip-icon">⚑</div>
       <div class="status-chip-body">
         <div class="status-chip-label">Data Flags</div>
@@ -662,20 +859,10 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 
   <!-- Flags section -->
   <div class="flag-preview-section" id="flagPreviewSection" style="margin-top:32px">
-    <div class="flag-preview-header">
-      <div class="sec-label" style="margin:0;flex:1">Flags & Data Integrity</div>
-      <button class="flag-show-all" id="flagShowAllBtn" onclick="document.getElementById('flagFullSection').classList.toggle('open');this.textContent=document.getElementById('flagFullSection').classList.contains('open')?'Show fewer ↑':'Show all flags ↓'">Show all flags ↓</button>
-    </div>
-    <div class="sec-note warn" style="margin-top:10px">Every flag is generated from the data · click to expand · mark reviewed to track your analysis</div>
-
-    <!-- HIGH flags preview (always visible) -->
-    <div id="flagPreviewList"></div>
-
-    <!-- Full flag list (hidden until expanded) -->
-    <div class="flag-full-section" id="flagFullSection">
-      <div class="flag-filter-bar" id="flagFilterBarOv"></div>
-      <div id="flagListOv"></div>
-    </div>
+    <div class="sec-label" style="margin:0 0 10px">Flags & Data Integrity</div>
+    <div class="sec-note warn" style="margin-bottom:16px">Every flag is generated from the data · click to expand · mark reviewed to track your analysis</div>
+    <div class="flag-filter-bar" id="flagFilterBarOv"></div>
+    <div id="flagListOv"></div>
   </div>
 
 </div>
@@ -750,7 +937,7 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
     <div class="tl-narrative-header" onclick="(function(el){el.closest('.tl-narrative').classList.toggle('collapsed')})(this)" style="cursor:pointer;user-select:none">
       <span class="tl-narrative-icon">🤖</span>
       <span class="tl-narrative-label">Prudence — Timeline Narrative</span>
-      <span id="tlNarrativeChevron" style="margin-left:auto;font-size:12px;color:#6366f1;transition:.2s">▲</span>
+      <span id="tlNarrativeChevron" style="margin-left:auto;font-size:12px;color:#2a4f7c;transition:.2s">▲</span>
     </div>
     <div class="tl-narrative-body">
       <p>Eric Swalwell's political career traces a rapid, unconventional ascent rooted in Bay Area ambition. Born in Iowa in 1980 and raised in Dublin, California, he moved from Alameda County prosecutor to Dublin City Council at 29, then pulled off one of the most surprising upsets in recent California congressional history — ousting 40-year incumbent Pete Stark in 2012 with 52% of the vote. That insurgent energy defined his early years in the House.</p>
@@ -785,6 +972,18 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
   </div>
 </div>
 
+<!-- MEMBER ROSTER MODAL -->
+<div class="modal-bg" id="rosterModalBg" onclick="if(event.target.id==='rosterModalBg')closeRoster()">
+  <div class="modal" style="max-width:900px">
+    <div class="mh">
+      <div><div class="mt">All Members</div><div class="ms">Article One · Political Intelligence OS · click a member to open their profile</div></div>
+      <div class="x" id="rosterClose" onclick="closeRoster()">×</div>
+    </div>
+    <div class="roster-intro">Profiles are built from primary sources (FEC, House SOD, state campaign finance). Only members with complete data are interactive — additional profiles are in preparation.</div>
+    <div class="roster-grid" id="rosterGrid"></div>
+  </div>
+</div>
+
 <!-- SOURCES -->
 <div id="page-sources" class="page">
   <div class="page-header">
@@ -797,6 +996,7 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 <!-- PRUDENCE MODULE -->
 <div id="page-houseai" class="page">
 
+<div id="prudence-swalwell" class="prudence-member-content active">
   <!-- Prudence combined summary card -->
   <div class="prudence-summary-card">
     <div class="psc-intro">
@@ -1076,7 +1276,7 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
     </details>
 
     <!-- INDICATOR 6: CROSS-OFFICE BENCHMARK (headline) -->
-    <details class="check" data-sev="review" open>
+    <details class="check" data-sev="review">
       <summary><span class="sev-badge review">Benchmark</span><span class="ttl">How this office compares to all 449 House offices (FY2024)</span><span class="amt">3× outlier</span><span class="arr">▶</span></summary>
       <div class="body">
         <div class="row"><div class="lbl">Why this matters</div>A single office in isolation tells you little — "many interns" only means something against the norm. The same SOD grids carry every other member's office, so each structural indicator can be scored against the whole House. This is the test of whether Swalwell's office is <em>typical</em> or an <em>outlier</em>. <span class="cite">EEOC 2016 factors 5 &amp; 7; cross-office distribution, 449 member offices, FY2024.</span></div>
@@ -1392,6 +1592,8 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
     </div>
   </div><!-- /shai-about -->
 
+</div><!-- /prudence-swalwell -->
+
 </div>
 
 <!-- MODAL -->
@@ -1417,6 +1619,25 @@ const META={
 };
 const ORDER=['office','house','pac','pres','gov','outside_pac'];
 
+// ── MEMBER ROSTER (declared early to avoid TDZ) ──
+var ACTIVE_MEMBER='swalwell';
+var MEMBER_ROSTER=[
+  {
+    slug:'swalwell',
+    name:'Eric Swalwell',
+    initials:'ES',
+    state:'CA', district:'14', party:'D', partyFull:'Democrat',
+    congress:'119th',
+    statusLabel:'Left 119th Congress · Apr 2026',
+    totalUniverse:'$18.4M',
+    flagCount:9, highFlags:2,
+    prudenceFindings:16,
+    hasData:true,
+    dataVar:'SWALWELL_DATA'
+  }
+  // Future members: add entry here + matching data JS file + prudence-[slug] div
+];
+
 // ── state ──
 const LS='swalwell_v3';
 let ST={enabled:{},yr:'all',vendEnt:'all',search:''};
@@ -1439,12 +1660,52 @@ function entTotal(k){
 function dated(k){return Object.keys(E[k].by_year||{}).some(y=>+y>1990);}
 
 // ── nav ──
+function resetPage(id){
+  if(id==='overview'){
+    document.querySelectorAll('.flag-card.open').forEach(c=>c.classList.remove('open'));
+    document.querySelectorAll('.flag-card.open').forEach(c=>c.classList.remove('open'));
+  }
+  if(id==='entities'){
+    selectedEnts=new Set(['office']);
+    renderEntView();
+    const cs=document.getElementById('crossSearch');if(cs)cs.value='';
+    document.querySelectorAll('#page-entities .itab').forEach(t=>t.classList.toggle('active',t.dataset.tab==='individuals'));
+  }
+  if(id==='flags'){
+    document.querySelectorAll('.flag-pill').forEach(p=>p.classList.toggle('active',p.dataset.sev==='all'));
+    document.querySelectorAll('.flag-card.open').forEach(c=>c.classList.remove('open'));
+  }
+  if(id==='timeline'){
+    const ts=document.getElementById('tlSearch');if(ts)ts.value='';
+    tlActiveCat='all';
+    document.querySelectorAll('.tl-pill').forEach(p=>p.classList.toggle('active',p.dataset.cat==='all'));
+    const tln=document.querySelector('.tl-narrative');
+    if(tln)tln.classList.remove('collapsed');
+  }
+  if(id==='vendors'){
+    VI.activeEnt='all';
+    VI.activeCat='all';
+    // reset segment bar back to Overview
+    const overviewTab=document.querySelector('#viSegBar .itab:first-child');
+    if(overviewTab)viSetSeg('overview',overviewTab);
+  }
+  if(id==='houseai'){
+    // close all ic-open accordions and native <details> panels in both Prudence views
+    document.querySelectorAll('#page-houseai .ic-open').forEach(el=>el.classList.remove('ic-open'));
+    document.querySelectorAll('#page-houseai details[open]').forEach(el=>el.removeAttribute('open'));
+    // reset sub-nav back to Spending screen
+    showShaiView('spending', document.querySelector('.shai-subpill[onclick*="spending"]'));
+  }
+}
+
 function showPage(id,el){
+  // reset the page we're leaving
+  const leaving=document.querySelector('.page.active');
+  if(leaving)resetPage(leaving.id.replace('page-',''));
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   if(el)el.classList.add('active');
-  // timeline now lives in member detail modal
   if(id==='vendors')initVendorIntelligence();
   window.scrollTo(0,0);
 }
@@ -1462,7 +1723,7 @@ function showShaiView(view,el){
 (function(){
   const m=D.member,name=(m['First Name']||'Eric')+' '+(m['Last Name']||'Swalwell');
   const initials=((m['First Name']||'E')[0]+(m['Last Name']||'S')[0]).toUpperCase();
-  document.getElementById('memberPill').innerHTML=`<div class="av">${initials}</div><div class="nm">${name}</div><div class="ds">${m['State']||'CA'}-${m['District']||'14'}</div>`;
+  const pill=document.getElementById('memberPill');if(pill)pill.innerHTML=`<div class="av">${initials}</div><div class="nm">${name}</div><div class="ds">${m['State']||'CA'}-${m['District']||'14'}</div>`;
   // also populate platform bar
   const lastName=(m['Last Name']||'Swalwell');
   if(document.getElementById('platformAvatar'))document.getElementById('platformAvatar').textContent=initials;
@@ -1496,13 +1757,13 @@ function renderStatCards(){
     const c=document.createElement('div');
     c.className='stat-card'+(on?'':' dimmed');
     c.style.borderTopColor=m.color;
-    c.innerHTML=`<div class="stat-label">${m.short}${e.controlled===false?'<span class="stat-badge" style="background:#f3f4f6;color:#6b7280">outside</span>':''}</div>
+    c.innerHTML=`<div class="stat-label">${m.short}${e.controlled===false?'<span class="stat-badge" style="background:#f7f6f3;color:#718096">outside</span>':''}</div>
       <div class="stat-value" style="color:${m.color}">${fmtK(t)}</div>
       <div class="stat-sub">${sub}</div>
       <div style="margin-top:8px;display:flex;align-items:center;gap:6px">
         <span class="prov-dot ${e.verification}"></span>
-        <span style="font-size:11px;color:#9ca3af">${on?'included in universe':'excluded'}</span>
-        <span style="margin-left:auto;font-size:11px;color:${on?'#10b981':'#9ca3af'};cursor:pointer;font-weight:600" onclick="toggleEnt('${k}',event)">${on?'✓ on':'off'}</span>
+        <span style="font-size:11px;color:#a0aec0">${on?'included in universe':'excluded'}</span>
+        <span style="margin-left:auto;font-size:11px;color:${on?'#2d6a4f':'#a0aec0'};cursor:pointer;font-weight:600" onclick="toggleEnt('${k}',event)">${on?'✓ on':'off'}</span>
       </div>`;
     c.onclick=(ev)=>{if(ev.target.style.cursor==='pointer'||ev.target.onclick)return;showPage('entities',document.querySelector('.nav-tab[data-p=entities]'));setTimeout(()=>activateEntCard(k),50);};
     g.appendChild(c);
@@ -1523,12 +1784,12 @@ function renderOvCharts(){
   ovCharts.bar=new Chart(document.getElementById('cEntityBar'),{type:'bar',
     data:{labels:sorted.map(k=>META[k].short),datasets:[{data:sorted.map(k=>entTotal(k)),backgroundColor:sorted.map(k=>META[k].color),borderRadius:8,borderSkipped:false}]},
     options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)}}},onClick:(ev,els)=>{if(els.length){const k=sorted[els[0].index];showPage('entities',document.querySelector('.nav-tab[data-p=entities]'));setTimeout(()=>activateEntCard(k),50);}},
-      scales:{x:{ticks:{color:'#9ca3af',callback:v=>fmtK(v)},grid:{color:'#f0f2f8'}},y:{ticks:{color:'#374151',font:{weight:'600'}},grid:{display:false}}}}});
+      scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},y:{ticks:{color:'#4a5568',font:{weight:'600'}},grid:{display:false}}}}});
 
   // doughnut
   ovCharts.dough=new Chart(document.getElementById('cDoughnut'),{type:'doughnut',
     data:{labels:sorted.map(k=>META[k].short),datasets:[{data:sorted.map(k=>entTotal(k)),backgroundColor:sorted.map(k=>META[k].color),borderWidth:2,borderColor:'#fff'}]},
-    options:{maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#374151',boxWidth:12,font:{size:11}}},tooltip:{callbacks:{label:c=>`${c.label}: ${fmt(c.parsed)}`}}},cutout:'62%'}});
+    options:{maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#4a5568',boxWidth:12,font:{size:11}}},tooltip:{callbacks:{label:c=>`${c.label}: ${fmt(c.parsed)}`}}},cutout:'62%'}});
 
   // year stacked
   let YMIN=9999,YMAX=0;
@@ -1540,8 +1801,8 @@ function renderOvCharts(){
   document.getElementById('yrChartSub').textContent=`${YMIN}–${YMAX} · stacked by entity`;
   ovCharts.yr=new Chart(document.getElementById('cYear'),{type:'bar',
     data:{labels:yrs,datasets:dks.map(k=>({label:META[k].short,backgroundColor:META[k].color,data:yrs.map(y=>(E[k].by_year||{})[y]||0),borderRadius:3}))},
-    options:{maintainAspectRatio:false,plugins:{legend:{labels:{color:'#6b7280',boxWidth:10,font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.parsed.y)}}},
-      scales:{x:{stacked:true,ticks:{color:'#9ca3af'},grid:{display:false}},y:{stacked:true,ticks:{color:'#9ca3af',callback:v=>fmtK(v)},grid:{color:'#f0f2f8'}}}}});
+    options:{maintainAspectRatio:false,plugins:{legend:{labels:{color:'#718096',boxWidth:10,font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.parsed.y)}}},
+      scales:{x:{stacked:true,ticks:{color:'#a0aec0'},grid:{display:false}},y:{stacked:true,ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}}}}});
 
   // top vendors chart
   const allRows=[];
@@ -1553,9 +1814,9 @@ function renderOvCharts(){
   const merged={};allRows.forEach(r=>{merged[r.name]=(merged[r.name]||0)+r.amt;});
   const top10=Object.entries(merged).sort((a,b)=>b[1]-a[1]).slice(0,10);
   ovCharts.top=new Chart(document.getElementById('cTopVend'),{type:'bar',
-    data:{labels:top10.map(([n])=>n.length>22?n.slice(0,22)+'…':n),datasets:[{data:top10.map(([,v])=>v),backgroundColor:'#6366f1',borderRadius:5,borderSkipped:false}]},
+    data:{labels:top10.map(([n])=>n.length>22?n.slice(0,22)+'…':n),datasets:[{data:top10.map(([,v])=>v),backgroundColor:'#2a4f7c',borderRadius:5,borderSkipped:false}]},
     options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)}}},
-      scales:{x:{ticks:{color:'#9ca3af',callback:v=>fmtK(v)},grid:{color:'#f0f2f8'}},y:{ticks:{color:'#374151',font:{size:11}},grid:{display:false}}}}});
+      scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},y:{ticks:{color:'#4a5568',font:{size:11}},grid:{display:false}}}}});
 
   // SOD category bars
   const sod=E.office;
@@ -1566,8 +1827,8 @@ function renderOvCharts(){
   const maxCat=catSorted[0]?catSorted[0][1]:1;
   document.getElementById('sodBars').innerHTML=catSorted.map(([c,v])=>`
     <div class="bar-row">
-      <div class="bar-label" style="font-size:12px;color:#4b5563">${c}</div>
-      <div class="bar-track"><div class="bar-fill" style="width:${(v/maxCat*100).toFixed(1)}%;background:#6366f1"></div></div>
+      <div class="bar-label" style="font-size:12px;color:#4a5568">${c}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(v/maxCat*100).toFixed(1)}%;background:#2a4f7c"></div></div>
       <div class="bar-val">${fmt(v)}</div>
     </div>`).join('');
 }
@@ -1684,23 +1945,23 @@ function buildCrossView(keys){
   const amtCols=keys.map(k=>`<th class="num" style="color:${META[k].color}">${META[k].short}</th>`).join('');
 
   const sharedAmtCols=keys.map(k=>`<th class="num" style="color:${META[k].color}">${META[k].short}</th>`).join('');
-  const sharedAmtCell=(r,k)=>r.rows[k]?`<td class="num" style="font-weight:700">${fmt(r.rows[k].amt)}</td>`:`<td class="num" style="color:#d1d5db">—</td>`;
+  const sharedAmtCell=(r,k)=>r.rows[k]?`<td class="num" style="font-weight:700">${fmt(r.rows[k].amt)}</td>`:`<td class="num" style="color:#dde3ec">—</td>`;
 
   const vendRowsHtml=sharedVendors.length?sharedVendors.map(r=>`
     <tr onclick='showCrossPayee(${JSON.stringify(keys)},${JSON.stringify(r.name)})'>
       <td style="font-weight:600">${r.name}</td>
       ${keys.map(k=>sharedAmtCell(r,k)).join('')}
-      <td class="num" style="font-weight:800;color:#6366f1">${fmt(r.total)}</td>
+      <td class="num" style="font-weight:800;color:#2a4f7c">${fmt(r.total)}</td>
     </tr>`).join('')
-    :`<tr><td colspan="${2+keys.length}" style="padding:20px;text-align:center;color:#9ca3af">No shared vendors found.</td></tr>`;
+    :`<tr><td colspan="${2+keys.length}" style="padding:20px;text-align:center;color:#a0aec0">No shared vendors found.</td></tr>`;
 
   const peopleRowsHtml=sharedPeople.length?sharedPeople.map(r=>`
     <tr onclick='showCrossPayee(${JSON.stringify(keys)},${JSON.stringify(r.name)})'>
       <td style="font-weight:600">${r.name}</td>
       ${keys.map(k=>sharedAmtCell(r,k)).join('')}
-      <td class="num" style="font-weight:800;color:#6366f1">${fmt(r.total)}</td>
+      <td class="num" style="font-weight:800;color:#2a4f7c">${fmt(r.total)}</td>
     </tr>`).join('')
-    :`<tr><td colspan="${2+keys.length}" style="padding:20px;text-align:center;color:#9ca3af">No shared individuals found.</td></tr>`;
+    :`<tr><td colspan="${2+keys.length}" style="padding:20px;text-align:center;color:#a0aec0">No shared individuals found.</td></tr>`;
 
   cross.innerHTML=`
     <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:16px;align-items:stretch">
@@ -1713,7 +1974,7 @@ function buildCrossView(keys){
     </div>
 
     <div class="cross-section-head">
-      <div class="csh-icon" style="background:#ecfdf5">👤</div>
+      <div class="csh-icon" style="background:#d8f0e5">👤</div>
       <span class="csh-title">Shared individuals</span>
       <span class="csh-sub">— people paid by multiple selected entities</span>
     </div>
@@ -1737,7 +1998,7 @@ function buildCrossView(keys){
     </div>
 
     <div class="cross-section-head">
-      <div class="csh-icon" style="background:#eef2ff">📋</div>
+      <div class="csh-icon" style="background:#eef3fa">📋</div>
       <span class="csh-title">All payees combined</span>
       <span class="csh-sub">— every payee across selected entities, sorted by total</span>
     </div>
@@ -1765,8 +2026,8 @@ function buildCrossView(keys){
         datasets:[{data:keys.map(k=>E[k].total),backgroundColor:keys.map(k=>META[k].color),borderRadius:6,borderSkipped:false}]},
       options:{maintainAspectRatio:false,indexAxis:'y',
         plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)}}},
-        scales:{x:{ticks:{color:'#9ca3af',callback:v=>fmtK(v)},grid:{color:'#f0f2f8'}},
-                y:{ticks:{color:'#374151',font:{weight:'600',size:11}},grid:{display:false}}}}});
+        scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},
+                y:{ticks:{color:'#4a5568',font:{weight:'600',size:11}},grid:{display:false}}}}});
   }
 }
 
@@ -1778,7 +2039,7 @@ function renderCrossAllTable(rows, keys){
     <tr onclick='showCrossPayee(${JSON.stringify(keysToUse)}, ${JSON.stringify(r.name)})'>
       <td style="font-weight:600">${r.name}${r.entities.length>1?` <span class="shared-badge">shared</span>`:''}</td>
       <td style="font-size:12px">${r.entities.map(k=>`<span style="display:inline-block;color:${META[k].color};font-weight:600;margin-right:6px;white-space:nowrap">${META[k].short}</span>`).join('')}</td>
-      <td style="color:#6b7280">${r.rows[r.entities[0]]?.role||r.rows[r.entities[0]]?.cat||''}</td>
+      <td style="color:#718096">${r.rows[r.entities[0]]?.role||r.rows[r.entities[0]]?.cat||''}</td>
       <td class="num" style="font-weight:700">${fmt(r.total)}</td>
     </tr>`).join('');
   const cnt=document.getElementById('crossAllCount');
@@ -1807,15 +2068,15 @@ function showCrossPayee(keys, name){
   document.getElementById('mSub').textContent=`Across ${keys.length} entities · ${fmt(totalAmt)} combined`;
   const tb=document.querySelector('#mTable tbody');
   tb.innerHTML=allTxns.length?allTxns.sort((a,b)=>(b.amount||0)-(a.amount||0)).map(t=>`<tr>
-    <td style="color:#9ca3af;font-family:monospace;font-size:12px">${t.date||'—'}</td>
-    <td style="font-weight:500">${t.payee||name} <span style="font-size:10px;color:#9ca3af">[${t._entity}]</span></td>
-    <td style="color:#6b7280">${t.purpose||''}</td>
+    <td style="color:#a0aec0;font-family:monospace;font-size:12px">${t.date||'—'}</td>
+    <td style="font-weight:500">${t.payee||name} <span style="font-size:10px;color:#a0aec0">[${t._entity}]</span></td>
+    <td style="color:#718096">${t.purpose||''}</td>
     <td class="num" style="font-weight:700">${fmt(t.amount)}</td>
-    <td>${t.pdf?`<a target="_blank" href="${t.pdf}" style="color:#6366f1">FEC ↗</a>`:'<span style="color:#d1d5db">—</span>'}</td></tr>`).join('')
-    :`<tr><td colspan="5" style="color:#9ca3af;padding:20px;text-align:center">No individual transactions in sample for this payee.</td></tr>`;
+    <td>${t.pdf?`<a target="_blank" href="${t.pdf}" style="color:#2a4f7c">FEC ↗</a>`:'<span style="color:#dde3ec">—</span>'}</td></tr>`).join('')
+    :`<tr><td colspan="5" style="color:#a0aec0;padding:20px;text-align:center">No individual transactions in sample for this payee.</td></tr>`;
   document.getElementById('modalBg').classList.add('show');
 }
-const ENT_CHART_COLORS=['#6366f1','#f97316','#10b981','#f59e0b','#ef4444','#8b5cf6','#0891b2','#db2777','#059669','#d97706'];
+const ENT_CHART_COLORS=['#2a4f7c','#b45309','#2d6a4f','#c9963a','#9b2335','#5b21b6','#0e7490','#9d174d','#92600a','#1e3a5f'];
 function drawEntCharts(k){
   const m=META[k],e=E[k];
   // ── year bar ──
@@ -1827,8 +2088,8 @@ function drawEntCharts(k){
     new Chart(ycv,{type:'bar',
       data:{labels:yrs,datasets:[{data:yrs.map(y=>by[y]),backgroundColor:m.color+'cc',borderColor:m.color,borderWidth:1,borderRadius:5}]},
       options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.y)}}},
-        scales:{x:{ticks:{color:'#9ca3af',font:{size:11}},grid:{display:false}},
-                y:{ticks:{color:'#9ca3af',callback:v=>fmtK(v)},grid:{color:'#f0f2f8'}}}}});
+        scales:{x:{ticks:{color:'#a0aec0',font:{size:11}},grid:{display:false}},
+                y:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}}}}});
   }
   // ── category doughnut ──
   const ccv=document.getElementById('ecat-'+k);
@@ -1841,10 +2102,11 @@ function drawEntCharts(k){
     });
     const sorted=Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,10);
     if(!sorted.length){ccv.parentElement.innerHTML='<div class="no-date-note">No category data available.</div>';return;}
+    const catColors=[m.color,...ENT_CHART_COLORS.filter(c=>c!==m.color)].slice(0,sorted.length);
     new Chart(ccv,{type:'doughnut',
-      data:{labels:sorted.map(([c])=>c),datasets:[{data:sorted.map(([,v])=>v),backgroundColor:ENT_CHART_COLORS.slice(0,sorted.length),borderWidth:2,borderColor:'#fff'}]},
+      data:{labels:sorted.map(([c])=>c),datasets:[{data:sorted.map(([,v])=>v),backgroundColor:catColors,borderWidth:2,borderColor:'#fff'}]},
       options:{maintainAspectRatio:false,cutout:'55%',
-        plugins:{legend:{position:'bottom',labels:{color:'#374151',boxWidth:10,font:{size:10},padding:6,
+        plugins:{legend:{position:'bottom',labels:{color:'#4a5568',boxWidth:10,font:{size:10},padding:6,
           formatter:(val)=>val.length>22?val.slice(0,22)+'…':val}},
           tooltip:{callbacks:{label:c=>`${c.label}: ${fmt(c.parsed)}`}}}}});
   }
@@ -1938,8 +2200,8 @@ function tableHtml(k,rows,kind){
   return `<div class="tcard"><div class="tcard-head"><h3>${kind==='ind'?'Individual payees':'Organizational vendors'}</h3><span class="tsub">Top ${rows.length} · click row for transactions</span></div>
   <div class="tscroll"><table><thead><tr><th>Name</th><th>Role / Category</th><th class="num">Amount</th><th class="num">Txns</th></tr></thead>
   <tbody>${rows.map(r=>`<tr onclick='showTxns("${k}","${r.name.replace(/"/g,'&quot;')}")'>
-    <td style="font-weight:600">${r.name}</td><td style="color:#6b7280">${r.role||r.cat||''}</td>
-    <td class="num" style="font-weight:700">${fmt(r.amt)}</td><td class="num" style="color:#9ca3af">${r.n}</td></tr>`).join('')}
+    <td style="font-weight:600">${r.name}</td><td style="color:#718096">${r.role||r.cat||''}</td>
+    <td class="num" style="font-weight:700">${fmt(r.amt)}</td><td class="num" style="color:#a0aec0">${r.n}</td></tr>`).join('')}
   </tbody></table></div></div>`;
 }
 function itab(k,section,el){
@@ -1955,7 +2217,7 @@ function itab(k,section,el){
       const by=E[k].by_year||{};const yrs=Object.keys(by).filter(y=>+y>1990).sort();
       new Chart(cv,{type:'bar',data:{labels:yrs,datasets:[{data:yrs.map(y=>by[y]),backgroundColor:META[k].color,borderRadius:5}]},
         options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.y)}}},
-          scales:{x:{ticks:{color:'#9ca3af'},grid:{display:false}},y:{ticks:{color:'#9ca3af',callback:v=>fmtK(v)},grid:{color:'#f0f2f8'}}}}});
+          scales:{x:{ticks:{color:'#a0aec0'},grid:{display:false}},y:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}}}}});
     }
   }
 }
@@ -1971,12 +2233,12 @@ function showTxns(k,name){
   document.getElementById('mSub').textContent=`${e.label} · ${e.source_type} · ${fmt(rec?rec.amt:0)} · ${rec?rec.n:0} transactions`;
   const tb=document.querySelector('#mTable tbody');
   tb.innerHTML=txns.length?txns.sort((a,b)=>(b.amount||0)-(a.amount||0)).map(t=>`<tr>
-    <td style="color:#9ca3af;font-family:monospace;font-size:12px">${t.date||'—'}</td>
+    <td style="color:#a0aec0;font-family:monospace;font-size:12px">${t.date||'—'}</td>
     <td style="font-weight:500">${t.payee||name}</td>
-    <td style="color:#6b7280">${t.purpose||''}</td>
+    <td style="color:#718096">${t.purpose||''}</td>
     <td class="num" style="font-weight:700">${fmt(t.amount)}</td>
-    <td>${t.pdf?`<a target="_blank" href="${t.pdf}" style="color:#6366f1">FEC ↗</a>`:'<span style="color:#d1d5db">—</span>'}</td></tr>`).join('')
-    :`<tr><td colspan="5" style="color:#9ca3af;padding:20px;text-align:center">Transaction sample for this payee. Full detail in: ${e.source_file}</td></tr>`;
+    <td>${t.pdf?`<a target="_blank" href="${t.pdf}" style="color:#2a4f7c">FEC ↗</a>`:'<span style="color:#dde3ec">—</span>'}</td></tr>`).join('')
+    :`<tr><td colspan="5" style="color:#a0aec0;padding:20px;text-align:center">Transaction sample for this payee. Full detail in: ${e.source_file}</td></tr>`;
   document.getElementById('modalBg').classList.add('show');
 }
 document.getElementById('mClose').onclick=()=>document.getElementById('modalBg').classList.remove('show');
@@ -2188,7 +2450,7 @@ function renderFlags(){
         → Go to ${drillEnt.short}
       </span>`;
     }
-    actions+=`<span class="flag-action-btn${rev?' secondary':' secondary'}" style="${rev?'background:#d1fae5;border-color:#6ee7b7;color:#065f46':''}" onclick="event.stopPropagation();toggleFlagReviewed(${idx})">
+    actions+=`<span class="flag-action-btn${rev?' secondary':' secondary'}" style="${rev?'background:#d8f0e5;border-color:#6ee7b7;color:#2d6a4f':''}" onclick="event.stopPropagation();toggleFlagReviewed(${idx})">
       ${rev?'✓ Reviewed — click to undo':'Mark as reviewed'}
     </span>`;
 
@@ -2199,7 +2461,7 @@ function renderFlags(){
           <div class="flag-title">${f.title}</div>
           <div class="flag-preview">${f.body.slice(0,90)}${f.body.length>90?'…':''}</div>
         </div>
-        ${rev?'<span style="font-size:11px;color:#10b981;font-weight:600;flex:none">✓ Reviewed</span>':''}
+        ${rev?'<span style="font-size:11px;color:#2d6a4f;font-weight:600;flex:none">✓ Reviewed</span>':''}
         <span class="flag-chevron">▶</span>
       </div>
       <div class="flag-detail">
@@ -2211,14 +2473,14 @@ function renderFlags(){
         <div class="flag-section">
           <div class="flag-section-label" onclick="this.closest('.flag-section').classList.toggle('ic-open')" style="cursor:pointer;display:flex;align-items:center;gap:6px">
             Data integrity check
-            <span class="ic-chevron" style="font-size:10px;color:#9ca3af;transition:.2s;margin-left:2px">▶</span>
+            <span class="ic-chevron" style="font-size:10px;color:#a0aec0;transition:.2s;margin-left:2px">▶</span>
           </div>
           <div class="ic-body" style="margin-top:8px;flex-direction:column;gap:8px">
             ${FLAG_CHECKS[f.title].verify.map((v,vi)=>`
-              <div style="background:#f8f9fd;border:1px solid #e8ecf4;border-radius:8px;padding:10px 12px;font-size:12.5px">
-                <div style="font-weight:700;color:#1a1f36;margin-bottom:4px">Step ${vi+1}: ${v.step}</div>
-                ${v.url?`<a href="${v.url}" target="_blank" style="color:#6366f1;font-weight:600;word-break:break-all">${v.label} ↗</a>`:''}
-                ${v.detail?`<div style="color:#6b7280;margin-top:${v.url?'4px':'0'}">${v.detail}</div>`:''}
+              <div style="background:#f7f6f3;border:1px solid #eaecf2;border-radius:8px;padding:10px 12px;font-size:12.5px">
+                <div style="font-weight:700;color:#1a2433;margin-bottom:4px">Step ${vi+1}: ${v.step}</div>
+                ${v.url?`<a href="${v.url}" target="_blank" style="color:#2a4f7c;font-weight:600;word-break:break-all">${v.label} ↗</a>`:''}
+                ${v.detail?`<div style="color:#718096;margin-top:${v.url?'4px':'0'}">${v.detail}</div>`:''}
               </div>`).join('')}
           </div>
         </div>`:''}
@@ -2231,26 +2493,6 @@ function renderFlags(){
     </div>`;
   }).join('') || '<div style="padding:40px;text-align:center;color:var(--muted)">No flags match this filter.</div>';
 
-  // render HIGH-only preview (always visible above the fold)
-  const previewEl=document.getElementById('flagPreviewList');
-  if(previewEl){
-    const highFlags=D.flags.filter(f=>f.severity==='HIGH').slice(0,3);
-    previewEl.innerHTML=highFlags.map((f,i)=>{
-      const idx=D.flags.indexOf(f);
-      const rev=flagReviewed.has(idx);
-      return `<div class="flag-card HIGH${rev?' reviewed':''}" id="flagprev-${idx}">
-        <div class="flag-summary" onclick="toggleFlagOpen(${idx});document.getElementById('flag-${idx}')?.scrollIntoView({behavior:'smooth',block:'center'});document.getElementById('flagFullSection').classList.add('open')">
-          <span class="flag-sev">HIGH</span>
-          <div style="flex:1;min-width:0">
-            <div class="flag-title">${f.title}</div>
-            <div class="flag-preview">${f.body.slice(0,110)}${f.body.length>110?'…':''}</div>
-          </div>
-          <span style="font-size:11px;color:var(--text-3);flex:none;white-space:nowrap">Expand ↓</span>
-        </div>
-      </div>`;
-    }).join('');
-    if(!highFlags.length)previewEl.innerHTML='<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">No HIGH severity flags.</div>';
-  }
 }
 renderFlags();
 
@@ -2380,7 +2622,7 @@ renderTl('all');
   const h=document.getElementById('profileContent');
   h.innerHTML=`<div class="member-hero">
     <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
-      <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#f97316);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;flex:none">${initials}</div>
+      <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#1e3a5f,#2a4f7c);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;flex:none">${initials}</div>
       <div class="info"><h1>${name}</h1>
         <div class="msub">${m['Party']||'Democrat'} · ${m['State']||'CA'}-${m['District']||'14'} · Elected ${m['Year Elected to Current Seat']||'—'} · Term ends ${m['Year Current Term Ends']||'—'}</div>
         <div class="mlinks">
@@ -2408,10 +2650,10 @@ renderTl('all');
         ['Instagram (official)','@repswalwell','https://www.instagram.com/repswalwell/'],
         ['Instagram (personal)','@ericswalwell','https://www.instagram.com/ericswalwell/'],
         ['Facebook','CongressmanEricSwalwell','https://www.facebook.com/CongressmanEricSwalwell/'],
-      ].map(([k,v,url])=>`<div class="drow"><span class="dk">${k}</span><span class="dv">${url?`<a href="${url}" target="_blank" style="color:#6366f1">${v}</a>`:v}</span></div>`).join('')}
+      ].map(([k,v,url])=>`<div class="drow"><span class="dk">${k}</span><span class="dv">${url?`<a href="${url}" target="_blank" style="color:#2a4f7c">${v}</a>`:v}</span></div>`).join('')}
     </div>
     <div class="dcard"><h4>Financial disclosures</h4>
-      ${[m['Most Recent House Financial Disclosure'],...(m['Other Financial Disclosure Docs']||'').split(';')].filter(Boolean).map((u,i)=>`<div class="drow"><a target="_blank" href="${u.trim()}" style="color:#6366f1">Disclosure ${i===0?'(most recent)':'doc '+(i+1)} ↗</a></div>`).join('')||'<span style="color:#9ca3af">—</span>'}
+      ${[m['Most Recent House Financial Disclosure'],...(m['Other Financial Disclosure Docs']||'').split(';')].filter(Boolean).map((u,i)=>`<div class="drow"><a target="_blank" href="${u.trim()}" style="color:#2a4f7c">Disclosure ${i===0?'(most recent)':'doc '+(i+1)} ↗</a></div>`).join('')||'<span style="color:#a0aec0">—</span>'}
     </div>
   </div>
   <div style="margin-top:28px">
@@ -2438,25 +2680,25 @@ renderTl('all');
 (function(){
   const h=document.getElementById('sourcesContent');
   const icons={'FEC Schedule B':'📋','CA FPPC Form 460 (Cal-Access)':'🏛','House Statement of Disbursements':'🏦','OpenFEC API':'🔌'};
-  const src=D.sources.map(s=>`<div style="display:flex;gap:12px;align-items:center;background:#fff;border:1px solid #e8ecf4;border-radius:12px;padding:12px 16px;margin-bottom:8px">
-    <div style="width:36px;height:36px;border-radius:10px;background:#f4f6fb;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none">${icons[s.type]||'📄'}</div>
-    <div style="flex:1"><div style="font-weight:600;font-size:13px">${s.entity}</div><div style="font-size:12px;color:#9ca3af">${s.type} · ID: ${s.id}</div></div>
-    <code style="font-size:11px;color:#9ca3af">${s.file}</code></div>`).join('');
+  const src=D.sources.map(s=>`<div style="display:flex;gap:12px;align-items:center;background:#fff;border:1px solid #eaecf2;border-radius:12px;padding:12px 16px;margin-bottom:8px">
+    <div style="width:36px;height:36px;border-radius:10px;background:#f7f6f3;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none">${icons[s.type]||'📄'}</div>
+    <div style="flex:1"><div style="font-weight:600;font-size:13px">${s.entity}</div><div style="font-size:12px;color:#a0aec0">${s.type} · ID: ${s.id}</div></div>
+    <code style="font-size:11px;color:#a0aec0">${s.file}</code></div>`).join('');
   const cc=D.api_crosscheck.map(c=>`<tr>
     <td style="font-weight:600">${META[c.entity]?META[c.entity].short:c.entity}</td>
-    <td style="font-family:monospace;font-size:12px;color:#6b7280">${c.committee_id}</td>
+    <td style="font-family:monospace;font-size:12px;color:#718096">${c.committee_id}</td>
     <td class="num">${fmt(c.local_total)}</td>
     <td class="num">${c.api_total!=null?fmt(c.api_total):'—'}</td>
-    <td class="num" style="color:${c.status==='match'?'#10b981':c.status==='VARIANCE'?'#f59e0b':'#9ca3af'};font-weight:600">${c.pct!=null?(c.pct>0?'+':'')+c.pct+'%':'—'}</td>
-    <td style="font-weight:600;color:${c.status==='match'?'#10b981':'#f59e0b'}">${c.status}</td></tr>`).join('');
+    <td class="num" style="color:${c.status==='match'?'#2d6a4f':c.status==='VARIANCE'?'#f59e0b':'#a0aec0'};font-weight:600">${c.pct!=null?(c.pct>0?'+':'')+c.pct+'%':'—'}</td>
+    <td style="font-weight:600;color:${c.status==='match'?'#2d6a4f':'#f59e0b'}">${c.status}</td></tr>`).join('');
   h.innerHTML=`<h3 style="font-size:14px;font-weight:700;margin-bottom:14px">Primary Sources — Financial</h3>${src}
   <div class="tcard" style="margin-top:20px"><div class="tcard-head"><h3>FEC API Cross-Check</h3><span class="tsub">Local rebuild vs official FEC totals</span></div>
   <div class="tscroll"><table><thead><tr><th>Entity</th><th>Committee</th><th class="num">Local (rebuilt)</th><th class="num">FEC API</th><th class="num">Δ%</th><th>Status</th></tr></thead><tbody>${cc}</tbody></table></div>
-  <p style="font-size:11.5px;color:#9ca3af;padding:12px 16px">Local totals exclude FEC memo entries (memo_code=X). Office/MRA intentionally not cross-checked against FEC. Generated ${D.generated_at}.</p></div>`;
+  <p style="font-size:11.5px;color:#a0aec0;padding:12px 16px">Local totals exclude FEC memo entries (memo_code=X). Office/MRA intentionally not cross-checked against FEC. Generated ${D.generated_at}.</p></div>`;
 
   // ===== Prudence — research & methodology provenance =====
-  const card=(inner,mt=14)=>`<div style="background:#fff;border:1px solid #e8ecf4;border-radius:12px;padding:16px 18px;margin-bottom:10px;margin-top:${mt}px">${inner}</div>`;
-  const chip=(t,c='#eef2ff',fg='#4338ca')=>`<span style="display:inline-block;background:${c};color:${fg};border-radius:6px;padding:3px 9px;font-size:11px;font-weight:600;margin:2px 4px 2px 0">${t}</span>`;
+  const card=(inner,mt=14)=>`<div style="background:#fff;border:1px solid #eaecf2;border-radius:12px;padding:16px 18px;margin-bottom:10px;margin-top:${mt}px">${inner}</div>`;
+  const chip=(t,c='#eef3fa',fg='#1e3a5f')=>`<span style="display:inline-block;background:${c};color:${fg};border-radius:6px;padding:3px 9px;font-size:11px;font-weight:600;margin:2px 4px 2px 0">${t}</span>`;
 
   // research literature (the Research Papers folder)
   const papers=[
@@ -2473,21 +2715,21 @@ renderTl('all');
      use:'Basis for Indicator 9 (the reporting gap): establishes that mandatory-reporting duties attach to specific professions, not to coworkers or congressional witnesses, and supplies the Penn State / McQueary archetype of internal-only escalation failing.',
      f:'Research Papers/Research Report.pdf'},
     {t:'CRS R46262 — Congressional Staff: Duties and Qualifications',sub:'Identified by Members of Congress for Selected Positions · Updated May 2, 2025 · 39 pp.',
-     kind:'Official government publication (Congressional Research Service)',kc:'#dbeafe',kf:'#1e40af',
+     kind:'Official government publication (Congressional Research Service)',kc:'#eef3fa',kf:'#1e3a5f',
      use:'Authoritative benchmark for what experience Members <em>advertise</em> per role (e.g. Chief of Staff: senior congressional + management experience, up to 5 yrs; Scheduler: 3+ yrs). Used in the honest-limit panel to explain what a real qualification audit would test — and why the SOD alone cannot.',
      f:'Research Papers/R46262.5.pdf'},
     {t:'Congressional Report Process',sub:'Hill workplace-reporting machinery (OCWR / Congressional Accountability Act framework)',
-     kind:'Reference — scanned image, not auto-parsed',kc:'#f3f4f6',kf:'#6b7280',
+     kind:'Reference — scanned image, not auto-parsed',kc:'#f7f6f3',kf:'#718096',
      use:'Referenced (not quoted) in Indicator 9 as the documentation of the actual reporting channels available to House staff. The file is image-based; no OCR pass has been run, so no text is machine-extracted from it.',
      f:'Research Papers/Congressional Report Process.pdf · (+ …_Watermarked.pdf variant)'},
   ];
   const paperCards=papers.map(p=>card(
     `<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
-       <div style="font-weight:700;font-size:13.5px;color:#1a1f36">📄 ${p.t}</div>
+       <div style="font-weight:700;font-size:13.5px;color:#1a2433">📄 ${p.t}</div>
        ${chip(p.kind,p.kc,p.kf)}</div>
-     <div style="font-size:11.5px;color:#9ca3af;margin:2px 0 8px">${p.sub}</div>
-     <div style="font-size:12.5px;color:#374151;line-height:1.5"><span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#9ca3af">How it's used</span><br>${p.use}</div>
-     <code style="font-size:11px;color:#9ca3af;display:block;margin-top:8px">${p.f}</code>`,8)).join('');
+     <div style="font-size:11.5px;color:#a0aec0;margin:2px 0 8px">${p.sub}</div>
+     <div style="font-size:12.5px;color:#4a5568;line-height:1.5"><span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#a0aec0">How it's used</span><br>${p.use}</div>
+     <code style="font-size:11px;color:#a0aec0;display:block;margin-top:8px">${p.f}</code>`,8)).join('');
 
   // frameworks mapping table
   const fwRows=[
@@ -2498,39 +2740,39 @@ renderTl('all');
   ];
   const fwTable=`<div class="tcard"><div class="tcard-head"><h3>Frameworks → How Applied</h3><span class="tsub">Each screen indicator is traceable to a cited framework</span></div>
     <div class="tscroll"><table><thead><tr><th>Framework</th><th>What it provides</th><th>Where it's used</th><th>Source file</th></tr></thead><tbody>
-    ${fwRows.map(r=>`<tr><td style="font-weight:600">${r[0]}</td><td style="font-size:12px;color:#6b7280">${r[1]}</td><td style="font-size:12px;color:#374151">${r[2]}</td><td><code style="font-size:11px;color:#9ca3af">${r[3]}</code></td></tr>`).join('')}
+    ${fwRows.map(r=>`<tr><td style="font-weight:600">${r[0]}</td><td style="font-size:12px;color:#718096">${r[1]}</td><td style="font-size:12px;color:#4a5568">${r[2]}</td><td><code style="font-size:11px;color:#a0aec0">${r[3]}</code></td></tr>`).join('')}
     </tbody></table></div></div>`;
 
   const dataCard=card(
-    `<div style="font-weight:700;font-size:13.5px;color:#1a1f36;margin-bottom:6px">🏦 Underlying data — House Statement of Disbursements (personnel)</div>
-     <div style="font-size:12.5px;color:#374151;line-height:1.55">
+    `<div style="font-weight:700;font-size:13.5px;color:#1a2433;margin-bottom:6px">🏦 Underlying data — House Statement of Disbursements (personnel)</div>
+     <div style="font-size:12.5px;color:#4a5568;line-height:1.55">
        The Workplace Structure screen is rebuilt from the public, all-member <strong>U.S. House Statement of Disbursements (SOD)</strong> quarterly DETAIL grids — <strong>40 CSV files, FY2015–2025</strong> — filtered to the organization <code style="font-size:11px">YYYY HON. ERIC SWALWELL</code> (committee / shared-employee rows excluded).
        <ul style="margin:8px 0 0 18px;padding:0">
          <li><strong>1,477</strong> personnel-compensation DETAIL rows → <strong>298</strong> distinct staff → <strong>$12,898,850</strong> in pay (reconciles exactly to the office personnel total).</li>
          <li>Job title = filed <code style="font-size:11px">DESCRIPTION</code> field; tenure = count of pay quarters; annualized pay ≈ quarterly × 4.</li>
          <li>Cross-office benchmark (Indicator 6) parses <strong>all 449 member offices'</strong> FY2024 personnel rows and scores Swalwell's percentile on each measure.</li>
        </ul></div>
-     <code style="font-size:11px;color:#9ca3af;display:block;margin-top:8px">data/sod_raw/*DETAIL*.csv · data/sod_raw/*SOD-DETAIL-GRID*.csv</code>`);
+     <code style="font-size:11px;color:#a0aec0;display:block;margin-top:8px">data/sod_raw/*DETAIL*.csv · data/sod_raw/*SOD-DETAIL-GRID*.csv</code>`);
 
   const methodCard=card(
-    `<div style="font-weight:700;font-size:13.5px;color:#1a1f36;margin-bottom:6px">⚙️ Method &amp; integrity notes</div>
-     <div style="font-size:12.5px;color:#374151;line-height:1.55">
+    `<div style="font-weight:700;font-size:13.5px;color:#1a2433;margin-bottom:6px">⚙️ Method &amp; integrity notes</div>
+     <div style="font-size:12.5px;color:#4a5568;line-height:1.55">
        <strong>Header-aware parser.</strong> Pre-2023 grids use a 12-column layout; FY2023+ grids use an 18-column layout (extra ORG CODE, FISCAL/LEGISLATIVE YEAR, VENDOR ID, BUDGET OBJECT columns). Columns are matched by header <em>name</em>, not fixed index — an earlier fixed-index pass silently dropped all post-2022 rows until this was corrected.
        <ul style="margin:8px 0 0 18px;padding:0">
          <li><strong>Deliberately NOT published:</strong> a per-person gender label (the SOD has no gender field — gender is used only as an aggregate "is the senior tier mixed?" check, never assigned to an individual) and a per-person "steep raise" metric (quarterly pay lacks FTE start dates, so mid-year hires produce false raise spikes).</li>
          <li><strong>Every output is a risk <em>indicator</em>, not an allegation</strong> — no claim is made that abuse occurred or about any named person's conduct or competence.</li>
        </ul></div>`);
 
-  const ethicsNote=`<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:13px 15px;font-size:12px;color:#9a3412;line-height:1.5;margin-top:10px">
+  const ethicsNote=`<div style="background:#fdf6e8;border:1px solid #f0d9a8;border-radius:10px;padding:13px 15px;font-size:12px;color:#92600a;line-height:1.5;margin-top:10px">
      <strong>⚠️ Provenance &amp; ethics.</strong> "Research synthesis (project-authored)" marks literature reviews developed within this project that compile and cite peer-reviewed scholarship; "Official government publication" marks primary documents (CRS, EEOC source material) downloaded unaltered. The Structure screen maps public payroll data onto this published research to surface <strong>structural risk indicators for human review only</strong>. It is not legal advice, not a finding, and not an allegation against any individual.</div>`;
 
   h.insertAdjacentHTML('beforeend',
-    `<div style="border-top:2px solid #eef0f6;margin:28px 0 0"></div>
+    `<div style="border-top:2px solid #eaecf2;margin:28px 0 0"></div>
      <h3 style="font-size:14px;font-weight:700;margin:18px 0 4px">🧭 Prudence — Research &amp; Methodology Sources</h3>
-     <p style="font-size:12px;color:#9ca3af;margin-bottom:6px">Provenance for the Workplace Structure &amp; Power-Imbalance Screen — every indicator traces to a cited framework and to the raw SOD data.</p>
-     <h4 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;margin:16px 0 2px">Research literature</h4>
+     <p style="font-size:12px;color:#a0aec0;margin-bottom:6px">Provenance for the Workplace Structure &amp; Power-Imbalance Screen — every indicator traces to a cited framework and to the raw SOD data.</p>
+     <h4 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#718096;margin:16px 0 2px">Research literature</h4>
      ${paperCards}
-     <h4 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;margin:18px 0 2px">Underlying data &amp; method</h4>
+     <h4 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#718096;margin:18px 0 2px">Underlying data &amp; method</h4>
      ${dataCard}${methodCard}
      ${fwTable}
      ${ethicsNote}`);
@@ -2544,7 +2786,7 @@ const VI = {
 
   categories: [
     {
-      id:'media', label:'Media & Advertising', icon:'📺', color:'#6366f1',
+      id:'media', label:'Media & Advertising', icon:'📺', color:'#2a4f7c',
       total:6364831,
       desc:'TV/digital ads, video production, creative strategy, social media',
       vendors:[
@@ -2564,7 +2806,7 @@ const VI = {
       ]
     },
     {
-      id:'fundraising', label:'Fundraising & Operations', icon:'💰', color:'#10b981',
+      id:'fundraising', label:'Fundraising & Operations', icon:'💰', color:'#2d6a4f',
       total:3735000,
       desc:'Online donation processing, voter data, compliance software, payroll, DC fundraising',
       vendors:[
@@ -2577,7 +2819,7 @@ const VI = {
       ]
     },
     {
-      id:'consulting', label:'Consulting & Strategy', icon:'🎯', color:'#f97316',
+      id:'consulting', label:'Consulting & Strategy', icon:'🎯', color:'#b45309',
       total:1620000,
       desc:'Campaign strategy, polling, operations management, voter research',
       vendors:[
@@ -2588,7 +2830,7 @@ const VI = {
       ]
     },
     {
-      id:'legal', label:'Legal Services', icon:'⚖️', color:'#ef4444', flag:'HIGH',
+      id:'legal', label:'Legal Services', icon:'⚖️', color:'#9b2335', flag:'HIGH',
       total:1130167,
       desc:'Outside legal counsel across all entities · $1.13M+ total · spikes align with controversy timeline',
       vendors:[
@@ -2601,13 +2843,13 @@ const VI = {
       ]
     },
     {
-      id:'hotels', label:'Hotels & Lodging', icon:'🏨', color:'#8b5cf6',
+      id:'hotels', label:'Hotels & Lodging', icon:'🏨', color:'#5b21b6',
       total:620000,
       desc:'Campaign-paid hotel stays across all entities · 30+ properties · 11-year pattern',
       vendors:[] // rendered by hotel intelligence section
     },
     {
-      id:'travel', label:'Travel & Transportation', icon:'✈️', color:'#0891b2',
+      id:'travel', label:'Travel & Transportation', icon:'✈️', color:'#2a4f7c',
       total:780000,
       desc:'Airline travel, booking services across House campaign and PAC',
       vendors:[
@@ -2625,7 +2867,7 @@ const VI = {
       ]
     },
     {
-      id:'transfers', label:'Transfers & Contributions', icon:'🔄', color:'#9ca3af',
+      id:'transfers', label:'Transfers & Contributions', icon:'🔄', color:'#a0aec0',
       total:2787500,
       desc:'Inter-committee transfers, state party contributions, candidate committee donations',
       vendors:[
@@ -2639,13 +2881,13 @@ const VI = {
 
   hotels: [
     // ICONIC LUXURY
-    {name:'Pebble Beach Resorts',           total:31895, payments:4,   span:'2017–2019', tier:'ICONIC LUXURY',    tierColor:'#dc2626', note:'World-famous resort · avg $7,974/stay · 3 fundraising event windows', flag:'Fundraiser pattern'},
-    {name:'Ritz-Carlton Half Moon Bay',     total:21161, payments:6,   span:'Apr 2021',  tier:'ICONIC LUXURY',    tierColor:'#dc2626', note:'6 payments in 2 weeks in April 2021 — consistent with multi-night fundraiser event', flag:'6 charges in 2 weeks'},
-    {name:'Ritz Paris',                     total:3539,  payments:1,   span:'May 2022',  tier:'ICONIC LUXURY',    tierColor:'#dc2626', note:'Single $3,539 charge · Paris · May 2022 international travel', flag:'International luxury'},
-    {name:'The Gwen Hotel',                 total:41774, payments:8,   span:'2020–2024', tier:'LUXURY',           tierColor:'#b91c1c', note:'5-star Chicago boutique · avg $5,222/stay'},
-    {name:'The Post Oak Hotel',             total:2641,  payments:7,   span:'2022–2025', tier:'LUXURY',           tierColor:'#b91c1c', note:'5-star Houston hotel · recurring use'},
+    {name:'Pebble Beach Resorts',           total:31895, payments:4,   span:'2017–2019', tier:'ICONIC LUXURY',    tierColor:'#9b2335', note:'World-famous resort · avg $7,974/stay · 3 fundraising event windows', flag:'Fundraiser pattern'},
+    {name:'Ritz-Carlton Half Moon Bay',     total:21161, payments:6,   span:'Apr 2021',  tier:'ICONIC LUXURY',    tierColor:'#9b2335', note:'6 payments in 2 weeks in April 2021 — consistent with multi-night fundraiser event', flag:'6 charges in 2 weeks'},
+    {name:'Ritz Paris',                     total:3539,  payments:1,   span:'May 2022',  tier:'ICONIC LUXURY',    tierColor:'#9b2335', note:'Single $3,539 charge · Paris · May 2022 international travel', flag:'International luxury'},
+    {name:'The Gwen Hotel',                 total:41774, payments:8,   span:'2020–2024', tier:'LUXURY',           tierColor:'#9b2335', note:'5-star Chicago boutique · avg $5,222/stay'},
+    {name:'The Post Oak Hotel',             total:2641,  payments:7,   span:'2022–2025', tier:'LUXURY',           tierColor:'#9b2335', note:'5-star Houston hotel · recurring use'},
     // PRIVATE CLUB
-    {name:'The Battery SF',                 total:43368, payments:108, span:'2015–2026', tier:'PRIVATE CLUB',     tierColor:'#7c3aed', note:'SF private members\' club · 108 charges over 11 years · de facto Bay Area campaign HQ', flag:'108 charges · 11 yrs'},
+    {name:'The Battery SF',                 total:43368, payments:108, span:'2015–2026', tier:'PRIVATE CLUB',     tierColor:'#5b21b6', note:'SF private members\' club · 108 charges over 11 years · de facto Bay Area campaign HQ', flag:'108 charges · 11 yrs'},
     // LUXURY LIFESTYLE
     {name:'1 Hotels (all locations)',        total:42190, payments:60,  span:'2023–2025', tier:'LUXURY LIFESTYLE', tierColor:'#d97706', note:'SH Hotels luxury eco brand · multiple locations · consistent 2023–25 preference'},
     {name:'KOR Group / SH Hotels (export)', total:17365, payments:23,  span:'No dates',  tier:'LUXURY LIFESTYLE', tierColor:'#d97706', note:'Presidential-era (unconfirmed) · KOR Group / 1 Hotels parent company'},
@@ -2655,25 +2897,25 @@ const VI = {
     {name:'Salamander Resort & Spa',        total:3511,  payments:10,  span:'2023–2024', tier:'LUXURY LIFESTYLE', tierColor:'#d97706', note:'Luxury resort · Middleburg, VA'},
     {name:'Tideline Palm Beach (export)',   total:3254,  payments:3,   span:'No dates',  tier:'LUXURY LIFESTYLE', tierColor:'#d97706', note:'Palm Beach ocean resort & spa · presidential-era (unconfirmed)'},
     // UPPER UPSCALE
-    {name:'Loews Hotels (all properties)',  total:63634, payments:80,  span:'2017–2025', tier:'UPPER UPSCALE',    tierColor:'#2563eb', note:'Loews Miami Beach + Chicago + NYC Regency · consistent chain preference across cities'},
-    {name:'Vdara Hotel & Spa',              total:17388, payments:24,  span:'2019–2023', tier:'UPPER UPSCALE',    tierColor:'#2563eb', note:'MGM Resorts boutique · Las Vegas · 24 payments over 4 years'},
-    {name:'Hyatt Regency (all locations)',  total:21734, payments:27,  span:'2015–2025', tier:'UPPER UPSCALE',    tierColor:'#2563eb', note:'Multiple Hyatt Regency properties · recurring business traveler pattern'},
-    {name:'Hilton Hotels (all locations)',  total:20625, payments:37,  span:'2015–2025', tier:'UPPER UPSCALE',    tierColor:'#2563eb', note:'Multiple Hilton properties · standard conference hotel'},
-    {name:'InterContinental Mexico City',   total:5144,  payments:7,   span:'2022–2025', tier:'UPPER UPSCALE',    tierColor:'#2563eb', note:'International IHG property · Mexico City · recurring'},
-    {name:'The Westin Saint Francis',       total:4925,  payments:12,  span:'2015–2022', tier:'UPPER UPSCALE',    tierColor:'#2563eb', note:'Iconic SF hotel · Union Square'},
-    {name:'Le Méridien',                    total:5860,  payments:8,   span:'2016',      tier:'UPPER UPSCALE',    tierColor:'#2563eb', note:'8 payments in 2016'},
-    {name:'Hotel Crescent Court',           total:4532,  payments:13,  span:'2020–2025', tier:'UPPER UPSCALE',    tierColor:'#2563eb', note:'Dallas luxury hotel · recurring use'},
-    {name:'SLS Hotel',                      total:3437,  payments:8,   span:'2022',      tier:'UPPER UPSCALE',    tierColor:'#2563eb', note:'Beverly Hills · concentrated June 2022'},
-    {name:'Doubletree by Hilton (export)',  total:13722, payments:14,  span:'No dates',  tier:'UPPER UPSCALE',    tierColor:'#2563eb', note:'Presidential-era (unconfirmed) · standard Hilton conference brand'},
+    {name:'Loews Hotels (all properties)',  total:63634, payments:80,  span:'2017–2025', tier:'UPPER UPSCALE',    tierColor:'#2a4f7c', note:'Loews Miami Beach + Chicago + NYC Regency · consistent chain preference across cities'},
+    {name:'Vdara Hotel & Spa',              total:17388, payments:24,  span:'2019–2023', tier:'UPPER UPSCALE',    tierColor:'#2a4f7c', note:'MGM Resorts boutique · Las Vegas · 24 payments over 4 years'},
+    {name:'Hyatt Regency (all locations)',  total:21734, payments:27,  span:'2015–2025', tier:'UPPER UPSCALE',    tierColor:'#2a4f7c', note:'Multiple Hyatt Regency properties · recurring business traveler pattern'},
+    {name:'Hilton Hotels (all locations)',  total:20625, payments:37,  span:'2015–2025', tier:'UPPER UPSCALE',    tierColor:'#2a4f7c', note:'Multiple Hilton properties · standard conference hotel'},
+    {name:'InterContinental Mexico City',   total:5144,  payments:7,   span:'2022–2025', tier:'UPPER UPSCALE',    tierColor:'#2a4f7c', note:'International IHG property · Mexico City · recurring'},
+    {name:'The Westin Saint Francis',       total:4925,  payments:12,  span:'2015–2022', tier:'UPPER UPSCALE',    tierColor:'#2a4f7c', note:'Iconic SF hotel · Union Square'},
+    {name:'Le Méridien',                    total:5860,  payments:8,   span:'2016',      tier:'UPPER UPSCALE',    tierColor:'#2a4f7c', note:'8 payments in 2016'},
+    {name:'Hotel Crescent Court',           total:4532,  payments:13,  span:'2020–2025', tier:'UPPER UPSCALE',    tierColor:'#2a4f7c', note:'Dallas luxury hotel · recurring use'},
+    {name:'SLS Hotel',                      total:3437,  payments:8,   span:'2022',      tier:'UPPER UPSCALE',    tierColor:'#2a4f7c', note:'Beverly Hills · concentrated June 2022'},
+    {name:'Doubletree by Hilton (export)',  total:13722, payments:14,  span:'No dates',  tier:'UPPER UPSCALE',    tierColor:'#2a4f7c', note:'Presidential-era (unconfirmed) · standard Hilton conference brand'},
     // UPSCALE/STANDARD
-    {name:'Marriott (all variants)',        total:73237, payments:180, span:'2014–2025', tier:'UPSCALE',          tierColor:'#059669', note:'Largest chain by total and payment count · multiple brands/cities · workhorse hotel'},
-    {name:'Walt Disney World / Parks',      total:15323, payments:18,  span:'2023–2024', tier:'UPSCALE/RESORT',   tierColor:'#059669', note:'Disney resort stays · 18 payments · likely donor/family events'},
-    {name:'The Rose Hotel',                 total:10088, payments:27,  span:'2019–2025', tier:'UPSCALE',          tierColor:'#059669', note:'27 payments over 6 years · consistent use'},
-    {name:'Hotel Adagio',                   total:2770,  payments:6,   span:'2018–2022', tier:'UPSCALE',          tierColor:'#059669', note:'San Francisco boutique · recurring SF lodging'},
-    {name:'Courtyard / AC Hotel Marriott',  total:6225,  payments:35,  span:'2017–2025', tier:'UPSCALE',          tierColor:'#059669', note:'Standard business Marriott brands · DC + Manhattan + other cities'},
-    {name:'Stanford Hotels Corporation',    total:4795,  payments:3,   span:'2026',      tier:'UPSCALE',          tierColor:'#059669', note:'SF hotel group · 3 payments in early 2026'},
+    {name:'Marriott (all variants)',        total:73237, payments:180, span:'2014–2025', tier:'UPSCALE',          tierColor:'#2d6a4f', note:'Largest chain by total and payment count · multiple brands/cities · workhorse hotel'},
+    {name:'Walt Disney World / Parks',      total:15323, payments:18,  span:'2023–2024', tier:'UPSCALE/RESORT',   tierColor:'#2d6a4f', note:'Disney resort stays · 18 payments · likely donor/family events'},
+    {name:'The Rose Hotel',                 total:10088, payments:27,  span:'2019–2025', tier:'UPSCALE',          tierColor:'#2d6a4f', note:'27 payments over 6 years · consistent use'},
+    {name:'Hotel Adagio',                   total:2770,  payments:6,   span:'2018–2022', tier:'UPSCALE',          tierColor:'#2d6a4f', note:'San Francisco boutique · recurring SF lodging'},
+    {name:'Courtyard / AC Hotel Marriott',  total:6225,  payments:35,  span:'2017–2025', tier:'UPSCALE',          tierColor:'#2d6a4f', note:'Standard business Marriott brands · DC + Manhattan + other cities'},
+    {name:'Stanford Hotels Corporation',    total:4795,  payments:3,   span:'2026',      tier:'UPSCALE',          tierColor:'#2d6a4f', note:'SF hotel group · 3 payments in early 2026'},
     // ALTERNATIVE
-    {name:'Airbnb',                         total:3718,  payments:5,   span:'2014–2019', tier:'ALTERNATIVE',      tierColor:'#6b7280', note:'5 stays · early campaign era · discontinued after 2019'},
+    {name:'Airbnb',                         total:3718,  payments:5,   span:'2014–2019', tier:'ALTERNATIVE',      tierColor:'#718096', note:'5 stays · early campaign era · discontinued after 2019'},
   ],
 
   legalByYear:{
@@ -2691,14 +2933,14 @@ const VI = {
 
 const TIER_ORDER=['ICONIC LUXURY','LUXURY','PRIVATE CLUB','LUXURY LIFESTYLE','UPPER UPSCALE','UPSCALE','UPSCALE/RESORT','ALTERNATIVE'];
 const TIER_BG={
-  'ICONIC LUXURY':  {bg:'#fee2e2',color:'#b91c1c'},
-  'LUXURY':         {bg:'#fee2e2',color:'#b91c1c'},
-  'PRIVATE CLUB':   {bg:'#ede9fe',color:'#6d28d9'},
+  'ICONIC LUXURY':  {bg:'#f5dde0',color:'#9b2335'},
+  'LUXURY':         {bg:'#f5dde0',color:'#9b2335'},
+  'PRIVATE CLUB':   {bg:'#ede9fe',color:'#5b21b6'},
   'LUXURY LIFESTYLE':{bg:'#fef3c7',color:'#92400e'},
-  'UPPER UPSCALE':  {bg:'#dbeafe',color:'#1d4ed8'},
-  'UPSCALE':        {bg:'#d1fae5',color:'#065f46'},
-  'UPSCALE/RESORT': {bg:'#d1fae5',color:'#065f46'},
-  'ALTERNATIVE':    {bg:'#f3f4f6',color:'#374151'},
+  'UPPER UPSCALE':  {bg:'#eef3fa',color:'#2a4f7c'},
+  'UPSCALE':        {bg:'#d8f0e5',color:'#2d6a4f'},
+  'UPSCALE/RESORT': {bg:'#d8f0e5',color:'#2d6a4f'},
+  'ALTERNATIVE':    {bg:'#f7f6f3',color:'#4a5568'},
 };
 
 let viChart=null;
@@ -2722,12 +2964,12 @@ function initVendorIntelligence(){
   const ef=document.getElementById('viEntFilter');
   if(!ef)return;
   ef.innerHTML=[
-    {k:'all',label:'All entities',color:'#1a1f36'},
-    {k:'house',label:'House Campaign',color:'#f97316'},
-    {k:'pres',label:'Presidential',color:'#10b981'},
-    {k:'pac',label:'Remedy PAC',color:'#8b5cf6'},
-    {k:'gov',label:'Governor 2026',color:'#ef4444'},
-    {k:'office',label:'House Office',color:'#6366f1'},
+    {k:'all',label:'All entities',color:'#1a2433'},
+    {k:'house',label:'House Campaign',color:META.house.color},
+    {k:'pres',label:'Presidential',color:META.pres.color},
+    {k:'pac',label:'Remedy PAC',color:META.pac.color},
+    {k:'gov',label:'Governor 2026',color:META.gov.color},
+    {k:'office',label:'House Office',color:META.office.color},
   ].map(({k,label,color})=>`<div class="vi-ent-pill${VI.activeEnt===k?' active':''}"
     onclick="viSetEnt('${k}')" style="${VI.activeEnt===k?'background:'+color+';border-color:'+color:''}">${label}</div>`).join('');
 
@@ -2761,12 +3003,12 @@ function renderViCatGrid(){
       <div class="vic-total" style="color:${c.color}">${fmtK(c.total)}</div>
       <div class="vic-sub">${c.vendors.length?c.vendors.length+' vendors':'See detail'}</div>
       <div style="margin-top:8px;display:flex;align-items:center;gap:7px">
-        <div style="flex:1;height:5px;background:#f0f2f8;border-radius:3px;overflow:hidden">
+        <div style="flex:1;height:5px;background:#eaecf2;border-radius:3px;overflow:hidden">
           <div style="height:100%;width:${pct.toFixed(1)}%;background:${c.color};border-radius:3px"></div>
         </div>
         <span style="font-size:12px;font-weight:800;color:${c.color};font-family:ui-monospace,monospace">${pct.toFixed(1)}%</span>
       </div>
-      <div style="font-size:10px;color:#9ca3af;margin-top:3px">of ${fmtK(grand)} total spend</div>
+      <div style="font-size:10px;color:#a0aec0;margin-top:3px">of ${fmtK(grand)} total spend</div>
     </div>`;
   }).join('');
 }
@@ -2787,8 +3029,8 @@ function renderViCatDetail(){
       viChart=new Chart(cv,{type:'bar',
         data:{labels:sorted.map(c=>c.label),datasets:[{data:sorted.map(c=>c.total),backgroundColor:sorted.map(c=>c.color),borderRadius:8,borderSkipped:false}]},
         options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)}}},
-          scales:{x:{ticks:{color:'#9ca3af',callback:v=>fmtK(v)},grid:{color:'#f0f2f8'}},
-                  y:{ticks:{color:'#374151',font:{weight:'600',size:12}},grid:{display:false}}}}});
+          scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},
+                  y:{ticks:{color:'#4a5568',font:{weight:'600',size:12}},grid:{display:false}}}}});
     }
     return;
   }
@@ -2819,26 +3061,26 @@ function renderViCatDetail(){
       </div>
       <div class="vi-detail-body">
         <div class="vi-chart-col">
-          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#9ca3af;margin-bottom:10px">Top vendors by amount</div>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a0aec0;margin-bottom:10px">Top vendors by amount</div>
           <div style="position:relative;height:${Math.min(topV.length,8)*36+20}px"><canvas id="viCatChart"></canvas></div>
         </div>
         <div class="vi-table-col">
           <table style="width:100%;border-collapse:collapse;font-size:13px">
             <thead><tr>
-              <th style="text-align:left;padding:9px 14px;border-bottom:2px solid #f0f2f8;color:#6b7280;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Vendor / Firm</th>
-              <th style="text-align:left;padding:9px 14px;border-bottom:2px solid #f0f2f8;color:#6b7280;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Entities</th>
-              <th style="text-align:right;padding:9px 14px;border-bottom:2px solid #f0f2f8;color:#6b7280;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Total</th>
+              <th style="text-align:left;padding:9px 14px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Vendor / Firm</th>
+              <th style="text-align:left;padding:9px 14px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Entities</th>
+              <th style="text-align:right;padding:9px 14px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Total</th>
             </tr></thead>
             <tbody>
-              ${topV.map((v,i)=>`<tr style="border-bottom:1px solid #f5f6fa">
+              ${topV.map((v,i)=>`<tr style="border-bottom:1px solid #f7f6f3">
                 <td style="padding:10px 14px">
                   <div style="font-weight:700">${v.name}</div>
-                  <div style="font-size:11.5px;color:#9ca3af;margin-top:2px">${v.note}</div>
-                  <div style="margin-top:5px;height:4px;background:#f0f2f8;border-radius:2px;overflow:hidden">
+                  <div style="font-size:11.5px;color:#a0aec0;margin-top:2px">${v.note}</div>
+                  <div style="margin-top:5px;height:4px;background:#eaecf2;border-radius:2px;overflow:hidden">
                     <div style="height:100%;width:${(v.total/maxAmt*100).toFixed(1)}%;background:${cat.color};border-radius:2px"></div>
                   </div>
                 </td>
-                <td style="padding:10px 14px;font-size:12px;color:#6b7280;vertical-align:top;white-space:nowrap">${v.ents}</td>
+                <td style="padding:10px 14px;font-size:12px;color:#718096;vertical-align:top;white-space:nowrap">${v.ents}</td>
                 <td style="padding:10px 14px;text-align:right;font-weight:800;font-family:ui-monospace,monospace;color:${cat.color};vertical-align:top;white-space:nowrap">${fmt(v.total)}</td>
               </tr>`).join('')}
             </tbody>
@@ -2867,8 +3109,8 @@ function renderViCatDetail(){
     viChart=new Chart(cv,{type:'bar',
       data:{labels:chartLabels,datasets:[{data:chartData,backgroundColor:cat.color+'cc',borderColor:cat.color,borderWidth:1,borderRadius:5,borderSkipped:false}]},
       options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)}}},
-        scales:{x:{ticks:{color:'#9ca3af',callback:v=>fmtK(v)},grid:{color:'#f0f2f8'}},
-                y:{ticks:{color:'#374151',font:{size:11,weight:'600'}},grid:{display:false}}}}});
+        scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},
+                y:{ticks:{color:'#4a5568',font:{size:11,weight:'600'}},grid:{display:false}}}}});
   }
 }
 
@@ -2904,34 +3146,31 @@ function renderHotelIntelligence(){
     <!-- summary stat row -->
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:18px">
       ${[
-        {label:'Total hotel spend', val:fmtK(total),            color:'#8b5cf6', sub:`${VI.hotels.length} properties`},
-        {label:'Total charges',     val:totalPayments.toLocaleString(), color:'#6366f1', sub:'individual payments'},
-        {label:'Avg per charge',    val:fmt(avgPerStay),        color:'#0891b2', sub:'blended across all stays'},
-        {label:'Premium-tier share',val:premiumPct+'%',         color:'#b91c1c', sub:`${fmtK(premiumTotal)} luxury/club`},
+        {label:'Total hotel spend', val:fmtK(total),            color:'#5b21b6', sub:`${VI.hotels.length} properties`},
+        {label:'Total charges',     val:totalPayments.toLocaleString(), color:'#2a4f7c', sub:'individual payments'},
+        {label:'Avg per charge',    val:fmt(avgPerStay),        color:'#2a4f7c', sub:'blended across all stays'},
+        {label:'Premium-tier share',val:premiumPct+'%',         color:'#9b2335', sub:`${fmtK(premiumTotal)} luxury/club`},
         {label:'Top property',      val:fmtK(topHotel.total),   color:'#d97706', sub:topHotel.name},
-      ].map(s=>`<div style="background:#fff;border:1px solid #e8ecf4;border-radius:14px;padding:16px;border-top:3px solid ${s.color}">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af;margin-bottom:4px">${s.label}</div>
+      ].map(s=>`<div style="background:#fff;border:1px solid #eaecf2;border-radius:14px;padding:16px;border-top:3px solid ${s.color}">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#a0aec0;margin-bottom:4px">${s.label}</div>
         <div style="font-size:22px;font-weight:800;color:${s.color};line-height:1;margin-bottom:3px">${s.val}</div>
-        <div style="font-size:11.5px;color:#9ca3af;line-height:1.3">${s.sub}</div>
+        <div style="font-size:11.5px;color:#a0aec0;line-height:1.3">${s.sub}</div>
       </div>`).join('')}
     </div>
 
-    <!-- HERO: behavior scatter — frequency vs total spend -->
-    <div style="background:#fff;border:1px solid #e8ecf4;border-radius:14px;padding:18px;margin-bottom:14px">
-      <div style="font-size:13px;font-weight:700;margin-bottom:2px">How each property is used — frequency vs. total spend</div>
-      <div style="font-size:11.5px;color:#9ca3af;margin-bottom:6px">Each bubble is one property · bubble size = average cost per stay · the position tells you <em>why</em> the money was spent</div>
-      <div style="position:relative;height:380px"><canvas id="hotelScatter"></canvas></div>
-      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:11.5px;color:#6b7280">
-        <div><strong style="color:#dc2626">↖ Top-left</strong> — few stays, high spend = luxury / fundraiser events (Pebble Beach, Ritz-Carlton, The Gwen)</div>
-        <div><strong style="color:#059669">↘ Bottom-right</strong> — many stays, low spend = workhorse business lodging (Marriott, The Battery)</div>
+    <!-- tier breakdown + ranked properties -->
+    <div style="display:grid;grid-template-columns:280px 1fr;gap:14px;margin-bottom:14px;align-items:start">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px">
+        <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:var(--text)">Spend by tier</div>
+        <div style="font-size:11.5px;color:var(--text-3);margin-bottom:14px">Share of total lodging budget</div>
+        <div style="position:relative;height:220px"><canvas id="hotelTierDonut"></canvas></div>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px" id="hotelTierLegend"></div>
       </div>
-    </div>
-
-    <!-- top properties by total -->
-    <div style="background:#fff;border:1px solid #e8ecf4;border-radius:14px;padding:18px;margin-bottom:18px">
-      <div style="font-size:13px;font-weight:700;margin-bottom:2px">Top properties by total spend</div>
-      <div style="font-size:11.5px;color:#9ca3af;margin-bottom:6px">The 12 properties that absorb most of the lodging budget</div>
-      <div style="position:relative;height:340px"><canvas id="hotelTopChart"></canvas></div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px">
+        <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:var(--text)">All properties — ranked by spend</div>
+        <div style="font-size:11.5px;color:var(--text-3);margin-bottom:14px">Colored by tier · hover for detail</div>
+        <div style="position:relative;height:${VI.hotels.length * 26 + 20}px"><canvas id="hotelRankedBar"></canvas></div>
+      </div>
     </div>
 
     <div class="vi-insight" style="margin-bottom:18px">
@@ -2946,7 +3185,7 @@ function renderHotelIntelligence(){
           <div class="hc-name">${h.name}</div>
           <div class="hc-amt" style="color:${h.tierColor}">${fmt(h.total)}</div>
           <div class="hc-meta">${h.payments} payment${h.payments!==1?'s':''} · avg ${fmt(avg)}/stay${h.span?` · ${h.span}`:''}</div>
-          <span class="hc-tier" style="background:${TIER_BG[h.tier]?.bg||'#f3f4f6'};color:${TIER_BG[h.tier]?.color||'#374151'}">${h.tier}</span>
+          <span class="hc-tier" style="background:${TIER_BG[h.tier]?.bg||'#f7f6f3'};color:${TIER_BG[h.tier]?.color||'#4a5568'}">${h.tier}</span>
           <div class="hc-meta" style="margin-top:5px">${h.note}</div>
           ${h.flag?`<div class="hc-flag">⚑ ${h.flag}</div>`:''}
         </div>`;
@@ -2955,38 +3194,44 @@ function renderHotelIntelligence(){
 
   // ── draw charts ──
   setTimeout(()=>{
-    // behavior scatter — x: payments, y: total, r: avg/stay
-    const sc=document.getElementById('hotelScatter');
-    if(sc){
-      const pts=VI.hotels.map(h=>{
-        const avg=h.total/h.payments;
-        return {x:h.payments, y:h.total, r:Math.max(5,Math.min(26,Math.sqrt(avg)/3.2)), _h:h, _avg:avg};
-      });
-      hotelCharts.push(new Chart(sc,{type:'bubble',
-        data:{datasets:[{data:pts,backgroundColor:pts.map(p=>p._h.tierColor+'b3'),borderColor:pts.map(p=>p._h.tierColor),borderWidth:1.5}]},
-        options:{maintainAspectRatio:false,
-          plugins:{legend:{display:false},tooltip:{callbacks:{
-            title:c=>c[0].raw._h.name,
-            label:c=>[`Total: ${fmt(c.raw.y)}`,`${c.raw.x} charges`,`Avg ${fmt(c.raw._avg)}/stay`,c.raw._h.tier]}}},
-          scales:{
-            x:{title:{display:true,text:'Number of charges  →  more frequent use',color:'#9ca3af',font:{size:11}},
-               ticks:{color:'#9ca3af'},grid:{color:'#f0f2f8'},beginAtZero:true},
-            y:{title:{display:true,text:'Total spend  →',color:'#9ca3af',font:{size:11}},
-               ticks:{color:'#9ca3af',callback:v=>fmtK(v)},grid:{color:'#f0f2f8'},beginAtZero:true}}}}));
+    const gridColor=document.body.classList.contains('dark')?'#2a3340':'#eaecf2';
+    const tickColor=document.body.classList.contains('dark')?'#6b7a8d':'#a0aec0';
+    const labelColor=document.body.classList.contains('dark')?'#a8b8cc':'#4a5568';
+
+    // tier donut
+    const donutEl=document.getElementById('hotelTierDonut');
+    if(donutEl){
+      const tiers=TIER_ORDER.filter(t=>VI.hotels.some(h=>h.tier===t));
+      const tierTotals=tiers.map(t=>VI.hotels.filter(h=>h.tier===t).reduce((s,h)=>s+h.total,0));
+      const tierColors=tiers.map(t=>VI.hotels.find(h=>h.tier===t).tierColor);
+      hotelCharts.push(new Chart(donutEl,{type:'doughnut',
+        data:{labels:tiers,datasets:[{data:tierTotals,backgroundColor:tierColors.map(c=>c+'cc'),borderColor:tierColors,borderWidth:2}]},
+        options:{maintainAspectRatio:false,cutout:'62%',
+          plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${fmtK(c.parsed)} (${Math.round(c.parsed/total*100)}%)`}}}}}));
+      // legend
+      const leg=document.getElementById('hotelTierLegend');
+      if(leg) leg.innerHTML=tiers.map((t,i)=>`<div style="display:flex;align-items:center;gap:8px;font-size:11.5px">
+        <span style="width:10px;height:10px;border-radius:50%;background:${tierColors[i]};flex:none"></span>
+        <span style="color:var(--text-2);flex:1">${t}</span>
+        <span style="font-weight:700;color:var(--text);font-family:monospace">${fmtK(tierTotals[i])}</span>
+      </div>`).join('');
     }
-    // top properties by total
-    const topc=document.getElementById('hotelTopChart');
-    if(topc){
-      const top=[...VI.hotels].sort((a,b)=>b.total-a.total).slice(0,12);
-      hotelCharts.push(new Chart(topc,{type:'bar',
-        data:{labels:top.map(h=>h.name.length>26?h.name.slice(0,26)+'…':h.name),
-          datasets:[{data:top.map(h=>h.total),backgroundColor:top.map(h=>h.tierColor),borderRadius:5,borderSkipped:false}]},
+
+    // ranked bar — all properties
+    const rankEl=document.getElementById('hotelRankedBar');
+    if(rankEl){
+      const sorted=[...VI.hotels].sort((a,b)=>b.total-a.total);
+      hotelCharts.push(new Chart(rankEl,{type:'bar',
+        data:{labels:sorted.map(h=>h.name.length>28?h.name.slice(0,28)+'…':h.name),
+          datasets:[{data:sorted.map(h=>h.total),backgroundColor:sorted.map(h=>h.tierColor+'cc'),borderColor:sorted.map(h=>h.tierColor),borderWidth:1,borderRadius:4,borderSkipped:false}]},
         options:{maintainAspectRatio:false,indexAxis:'y',
           plugins:{legend:{display:false},tooltip:{callbacks:{
-            label:c=>fmt(c.parsed.x),
-            afterLabel:c=>top[c.dataIndex].payments+' charges · '+top[c.dataIndex].tier}}},
-          scales:{x:{ticks:{color:'#9ca3af',callback:v=>fmtK(v)},grid:{color:'#f0f2f8'}},
-                  y:{ticks:{color:'#374151',font:{size:10,weight:'600'}},grid:{display:false}}}}}));
+            title:c=>sorted[c[0].dataIndex].name,
+            label:c=>`${fmt(c.parsed.x)}`,
+            afterLabel:c=>[`${sorted[c.dataIndex].payments} charges · avg ${fmt(sorted[c.dataIndex].total/sorted[c.dataIndex].payments)}/stay`,sorted[c.dataIndex].tier,sorted[c.dataIndex].span||'']}}},
+          scales:{
+            x:{ticks:{color:tickColor,callback:v=>fmtK(v)},grid:{color:gridColor}},
+            y:{ticks:{color:labelColor,font:{size:10,weight:'600'}},grid:{display:false}}}}}));
     }
   },50);
 }
@@ -3000,39 +3245,39 @@ function renderLegalIntelligence(){
   const legalTotal=legalCat.total;
   const firms=[...legalCat.vendors].sort((a,b)=>b.total-a.total);
   const topFirm=firms[0];
-  const FIRM_COLORS=['#ef4444','#f59e0b','#8b5cf6','#0891b2','#9ca3af','#db2777','#059669'];
+  const FIRM_COLORS=['#9b2335','#f59e0b','#5b21b6','#2a4f7c','#a0aec0','#9d174d','#2d6a4f'];
 
   el.innerHTML=`
     <!-- summary stat row -->
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:18px">
       ${[
-        {label:'Total legal spend', val:fmtK(legalTotal),       color:'#ef4444', sub:'all entities · 2012–2026'},
-        {label:'Outside firms',     val:firms.length,            color:'#8b5cf6', sub:'distinct legal payees'},
+        {label:'Total legal spend', val:fmtK(legalTotal),       color:'#9b2335', sub:'all entities · 2012–2026'},
+        {label:'Outside firms',     val:firms.length,            color:'#5b21b6', sub:'distinct legal payees'},
         {label:'Largest firm',      val:fmtK(topFirm.total),     color:'#f59e0b', sub:topFirm.name},
-        {label:'Criminal defense',  val:fmtK(313251),            color:'#b91c1c', sub:'Sara Azari · "compliance"'},
-        {label:'Peak year',         val:fmtK(maxVal),            color:'#0891b2', sub:yrs[vals.indexOf(maxVal)]+' · controversy spike'},
-      ].map(s=>`<div style="background:#fff;border:1px solid #e8ecf4;border-radius:14px;padding:16px;border-top:3px solid ${s.color}">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af;margin-bottom:4px">${s.label}</div>
+        {label:'Criminal defense',  val:fmtK(313251),            color:'#9b2335', sub:'Sara Azari · "compliance"'},
+        {label:'Peak year',         val:fmtK(maxVal),            color:'#2a4f7c', sub:yrs[vals.indexOf(maxVal)]+' · controversy spike'},
+      ].map(s=>`<div style="background:#fff;border:1px solid #eaecf2;border-radius:14px;padding:16px;border-top:3px solid ${s.color}">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#a0aec0;margin-bottom:4px">${s.label}</div>
         <div style="font-size:22px;font-weight:800;color:${s.color};line-height:1;margin-bottom:3px">${s.val}</div>
-        <div style="font-size:11.5px;color:#9ca3af;line-height:1.3">${s.sub}</div>
+        <div style="font-size:11.5px;color:#a0aec0;line-height:1.3">${s.sub}</div>
       </div>`).join('')}
     </div>
 
     <!-- firm share doughnut + year chart side by side -->
     <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:14px;margin-bottom:14px">
-      <div style="background:#fff;border:1px solid #e8ecf4;border-radius:14px;padding:18px">
+      <div style="background:#fff;border:1px solid #eaecf2;border-radius:14px;padding:18px">
         <div style="font-size:13px;font-weight:700;margin-bottom:2px">Spend by firm</div>
-        <div style="font-size:11.5px;color:#9ca3af;margin-bottom:6px">Share of total legal spend</div>
+        <div style="font-size:11.5px;color:#a0aec0;margin-bottom:6px">Share of total legal spend</div>
         <div style="position:relative;height:230px"><canvas id="viLegalFirmChart"></canvas></div>
       </div>
-      <div style="background:#fff;border:1px solid #e8ecf4;border-radius:14px;padding:18px">
+      <div style="background:#fff;border:1px solid #eaecf2;border-radius:14px;padding:18px">
         <div style="font-size:13px;font-weight:700;margin-bottom:2px">Legal fees by year (FEC federal entities)</div>
-        <div style="font-size:11.5px;color:#9ca3af;margin-bottom:6px">Annual spend · controversy years in deep red</div>
+        <div style="font-size:11.5px;color:#a0aec0;margin-bottom:6px">Annual spend · controversy years in deep red</div>
         <div style="position:relative;height:230px"><canvas id="viLegalChart"></canvas></div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px">
           ${Object.entries(VI.legalControversies).map(([yr,note])=>`
-            <div style="background:#fff3cd;border:1px solid #fde68a;border-radius:8px;padding:5px 10px;font-size:11px">
-              <strong>${yr}</strong> — ${note}
+            <div style="background:var(--gold-pale);border:1px solid var(--gold-light);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--amber);line-height:1.4">
+              <strong style="color:var(--text)">${yr}</strong> — ${note}
             </div>`).join('')}
         </div>
       </div>
@@ -3045,16 +3290,16 @@ function renderLegalIntelligence(){
       ${firms.map(v=>`<div class="legal-firm-row">
         <div style="flex:1;min-width:0">
           <div class="lfr-name">${v.name}</div>
-          <div class="lfr-ents" style="font-size:11.5px;color:#9ca3af;margin-top:2px">${v.note}</div>
-          <div style="margin-top:7px;height:5px;background:#f0f2f8;border-radius:3px;overflow:hidden">
-            <div style="height:100%;width:${(v.total/357000*100).toFixed(1)}%;background:#ef4444;border-radius:3px"></div>
+          <div class="lfr-ents" style="font-size:11.5px;color:#a0aec0;margin-top:2px">${v.note}</div>
+          <div style="margin-top:7px;height:5px;background:#eaecf2;border-radius:3px;overflow:hidden">
+            <div style="height:100%;width:${(v.total/357000*100).toFixed(1)}%;background:#9b2335;border-radius:3px"></div>
           </div>
         </div>
         <div style="text-align:right;flex-shrink:0;margin-left:14px">
-          <div class="lfr-amt" style="color:#ef4444">${fmt(v.total)}</div>
+          <div class="lfr-amt" style="color:#9b2335">${fmt(v.total)}</div>
           <div class="lfr-ents">${v.ents}</div>
           ${v.name.includes('Azari')?`<div class="lfr-flag" style="display:inline-block;margin-top:4px">⚑ Criminal defense</div>`:''}
-          ${v.name.includes('Miller')?`<div style="font-size:10px;color:#7c3aed;font-weight:600;margin-top:4px">All 3 federal entities</div>`:''}
+          ${v.name.includes('Miller')?`<div style="font-size:10px;color:#5b21b6;font-weight:600;margin-top:4px">All 3 federal entities</div>`:''}
         </div>
       </div>`).join('')}
     </div>
@@ -3071,7 +3316,7 @@ function renderLegalIntelligence(){
         data:{labels:firms.map(f=>f.name),
           datasets:[{data:firms.map(f=>f.total),backgroundColor:firms.map((f,i)=>FIRM_COLORS[i%FIRM_COLORS.length]),borderWidth:2,borderColor:'#fff'}]},
         options:{maintainAspectRatio:false,cutout:'58%',
-          plugins:{legend:{position:'bottom',labels:{color:'#374151',boxWidth:10,font:{size:10},padding:6}},
+          plugins:{legend:{position:'bottom',labels:{color:'#4a5568',boxWidth:10,font:{size:10},padding:6}},
             tooltip:{callbacks:{label:c=>`${c.label}: ${fmt(c.parsed)} (${Math.round(c.parsed/legalTotal*100)}%)`}}}}});
     }
     const cv=document.getElementById('viLegalChart');if(!cv)return;
@@ -3080,8 +3325,8 @@ function renderLegalIntelligence(){
         labels:yrs,
         datasets:[{
           data:vals,
-          backgroundColor:yrs.map(y=>VI.legalControversies[y]?'#ef4444cc':'#f87171cc'),
-          borderColor:yrs.map(y=>VI.legalControversies[y]?'#dc2626':'#fca5a5'),
+          backgroundColor:yrs.map(y=>VI.legalControversies[y]?'#9b2335cc':'#c45065cc'),
+          borderColor:yrs.map(y=>VI.legalControversies[y]?'#9b2335':'#f5dde0'),
           borderWidth:1,borderRadius:4
         }]
       },
@@ -3091,8 +3336,8 @@ function renderLegalIntelligence(){
           afterLabel:c=>VI.legalControversies[c.label]?'⚑ '+VI.legalControversies[c.label]:''
         }}},
         scales:{
-          x:{ticks:{color:'#9ca3af'},grid:{display:false}},
-          y:{ticks:{color:'#9ca3af',callback:v=>'$'+Math.round(v/1000)+'K'},grid:{color:'#f0f2f8'}}
+          x:{ticks:{color:'#a0aec0'},grid:{display:false}},
+          y:{ticks:{color:'#a0aec0',callback:v=>'$'+Math.round(v/1000)+'K'},grid:{color:'#eaecf2'}}
         }
       }
     });
@@ -3102,45 +3347,45 @@ function renderLegalIntelligence(){
 // ── MEDIA INTELLIGENCE ──
 const MEDIA_FIRMS = [
   // TV / Production
-  {name:'The Tucker Group',             total:2022327, type:'TV & Strategy',  color:'#6366f1', entities:'House · Pres · PAC',
+  {name:'The Tucker Group',             total:2022327, type:'TV & Strategy',  color:'#2a4f7c', entities:'House · Pres · PAC',
    cycles:['2012','2014','2016','2018','2019','2020','2022','2024'],
    note:'Primary media firm since 2012 · bills every controlled entity · 14-year unbroken relationship'},
-  {name:'Screen Strategies Media',      total:754982,  type:'TV & Strategy',  color:'#6366f1', entities:'Gov',
+  {name:'Screen Strategies Media',      total:754982,  type:'TV & Strategy',  color:'#2a4f7c', entities:'Gov',
    cycles:['Gov 2026'],
    note:'Governor campaign TV buy · $755K in a single 14-month cycle · Tucker Group replacement for state race'},
-  {name:'Pacific Productions',          total:48840,   type:'TV & Strategy',  color:'#6366f1', entities:'Pres',
+  {name:'Pacific Productions',          total:48840,   type:'TV & Strategy',  color:'#2a4f7c', entities:'Pres',
    cycles:['2019'],
    note:'Video production · presidential campaign only'},
-  {name:'Eleven Films LLC',             total:35400,   type:'TV & Strategy',  color:'#6366f1', entities:'PAC',
+  {name:'Eleven Films LLC',             total:35400,   type:'TV & Strategy',  color:'#2a4f7c', entities:'PAC',
    cycles:['PAC'],
    note:'Video production · Remedy PAC'},
-  {name:'Kessler Content',              total:49016,   type:'TV & Strategy',  color:'#6366f1', entities:'Pres',
+  {name:'Kessler Content',              total:49016,   type:'TV & Strategy',  color:'#2a4f7c', entities:'Pres',
    cycles:['2019'],
    note:'Content & creative · presidential campaign'},
-  {name:'Scotch Digital',               total:33890,   type:'TV & Strategy',  color:'#6366f1', entities:'Pres',
+  {name:'Scotch Digital',               total:33890,   type:'TV & Strategy',  color:'#2a4f7c', entities:'Pres',
    cycles:['2019'],
    note:'Digital advertising · presidential campaign'},
   // Strategy
-  {name:'Berger Hirschberg Strategies', total:1675934, type:'Fundraising Strategy', color:'#10b981', entities:'House · Pres',
+  {name:'Berger Hirschberg Strategies', total:1675934, type:'Fundraising Strategy', color:'#2d6a4f', entities:'House · Pres',
    cycles:['2018','2019','2020','2022','2024'],
    note:'Fundraising & media strategy · joined 2018 · now second-largest relationship after Tucker Group'},
   // Digital / Programmatic
-  {name:'BCOM Solutions LLC',           total:747794,  type:'Digital',        color:'#f97316', entities:'House · Gov',
+  {name:'BCOM Solutions LLC',           total:747794,  type:'Digital',        color:'#b45309', entities:'House · Gov',
    cycles:['2022','2024','Gov 2026'],
    note:'Media buying · bridges House and Governor committees · cross-entity presence'},
-  {name:'Veracity Media',               total:403994,  type:'Digital',        color:'#f97316', entities:'House · PAC',
+  {name:'Veracity Media',               total:403994,  type:'Digital',        color:'#b45309', entities:'House · PAC',
    cycles:['2020','2022','2024'],
    note:'Digital advertising · House campaign + Remedy PAC'},
-  {name:'True Blue Digital',            total:347419,  type:'Digital',        color:'#f97316', entities:'Gov',
+  {name:'True Blue Digital',            total:347419,  type:'Digital',        color:'#b45309', entities:'Gov',
    cycles:['Gov 2026'],
    note:'Digital advertising · Governor race only · part of new state-level stack'},
-  {name:'Google LLC',                   total:108638,  type:'Digital',        color:'#f97316', entities:'Pres',
+  {name:'Google LLC',                   total:108638,  type:'Digital',        color:'#b45309', entities:'Pres',
    cycles:['2019'],
    note:'Paid search / YouTube · presidential campaign'},
-  {name:'Facebook',                     total:102326,  type:'Digital',        color:'#f97316', entities:'Pres',
+  {name:'Facebook',                     total:102326,  type:'Digital',        color:'#b45309', entities:'Pres',
    cycles:['2019'],
    note:'Social media advertising · presidential campaign'},
-  {name:'Twitter',                      total:33006,   type:'Digital',        color:'#f97316', entities:'Pres',
+  {name:'Twitter',                      total:33006,   type:'Digital',        color:'#b45309', entities:'Pres',
    cycles:['2019'],
    note:'Social media advertising · presidential campaign'},
 ];
@@ -3181,15 +3426,15 @@ function renderMediaIntelligence(){
     <!-- Summary stat row -->
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-bottom:22px">
       ${[
-        {label:'Total media spend',    val:fmtK(grandTotal),  color:'#6366f1', sub:'all entities combined'},
-        {label:'Tucker Group share',   val:tuckerShare+'%',   color:'#ef4444', sub:'of total media universe'},
-        {label:'Firms employed',       val:'13',              color:'#10b981', sub:'across all cycles'},
-        {label:'Years of Tucker Grp',  val:'14',              color:'#f97316', sub:'2012 → 2026'},
-        {label:'Gov race media spend', val:fmtK(1850000),     color:'#8b5cf6', sub:'entirely new vendor stack'},
-      ].map(s=>`<div style="background:#fff;border:1px solid #e8ecf4;border-radius:14px;padding:16px;border-top:3px solid ${s.color}">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af;margin-bottom:4px">${s.label}</div>
+        {label:'Total media spend',    val:fmtK(grandTotal),  color:'#2a4f7c', sub:'all entities combined'},
+        {label:'Tucker Group share',   val:tuckerShare+'%',   color:'#9b2335', sub:'of total media universe'},
+        {label:'Firms employed',       val:'13',              color:'#2d6a4f', sub:'across all cycles'},
+        {label:'Years of Tucker Grp',  val:'14',              color:'#b45309', sub:'2012 → 2026'},
+        {label:'Gov race media spend', val:fmtK(1850000),     color:'#5b21b6', sub:'entirely new vendor stack'},
+      ].map(s=>`<div style="background:#fff;border:1px solid #eaecf2;border-radius:14px;padding:16px;border-top:3px solid ${s.color}">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#a0aec0;margin-bottom:4px">${s.label}</div>
         <div style="font-size:22px;font-weight:800;color:${s.color};line-height:1;margin-bottom:3px">${s.val}</div>
-        <div style="font-size:11.5px;color:#9ca3af">${s.sub}</div>
+        <div style="font-size:11.5px;color:#a0aec0">${s.sub}</div>
       </div>`).join('')}
     </div>
 
@@ -3197,59 +3442,59 @@ function renderMediaIntelligence(){
     <div style="background:linear-gradient(135deg,rgba(99,102,241,.07),rgba(99,102,241,.02));border:1.5px solid rgba(99,102,241,.25);border-radius:14px;padding:18px 22px;margin-bottom:18px">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
         <span style="font-size:16px">👑</span>
-        <span style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#6366f1">Tucker Group Dynasty — 2012 to 2026</span>
+        <span style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#2a4f7c">Tucker Group Dynasty — 2012 to 2026</span>
       </div>
-      <div style="font-size:13px;color:#374151;line-height:1.7;margin-bottom:14px">
+      <div style="font-size:13px;color:#4a5568;line-height:1.7;margin-bottom:14px">
         The Tucker Group has been paid by Swalwell's House campaign, presidential committee, <em>and</em> Remedy PAC — every controlled federal entity. At <strong>${fmtK(2022327)}</strong> over 14 years, they are the single largest vendor in the entire financial universe, outpacing every law firm, hotel chain, airline, and consultant combined. Notably, they are <strong>absent from the Governor's race</strong> — the first major Swalwell campaign they did not work on.
       </div>
       <!-- timeline bar -->
       <div style="display:flex;gap:3px;align-items:center;flex-wrap:wrap">
         ${['2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'].map(y=>`
           <div style="flex:1;min-width:28px;text-align:center">
-            <div style="height:28px;border-radius:5px;background:${parseInt(y)<=2024?'#6366f1':'#e8ecf4'};opacity:${parseInt(y)<=2024?1:0.3};margin-bottom:3px"></div>
-            <div style="font-size:9px;color:#9ca3af">${y.slice(2)}</div>
+            <div style="height:28px;border-radius:5px;background:${parseInt(y)<=2024?'#2a4f7c':'#eaecf2'};opacity:${parseInt(y)<=2024?1:0.3};margin-bottom:3px"></div>
+            <div style="font-size:9px;color:#a0aec0">${y.slice(2)}</div>
           </div>`).join('')}
         <div style="flex:1;min-width:28px;text-align:center">
-          <div style="height:28px;border-radius:5px;background:#e8ecf4;opacity:0.3;margin-bottom:3px"></div>
-          <div style="font-size:9px;color:#ef4444;font-weight:700">Gov</div>
+          <div style="height:28px;border-radius:5px;background:#eaecf2;opacity:0.3;margin-bottom:3px"></div>
+          <div style="font-size:9px;color:#9b2335;font-weight:700">Gov</div>
         </div>
       </div>
       <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap">
-        <div style="display:flex;align-items:center;gap:5px;font-size:11.5px;color:#6b7280"><span style="width:12px;height:12px;border-radius:3px;background:#6366f1;display:inline-block"></span>Tucker Group active</div>
-        <div style="display:flex;align-items:center;gap:5px;font-size:11.5px;color:#ef4444"><span style="width:12px;height:12px;border-radius:3px;background:#e8ecf4;display:inline-block"></span>Absent from Governor race</div>
+        <div style="display:flex;align-items:center;gap:5px;font-size:11.5px;color:#718096"><span style="width:12px;height:12px;border-radius:3px;background:#2a4f7c;display:inline-block"></span>Tucker Group active</div>
+        <div style="display:flex;align-items:center;gap:5px;font-size:11.5px;color:#9b2335"><span style="width:12px;height:12px;border-radius:3px;background:#eaecf2;display:inline-block"></span>Absent from Governor race</div>
       </div>
     </div>
 
     <!-- Media type breakdown + Cycle comparison charts side by side -->
     <div style="display:grid;grid-template-columns:1fr 1.8fr;gap:14px;margin-bottom:18px">
-      <div style="background:#fff;border:1px solid #e8ecf4;border-radius:14px;padding:18px">
+      <div style="background:#fff;border:1px solid #eaecf2;border-radius:14px;padding:18px">
         <div style="font-size:13px;font-weight:700;margin-bottom:2px">Media type breakdown</div>
-        <div style="font-size:11.5px;color:#9ca3af;margin-bottom:14px">TV/production vs. digital vs. strategy</div>
+        <div style="font-size:11.5px;color:#a0aec0;margin-bottom:14px">TV/production vs. digital vs. strategy</div>
         <div style="position:relative;height:200px"><canvas id="viMediaTypeChart"></canvas></div>
       </div>
-      <div style="background:#fff;border:1px solid #e8ecf4;border-radius:14px;padding:18px">
+      <div style="background:#fff;border:1px solid #eaecf2;border-radius:14px;padding:18px">
         <div style="font-size:13px;font-weight:700;margin-bottom:2px">Spend by cycle — key firms</div>
-        <div style="font-size:11.5px;color:#9ca3af;margin-bottom:14px">Estimated allocation by election cycle</div>
+        <div style="font-size:11.5px;color:#a0aec0;margin-bottom:14px">Estimated allocation by election cycle</div>
         <div style="position:relative;height:200px"><canvas id="viMediaCycleChart"></canvas></div>
       </div>
     </div>
 
     <!-- Governor pivot callout -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
-      <div style="background:#fff;border:1px solid #e8ecf4;border-left:4px solid #6366f1;border-radius:14px;padding:18px">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6366f1;margin-bottom:10px">House Campaign Stack (2020–2024)</div>
+      <div style="background:#fff;border:1px solid #eaecf2;border-left:4px solid #2a4f7c;border-radius:14px;padding:18px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#2a4f7c;margin-bottom:10px">House Campaign Stack (2020–2024)</div>
         ${['The Tucker Group · $1.81M','Berger Hirschberg · $1.59M','BCOM Solutions · $346K','Veracity Media · $330K'].map(f=>`
-          <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #f5f6fa;font-size:13px">
-            <span style="width:8px;height:8px;border-radius:50%;background:#6366f1;flex:none"></span>${f}
+          <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #f7f6f3;font-size:13px">
+            <span style="width:8px;height:8px;border-radius:50%;background:#2a4f7c;flex:none"></span>${f}
           </div>`).join('')}
       </div>
-      <div style="background:#fff;border:1px solid #e8ecf4;border-left:4px solid #8b5cf6;border-radius:14px;padding:18px">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#8b5cf6;margin-bottom:10px">Governor Race Stack (2025–2026) — complete rebuild</div>
+      <div style="background:#fff;border:1px solid #eaecf2;border-left:4px solid #5b21b6;border-radius:14px;padding:18px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#5b21b6;margin-bottom:10px">Governor Race Stack (2025–2026) — complete rebuild</div>
         ${['Screen Strategies · $755K ← replaces Tucker Grp','True Blue Digital · $347K ← new entrant','BCOM Solutions · $402K ← only carryover','KMM Strategies · $741K ← new entrant'].map(f=>`
-          <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #f5f6fa;font-size:13px">
-            <span style="width:8px;height:8px;border-radius:50%;background:#8b5cf6;flex:none"></span>${f}
+          <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #f7f6f3;font-size:13px">
+            <span style="width:8px;height:8px;border-radius:50%;background:#5b21b6;flex:none"></span>${f}
           </div>`).join('')}
-        <div style="font-size:11.5px;color:#9ca3af;margin-top:8px">BCOM Solutions is the only firm to survive the transition</div>
+        <div style="font-size:11.5px;color:#a0aec0;margin-top:8px">BCOM Solutions is the only firm to survive the transition</div>
       </div>
     </div>
 
@@ -3264,11 +3509,11 @@ function renderMediaIntelligence(){
           ${[...MEDIA_FIRMS].sort((a,b)=>b.total-a.total).map(f=>`<tr>
             <td>
               <div style="font-weight:700">${f.name}</div>
-              <div style="font-size:11.5px;color:#9ca3af;margin-top:2px">${f.note}</div>
+              <div style="font-size:11.5px;color:#a0aec0;margin-top:2px">${f.note}</div>
             </td>
             <td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:${f.color}18;color:${f.color}">${f.type}</span></td>
-            <td style="font-size:12px;color:#6b7280">${f.entities}</td>
-            <td style="font-size:12px;color:#6b7280">${f.cycles.join(', ')}</td>
+            <td style="font-size:12px;color:#718096">${f.entities}</td>
+            <td style="font-size:12px;color:#718096">${f.cycles.join(', ')}</td>
             <td class="num" style="font-weight:800;color:${f.color}">${fmt(f.total)}</td>
           </tr>`).join('')}
         </tbody>
@@ -3282,10 +3527,10 @@ function renderMediaIntelligence(){
       mediaCharts.push(new Chart(cv,{type:'doughnut',
         data:{
           labels:['TV & Production','Digital / Programmatic','Fundraising Strategy'],
-          datasets:[{data:[tvTotal,digTotal,strTotal],backgroundColor:['#6366f1','#f97316','#10b981'],borderWidth:2,borderColor:'#fff'}]
+          datasets:[{data:[tvTotal,digTotal,strTotal],backgroundColor:['#2a4f7c','#b45309','#2d6a4f'],borderWidth:2,borderColor:'#fff'}]
         },
         options:{maintainAspectRatio:false,cutout:'58%',
-          plugins:{legend:{position:'bottom',labels:{color:'#374151',boxWidth:10,font:{size:11},padding:8}},
+          plugins:{legend:{position:'bottom',labels:{color:'#4a5568',boxWidth:10,font:{size:11},padding:8}},
             tooltip:{callbacks:{label:c=>`${c.label}: ${fmt(c.parsed)}`}}}}
       }));
     }
@@ -3298,18 +3543,18 @@ function renderMediaIntelligence(){
         data:{
           labels:cycleLabels,
           datasets:[
-            {label:'Tucker Group',             data:[195000,585000,174099,850000,1062000,0],       backgroundColor:'#6366f1cc',borderRadius:3},
-            {label:'Berger Hirschberg',         data:[0,0,90027,560000,573934,0],                  backgroundColor:'#10b981cc',borderRadius:3},
-            {label:'Screen Strategies / TBD',  data:[0,0,0,0,0,1102401],                          backgroundColor:'#8b5cf6cc',borderRadius:3},
-            {label:'Digital (Google/FB/etc)',   data:[0,0,244860,200000,250000,750000],            backgroundColor:'#f97316cc',borderRadius:3},
+            {label:'Tucker Group',             data:[195000,585000,174099,850000,1062000,0],       backgroundColor:'#2a4f7ccc',borderRadius:3},
+            {label:'Berger Hirschberg',         data:[0,0,90027,560000,573934,0],                  backgroundColor:'#2d6a4fcc',borderRadius:3},
+            {label:'Screen Strategies / TBD',  data:[0,0,0,0,0,1102401],                          backgroundColor:'#5b21b6cc',borderRadius:3},
+            {label:'Digital (Google/FB/etc)',   data:[0,0,244860,200000,250000,750000],            backgroundColor:'#b45309cc',borderRadius:3},
           ]
         },
         options:{maintainAspectRatio:false,
-          plugins:{legend:{labels:{color:'#6b7280',boxWidth:10,font:{size:10},padding:6}},
+          plugins:{legend:{labels:{color:'#718096',boxWidth:10,font:{size:10},padding:6}},
             tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${fmt(c.parsed.y)}`}}},
           scales:{
-            x:{stacked:true,ticks:{color:'#9ca3af',font:{size:10}},grid:{display:false}},
-            y:{stacked:true,ticks:{color:'#9ca3af',callback:v=>fmtK(v)},grid:{color:'#f0f2f8'}}
+            x:{stacked:true,ticks:{color:'#a0aec0',font:{size:10}},grid:{display:false}},
+            y:{stacked:true,ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}}
           }
         }
       }));
@@ -3321,6 +3566,76 @@ function renderMediaIntelligence(){
 buildEntities();
 renderStatCards();
 renderOvCharts();
+window.scrollTo(0,0);
+
+// ── dark / light toggle ──
+function toggleDark(){
+  const dark=document.body.classList.toggle('dark');
+  document.getElementById('darkToggle').textContent=dark?'☀ Light':'🌙 Dark';
+  localStorage.setItem('theme',dark?'dark':'light');
+}
+if(localStorage.getItem('theme')==='dark'){
+  document.body.classList.add('dark');
+  document.getElementById('darkToggle').textContent='☀ Light';
+}
+
+function openRoster(){
+  renderRoster();
+  document.getElementById('rosterModalBg').classList.add('show');
+}
+function closeRoster(){
+  document.getElementById('rosterModalBg').classList.remove('show');
+}
+
+function renderRoster(){
+  const g=document.getElementById('rosterGrid');
+  g.innerHTML=MEMBER_ROSTER.map(m=>{
+    const isActive=m.slug===ACTIVE_MEMBER;
+    const partyColor=m.party==='D'?'#1a56a0':m.party==='R'?'#9b2335':'#4a5568';
+    return `<div class="roster-card${isActive?' active':''}${!m.hasData?' stub':''}" onclick="${m.hasData?`selectMember('${m.slug}')`:''}" style="${m.hasData?'':'cursor:default'}">
+      <div class="rc-avatar">${m.initials}</div>
+      <div class="rc-body">
+        <div class="rc-name">${m.name}</div>
+        <div class="rc-meta">${m.state}-${m.district} &nbsp;·&nbsp; <span style="color:${partyColor};font-weight:700">${m.partyFull}</span> &nbsp;·&nbsp; ${m.congress}</div>
+        <div class="rc-meta" style="margin-top:2px;font-size:11px">${m.statusLabel}</div>
+        <div class="rc-stats">
+          <span class="rc-flag">⚑ ${m.flagCount} flags</span>
+          <span class="rc-stat"><strong>${m.prudenceFindings}</strong> Prudence</span>
+          <span class="rc-stat" style="font-weight:700;color:var(--text)">${m.totalUniverse}</span>
+        </div>
+      </div>
+      ${isActive?'<div class="rc-active-badge">Viewing</div>':!m.hasData?'<div class="rc-soon">Coming soon</div>':''}
+    </div>`;
+  }).join('');
+}
+
+function selectMember(slug){
+  const m=MEMBER_ROSTER.find(x=>x.slug===slug);
+  if(!m||!m.hasData)return;
+  ACTIVE_MEMBER=slug;
+
+  // Update nav brand
+  const firstName=m.name.split(' ')[0], lastName=m.name.split(' ').pop();
+  if(document.getElementById('navMark'))document.getElementById('navMark').textContent=m.initials;
+  if(document.getElementById('navTitle'))document.getElementById('navTitle').textContent=m.name;
+  if(document.getElementById('navSub'))document.getElementById('navSub').textContent=`${m.state}-${m.district} · ${m.party} · ${m.congress} Congress`;
+  // Update platform bar
+  if(document.getElementById('platformAvatar'))document.getElementById('platformAvatar').textContent=m.initials;
+  if(document.getElementById('platformMemberName'))document.getElementById('platformMemberName').textContent=lastName;
+  const ctx=document.querySelector('.platform-context');
+  if(ctx)ctx.innerHTML=`Political Intelligence OS &nbsp;·&nbsp; <strong>${m.state}-${m.district} Profile</strong>`;
+  // Update member pill in nav
+  const pill=document.getElementById('memberPill');
+  if(pill)pill.innerHTML=`<div class="av">${m.initials}</div><div class="nm">${m.name}</div><div class="ds">${m.state}-${m.district}</div>`;
+
+  // Show this member's Prudence content, hide others
+  document.querySelectorAll('.prudence-member-content').forEach(el=>el.classList.remove('active'));
+  const pc=document.getElementById('prudence-'+slug);
+  if(pc)pc.classList.add('active');
+
+  closeRoster();
+  showPage('overview',document.querySelector('.nav-tab[data-p=overview]'));
+}
 </script>
 </body>
 </html>

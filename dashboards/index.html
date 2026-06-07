@@ -2103,29 +2103,69 @@ function showPage(id,el){
 
 // ── FINANCIAL DISCLOSURE charts (init once, on first view) ──
 let _discInit=false;
+let _discDynamic=false;
 function initDisclosure(){
   if(_discInit)return;
-  if(!document.getElementById('d-liab-creditor'))return;  // disclosure tab placeheld for this member
   _discInit=true;
-  // Liabilities by creditor (Schedule D, minimum disclosed value) — horizontal bar
-  new Chart(document.getElementById('d-liab-creditor'),{
-    type:'bar',
-    data:{labels:['Apple FCU — Home Loan','Ed Financial — Student Loans','Chase — Credit Card','Amex — Credit Card'],
-      datasets:[{data:[1000001,50001,15001,15001],
-        backgroundColor:['#9b2335','#c9963a','#b45309','#b45309'],borderRadius:5,borderSkipped:false}]},
-    options:{maintainAspectRatio:false,indexAxis:'y',
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)+' (minimum)'}}},
-      scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},
-              y:{ticks:{color:'#4a5568',font:{size:11}},grid:{display:false}}}}
-  });
-  // Where the salary goes — doughnut
-  new Chart(document.getElementById('d-salary-chart'),{
-    type:'doughnut',
-    data:{labels:['Est. Take-Home After Tax','Est. Min. Mortgage Payment','Credit Cards (min)','Student Loans (min)','Remaining'],
-      datasets:[{data:[118320,60804,30002,50001,118320-60804-30002-50001],
-        backgroundColor:['#b45309','#9b2335','#9b2335b3','#c9963a','#2d6a4f'],borderWidth:2,borderColor:'#fff'}]},
-    options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#4a5568',font:{size:10},padding:8,boxWidth:12}},tooltip:{callbacks:{label:c=>`${c.label}: ${fmt(c.parsed)}`}}},cutout:'62%'}
-  });
+  if(document.getElementById('d-liab-creditor')){
+    // Swalwell hardcoded charts
+    new Chart(document.getElementById('d-liab-creditor'),{
+      type:'bar',
+      data:{labels:['Apple FCU — Home Loan','Ed Financial — Student Loans','Chase — Credit Card','Amex — Credit Card'],
+        datasets:[{data:[1000001,50001,15001,15001],
+          backgroundColor:['#9b2335','#c9963a','#b45309','#b45309'],borderRadius:5,borderSkipped:false}]},
+      options:{maintainAspectRatio:false,indexAxis:'y',
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)+' (minimum)'}}},
+        scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},
+                y:{ticks:{color:'#4a5568',font:{size:11}},grid:{display:false}}}}
+    });
+    new Chart(document.getElementById('d-salary-chart'),{
+      type:'doughnut',
+      data:{labels:['Est. Take-Home After Tax','Est. Min. Mortgage Payment','Credit Cards (min)','Student Loans (min)','Remaining'],
+        datasets:[{data:[118320,60804,30002,50001,118320-60804-30002-50001],
+          backgroundColor:['#b45309','#9b2335','#9b2335b3','#c9963a','#2d6a4f'],borderWidth:2,borderColor:'#fff'}]},
+      options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#4a5568',font:{size:10},padding:8,boxWidth:12}},tooltip:{callbacks:{label:c=>`${c.label}: ${fmt(c.parsed)}`}}},cutout:'62%'}
+    });
+  }
+  if(_discDynamic)initDynDisclosureCharts();
+}
+
+function initDynDisclosureCharts(){
+  const fd=D.disclosure||{};
+  const dd=fd.schedule_d||[];
+  const h=fd.header||{};
+  const isMember=(h.status||'').toLowerCase()==='member';
+  const parseMin=str=>{if(!str)return 0;const m=String(str).replace(/[–—]/g,'-').match(/\$([\d,]+)/);return m?parseInt(m[1].replace(/,/g,''),10):0;};
+  const liabColor=type=>{const t=(type||'').toLowerCase();if(t.includes('mort')||(t.includes('home')&&t.includes('loan')))return '#9b2335';if(t.includes('student')||t.includes('school')||t.includes('medical'))return '#c9963a';if(t.includes('credit')||t.includes('card'))return '#b45309';return '#718096';};
+  const liabEl=document.getElementById('d-liab-dyn');
+  if(liabEl&&dd.length){
+    const labels=dd.map(r=>(r.creditor||'')+(r.type?' — '+r.type:''));
+    const mins=dd.map(r=>parseMin(r.amount)||1);
+    const colors=dd.map(r=>liabColor(r.type));
+    new Chart(liabEl,{type:'bar',data:{labels,datasets:[{data:mins,backgroundColor:colors,borderRadius:5,borderSkipped:false}]},
+      options:{maintainAspectRatio:false,indexAxis:'y',
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)+' (minimum)'}}},
+        scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},y:{ticks:{color:'#4a5568',font:{size:11}},grid:{display:false}}}}});
+  }
+  const salEl=document.getElementById('d-salary-dyn');
+  if(salEl&&isMember){
+    const salary=174000,takeHome=Math.round(salary*0.68);
+    let mortEst=0,studEst=0,credEst=0;
+    dd.forEach(r=>{
+      const min=parseMin(r.amount);const t=(r.type||'').toLowerCase();
+      if(t.includes('mort')||(t.includes('home')&&t.includes('loan')))mortEst=Math.round(min*(0.045/12)*Math.pow(1+0.045/12,360)/(Math.pow(1+0.045/12,360)-1)*12);
+      else if(t.includes('student')||t.includes('school')||t.includes('medical'))studEst+=Math.round(min*0.07);
+      else if(t.includes('credit')||t.includes('card'))credEst+=Math.round(min*0.02);
+    });
+    const rem=Math.max(0,takeHome-mortEst-studEst-credEst);
+    const labels=['Est. Take-Home After Tax'],data=[takeHome],colors=['#b45309'];
+    if(mortEst>0){labels.push('Est. Min. Mortgage Payment');data.push(mortEst);colors.push('#9b2335');}
+    if(credEst>0){labels.push('Credit Cards (min)');data.push(credEst);colors.push('#9b2335b3');}
+    if(studEst>0){labels.push('Student/Medical Loans (min)');data.push(studEst);colors.push('#c9963a');}
+    labels.push('Remaining');data.push(rem);colors.push('#2d6a4f');
+    new Chart(salEl,{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:colors,borderWidth:2,borderColor:'#fff'}]},
+      options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#4a5568',font:{size:10},padding:8,boxWidth:12}},tooltip:{callbacks:{label:c=>`${c.label}: ${fmt(c.parsed)}`}}},cutout:'62%'}});
+  }
 }
 
 // ── Prudence: toggle between Spending and Structure screens ──
@@ -2143,64 +2183,171 @@ function renderDisclosure(){
   if(!el||!fd)return false;
   const esc=s=>String(s==null?'':s).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
   const h=fd.header||{}, s=fd.summary||{};
-  const a=fd.schedule_a||[], b=fd.schedule_b||[], dd=fd.schedule_d||[], c=fd.schedule_c||[], ag=fd.agreements||[];
+  const a=fd.schedule_a||[], b=fd.schedule_b||[], dd=fd.schedule_d||[], c=fd.schedule_c||[], ag=fd.agreements||[], sh=fd.schedule_h||[];
+  const flags=D.flags||[];
   const rng=(lo,hi)=>'$'+Math.round(lo).toLocaleString()+' – $'+Math.round(hi).toLocaleString();
-  const src=fd.source_url?`<a href="${esc(fd.source_url)}" target="_blank" style="color:#cbd5e1;text-decoration:underline">View source PDF ↗</a>`:'';
-  if(!a.length && !dd.length && !b.length){
-    el.innerHTML=`<div style="max-width:680px;margin:48px auto;padding:32px;border:1px dashed var(--border);border-radius:12px;text-align:center;color:var(--text-3)">
-      <div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px">Financial Disclosure — image-based filing</div>
-      This member's House FD report (Filing ID ${esc(h.filing_id||'—')}) appears to be a scanned/image PDF, so structured data couldn't be extracted automatically. ${src}</div>`;
+  const src=fd.source_url?`<a href="${esc(fd.source_url)}" target="_blank" style="color:var(--navy-mid);text-decoration:underline">View source PDF ↗</a>`:'';
+  const isMember=(h.status||'').toLowerCase()==='member';
+  const parseMin=str=>{if(!str)return 0;const m=String(str).replace(/[–—]/g,'-').match(/\$([\d,]+)/);return m?parseInt(m[1].replace(/,/g,''),10):0;};
+  const cHasItems=c.filter(r=>(r.source||'').trim()).length>0;
+  const filingBadge=`${esc(h.filing_type||'Annual Report')} · Filing ID #${esc(h.filing_id||'—')} · Filed ${esc(h.filing_date||'')}`;
+
+  // Image-based fallback (no parseable schedules)
+  if(!a.length&&!dd.length&&!b.length&&!cHasItems&&!sh.length){
+    el.innerHTML=`<div class="page-header"><div class="page-title">Financial Disclosure</div>
+      <div class="page-sub">${filingBadge}</div></div>
+      <div class="disclosure-hero">
+        <div class="disclosure-hero-title">House Financial Disclosure Report · Filing ID #${esc(h.filing_id||'—')}</div>
+        <div class="disclosure-hero-name">${esc(h.name||'Member')} — ${esc(h.filing_type||'Annual Report')}</div>
+        <div class="disclosure-hero-sub">Filing Year: ${esc(h.filing_year||'')} · Filed: ${esc(h.filing_date||'')} · State/District: ${esc(h.state_district||'')} · Status: ${esc(h.status||'')}</div>
+      </div>
+      <div style="max-width:680px;margin:48px auto;padding:32px;border:1px dashed var(--border);border-radius:12px;text-align:center;color:var(--text-3)">
+        <div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px">Financial Disclosure — image-based filing</div>
+        This member's House FD report (Filing ID ${esc(h.filing_id||'—')}) appears to be a scanned/image PDF. ${src}</div>`;
     return true;
   }
-  const tile=(label,lo,hi,color)=>`<div style="flex:1;min-width:150px;background:var(--card);border:1px solid var(--border);border-top:3px solid ${color};border-radius:10px;padding:14px 16px">
-    <div style="font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3);font-weight:600">${label}</div>
-    <div style="font-size:18px;font-weight:800;color:${color};margin-top:4px">${rng(lo,hi)}</div></div>`;
-  let html=`<div class="member-hero" style="background:linear-gradient(135deg,#1e3a5f,#0f2238)">
-      <h1>Hon. ${esc((h.name||'').replace(/^Hon\.\s*/,''))} — Financial Disclosure</h1>
-      <div class="msub">${esc(h.filing_type||'Annual Report')} ${esc(h.filing_year||'')} · Filed ${esc(h.filing_date||'')} · Filing ID ${esc(h.filing_id||'—')} &nbsp; ${src}</div></div>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin:16px 0 22px">
-      ${tile('Assets (Schedule A)',s.asset_low||0,s.asset_high||0,'#2d6a4f')}
-      ${tile('Liabilities (Schedule D)',s.liability_low||0,s.liability_high||0,'#9b2335')}
-      ${tile('Est. Net Worth (range)',s.net_low||0,s.net_high||0,'#2a4f7c')}
-    </div>
-    <div class="sec-note info" style="margin-bottom:18px">Values are disclosed as broad ranges on the House FD form; totals here sum the range bounds (a band, not an exact figure). Rebuilt from the linked PDF — nothing hand-typed.</div>`;
-  // Assets
+
+  // Chips
+  const chips=[];
+  if(isMember)chips.push(`<span class="disclosure-meta-chip">Base Salary <strong>$174,000/yr</strong></span>`);
+  if(cHasItems){const cAmt=c.map(r=>r.amount).filter(Boolean);chips.push(`<span class="disclosure-meta-chip">Outside Income <strong>${cAmt.length?esc(cAmt[0]):'Disclosed'}</strong></span>`);}
+  const hasLiab=(s.liability_low||0)>0, hasAsset=(s.asset_low||0)>0;
+  if(hasLiab)chips.push(`<span class="disclosure-meta-chip">Total Liabilities <strong>${rng(s.liability_low,s.liability_high)}</strong></span>`);
+  if(hasAsset)chips.push(`<span class="disclosure-meta-chip">Total Assets <strong>${rng(s.asset_low,s.asset_high)}</strong></span>`);
+  const nlw=(s.net_low!=null&&s.net_low!==0)?s.net_low:(hasAsset||hasLiab?(s.asset_low||0)-(s.liability_high||0):null);
+  const nhg=(s.net_high!=null&&s.net_high!==0)?s.net_high:(hasAsset||hasLiab?(s.asset_high||0)-(s.liability_low||0):null);
+  const hasNW=nlw!=null&&nhg!=null&&(hasAsset||hasLiab);
+  const nwNeg=hasNW&&nlw<0&&nhg<0, nwMix=hasNW&&nlw<0&&nhg>=0;
+  const nwColor=nwNeg?'var(--red)':nwMix?'var(--amber)':'var(--green)';
+  const fmtNW=n=>`${n<0?'−':''}$${Math.abs(Math.round(n)).toLocaleString()}`;
+  if(hasNW)chips.push(`<span class="disclosure-meta-chip">Estimated Net Worth <strong style="color:${nwColor}">${fmtNW(nlw)} to ${fmtNW(nhg)}</strong></span>`);
+  if(flags.length)chips.push(`<span class="disclosure-meta-chip">Flags Identified <strong style="color:var(--red)">${flags.length}</strong></span>`);
+
+  // Net worth block
+  let nwBlock='';
+  if(hasNW){
+    const nwSub=nwNeg?'Both scenarios yield a negative net worth':nwMix?'Ranges span positive and negative territory':'Positive net worth across all disclosed ranges';
+    nwBlock=`<div class="net-worth-block" style="${nwNeg?'':'border-top-color:'+(nwMix?'var(--amber)':'var(--green)')}">
+      <div class="net-worth-label">Estimated Net Worth Range</div>
+      <div class="net-worth-range" style="color:${nwColor}">${fmtNW(nlw)} to ${fmtNW(nhg)}</div>
+      <div class="net-worth-sub">Assets minus liabilities across all disclosed ranges · ${nwSub}</div>
+    </div>`;
+  }
+
+  // Charts — only when schedule_d has parseable amounts
+  const hasChartData=dd.some(r=>parseMin(r.amount)>0);
+  let chartRow='';
+  if(hasChartData){
+    chartRow=`<div class="chart-row${isMember?'':' full'}">
+      <div class="ccard"><div class="ctitle">Liabilities by Creditor</div>
+        <div class="csub">Schedule D · minimum disclosed value of each obligation</div>
+        <div class="cwrap tall"><canvas id="d-liab-dyn"></canvas></div></div>
+      ${isMember?`<div class="ccard"><div class="ctitle">Annual Salary Reality Check</div>
+        <div class="csub">Where the $174,000 salary goes (minimum estimates)</div>
+        <div class="cwrap tall"><canvas id="d-salary-dyn"></canvas></div></div>`:''}
+    </div>`;
+  }
+
+  // Flags
+  let flagsHtml='';
+  if(flags.length){
+    const sevCls=sev=>{const v=(sev||'').toUpperCase();return v==='HIGH'?'high':v==='NOTABLE'?'medium':'notable';};
+    const cardCls=sev=>{const v=(sev||'').toUpperCase();return v==='HIGH'?'':v==='NOTABLE'?' amber':' purple';};
+    flagsHtml=`<div class="sec-label">⚑ Flagged Findings</div>
+    <div class="disc-flag-grid">${flags.map(f=>`<div class="disc-flag-card${cardCls(f.severity)}">
+      <div class="disc-flag-header"><div class="disc-flag-title">${esc(f.title||'')}</div>
+        <div class="disc-flag-sev ${sevCls(f.severity)}">${esc(f.severity||'')}</div></div>
+      <div class="disc-flag-body">${esc(f.body||'')}</div>
+    </div>`).join('')}</div>`;
+  }
+
+  // Schedule A
+  let schedA='';
   if(a.length){
-    html+=`<h3 style="margin:18px 0 10px;font-size:15px">Assets &amp; "Unearned" Income — ${a.length}</h3>
-    <table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="text-align:left;color:var(--text-3);border-bottom:1px solid var(--border)">
-      <th style="padding:6px 8px">Asset</th><th style="padding:6px 8px">Value</th><th style="padding:6px 8px">Income type</th><th style="padding:6px 8px">Income</th></tr></thead><tbody>`;
-    a.forEach(r=>{html+=`<tr style="border-bottom:1px solid var(--border-soft)"><td style="padding:6px 8px">${esc(r.asset)}${r.type?` <span style="color:var(--text-3)">[${esc(r.type)}]</span>`:''}</td>
-      <td style="padding:6px 8px;white-space:nowrap">${esc(r.value||'')}</td><td style="padding:6px 8px">${esc(r.income_type||'')}</td><td style="padding:6px 8px;white-space:nowrap">${esc(r.income||'')}</td></tr>`;});
-    html+=`</tbody></table>`;
+    schedA=`<div class="tcard"><div class="tcard-head"><h3>Schedule A — Assets &amp; Unearned Income</h3><span class="tsub">${a.length} items</span></div>
+    <div class="tscroll"><table><thead><tr><th>Asset</th><th>Value</th><th>Income Type</th><th>Income</th></tr></thead>
+    <tbody>${a.map(r=>`<tr><td>${esc(r.asset||'')}${r.type?` <span style="color:var(--text-3);font-size:11px">[${esc(r.type)}]</span>`:''}</td>
+      <td style="white-space:nowrap">${esc(r.value||'')}</td>
+      <td style="font-size:11px;color:var(--text-3)">${esc(r.income_type||'')}</td>
+      <td style="white-space:nowrap">${esc(r.income||'')}</td></tr>`).join('')}
+    </tbody></table></div></div>`;
   }
-  // Liabilities
+
+  // Schedule C
+  let schedC='';
+  if(cHasItems){
+    schedC=`<div class="tcard"><div class="tcard-head"><h3>Schedule C — Earned Income</h3></div>
+    <div class="tscroll"><table><thead><tr><th>Source</th><th class="num">Amount</th></tr></thead>
+    <tbody>${c.filter(r=>(r.source||'').trim()).map(r=>`<tr><td>${esc(r.source||'')}</td>
+      <td class="num" style="color:var(--green)">${esc(r.amount||'—')}</td></tr>`).join('')}
+    </tbody></table></div></div>`;
+  }
+
+  // Schedule D
+  let schedD='';
   if(dd.length){
-    html+=`<h3 style="margin:22px 0 10px;font-size:15px">Liabilities (Schedule D) — ${dd.length}</h3>
-    <table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="text-align:left;color:var(--text-3);border-bottom:1px solid var(--border)">
-      <th style="padding:6px 8px">Creditor</th><th style="padding:6px 8px">Type</th><th style="padding:6px 8px">Incurred</th><th style="padding:6px 8px">Amount</th></tr></thead><tbody>`;
-    dd.forEach(r=>{html+=`<tr style="border-bottom:1px solid var(--border-soft)"><td style="padding:6px 8px">${esc(r.creditor)}</td><td style="padding:6px 8px">${esc(r.type||'')}</td><td style="padding:6px 8px;white-space:nowrap">${esc(r.date_incurred||'')}</td><td style="padding:6px 8px;white-space:nowrap">${esc(r.amount||'')}</td></tr>`;});
-    html+=`</tbody></table>`;
+    schedD=`<div class="tcard"><div class="tcard-head"><h3>Schedule D — Liabilities</h3></div>
+    <div class="tscroll"><table><thead><tr><th>Creditor</th><th>Date</th><th>Type</th><th class="num">Amount Range</th></tr></thead>
+    <tbody>${dd.map(r=>`<tr><td>${esc(r.creditor||'')}</td>
+      <td style="white-space:nowrap;font-size:11px;color:var(--text-3)">${esc(r.date_incurred||'')}</td>
+      <td style="font-size:11px;color:var(--text-3)">${esc(r.type||'')}</td>
+      <td class="num" style="color:var(--red)">${esc(r.amount||'')}</td></tr>`).join('')}
+      ${hasLiab?`<tr style="font-weight:700;border-top:2px solid var(--border)"><td colspan="3">TOTAL LIABILITIES RANGE</td>
+        <td class="num" style="color:var(--red)">${rng(s.liability_low,s.liability_high)}</td></tr>`:''}
+    </tbody></table></div></div>`;
   }
-  // Earned income
-  if(c.length){
-    html+=`<h3 style="margin:22px 0 10px;font-size:15px">Earned Income (Schedule C) — ${c.length}</h3><ul style="font-size:13px;color:var(--text-2);padding-left:18px">`;
-    c.forEach(r=>{html+=`<li style="margin:3px 0">${esc(r.source)}${r.amount?` — ${esc(r.amount)}`:''}</li>`;});
-    html+=`</ul>`;
+
+  // Schedule H (travel)
+  let schedH='';
+  if(sh.length){
+    schedH=`<div class="tcard"><div class="tcard-head"><h3>Schedule H — Travel Payments &amp; Reimbursements</h3><span class="tsub">All trips: 0 days at own expense</span></div>
+    <div style="padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+    ${sh.map(r=>{const isArr=Array.isArray(r);
+      const who=esc(isArr?r[0]:r.source||'');
+      const d1=esc(isArr?r[1]:r.date_from||'');
+      const d2=esc(isArr?r[2]:r.date_to||'');
+      const dest=esc(isArr?r[3]:r.destination||'');
+      return `<div class="travel-item"><div class="travel-source">${who}</div>
+        <div class="travel-route">📍 ${dest}</div>
+        <div class="travel-dates">${d1}${d2?' – '+d2:''}</div></div>`;
+    }).join('')}</div></div>`;
   }
-  // Transactions (collapsible)
+
+  // Schedule B (transactions) — collapsible
+  let schedB='';
   if(b.length){
-    html+=`<details style="margin:22px 0"><summary style="cursor:pointer;font-size:15px;font-weight:700">Transactions (Schedule B) — ${b.length}</summary>
-    <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:10px"><thead><tr style="text-align:left;color:var(--text-3);border-bottom:1px solid var(--border)">
-      <th style="padding:6px 8px">Asset</th><th style="padding:6px 8px">Date</th><th style="padding:6px 8px">Type</th><th style="padding:6px 8px">Amount</th></tr></thead><tbody>`;
-    b.forEach(r=>{html+=`<tr style="border-bottom:1px solid var(--border-soft)"><td style="padding:6px 8px">${esc(r.asset)}</td><td style="padding:6px 8px;white-space:nowrap">${esc(r.date||'')}</td><td style="padding:6px 8px">${esc(r.tx_type||'')}</td><td style="padding:6px 8px;white-space:nowrap">${esc(r.amount||'')}</td></tr>`;});
-    html+=`</tbody></table></details>`;
+    schedB=`<details style="margin-bottom:14px"><summary style="cursor:pointer;font-size:14px;font-weight:700;padding:8px 0">Transactions (Schedule B) — ${b.length}</summary>
+    <div class="tcard" style="margin-top:10px"><div class="tscroll"><table>
+    <thead><tr><th>Asset</th><th>Date</th><th>Type</th><th class="num">Amount</th></tr></thead>
+    <tbody>${b.map(r=>`<tr><td>${esc(r.asset||'')}</td><td style="white-space:nowrap">${esc(r.date||'')}</td>
+      <td>${esc(r.tx_type||'')}</td><td class="num">${esc(r.amount||'')}</td></tr>`).join('')}
+    </tbody></table></div></div></details>`;
   }
+
+  // Agreements
+  let schedAg='';
   if(ag.length){
-    html+=`<h3 style="margin:22px 0 10px;font-size:15px">Agreements (Schedule F) — ${ag.length}</h3><ul style="font-size:13px;color:var(--text-2);padding-left:18px">`;
-    ag.forEach(r=>{html+=`<li style="margin:3px 0">${esc(r.date||'')} — ${esc(r.parties||'')}: ${esc(r.terms||'')}</li>`;});
-    html+=`</ul>`;
+    schedAg=`<div class="tcard"><div class="tcard-head"><h3>Agreements (Schedule F)</h3><span class="tsub">${ag.length} items</span></div>
+    <div style="padding:14px 16px"><ul style="font-size:13px;color:var(--text-2);padding-left:18px">
+    ${ag.map(r=>`<li style="margin:3px 0">${esc(r.date||'')} — ${esc(r.parties||'')}: ${esc(r.terms||'')}</li>`).join('')}
+    </ul></div></div>`;
   }
-  el.innerHTML=`<div style="padding:4px 0 40px">${html}</div>`;
+
+  el.innerHTML=`<div class="page-header">
+    <div class="page-title">Financial Disclosure</div>
+    <div class="page-sub">${filingBadge}</div>
+  </div>
+  <div class="disclosure-hero">
+    <div class="disclosure-hero-title">House Financial Disclosure Report · Filing ID #${esc(h.filing_id||'—')}</div>
+    <div class="disclosure-hero-name">${esc(h.name||'Member')} — ${esc(h.filing_type||'Annual Report')}</div>
+    <div class="disclosure-hero-sub">Filing Year: ${esc(h.filing_year||'')} · Filed: ${esc(h.filing_date||'')} · State/District: ${esc(h.state_district||'')} · Status: ${esc(h.status||'')}</div>
+    <div class="disclosure-hero-meta">${chips.join('')}</div>
+  </div>
+  ${nwBlock}${chartRow}${flagsHtml}${schedA}${schedC}${schedD}${schedH}${schedB}${schedAg}
+  <div class="sec-note info"><strong>Source:</strong> House Financial Disclosure Report, Filing ID #${esc(h.filing_id||'—')}, ${esc(h.name||'')}, ${esc(h.filing_type||'')} Filing Year ${esc(h.filing_year||'')}, filed ${esc(h.filing_date||'')}. ${src}
+  All flags represent analyst observations on publicly reported data. No legal conclusions asserted.</div>`;
+
+  _discDynamic=true;
   return true;
 }
 
@@ -3673,7 +3820,20 @@ function renderCategorySegment(catId,target){
     [];
   const hasYearData=staff.length>0;
 
-  if(isSalary&&hasYearData){
+  if(isSalary&&!hasYearData){
+    // Salary category but no per-year data available — show chart + honest note
+    el.innerHTML=`<div class="vi-detail">
+      ${headHtml}
+      ${statCardsHtml}
+      ${insightHtml}
+      ${chartSectionHtml('Top staff by total compensation')}
+      <div style="padding:0 16px 20px">
+        <div class="sec-note" style="font-size:13px">
+          Annual pay breakdown by staff member isn't available for this member — not enough time in office for meaningful year-over-year data.
+        </div>
+      </div>
+    </div>`;
+  } else if(isSalary&&hasYearData){
     const allYears=[...new Set(staff.flatMap(p=>Object.keys(p.by_year)))].sort();
     const thStyle='text-align:right;padding:8px 10px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;background:#f8fafc';
     const thStyleL='text-align:left;padding:8px 14px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;background:#f8fafc';

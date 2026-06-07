@@ -2664,7 +2664,10 @@ const FLAG_REVIEWED_KEY='swalwell_flags_reviewed_v1';
       evidence:'FEC Schedule B: C00502294 (house) $55,211 · C00701698 (presidential) $37,763 · C00566059 (PAC) $10,927 · Payments span 2015–2020 · Purpose: Legal Services',
     },
   ];
-  if(D.flags){
+  // These legal-fee flags are Swalwell-specific (FPPC/FEC source) — only inject for his data.
+  const __bio=new URLSearchParams(location.search).get('member');
+  const __isSwalwell=(!__bio || __bio==='S001193' || __bio==='swalwell');
+  if(D.flags && __isSwalwell){
     D.flags.push(...legalFlags);
   }
 })();

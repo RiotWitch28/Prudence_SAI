@@ -7,3 +7,6 @@ _source-data/fec_secrets.txt.txt
 **/secrets.ini
 *.secret
 fec_secrets*
+build/.venv/
+**/fd_source.pdf
+build/*.log

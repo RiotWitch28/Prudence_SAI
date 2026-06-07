@@ -1872,9 +1872,9 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
   </div>
 </div>
 
-<script src="swalwell_data.js"></script>
+<script>(function(){var b=new URLSearchParams(location.search).get('member');var s=(!b||b==='S001193'||b==='swalwell')?'swalwell_data.js':'members/'+b+'/data.js';s+=(s.indexOf('?')<0?'?':'&')+'v='+Date.now();document.write('<scr'+'ipt src="'+s+'"></scr'+'ipt>');})();</script>
 <script>
-const D=window.SWALWELL_DATA, E=D.entities;
+const D=window.MEMBER_DATA||window.SWALWELL_DATA, E=D.entities;
 const fmt=n=>'$'+Math.round(n).toLocaleString();
 const fmtK=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e3?'$'+(n/1e3).toFixed(0)+'K':'$'+Math.round(n);
 const META={
@@ -1884,8 +1884,14 @@ const META={
   gov:   {color:'#9b2335',bg:'linear-gradient(135deg,#9b2335,#7f1d1d)',short:'Governor 2026',abbr:'G'},
   office:{color:'#2a4f7c',bg:'linear-gradient(135deg,#2a4f7c,#1e3a5f)',short:'House Office (MRA)',abbr:'O'},
   outside_pac:{color:'#718096',bg:'linear-gradient(135deg,#718096,#4a5568)',short:'Outside PAC',abbr:'OP'},
+  senate:{color:'#0e7490',bg:'linear-gradient(135deg,#0e7490,#155e75)',short:'Senate Run',abbr:'S'},
+  other_pac:{color:'#7c5e10',bg:'linear-gradient(135deg,#7c5e10,#5c4708)',short:'Other PAC',abbr:'OP'},
 };
-const ORDER=['office','house','pac','pres','gov','outside_pac'];
+// Any present entity without explicit META gets a neutral fallback (keeps new members from crashing).
+Object.keys(E).forEach(k=>{if(!META[k])META[k]={color:'#64748b',bg:'linear-gradient(135deg,#64748b,#475569)',short:(E[k]&&E[k].label)||k,abbr:(String(k)[0]||'?').toUpperCase()};});
+// ORDER is now derived from the entities this member actually has (preferred order first).
+const __PREF=['office','house','pac','pres','senate','gov','other_pac','outside_pac'];
+const ORDER=[...__PREF.filter(k=>E[k]),...Object.keys(E).filter(k=>!__PREF.includes(k))];
 
 // ── MEMBER ROSTER (declared early to avoid TDZ) ──
 var ACTIVE_MEMBER='swalwell';
@@ -1985,7 +1991,9 @@ function showPage(id,el){
 // ── FINANCIAL DISCLOSURE charts (init once, on first view) ──
 let _discInit=false;
 function initDisclosure(){
-  if(_discInit)return; _discInit=true;
+  if(_discInit)return;
+  if(!document.getElementById('d-liab-creditor'))return;  // disclosure tab placeheld for this member
+  _discInit=true;
   // Liabilities by creditor (Schedule D, minimum disclosed value) — horizontal bar
   new Chart(document.getElementById('d-liab-creditor'),{
     type:'bar',
@@ -2016,20 +2024,102 @@ function showShaiView(view,el){
   window.scrollTo(0,0);
 }
 
-// ── member pill ──
+// ── Financial Disclosure (data-driven from the member's House FD PDF) ──
+function renderDisclosure(){
+  const fd=D.disclosure, el=document.getElementById('page-disclosure');
+  if(!el||!fd)return false;
+  const esc=s=>String(s==null?'':s).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
+  const h=fd.header||{}, s=fd.summary||{};
+  const a=fd.schedule_a||[], b=fd.schedule_b||[], dd=fd.schedule_d||[], c=fd.schedule_c||[], ag=fd.agreements||[];
+  const rng=(lo,hi)=>'$'+Math.round(lo).toLocaleString()+' – $'+Math.round(hi).toLocaleString();
+  const src=fd.source_url?`<a href="${esc(fd.source_url)}" target="_blank" style="color:#cbd5e1;text-decoration:underline">View source PDF ↗</a>`:'';
+  if(!a.length && !dd.length && !b.length){
+    el.innerHTML=`<div style="max-width:680px;margin:48px auto;padding:32px;border:1px dashed var(--border);border-radius:12px;text-align:center;color:var(--text-3)">
+      <div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px">Financial Disclosure — image-based filing</div>
+      This member's House FD report (Filing ID ${esc(h.filing_id||'—')}) appears to be a scanned/image PDF, so structured data couldn't be extracted automatically. ${src}</div>`;
+    return true;
+  }
+  const tile=(label,lo,hi,color)=>`<div style="flex:1;min-width:150px;background:var(--card);border:1px solid var(--border);border-top:3px solid ${color};border-radius:10px;padding:14px 16px">
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3);font-weight:600">${label}</div>
+    <div style="font-size:18px;font-weight:800;color:${color};margin-top:4px">${rng(lo,hi)}</div></div>`;
+  let html=`<div class="member-hero" style="background:linear-gradient(135deg,#1e3a5f,#0f2238)">
+      <h1>Hon. ${esc((h.name||'').replace(/^Hon\.\s*/,''))} — Financial Disclosure</h1>
+      <div class="msub">${esc(h.filing_type||'Annual Report')} ${esc(h.filing_year||'')} · Filed ${esc(h.filing_date||'')} · Filing ID ${esc(h.filing_id||'—')} &nbsp; ${src}</div></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin:16px 0 22px">
+      ${tile('Assets (Schedule A)',s.asset_low||0,s.asset_high||0,'#2d6a4f')}
+      ${tile('Liabilities (Schedule D)',s.liability_low||0,s.liability_high||0,'#9b2335')}
+      ${tile('Est. Net Worth (range)',s.net_low||0,s.net_high||0,'#2a4f7c')}
+    </div>
+    <div class="sec-note info" style="margin-bottom:18px">Values are disclosed as broad ranges on the House FD form; totals here sum the range bounds (a band, not an exact figure). Rebuilt from the linked PDF — nothing hand-typed.</div>`;
+  // Assets
+  if(a.length){
+    html+=`<h3 style="margin:18px 0 10px;font-size:15px">Assets &amp; "Unearned" Income — ${a.length}</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="text-align:left;color:var(--text-3);border-bottom:1px solid var(--border)">
+      <th style="padding:6px 8px">Asset</th><th style="padding:6px 8px">Value</th><th style="padding:6px 8px">Income type</th><th style="padding:6px 8px">Income</th></tr></thead><tbody>`;
+    a.forEach(r=>{html+=`<tr style="border-bottom:1px solid var(--border-soft)"><td style="padding:6px 8px">${esc(r.asset)}${r.type?` <span style="color:var(--text-3)">[${esc(r.type)}]</span>`:''}</td>
+      <td style="padding:6px 8px;white-space:nowrap">${esc(r.value||'')}</td><td style="padding:6px 8px">${esc(r.income_type||'')}</td><td style="padding:6px 8px;white-space:nowrap">${esc(r.income||'')}</td></tr>`;});
+    html+=`</tbody></table>`;
+  }
+  // Liabilities
+  if(dd.length){
+    html+=`<h3 style="margin:22px 0 10px;font-size:15px">Liabilities (Schedule D) — ${dd.length}</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="text-align:left;color:var(--text-3);border-bottom:1px solid var(--border)">
+      <th style="padding:6px 8px">Creditor</th><th style="padding:6px 8px">Type</th><th style="padding:6px 8px">Incurred</th><th style="padding:6px 8px">Amount</th></tr></thead><tbody>`;
+    dd.forEach(r=>{html+=`<tr style="border-bottom:1px solid var(--border-soft)"><td style="padding:6px 8px">${esc(r.creditor)}</td><td style="padding:6px 8px">${esc(r.type||'')}</td><td style="padding:6px 8px;white-space:nowrap">${esc(r.date_incurred||'')}</td><td style="padding:6px 8px;white-space:nowrap">${esc(r.amount||'')}</td></tr>`;});
+    html+=`</tbody></table>`;
+  }
+  // Earned income
+  if(c.length){
+    html+=`<h3 style="margin:22px 0 10px;font-size:15px">Earned Income (Schedule C) — ${c.length}</h3><ul style="font-size:13px;color:var(--text-2);padding-left:18px">`;
+    c.forEach(r=>{html+=`<li style="margin:3px 0">${esc(r.source)}${r.amount?` — ${esc(r.amount)}`:''}</li>`;});
+    html+=`</ul>`;
+  }
+  // Transactions (collapsible)
+  if(b.length){
+    html+=`<details style="margin:22px 0"><summary style="cursor:pointer;font-size:15px;font-weight:700">Transactions (Schedule B) — ${b.length}</summary>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:10px"><thead><tr style="text-align:left;color:var(--text-3);border-bottom:1px solid var(--border)">
+      <th style="padding:6px 8px">Asset</th><th style="padding:6px 8px">Date</th><th style="padding:6px 8px">Type</th><th style="padding:6px 8px">Amount</th></tr></thead><tbody>`;
+    b.forEach(r=>{html+=`<tr style="border-bottom:1px solid var(--border-soft)"><td style="padding:6px 8px">${esc(r.asset)}</td><td style="padding:6px 8px;white-space:nowrap">${esc(r.date||'')}</td><td style="padding:6px 8px">${esc(r.tx_type||'')}</td><td style="padding:6px 8px;white-space:nowrap">${esc(r.amount||'')}</td></tr>`;});
+    html+=`</tbody></table></details>`;
+  }
+  if(ag.length){
+    html+=`<h3 style="margin:22px 0 10px;font-size:15px">Agreements (Schedule F) — ${ag.length}</h3><ul style="font-size:13px;color:var(--text-2);padding-left:18px">`;
+    ag.forEach(r=>{html+=`<li style="margin:3px 0">${esc(r.date||'')} — ${esc(r.parties||'')}: ${esc(r.terms||'')}</li>`;});
+    html+=`</ul>`;
+  }
+  el.innerHTML=`<div style="padding:4px 0 40px">${html}</div>`;
+  return true;
+}
+
+// ── member identity (normalizes Swalwell's capitalized keys + member-v1 lowercase keys) ──
 (function(){
-  const m=D.member,name=(m['First Name']||'Eric')+' '+(m['Last Name']||'Swalwell');
-  const initials=((m['First Name']||'E')[0]+(m['Last Name']||'S')[0]).toUpperCase();
-  const pill=document.getElementById('memberPill');if(pill)pill.innerHTML=`<div class="av">${initials}</div><div class="nm">${name}</div><div class="ds">${m['State']||'CA'}-${m['District']||'14'}</div>`;
-  // also populate platform bar
-  const lastName=(m['Last Name']||'Swalwell');
+  const m=D.member||{};
+  const first=m['First Name']||m.first_name||'';
+  const last =m['Last Name'] ||m.last_name ||'';
+  const name=((first+' '+last).trim())||m.full_name||'Member';
+  const initials=((first[0]||'?')+(last[0]||'')).toUpperCase();
+  const state=m['State']||m.state||'';
+  const dist =m['District']||m.district||'';
+  const party=m['Party']||m.party||'';
+  const congress=m['Congress']||m.congress||'119th';
+  const pill=document.getElementById('memberPill');if(pill)pill.innerHTML=`<div class="av">${initials}</div><div class="nm">${name}</div><div class="ds">${state}-${dist}</div>`;
   if(document.getElementById('platformAvatar'))document.getElementById('platformAvatar').textContent=initials;
-  if(document.getElementById('platformMemberName'))document.getElementById('platformMemberName').textContent=lastName;
-  // update profile nav brand
-  const state=m['State']||'CA',dist=m['District']||'14',party=m['Party']||'D',congress=m['Congress']||'119th';
+  if(document.getElementById('platformMemberName'))document.getElementById('platformMemberName').textContent=last;
   if(document.getElementById('navMark'))document.getElementById('navMark').textContent=initials;
   if(document.getElementById('navTitle'))document.getElementById('navTitle').textContent=name;
   if(document.getElementById('navSub'))document.getElementById('navSub').textContent=`${state}-${dist} · ${party} · ${congress} Congress`;
+  document.title=`Article One · ${state}-${dist} ${last}`;
+  // Hand-authored narrative tabs are per-member; placeholder them for members not yet authored.
+  const bio=new URLSearchParams(location.search).get('member');
+  if(bio && bio!=='S001193' && bio!=='swalwell'){
+    renderDisclosure();  // Financial Disclosure rendered from the member's House FD PDF
+    // Vendor Intelligence: Media/Hotels/Legal deep-dives are Swalwell-specific editorial — hide for others.
+    document.querySelectorAll('#viSegBar .itab').forEach(function(t,i){if(i>0)t.style.display='none';});
+    const vsub=document.querySelector('#page-vendors .page-sub');
+    if(vsub)vsub.textContent='Every vendor and payee categorized by function — built from this member’s own FEC campaign and House-office disbursements.';
+    const tl=document.getElementById('page-timeline');
+    if(tl)tl.innerHTML=`<div style="max-width:680px;margin:48px auto;padding:32px;border:1px dashed var(--border);border-radius:12px;text-align:center;color:var(--text-3)"><div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px">Political Timeline — not yet authored</div>This section is written per member. ${name}'s timeline hasn't been added yet. The other tabs (Overview, Entities, Vendor Intelligence, Financial Disclosure, Sources) are live from ${name}'s filings.</div>`;
+  }
 })();
 
 // ── year filter ──
@@ -2122,7 +2212,7 @@ function renderOvCharts(){
   cats.forEach(r=>{const c=r.role||'Other';catGroups[c]=(catGroups[c]||0)+r.amt;});
   const catSorted=Object.entries(catGroups).sort((a,b)=>b[1]-a[1]).slice(0,8);
   const maxCat=catSorted[0]?catSorted[0][1]:1;
-  document.getElementById('sodBars').innerHTML=catSorted.map(([c,v])=>`
+  const __sodBars=document.getElementById('sodBars');if(__sodBars)__sodBars.innerHTML=catSorted.map(([c,v])=>`
     <div class="bar-row">
       <div class="bar-label" style="font-size:12px;color:#4a5568">${c}</div>
       <div class="bar-track"><div class="bar-fill" style="width:${(v/maxCat*100).toFixed(1)}%;background:#2a4f7c"></div></div>
@@ -2880,6 +2970,7 @@ function renderTl(cat,containerId){
   const searchId=containerId==='modalTlContainer'?'modalTlSearch':'tlSearch';
   const q=(document.getElementById(searchId)?.value||'').toLowerCase().trim();
   const con=document.getElementById(containerId);
+  if(!con)return;   // timeline tab placeheld for this member — nothing to render
   let evs=cat==='all'?TL_EVENTS:TL_EVENTS.filter(e=>e.cat===cat);
   if(q)evs=evs.filter(e=>e.title.toLowerCase().includes(q)||e.body.toLowerCase().includes(q)||e.date.toLowerCase().includes(q));
   const byYr={};evs.forEach(e=>{(byYr[e.year]=byYr[e.year]||[]).push(e);});
@@ -3256,18 +3347,40 @@ function viSetSeg(seg,el){
   else initVendorIntelligence();
 }
 
+// Build VI.categories from the loaded member's own FEC/SOD data (per-entity by_category),
+// respecting the active entity filter. Returns false for members without by_category
+// (e.g. Swalwell's legacy hardcoded dataset), leaving the existing VI.categories intact.
+function buildVendorCategories(){
+  const hasBC=ORDER.some(k=>E[k]&&E[k].by_category);
+  if(!hasBC)return false;
+  const ents=VI.activeEnt==='all'?ORDER:[VI.activeEnt];
+  const map={};
+  ents.forEach(k=>{
+    const e=E[k]; if(!e||!e.by_category)return;
+    e.by_category.forEach(c=>{
+      const m=map[c.id]||(map[c.id]={id:c.id,label:c.label,icon:c.icon,color:c.color,total:0,vm:{}});
+      m.total+=c.total;
+      (c.vendors||[]).forEach(v=>{
+        const vm=m.vm[v.name]||(m.vm[v.name]={total:0,ents:{}});
+        vm.total+=v.total; vm.ents[(META[k]||{}).short||k]=1;
+      });
+    });
+  });
+  VI.categories=Object.values(map).sort((a,b)=>b.total-a.total).map(c=>({
+    id:c.id,label:c.label,icon:c.icon,color:c.color,total:c.total,
+    vendors:Object.entries(c.vm).sort((a,b)=>b[1].total-a[1].total).slice(0,15)
+      .map(([name,v])=>({name,total:v.total,ents:Object.keys(v.ents).join(' · '),note:''}))
+  }));
+  return true;
+}
+
 function initVendorIntelligence(){
-  // entity filter pills
   const ef=document.getElementById('viEntFilter');
   if(!ef)return;
-  ef.innerHTML=[
-    {k:'all',label:'All entities',color:'#1a2433'},
-    {k:'house',label:'House Campaign',color:META.house.color},
-    {k:'pres',label:'Presidential',color:META.pres.color},
-    {k:'pac',label:'Remedy PAC',color:META.pac.color},
-    {k:'gov',label:'Governor 2026',color:META.gov.color},
-    {k:'office',label:'House Office',color:META.office.color},
-  ].map(({k,label,color})=>`<div class="vi-ent-pill${VI.activeEnt===k?' active':''}"
+  buildVendorCategories();   // refresh categories for the current entity filter (no-op for legacy data)
+  const pills=[{k:'all',label:'All entities',color:'#1a2433'}]
+    .concat(ORDER.map(k=>({k,label:(META[k]||{}).short||k,color:(META[k]||{}).color||'#64748b'})));
+  ef.innerHTML=pills.map(({k,label,color})=>`<div class="vi-ent-pill${VI.activeEnt===k?' active':''}"
     onclick="viSetEnt('${k}')" style="${VI.activeEnt===k?'background:'+color+';border-color:'+color:''}">${label}</div>`).join('');
 
   renderViCatGrid();

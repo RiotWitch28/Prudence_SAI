@@ -1,0 +1,491 @@
+{
+  "sample": "10-member working set (expandable)",
+  "source": "119th_MASTER_LIST.xlsx",
+  "count": 10,
+  "members": [
+    {
+      "bioguide_id": "S001193",
+      "full_name": "Eric Swalwell",
+      "state": "CA",
+      "district": 14,
+      "party": "Democrat",
+      "gender": "M",
+      "committees": [],
+      "fec_ids": {
+        "house_campaign": "H2CA15094",
+        "leadership_pac": null,
+        "other_pac": null,
+        "senate_run": null,
+        "president_run": null
+      },
+      "ran_state_office": "No",
+      "which_state_office": null,
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10066827.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/30022873.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/10061638.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/30022044.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10051447.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/30018188.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2021/10047585.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2020/10041327.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2020/30014509.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://swalwell.house.gov",
+        "campaign_website": null
+      },
+      "status": "Left during 119th (S001193)",
+      "dashboard_built": true,
+      "first_name": "Eric",
+      "last_name": "Swalwell",
+      "sod_match": {
+        "first": "ERIC",
+        "last": "SWALWELL"
+      }
+    },
+    {
+      "bioguide_id": "R000610",
+      "full_name": "Guy Reschenthaler",
+      "state": "PA",
+      "district": 14,
+      "party": "Republican",
+      "gender": "M",
+      "committees": [
+        "House Committee on Appropriations",
+        "House Committee on Appropriations — Energy and Water Development and Related Agencies",
+        "House Committee on Appropriations — Interior, Environment, and Related Agencies",
+        "House Committee on Appropriations — National Security, Department of State, and Related Programs"
+      ],
+      "fec_ids": {
+        "house_campaign": "H8PA18199",
+        "leadership_pac": null,
+        "other_pac": null,
+        "senate_run": null,
+        "president_run": null
+      },
+      "ran_state_office": "Yes",
+      "which_state_office": "State Senate",
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10065963.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/30026935.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030371.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030237.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20026547.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/30022642.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/10060469.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10054197.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2021/10047968.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://reschenthaler.house.gov",
+        "campaign_website": "http://www.guyforpa.com/"
+      },
+      "status": "Sitting (R000610)",
+      "dashboard_built": false,
+      "first_name": "Guy",
+      "last_name": "Reschenthaler",
+      "sod_match": {
+        "first": "GUY",
+        "last": "RESCHENTHALER"
+      }
+    },
+    {
+      "bioguide_id": "D000399",
+      "full_name": "Lloyd Doggett",
+      "state": "TX",
+      "district": 37,
+      "party": "Democrat",
+      "gender": "M",
+      "committees": [
+        "House Committee on Ways and Means",
+        "House Committee on the Budget",
+        "Joint Committee on Taxation",
+        "House Committee on Ways and Means — Health",
+        "House Committee on Ways and Means — Oversight",
+        "House Committee on Ways and Means — Trade"
+      ],
+      "fec_ids": {
+        "house_campaign": "H4TX10028",
+        "leadership_pac": null,
+        "other_pac": null,
+        "senate_run": null,
+        "president_run": null
+      },
+      "ran_state_office": "Yes",
+      "which_state_office": "State Senate",
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10066436.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034486.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034292.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034132.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033713.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/30027005.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030820.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030618.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030454.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://doggett.house.gov",
+        "campaign_website": null
+      },
+      "status": "Sitting (D000399)",
+      "dashboard_built": false,
+      "first_name": "Lloyd",
+      "last_name": "Doggett",
+      "sod_match": {
+        "first": "LLOYD",
+        "last": "DOGGETT"
+      }
+    },
+    {
+      "bioguide_id": "D000594",
+      "full_name": "Monica De La Cruz",
+      "state": "TX",
+      "district": 15,
+      "party": "Republican",
+      "gender": "F",
+      "committees": [
+        "House Committee on Agriculture",
+        "House Committee on Financial Services",
+        "House Committee on Agriculture — General Farm Commodities, Risk Management, and Credit",
+        "House Committee on Agriculture — Nutrition and Foreign Agriculture",
+        "House Committee on Financial Services — Financial Institutions",
+        "House Committee on Financial Services — Housing and Insurance"
+      ],
+      "fec_ids": {
+        "house_campaign": "H0TX15124",
+        "leadership_pac": "C00942334",
+        "other_pac": null,
+        "senate_run": null,
+        "president_run": null
+      },
+      "ran_state_office": "No",
+      "which_state_office": null,
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/10072719.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/30026986.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/30025513.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10067135.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/30022990.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/10059362.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/30021002.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10053186.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10050956.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://delacruz.house.gov",
+        "campaign_website": "https://www.monicaforcongress.us/; https://www.monicaforcongress.us/es/"
+      },
+      "status": "Sitting (D000594)",
+      "dashboard_built": false,
+      "first_name": "Mónica",
+      "last_name": "De La Cruz",
+      "sod_match": {
+        "first": "MÓNICA",
+        "last": "DE LA CRUZ"
+      }
+    },
+    {
+      "bioguide_id": "L000598",
+      "full_name": "Nick LaLota",
+      "state": "NY",
+      "district": 1,
+      "party": "Republican",
+      "gender": "M",
+      "committees": [
+        "House Committee on Appropriations",
+        "House Committee on Homeland Security",
+        "House Committee on Appropriations — Financial Services and General Government",
+        "House Committee on Appropriations — Legislative Branch",
+        "House Committee on Appropriations — Military Construction, Veterans Affairs, and Related Agencies",
+        "House Committee on Homeland Security — Cybersecurity and Infrastructure Protection",
+        "House Committee on Homeland Security — Oversight, Investigations, and Accountability"
+      ],
+      "fec_ids": {
+        "house_campaign": "H2NY01190",
+        "leadership_pac": null,
+        "other_pac": null,
+        "senate_run": null,
+        "president_run": null
+      },
+      "ran_state_office": "No",
+      "which_state_office": null,
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10069103.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/30027680.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/30023921.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/10060364.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/30021392.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10053778.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/30018482.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10047996.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/30016753.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://lalota.house.gov",
+        "campaign_website": null
+      },
+      "status": "Sitting (L000598)",
+      "dashboard_built": false,
+      "first_name": "Nicolas",
+      "last_name": "LaLota",
+      "sod_match": {
+        "first": "NICOLAS",
+        "last": "LALOTA"
+      }
+    },
+    {
+      "bioguide_id": "K000391",
+      "full_name": "Raja Krishnamoorthi",
+      "state": "IL",
+      "district": 8,
+      "party": "Democrat",
+      "gender": "M",
+      "committees": [
+        "House Committee on Oversight and Government Reform",
+        "House Permanent Select Committee on Intelligence",
+        "House Select Committee on the Strategic Competition Between the United States and the Chinese Communist Party",
+        "House Committee on Oversight and Government Reform — Health Care and Financial Services",
+        "House Permanent Select Committee on Intelligence — Central Intelligence Agency"
+      ],
+      "fec_ids": {
+        "house_campaign": "H6IL08147",
+        "leadership_pac": null,
+        "other_pac": null,
+        "senate_run": null,
+        "president_run": null
+      },
+      "ran_state_office": "No",
+      "which_state_office": null,
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10066035.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/30026761.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/30022655.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/10057306.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/30019728.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10062410.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10052849.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/30018167.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2021/10048789.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://krishnamoorthi.house.gov",
+        "campaign_website": null
+      },
+      "status": "Sitting (K000391)",
+      "dashboard_built": false,
+      "first_name": "Raja",
+      "last_name": "Krishnamoorthi",
+      "sod_match": {
+        "first": "RAJA",
+        "last": "KRISHNAMOORTHI"
+      }
+    },
+    {
+      "bioguide_id": "F000484",
+      "full_name": "Randy Fine",
+      "state": "FL",
+      "district": 6,
+      "party": "Republican",
+      "gender": "M",
+      "committees": [
+        "House Committee on Education and Workforce",
+        "House Committee on Foreign Affairs",
+        "House Committee on Education and Workforce — Health, Employment, Labor, and Pensions",
+        "House Committee on Education and Workforce — Higher Education and Workforce Development",
+        "House Committee on Education and Workforce — Workforce Protections",
+        "House Committee on Foreign Affairs — Europe",
+        "House Committee on Foreign Affairs — Western Hemisphere"
+      ],
+      "fec_ids": {
+        "house_campaign": "H6FL06258",
+        "leadership_pac": null,
+        "other_pac": null,
+        "senate_run": null,
+        "president_run": null
+      },
+      "ran_state_office": "No",
+      "which_state_office": null,
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10063200.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/30027634.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/30022941.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10067009.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/30022460.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://fine.house.gov",
+        "campaign_website": null
+      },
+      "status": "Sitting (F000484)",
+      "dashboard_built": false,
+      "first_name": "Randall",
+      "last_name": "Fine",
+      "sod_match": {
+        "first": "RANDALL",
+        "last": "FINE"
+      }
+    },
+    {
+      "bioguide_id": "N000026",
+      "full_name": "Troy E. Nehls",
+      "state": "TX",
+      "district": 22,
+      "party": "Republican",
+      "gender": "M",
+      "committees": [
+        "House Committee on Transportation and Infrastructure",
+        "House Committee on the Judiciary",
+        "House Select Subcommittee to Investigate the Remaining Questions Surrounding January 6, 2021",
+        "House Committee on Transportation and Infrastructure — Aviation",
+        "House Committee on Transportation and Infrastructure — Highways and Transit",
+        "House Committee on Transportation and Infrastructure — Railroads, Pipelines, and Hazardous Materials",
+        "House Committee on the Judiciary — Crime and Federal Government Surveillance",
+        "House Committee on the Judiciary — Immigration Integrity, Security, and Enforcement"
+      ],
+      "fec_ids": {
+        "house_campaign": "H0TX22302",
+        "leadership_pac": null,
+        "other_pac": null,
+        "senate_run": null,
+        "president_run": null
+      },
+      "ran_state_office": "No",
+      "which_state_office": null,
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10072372.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/8221083.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/10062762.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/8220397.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10056813.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10055651.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/8219615.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2021/10056812.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2021/10047407.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://nehls.house.gov",
+        "campaign_website": null
+      },
+      "status": "Sitting (N000026)",
+      "dashboard_built": false,
+      "first_name": "Troy",
+      "last_name": "Nehls",
+      "sod_match": {
+        "first": "TROY",
+        "last": "NEHLS"
+      }
+    },
+    {
+      "bioguide_id": "B001324",
+      "full_name": "Wesley Bell",
+      "state": "MO",
+      "district": 1,
+      "party": "Democrat",
+      "gender": "M",
+      "committees": [
+        "House Committee on Armed Services",
+        "House Committee on Oversight and Government Reform",
+        "House Committee on Armed Services — Strategic Forces",
+        "House Committee on Armed Services — Tactical Air and Land Forces",
+        "House Committee on Oversight and Government Reform — Federal Law Enforcement",
+        "House Committee on Oversight and Government Reform — Health Care and Financial Services"
+      ],
+      "fec_ids": {
+        "house_campaign": "H4MO01134",
+        "leadership_pac": null,
+        "other_pac": null,
+        "senate_run": "S4MO00250",
+        "president_run": null
+      },
+      "ran_state_office": "No",
+      "which_state_office": null,
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10062319.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10068770.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/30023751.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/10062326.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/10056209.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://bell.house.gov",
+        "campaign_website": null
+      },
+      "status": "Sitting (B001324)",
+      "dashboard_built": false,
+      "first_name": "Wesley",
+      "last_name": "Bell",
+      "sod_match": {
+        "first": "WESLEY",
+        "last": "BELL"
+      }
+    },
+    {
+      "bioguide_id": "C001067",
+      "full_name": "Yvette D. Clarke",
+      "state": "NY",
+      "district": 9,
+      "party": "Democrat",
+      "gender": "F",
+      "committees": [
+        "House Committee on Energy and Commerce",
+        "House Committee on Energy and Commerce — Commerce, Manufacturing, and Trade",
+        "House Committee on Energy and Commerce — Communications and Technology",
+        "House Committee on Energy and Commerce — Oversight and Investigations"
+      ],
+      "fec_ids": {
+        "house_campaign": "H4NY11138",
+        "leadership_pac": null,
+        "other_pac": null,
+        "senate_run": null,
+        "president_run": null
+      },
+      "ran_state_office": "No",
+      "which_state_office": null,
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10069178.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2025/30028187.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/30023992.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/10062455.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/8220337.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10055310.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/30019352.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/8219685.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2021/10049776.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://clarke.house.gov",
+        "campaign_website": null
+      },
+      "status": "Sitting (C001067)",
+      "dashboard_built": false,
+      "first_name": "Yvette",
+      "last_name": "Clarke",
+      "sod_match": {
+        "first": "YVETTE",
+        "last": "CLARKE"
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# OS junk
+.DS_Store
+**/.DS_Store
+
+# Secrets — never commit credentials
+_source-data/fec_secrets.txt.txt
+**/secrets.ini
+*.secret
+fec_secrets*

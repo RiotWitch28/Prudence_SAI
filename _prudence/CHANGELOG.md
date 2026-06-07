@@ -13,6 +13,29 @@ short title, and a plain-language description of what changed and why.
 
 ---
 
+## 2026-06-06 — Added retrieval & AI-integrity frameworks; filed the founding encyclical
+
+**What changed:** Five reference documents that Prudence should reason within were
+filed into the project so they are actually part of her source corpus (previously
+they sat outside the repo in a working folder, where Prudence had no access). Four
+went to `_research/papers/` — three peer-reviewed RAG papers (*One-shot vs Iterative
+Retrieval* 2509.04820; *RAG Security & Privacy Threat Model* 2509.20324; *RAGShield:
+Numerical Claim Manipulation in Government RAG* 2604.00387) and a general *RAG
+systems* reference — and are catalogued under a new "Retrieval & AI-Integrity
+Frameworks" section in `_research/papers/INDEX.md`. The founding encyclical
+*Magnifica Humanitas* (Leo XIV, 15 May 2026) — which the Charter §2.3 is built on —
+was filed beside the Charter in `_prudence/`.
+
+**Why:** Prudence reasons only within the documents in her source folders
+(`CLAUDE.md` / Charter §4). These RAG frameworks govern how she retrieves evidence
+and protects her own numeric/financial claims from manipulation — a direct extension
+of her integrity commitments — and the encyclical that grounds her Charter now lives
+inside the project rather than only as an external copy.
+
+**Triggered by:** Amanda Koski (custodian).
+
+---
+
 ## 2026-06-05 — Added Situational Analysis screen (Findraiser / Wolf / Gomez)
 
 **What changed:** A new screen — **③ Situational Analysis** — was added to the Prudence module in `article_one_beta.html`. It summarizes three interconnected publicly reported facts (the Wolf–Gomez affair allegation; the co-founding of Findraiser by Swalwell and Wolf while Wolf was COS; and the financial nexus between Findraiser and Gomez's campaign) and cross-checks them against five policy areas: (1) staff outside employment and conflict of interest per the Members' Congressional Handbook; (2) Member use of official office to promote a private venture per the House Ethics Manual and CAA; (3) workplace conduct and power dynamics per the CAA, OCWR, and EEOC 12-factor framework; (4) financial nexus between the personal relationship and commercial transaction; and (5) a structural note that the company's formation itself is not prohibited. The Prudence badge count was updated from 3 to 4.

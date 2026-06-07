@@ -23,6 +23,25 @@ Academic and policy research documents used to build the Sovereign House AI anal
 
 ---
 
+## Retrieval & AI-Integrity Frameworks
+
+How Prudence retrieves evidence and safeguards the integrity of her own answers —
+directly serving the Charter's commitments to accuracy, non-manipulation, and not
+reducing human judgment to a mechanical verdict.
+
+- **RAG — One-shot vs Iterative Retrieval (arXiv 2509.04820)** — *"Fishing for
+  Answers."* Compares retrieval strategies; informs how thoroughly Prudence should
+  gather evidence before presenting options.
+- **RAG Security & Privacy — Threat Model (arXiv 2509.20324)** — Formalizes the
+  attack surface of retrieval systems; informs safeguarding Prudence against
+  poisoning, leakage, and tampered sources.
+- **RAGShield — Numerical Claim Manipulation in Government RAG (arXiv 2604.00387)** —
+  Detecting manipulated numeric claims in government RAG. Directly relevant to
+  protecting Prudence's financial figures and statistics from fabrication or drift.
+- **RAG systems** — General reference on retrieval-augmented generation.
+
+---
+
 ## Key Metrics from Research
 
 The Sovereign House AI module uses these frameworks to benchmark Swalwell's office structure:

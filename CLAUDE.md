@@ -39,5 +39,4 @@ human-readable, no rollback. Log major changes only (new sections, changed findi
 new rule sets, material methodology changes), not routine touch-ups.
 
 ## Dashboard
-- Active dashboard files live in `dashboards/`. Deploy by dragging the folder to netlify.com/drop.
 - See `README.md` and `STRUCTURE.txt` for full data layout and workflows.

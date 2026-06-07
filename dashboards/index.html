@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Frequently-updated dashboard: tell browsers not to serve a stale cached copy -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Article One · CA-14 Swalwell</title>
 <script src="chart.umd.min.js"></script>
 <style>
@@ -171,7 +175,7 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);position:sti
 @media(min-width:1024px){.page{padding:28px 36px}}
 
 /* ── FILTER PILLS ── */
-.filter-bar{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-bottom:20px;padding-bottom:2px}
+.filter-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;padding-bottom:2px}
 .filter-bar::-webkit-scrollbar{display:none}
 .fpill{flex-shrink:0;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);color:var(--text-3);background:var(--surface);transition:all var(--t);white-space:nowrap}
 .fpill:hover{color:var(--text);border-color:var(--muted)}
@@ -474,7 +478,7 @@ body.dark .REVIEW .flag-sev{background:#0d1520;color:var(--navy-mid)}
 .modal{background:var(--surface);border-radius:var(--radius-lg);max-width:860px;width:100%;max-height:84vh;display:flex;flex-direction:column;box-shadow:var(--shadow-lg)}
 
 /* ── MEMBER ROSTER ── */
-.roster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;padding:20px}
+.roster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;padding:20px;overflow-y:auto;min-height:0;flex:1 1 auto}
 .roster-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:16px;display:flex;gap:14px;align-items:flex-start;cursor:pointer;transition:all var(--t);position:relative}
 .roster-card:hover{border-color:var(--navy-mid);box-shadow:var(--shadow);background:var(--surface)}
 .roster-card.active{border-color:var(--navy);background:var(--surface);box-shadow:0 0 0 2px rgba(30,58,95,.15)}
@@ -612,6 +616,8 @@ body.dark .REVIEW .flag-sev{background:#0d1520;color:var(--navy-mid)}
 }
 
 /* ── VENDOR INTELLIGENCE ── */
+.vi-instructions{background:var(--blue-bg,#eef4fb);border:1px solid var(--border);border-left:4px solid var(--accent,#2a4f7c);border-radius:10px;padding:12px 16px;margin-bottom:18px;font-size:13px;color:var(--text-2,#4a5568);line-height:1.5}
+.vi-cat-card.active{outline:2px solid currentColor;outline-offset:-1px}
 .vi-cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-bottom:20px}
 .vi-cat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;cursor:pointer;transition:all var(--t);border-top:4px solid transparent;position:relative;box-shadow:var(--shadow-sm)}
 .vi-cat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
@@ -805,8 +811,9 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
     <div class="platform-name">Article One</div>
   </div>
   <div class="platform-divider"></div>
-  <div class="platform-context">Political Intelligence OS &nbsp;·&nbsp; <strong>CA-14 Profile</strong></div>
+  <div class="platform-context">Political Intelligence OS</div>
   <div class="platform-right">
+    <button class="platform-btn" onclick="location.href='article-one.html'">Article One</button>
     <button class="platform-btn" id="allMembersBtn" onclick="openRoster()">All Members</button>
     <button class="platform-btn">Export</button>
     <button class="dark-toggle" id="darkToggle" onclick="toggleDark()">☀ Light</button>
@@ -842,14 +849,8 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
     <div class="page-sub">All publicly-available political financial data for this member · rebuilt from primary sources · click any card or use filters below</div>
   </div>
 
-  <!-- period filter pills -->
-  <div class="filter-bar" id="yrBar">
-    <div class="fpill f-yr active" data-yr="all">All years</div>
-    <div class="fpill f-yr" data-yr="2024-2026">2024–26</div>
-    <div class="fpill f-yr" data-yr="2020-2023">2020–23</div>
-    <div class="fpill f-yr" data-yr="2016-2019">2016–19</div>
-    <div class="fpill f-yr" data-yr="2012-2015">2012–15</div>
-  </div>
+  <!-- period filter pills — built per member from active span (see buildYrPills) -->
+  <div class="filter-bar" id="yrBar"></div>
 
   <!-- stat cards (one per entity + total) -->
   <div class="stat-grid" id="statGrid"></div>
@@ -1160,39 +1161,13 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
     <div class="page-sub">Comprehensive analysis of every vendor across all entities · categorized by function · hotel tier classification · legal controversy correlation</div>
   </div>
 
-  <!-- Segment controller -->
-  <div class="inner-tab-bar" id="viSegBar">
-    <div class="itab active" onclick="viSetSeg('overview',this)">Overview</div>
-    <div class="itab" onclick="viSetSeg('media',this)">📺 Media & Advertising</div>
-    <div class="itab" onclick="viSetSeg('hotels',this)">🏨 Hotels & Lodging</div>
-    <div class="itab" onclick="viSetSeg('legal',this)">⚖️ Legal Services</div>
-  </div>
+  <!-- Instruction banner -->
+  <div class="vi-instructions">👇 Click any category below to expand its full breakdown — top vendors, spending concentration, and transaction stats appear right beneath the grid.</div>
 
-  <!-- OVERVIEW SEGMENT -->
-  <div id="viSeg-overview" class="inner-section active">
-    <div class="vi-ent-filter" id="viEntFilter"></div>
-    <div class="sec-label">Spending by category</div>
-    <div class="vi-cat-grid" id="viCatGrid"></div>
-    <div id="viCatDetail"></div>
-  </div>
-
-  <!-- MEDIA SEGMENT -->
-  <div id="viSeg-media" class="inner-section">
-    <div class="sec-note info" style="margin-bottom:18px">$6.37M across 13 firms · Tucker Group has billed every controlled entity for 14 consecutive years · Governor race triggered a complete vendor rebuild · digital share grew from ~0% in 2012 to ~35% by 2026</div>
-    <div id="viMediaContent"></div>
-  </div>
-
-  <!-- HOTELS SEGMENT -->
-  <div id="viSeg-hotels" class="inner-section">
-    <div class="sec-note info" style="margin-bottom:18px">Classified by tier · all paid from campaign or official funds · Ritz-Carlton Half Moon Bay: 6 charges in 2 weeks signals fundraiser event · The Battery: 108 charges over 11 years = de facto campaign HQ</div>
-    <div id="viHotelContent"></div>
-  </div>
-
-  <!-- LEGAL SEGMENT -->
-  <div id="viSeg-legal" class="inner-section">
-    <div class="sec-note warn" style="margin-bottom:18px">$1.13M+ total across all entities · spending spikes correlate directly with known controversies · Sara Azari (criminal defense) billed $313K as "Campaign Legal Compliance"</div>
-    <div id="viLegalContent"></div>
-  </div>
+  <div class="vi-ent-filter" id="viEntFilter"></div>
+  <div class="sec-label">Spending by category</div>
+  <div class="vi-cat-grid" id="viCatGrid"></div>
+  <div id="viCatDetail"></div>
 </div>
 
 <!-- TIMELINE -->
@@ -1894,8 +1869,116 @@ const __PREF=['office','house','pac','pres','senate','gov','other_pac','outside_
 const ORDER=[...__PREF.filter(k=>E[k]),...Object.keys(E).filter(k=>!__PREF.includes(k))];
 
 // ── MEMBER ROSTER (declared early to avoid TDZ) ──
-var ACTIVE_MEMBER='swalwell';
+var ACTIVE_MEMBER=(function(){var b=new URLSearchParams(location.search).get('member');return (!b||b==='S001193')?'swalwell':b;})();
 var MEMBER_ROSTER=[
+  {
+    slug:'B001324',
+    name:'Wesley Bell',
+    initials:'WB',
+    state:'MO', district:'1', party:'D', partyFull:'Democrat',
+    congress:'119th',
+    statusLabel:'Sitting member',
+    totalUniverse:'$7.6M',
+    flagCount:1, highFlags:0,
+    prudenceFindings:5,
+    hasData:true
+  },
+  {
+    slug:'C001067',
+    name:'Yvette D. Clarke',
+    initials:'YC',
+    state:'NY', district:'9', party:'D', partyFull:'Democrat',
+    congress:'119th',
+    statusLabel:'Sitting member',
+    totalUniverse:'$24.5M',
+    flagCount:11, highFlags:0,
+    prudenceFindings:5,
+    hasData:true
+  },
+  {
+    slug:'D000594',
+    name:'Monica De La Cruz',
+    initials:'MD',
+    state:'TX', district:'15', party:'R', partyFull:'Republican',
+    congress:'119th',
+    statusLabel:'Sitting member',
+    totalUniverse:'$20.3M',
+    flagCount:8, highFlags:0,
+    prudenceFindings:5,
+    hasData:true
+  },
+  {
+    slug:'D000399',
+    name:'Lloyd Doggett',
+    initials:'LD',
+    state:'TX', district:'37', party:'D', partyFull:'Democrat',
+    congress:'119th',
+    statusLabel:'Sitting member',
+    totalUniverse:'$25.7M',
+    flagCount:8, highFlags:0,
+    prudenceFindings:5,
+    hasData:true
+  },
+  {
+    slug:'F000484',
+    name:'Randy Fine',
+    initials:'RF',
+    state:'FL', district:'6', party:'R', partyFull:'Republican',
+    congress:'119th',
+    statusLabel:'Sitting member',
+    totalUniverse:'$4.0M',
+    flagCount:1, highFlags:0,
+    prudenceFindings:5,
+    hasData:true
+  },
+  {
+    slug:'K000391',
+    name:'Raja Krishnamoorthi',
+    initials:'RK',
+    state:'IL', district:'8', party:'D', partyFull:'Democrat',
+    congress:'119th',
+    statusLabel:'Sitting member',
+    totalUniverse:'$52.2M',
+    flagCount:9, highFlags:0,
+    prudenceFindings:5,
+    hasData:true
+  },
+  {
+    slug:'L000598',
+    name:'Nick LaLota',
+    initials:'NL',
+    state:'NY', district:'1', party:'R', partyFull:'Republican',
+    congress:'119th',
+    statusLabel:'Sitting member',
+    totalUniverse:'$11.8M',
+    flagCount:6, highFlags:0,
+    prudenceFindings:5,
+    hasData:true
+  },
+  {
+    slug:'N000026',
+    name:'Troy E. Nehls',
+    initials:'TN',
+    state:'TX', district:'22', party:'R', partyFull:'Republican',
+    congress:'119th',
+    statusLabel:'Sitting member',
+    totalUniverse:'$13.2M',
+    flagCount:10, highFlags:0,
+    prudenceFindings:5,
+    hasData:true
+  },
+  {
+    slug:'R000610',
+    name:'Guy Reschenthaler',
+    initials:'GR',
+    state:'PA', district:'14', party:'R', partyFull:'Republican',
+    congress:'119th',
+    statusLabel:'Sitting member',
+    totalUniverse:'$23.4M',
+    flagCount:8, highFlags:0,
+    prudenceFindings:5,
+    hasData:true
+  },
   {
     slug:'swalwell',
     name:'Eric Swalwell',
@@ -1903,25 +1986,57 @@ var MEMBER_ROSTER=[
     state:'CA', district:'14', party:'D', partyFull:'Democrat',
     congress:'119th',
     statusLabel:'Left 119th Congress · Apr 2026',
-    totalUniverse:'$18.4M',
-    flagCount:9, highFlags:2,
+    totalUniverse:'$46.8M',
+    flagCount:9, highFlags:0,
     prudenceFindings:16,
-    hasData:true,
-    dataVar:'SWALWELL_DATA'
-  }
-  // Future members: add entry here + matching data JS file + prudence-[slug] div
+    hasData:true
+  },
+  // Active/live members (sample_members_10.json). Add a member: new entry + members/<bioguide>/data.js
 ];
 
 // ── state ──
 const LS='swalwell_v3';
 let ST={enabled:{},yr:'all',vendEnt:'all',search:''};
 ORDER.forEach(k=>ST.enabled[k]=true);
-try{const s=JSON.parse(localStorage.getItem(LS));if(s){if(s.enabled)Object.assign(ST.enabled,s.enabled);if(s.yr)ST.yr=s.yr;}}catch(e){}
+try{const s=JSON.parse(localStorage.getItem(LS));if(s){if(s.enabled)Object.assign(ST.enabled,s.enabled);}}catch(e){}
+// Year filter is per-member and must not bleed across members: always start on the
+// member's full active span ("All years") regardless of what a prior member/session left.
+ST.yr='all';
 function save(){localStorage.setItem(LS,JSON.stringify({enabled:ST.enabled,yr:ST.yr}));}
 
 function yrRange(){
   if(ST.yr==='all')return [0,9999];
   const [a,b]=ST.yr.split('-').map(Number);return [a,b];
+}
+// The member's active window: first year they filed/started spending → most recent
+// data item (or the current year, whichever is later). Derived from the data, never
+// hardcoded, so no cycle pill can land outside a given member's tenure.
+function memberSpan(){
+  let lo=Infinity,hi=-Infinity;
+  Object.keys(E).forEach(k=>Object.keys(E[k].by_year||{}).forEach(y=>{const n=+y;if(n>1990){if(n<lo)lo=n;if(n>hi)hi=n;}}));
+  if(lo===Infinity)return null;            // no dated activity (e.g. dormant PAC only)
+  return [lo,Math.max(hi,new Date().getFullYear())];
+}
+// Build the period pills from the member's own span as 2-year FEC election cycles
+// (each ending on an even year). "All years" = the full span and stays the default.
+function buildYrPills(){
+  const bar=document.getElementById('yrBar');if(!bar)return;
+  let html='<div class="fpill f-yr'+(ST.yr==='all'?' active':'')+'" data-yr="all">All years</div>';
+  const span=memberSpan();
+  if(span){
+    const[lo,hi]=span;
+    // Does any entity have spending in this 2-year window? Skip cycles with none so
+    // a member with a gap in their record (e.g. a stray early year) never produces a
+    // pill that reads $0 across every box and chart.
+    const hasData=s=>Object.keys(E).some(k=>{const by=E[k].by_year||{};return ((by[s]||0)+(by[s+1]||0))>0;});
+    let start=lo%2?lo:lo-1;               // align cycle start to the odd year
+    for(let s=start;s<=hi;s+=2){
+      if(!hasData(s))continue;
+      const e=s+1,key=s+'-'+e;
+      html+='<div class="fpill f-yr'+(ST.yr===key?' active':'')+'" data-yr="'+key+'">'+s+'–'+String(e).slice(2)+'</div>';
+    }
+  }
+  bar.innerHTML=html;
 }
 function entTotal(k){
   const by=E[k].by_year||{};
@@ -1960,11 +2075,9 @@ function resetPage(id){
     // static section — no filters, accordions, or selections to reset
   }
   if(id==='vendors'){
+    // clean slate: no category expanded, entity filter back to All
     VI.activeEnt='all';
     VI.activeCat='all';
-    // reset segment bar back to Overview
-    const overviewTab=document.querySelector('#viSegBar .itab:first-child');
-    if(overviewTab)viSetSeg('overview',overviewTab);
   }
   if(id==='houseai'){
     // close all ic-open accordions and native <details> panels in both Prudence views
@@ -2113,8 +2226,8 @@ function renderDisclosure(){
   const bio=new URLSearchParams(location.search).get('member');
   if(bio && bio!=='S001193' && bio!=='swalwell'){
     renderDisclosure();  // Financial Disclosure rendered from the member's House FD PDF
-    // Vendor Intelligence: Media/Hotels/Legal deep-dives are Swalwell-specific editorial — hide for others.
-    document.querySelectorAll('#viSegBar .itab').forEach(function(t,i){if(i>0)t.style.display='none';});
+    // Vendor Intelligence: clicking a category square expands the auto-generated holistic
+    // breakdown inline below the grid (Swalwell-only editorial deep-dives don't apply here).
     const vsub=document.querySelector('#page-vendors .page-sub');
     if(vsub)vsub.textContent='Every vendor and payee categorized by function — built from this member’s own FEC campaign and House-office disbursements.';
     const tl=document.getElementById('page-timeline');
@@ -3335,45 +3448,38 @@ const TIER_BG={
 };
 
 let viChart=null;
-let viActiveSeg='overview';
 function destroyViChart(){if(viChart){try{viChart.destroy();}catch(e){}viChart=null;}}
-
-function viSetSeg(seg,el){
-  viActiveSeg=seg;
-  document.querySelectorAll('#viSegBar .itab').forEach(t=>t.classList.remove('active'));
-  if(el)el.classList.add('active');
-  document.querySelectorAll('#page-vendors .inner-section').forEach(s=>s.classList.remove('active'));
-  const sec=document.getElementById('viSeg-'+seg);if(sec)sec.classList.add('active');
-  if(seg==='hotels')renderHotelIntelligence();
-  else if(seg==='legal')renderLegalIntelligence();
-  else if(seg==='media')renderMediaIntelligence();
-  else initVendorIntelligence();
-}
 
 // Build VI.categories from the loaded member's own FEC/SOD data (per-entity by_category),
 // respecting the active entity filter. Returns false for members without by_category
 // (e.g. Swalwell's legacy hardcoded dataset), leaving the existing VI.categories intact.
 function buildVendorCategories(){
   const hasBC=ORDER.some(k=>E[k]&&E[k].by_category);
+  VI.dataDriven=hasBC;   // true = member has structured by_category data (auto analysis); false = Swalwell legacy editorial
   if(!hasBC)return false;
   const ents=VI.activeEnt==='all'?ORDER:[VI.activeEnt];
   const map={};
   ents.forEach(k=>{
     const e=E[k]; if(!e||!e.by_category)return;
     e.by_category.forEach(c=>{
-      const m=map[c.id]||(map[c.id]={id:c.id,label:c.label,icon:c.icon,color:c.color,total:0,vm:{}});
+      const m=map[c.id]||(map[c.id]={id:c.id,label:c.label,icon:c.icon,color:c.color,total:0,n:0,vendorCount:0,vm:{}});
       m.total+=c.total;
+      m.n+=(c.n||0);
       (c.vendors||[]).forEach(v=>{
         const vm=m.vm[v.name]||(m.vm[v.name]={total:0,ents:{}});
         vm.total+=v.total; vm.ents[(META[k]||{}).short||k]=1;
       });
     });
   });
-  VI.categories=Object.values(map).sort((a,b)=>b.total-a.total).map(c=>({
-    id:c.id,label:c.label,icon:c.icon,color:c.color,total:c.total,
-    vendors:Object.entries(c.vm).sort((a,b)=>b[1].total-a[1].total).slice(0,15)
-      .map(([name,v])=>({name,total:v.total,ents:Object.keys(v.ents).join(' · '),note:''}))
-  }));
+  VI.categories=Object.values(map).sort((a,b)=>b.total-a.total).map(c=>{
+    const allV=Object.entries(c.vm).sort((a,b)=>b[1].total-a[1].total);
+    return {
+      id:c.id,label:c.label,icon:c.icon,color:c.color,total:c.total,
+      n:c.n,                       // total transactions in this category (data-driven members only)
+      vendorCount:allV.length,     // distinct vendors seen across the active entity filter
+      vendors:allV.slice(0,15).map(([name,v])=>({name,total:v.total,ents:Object.keys(v.ents).join(' · '),note:''}))
+    };
+  });
   return true;
 }
 
@@ -3397,6 +3503,7 @@ function viSetEnt(k){
 }
 
 function viSelectCat(id){
+  // Click a square to expand its breakdown below the grid; click it again to collapse.
   VI.activeCat=VI.activeCat===id?'all':id;
   renderViCatGrid();
   renderViCatDetail();
@@ -3426,100 +3533,242 @@ function renderViCatGrid(){
   }).join('');
 }
 
+// Sticky notes for Swalwell's hand-authored editorial deep-dives (formerly the segment sec-notes)
+const VI_EDITORIAL_NOTES={
+  media:{cls:'info', text:'$6.37M across 13 firms · Tucker Group has billed every controlled entity for 14 consecutive years · Governor race triggered a complete vendor rebuild · digital share grew from ~0% in 2012 to ~35% by 2026'},
+  hotels:{cls:'info', text:'Classified by tier · all paid from campaign or official funds · Ritz-Carlton Half Moon Bay: 6 charges in 2 weeks signals fundraiser event · The Battery: 108 charges over 11 years = de facto campaign HQ'},
+  legal:{cls:'warn', text:'$1.13M+ total across all entities · spending spikes correlate directly with known controversies · Sara Azari (criminal defense) billed $313K as "Campaign Legal Compliance"'}
+};
+
+// Scroll an expanded breakdown so its title sits just below the stacked sticky top bars.
+// Deferred to the next frame so the new content is laid out before we measure.
+function viScrollToDetail(el){
+  requestAnimationFrame(()=>{
+    let offset=0;
+    document.querySelectorAll('.platform-bar, nav').forEach(b=>{
+      const s=getComputedStyle(b);
+      if((s.position==='sticky'||s.position==='fixed') && b.getBoundingClientRect().top<60) offset+=b.offsetHeight;
+    });
+    const y=el.getBoundingClientRect().top + window.pageYOffset - offset - 14;
+    window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
+  });
+}
+
 function renderViCatDetail(){
   const el=document.getElementById('viCatDetail');if(!el)return;
   destroyViChart();
+  destroyCatSegChart();
+
+  // Nothing selected → quiet prompt (the squares above are the entry point).
   if(VI.activeCat==='all'){
-    // show a bar chart of all categories
-    el.innerHTML=`
-      <div class="vi-detail">
-        <div class="vi-detail-head"><h2>All categories — spending overview</h2><span class="vd-sub">Click a category card above to drill into vendors</span></div>
-        <div style="padding:16px"><div style="position:relative;height:260px"><canvas id="viAllCatChart"></canvas></div></div>
-      </div>`;
-    const cv=document.getElementById('viAllCatChart');
-    if(cv){
-      const sorted=[...VI.categories].sort((a,b)=>b.total-a.total);
-      viChart=new Chart(cv,{type:'bar',
-        data:{labels:sorted.map(c=>c.label),datasets:[{data:sorted.map(c=>c.total),backgroundColor:sorted.map(c=>c.color),borderRadius:8,borderSkipped:false}]},
-        options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)}}},
-          scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},
-                  y:{ticks:{color:'#4a5568',font:{weight:'600',size:12}},grid:{display:false}}}}});
-    }
+    el.innerHTML='<div class="vi-detail-empty" style="text-align:center;color:var(--text-3);padding:26px 16px;font-size:13px;border:1px dashed var(--border);border-radius:12px">Select a category above to see its full breakdown here.</div>';
     return;
   }
 
   const cat=VI.categories.find(c=>c.id===VI.activeCat);
   if(!cat){el.innerHTML='';return;}
 
-  if(cat.id==='media'||cat.id==='hotels'||cat.id==='legal'){
-    el.innerHTML='';
-    const segMap={media:2,hotels:3,legal:4};
-    const segEl=document.querySelector(`#viSegBar .itab:nth-child(${segMap[cat.id]})`);
-    viSetSeg(cat.id,segEl);
+  // Swalwell keeps its hand-authored Media/Hotels/Legal deep-dives — render them inline.
+  if(!VI.dataDriven && VI_EDITORIAL_NOTES[cat.id]){
+    const note=VI_EDITORIAL_NOTES[cat.id];
+    el.innerHTML=`<div class="sec-note ${note.cls}" style="margin-bottom:18px">${note.text}</div><div id="viInlineEditorial"></div>`;
+    const target=document.getElementById('viInlineEditorial');
+    if(cat.id==='hotels')renderHotelIntelligence(target);
+    else if(cat.id==='legal')renderLegalIntelligence(target);
+    else if(cat.id==='media')renderMediaIntelligence(target);
+    viScrollToDetail(el);
     return;
   }
 
+  // Everything else: the auto-generated holistic breakdown, rendered inline below the grid.
+  renderCategorySegment(cat.id, el);
+  viScrollToDetail(el);
+}
+
+// ── HOLISTIC CATEGORY SEGMENT (auto-generated for any >$1M category) ──
+let catSegChart=null;
+function destroyCatSegChart(){if(catSegChart){try{catSegChart.destroy();}catch(e){}catSegChart=null;}}
+
+// Format SOD name "LAST FIRST MIDDLE" → "First Middle Last"
+function fmtSODName(s){
+  const p=s.trim().split(/\s+/);
+  if(!p.length)return s;
+  const tc=w=>w?w[0].toUpperCase()+w.slice(1).toLowerCase():'';
+  if(p.length===1)return tc(p[0]);
+  return [...p.slice(1),p[0]].map(tc).join(' ');
+}
+
+function renderCategorySegment(catId,target){
+  const el=target||document.getElementById('viCatSegContent');if(!el)return;
+  destroyCatSegChart();
+  const cat=VI.categories.find(c=>c.id===catId);
+  if(!cat){el.innerHTML='<div class="no-date-note">Category not found.</div>';return;}
+
+  const grand=VI.categories.reduce((s,c)=>s+c.total,0);
+  const pctOfAll=grand?cat.total/grand*100:0;
   const topV=[...cat.vendors].sort((a,b)=>b.total-a.total);
-  const chartLabels=topV.slice(0,8).map(v=>v.name.length>28?v.name.slice(0,28)+'…':v.name);
-  const chartData=topV.slice(0,8).map(v=>v.total);
+  const vendorCount=cat.vendorCount||topV.length;
+  const hasTxn=VI.dataDriven && cat.n>0;            // transaction count only exists for data-driven members
+  const avgTxn=hasTxn?cat.total/cat.n:0;
+
+  // ── concentration ──
+  const topShare=cat.total?topV[0].total/cat.total*100:0;
+  const top3=topV.slice(0,3).reduce((s,v)=>s+v.total,0);
+  const top3Share=cat.total?top3/cat.total*100:0;
+  // Herfindahl–Hirschman style index over the listed vendors (0–10000); >2500 = highly concentrated
+  const hhi=cat.total?topV.reduce((s,v)=>s+Math.pow(v.total/cat.total*100,2),0):0;
+  const concLabel=hhi>=2500?'Highly concentrated':hhi>=1500?'Moderately concentrated':'Competitive / diffuse';
+  const concColor=hhi>=2500?'#9b2335':hhi>=1500?'#d97706':'#2d6a4f';
+
+  // ── stat cards ──
+  const stats=[
+    {label:'Category total', val:fmtK(cat.total), color:cat.color, sub:`${pctOfAll.toFixed(1)}% of all vendor spend`},
+    {label:'Distinct vendors', val:vendorCount.toLocaleString(), color:'#2a4f7c', sub:topV.length<vendorCount?`top ${topV.length} shown below`:'all shown below'},
+    {label:'Largest relationship', val:fmtK(topV[0].total), color:'#5b21b6', sub:topV[0].name},
+    {label:'Top-vendor share', val:topShare.toFixed(0)+'%', color:concColor, sub:`top 3 = ${top3Share.toFixed(0)}%`},
+  ];
+  if(hasTxn){
+    stats.splice(1,0,{label:'Transactions', val:cat.n.toLocaleString(), color:'#2a4f7c', sub:'individual payments'});
+    stats.splice(2,0,{label:'Avg per transaction', val:fmt(avgTxn), color:'#2a4f7c', sub:'blended across the category'});
+  }
+
+  const chartLabels=topV.slice(0,10).map(v=>{
+    const n=catId==='salary'?fmtSODName(v.name):v.name;
+    return n.length>28?n.slice(0,28)+'…':n;
+  });
+  const chartData=topV.slice(0,10).map(v=>v.total);
   const maxAmt=chartData[0]||1;
 
-  el.innerHTML=`
-    <div class="vi-detail">
-      <div class="vi-detail-head">
-        <span style="font-size:20px">${cat.icon}</span>
-        <h2>${cat.label}</h2>
-        <span class="vd-sub">${cat.desc}</span>
-        <span style="font-size:20px;font-weight:900;color:${cat.color}">${fmtK(cat.total)}</span>
+  // ── shared HTML helpers ──
+  const headHtml=`<div class="vi-detail-head">
+    <span style="font-size:20px">${cat.icon||''}</span>
+    <h2>${cat.label}</h2>
+    <span class="vd-sub">Holistic breakdown · ${VI.activeEnt==='all'?'all entities':((META[VI.activeEnt]||{}).short||VI.activeEnt)}</span>
+    <span style="font-size:20px;font-weight:900;color:${cat.color}">${fmtK(cat.total)}</span>
+  </div>`;
+  const statCardsHtml=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding:16px">
+    ${stats.map(s=>`<div style="background:#fff;border:1px solid #eaecf2;border-radius:14px;padding:16px;border-top:3px solid ${s.color}">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#a0aec0;margin-bottom:4px">${s.label}</div>
+      <div style="font-size:22px;font-weight:800;color:${s.color};line-height:1;margin-bottom:3px">${s.val}</div>
+      <div style="font-size:11.5px;color:#a0aec0;line-height:1.3">${s.sub}</div>
+    </div>`).join('')}
+  </div>`;
+  const insightHtml=`<div class="vi-insight" style="margin:0 16px 16px;border-left:4px solid ${concColor}">
+    <strong style="color:${concColor}">${concLabel}.</strong>
+    The top vendor (${catId==='salary'?fmtSODName(topV[0].name):topV[0].name}) accounts for <strong>${topShare.toFixed(0)}%</strong> of this category, and the
+    top three for <strong>${top3Share.toFixed(0)}%</strong>, across ${vendorCount.toLocaleString()} distinct vendor${vendorCount!==1?'s':''}.
+    ${hasTxn?`That is ${cat.n.toLocaleString()} payments averaging ${fmt(avgTxn)} each. `:''}
+    ${hhi>=2500?'A small number of firms dominate the spend — worth confirming these relationships were competitively procured.':hhi>=1500?'Spend leans toward a few primary firms with a longer tail of smaller vendors.':'Spend is spread across many vendors with no single dominant firm.'}
+  </div>`;
+  const chartSectionHtml=(label)=>`<div style="padding:0 16px 20px">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a0aec0;margin-bottom:10px">${label}</div>
+    <div style="position:relative;height:${Math.min(topV.length,10)*34+20}px"><canvas id="catSegCanvas"></canvas></div>
+  </div>`;
+
+  // ── salary: chart full-width on top, per-person yearly table below ──
+  const isSalary=catId==='salary';
+  const officeEnt=isSalary?ORDER.map(k=>E[k]).find(e=>e&&e.source_type==='SOD'):null;
+  const staff=officeEnt?
+    (officeEnt.top_individuals||[]).filter(p=>p.by_year&&Object.keys(p.by_year).length>0).sort((a,b)=>b.amt-a.amt):
+    [];
+  const hasYearData=staff.length>0;
+
+  if(isSalary&&hasYearData){
+    const allYears=[...new Set(staff.flatMap(p=>Object.keys(p.by_year)))].sort();
+    const thStyle='text-align:right;padding:8px 10px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;background:#f8fafc';
+    const thStyleL='text-align:left;padding:8px 14px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;background:#f8fafc';
+
+    const salaryRows=staff.map(p=>{
+      const personTotal=Object.values(p.by_year).reduce((s,v)=>s+v,0);
+      const share=cat.total?personTotal/cat.total*100:0;
+      const maxCell=Math.max(...Object.values(p.by_year),1);
+      // latest title: highest-amount txn purpose (salary payments are the biggest), title-cased
+      const rawTitle=(p.txns&&p.txns.length?p.txns.reduce((best,t)=>t.amount>best.amount?t:best,p.txns[0]).purpose:'');
+      const latestTitle=rawTitle.split(/\s+/).map(w=>w?w[0].toUpperCase()+w.slice(1).toLowerCase():'').join(' ');
+      const yearsActive=allYears.filter(y=>(p.by_year[y]||0)>0).length;
+      const cells=allYears.map(y=>{
+        const a=p.by_year[y]||0;
+        if(!a)return`<td style="text-align:right;padding:7px 8px;color:#d1d5db;font-size:12px;border-bottom:1px solid #f7f6f3">–</td>`;
+        // subtle heat: opacity 12%–45% of category color using hex alpha
+        const alphaHex=Math.round((0.12+a/maxCell*0.33)*255).toString(16).padStart(2,'0');
+        return`<td style="text-align:right;padding:7px 8px;font-size:12px;font-weight:600;font-family:ui-monospace,monospace;background:${cat.color}${alphaHex};border-bottom:1px solid #f7f6f3">${fmtK(a)}</td>`;
+      }).join('');
+      return`<tr>
+        <td style="padding:8px 14px;font-weight:700;font-size:13px;white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmtSODName(p.name)}</td>
+        <td style="padding:8px 10px;font-size:11.5px;color:#718096;white-space:nowrap;border-bottom:1px solid #f7f6f3;max-width:160px;overflow:hidden;text-overflow:ellipsis">${latestTitle||'—'}</td>
+        <td style="text-align:center;padding:8px 8px;font-size:11.5px;color:#a0aec0;white-space:nowrap;border-bottom:1px solid #f7f6f3">${yearsActive}yr</td>
+        ${cells}
+        <td style="text-align:right;padding:8px 14px;font-weight:800;font-family:ui-monospace,monospace;color:${cat.color};white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmt(personTotal)}</td>
+        <td style="text-align:right;padding:8px 10px;font-size:12px;color:#718096;white-space:nowrap;border-bottom:1px solid #f7f6f3">${share.toFixed(1)}%</td>
+      </tr>`;
+    }).join('');
+
+    el.innerHTML=`<div class="vi-detail">
+      ${headHtml}
+      ${statCardsHtml}
+      ${insightHtml}
+      ${chartSectionHtml('Top staff by total compensation')}
+      <div style="padding:0 16px 20px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a0aec0;margin-bottom:10px">Staff — annual compensation by year · top ${staff.length} by total</div>
+        <div style="overflow-x:auto;border:1px solid #eaecf2;border-radius:8px">
+          <table style="border-collapse:collapse;font-size:13px;white-space:nowrap">
+            <thead><tr>
+              <th style="${thStyleL}">Name</th>
+              <th style="${thStyleL}">Latest Title</th>
+              <th style="text-align:center;padding:8px 8px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:700;font-size:10px;white-space:nowrap;background:#f8fafc">Yrs</th>
+              ${allYears.map(y=>`<th style="${thStyle}">${y}</th>`).join('')}
+              <th style="${thStyle}">Total</th>
+              <th style="${thStyle}">%</th>
+            </tr></thead>
+            <tbody>${salaryRows}</tbody>
+          </table>
+        </div>
+        <div style="font-size:11px;color:#a0aec0;padding:8px 2px">Source: House Statement of Disbursements · Personnel Compensation rows only</div>
       </div>
+    </div>`;
+
+  } else {
+    // ── standard two-column layout for all other categories ──
+    el.innerHTML=`<div class="vi-detail">
+      ${headHtml}
+      ${statCardsHtml}
+      ${insightHtml}
       <div class="vi-detail-body">
         <div class="vi-chart-col">
           <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a0aec0;margin-bottom:10px">Top vendors by amount</div>
-          <div style="position:relative;height:${Math.min(topV.length,8)*36+20}px"><canvas id="viCatChart"></canvas></div>
+          <div style="position:relative;height:${Math.min(topV.length,10)*34+20}px"><canvas id="catSegCanvas"></canvas></div>
         </div>
         <div class="vi-table-col">
           <table style="width:100%;border-collapse:collapse;font-size:13px">
             <thead><tr>
               <th style="text-align:left;padding:9px 14px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Vendor / Firm</th>
-              <th style="text-align:left;padding:9px 14px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Entities</th>
+              <th style="text-align:right;padding:9px 14px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Share</th>
               <th style="text-align:right;padding:9px 14px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Total</th>
             </tr></thead>
             <tbody>
-              ${topV.map((v,i)=>`<tr style="border-bottom:1px solid #f7f6f3">
+              ${topV.map(v=>`<tr style="border-bottom:1px solid #f7f6f3">
                 <td style="padding:10px 14px">
                   <div style="font-weight:700">${v.name}</div>
-                  <div style="font-size:11.5px;color:#a0aec0;margin-top:2px">${v.note}</div>
+                  ${v.ents?`<div style="font-size:11.5px;color:#a0aec0;margin-top:2px">${v.ents}</div>`:''}
                   <div style="margin-top:5px;height:4px;background:#eaecf2;border-radius:2px;overflow:hidden">
                     <div style="height:100%;width:${(v.total/maxAmt*100).toFixed(1)}%;background:${cat.color};border-radius:2px"></div>
                   </div>
                 </td>
-                <td style="padding:10px 14px;font-size:12px;color:#718096;vertical-align:top;white-space:nowrap">${v.ents}</td>
+                <td style="padding:10px 14px;text-align:right;font-size:12px;color:#718096;vertical-align:top;white-space:nowrap">${(cat.total?v.total/cat.total*100:0).toFixed(1)}%</td>
                 <td style="padding:10px 14px;text-align:right;font-weight:800;font-family:ui-monospace,monospace;color:${cat.color};vertical-align:top;white-space:nowrap">${fmt(v.total)}</td>
               </tr>`).join('')}
             </tbody>
           </table>
+          ${topV.length<vendorCount?`<div style="font-size:11.5px;color:#a0aec0;padding:10px 14px">Showing the top ${topV.length} of ${vendorCount.toLocaleString()} vendors by amount.</div>`:''}
         </div>
       </div>
-      ${cat.id==='media'?`<div class="vi-insight" style="margin:0 16px 16px">
-        <strong>Tucker Group dominance:</strong> The Tucker Group has been Swalwell's primary media vendor since 2012 — a 14-year relationship totaling $2M+. Combined with Berger Hirschberg ($1.68M), just two firms account for <strong>58% of all media spending</strong>. A third firm (Screen Strategies) captured $755K in the single Governor race cycle, signaling a deliberate vendor diversification for the state-level campaign.
-      </div>`:''}
-      ${cat.id==='fundraising'?`<div class="vi-insight" style="margin:0 16px 16px">
-        <strong>Infrastructure lock-in:</strong> ActBlue ($631K), NGP VAN ($495K), and PrimePay ($538K) form an operational trifecta that has processed donations, managed voter data, and handled payroll across nearly every entity. These vendors are effectively fixed infrastructure costs — present in House, Pres, PAC, and Gov committees simultaneously.
-      </div>`:''}
-      ${cat.id==='consulting'?`<div class="vi-insight" style="margin:0 16px 16px">
-        <strong>Governor campaign concentration:</strong> Three of four top consulting vendors were deployed exclusively for the Governor's race (KMM Strategies, EMC Research, River City Gov portion). The $741K paid to KMM Strategies in a single ~14-month cycle represents the most concentrated consulting relationship in the entire financial universe.
-      </div>`:''}
-      ${cat.id==='security'?`<div class="vi-insight warn" style="margin:0 16px 16px">
-        <strong>Security anomaly:</strong> $275,598 to Global Guardian from the House campaign is unusually large for a House member. Most House members pay little to no campaign-funded security. This level of expenditure is more typical of high-profile senators or presidential candidates. The spend began and accelerated during the period of heightened public controversy.
-      </div>`:''}
-      ${cat.id==='transfers'?`<div class="vi-insight" style="margin:0 16px 16px">
-        <strong>$1.7M presidential transfer loop:</strong> Swalwell moved $700K from Swalwell for Congress to a "Testing the Waters" entity, then an additional $1M to the formal presidential committee (C00701698) — and returned $700K when the campaign ended after 87 days. This inter-committee movement is legally permitted but represents a notable financial maneuver within a single calendar year.
-      </div>`:''}
+      ${!hasTxn?`<div class="sec-note" style="margin:0 16px 16px;font-size:12px">Transaction counts and per-payment averages aren't available for this dataset — figures reflect vendor totals only.</div>`:''}
     </div>`;
+  }
 
-  const cv=document.getElementById('viCatChart');
+  const cv=document.getElementById('catSegCanvas');
   if(cv&&chartData.length){
-    viChart=new Chart(cv,{type:'bar',
+    catSegChart=new Chart(cv,{type:'bar',
       data:{labels:chartLabels,datasets:[{data:chartData,backgroundColor:cat.color+'cc',borderColor:cat.color,borderWidth:1,borderRadius:5,borderSkipped:false}]},
       options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)}}},
         scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},
@@ -3530,8 +3779,8 @@ function renderViCatDetail(){
 let hotelCharts=[];
 function destroyHotelCharts(){hotelCharts.forEach(c=>{try{c.destroy();}catch(e){}});hotelCharts=[];}
 
-function renderHotelIntelligence(){
-  const el=document.getElementById('viHotelContent');if(!el)return;
+function renderHotelIntelligence(target){
+  const el=target||document.getElementById('viHotelContent');if(!el)return;
   destroyHotelCharts();
   const tiers=TIER_ORDER.filter(t=>VI.hotels.some(h=>h.tier===t));
   const total=VI.hotels.reduce((s,h)=>s+h.total,0);
@@ -3649,8 +3898,8 @@ function renderHotelIntelligence(){
   },50);
 }
 
-function renderLegalIntelligence(){
-  const el=document.getElementById('viLegalContent');if(!el)return;
+function renderLegalIntelligence(target){
+  const el=target||document.getElementById('viLegalContent');if(!el)return;
   const legalCat=VI.categories.find(c=>c.id==='legal');
   const yrs=Object.keys(VI.legalByYear).map(Number).sort();
   const vals=yrs.map(y=>VI.legalByYear[y]);
@@ -3825,8 +4074,8 @@ const MEDIA_CYCLES = [
 let mediaCharts=[];
 function destroyMediaCharts(){mediaCharts.forEach(c=>{try{c.destroy();}catch(e){}});mediaCharts=[];}
 
-function renderMediaIntelligence(){
-  const el=document.getElementById('viMediaContent');if(!el)return;
+function renderMediaIntelligence(target){
+  const el=target||document.getElementById('viMediaContent');if(!el)return;
   destroyMediaCharts();
 
   const tvTotal=MEDIA_FIRMS.filter(f=>f.type==='TV & Strategy').reduce((s,f)=>s+f.total,0);
@@ -3976,6 +4225,7 @@ function renderMediaIntelligence(){
 }
 
 // ── INIT ──
+buildYrPills();
 buildEntities();
 renderStatCards();
 renderOvCharts();
@@ -4025,29 +4275,8 @@ function renderRoster(){
 function selectMember(slug){
   const m=MEMBER_ROSTER.find(x=>x.slug===slug);
   if(!m||!m.hasData)return;
-  ACTIVE_MEMBER=slug;
-
-  // Update nav brand
-  const firstName=m.name.split(' ')[0], lastName=m.name.split(' ').pop();
-  if(document.getElementById('navMark'))document.getElementById('navMark').textContent=m.initials;
-  if(document.getElementById('navTitle'))document.getElementById('navTitle').textContent=m.name;
-  if(document.getElementById('navSub'))document.getElementById('navSub').textContent=`${m.state}-${m.district} · ${m.party} · ${m.congress} Congress`;
-  // Update platform bar
-  if(document.getElementById('platformAvatar'))document.getElementById('platformAvatar').textContent=m.initials;
-  if(document.getElementById('platformMemberName'))document.getElementById('platformMemberName').textContent=lastName;
-  const ctx=document.querySelector('.platform-context');
-  if(ctx)ctx.innerHTML=`Political Intelligence OS &nbsp;·&nbsp; <strong>${m.state}-${m.district} Profile</strong>`;
-  // Update member pill in nav
-  const pill=document.getElementById('memberPill');
-  if(pill)pill.innerHTML=`<div class="av">${m.initials}</div><div class="nm">${m.name}</div><div class="ds">${m.state}-${m.district}</div>`;
-
-  // Show this member's Prudence content, hide others
-  document.querySelectorAll('.prudence-member-content').forEach(el=>el.classList.remove('active'));
-  const pc=document.getElementById('prudence-'+slug);
-  if(pc)pc.classList.add('active');
-
-  closeRoster();
-  showPage('overview',document.querySelector('.nav-tab[data-p=overview]'));
+  // Members load via the ?member= URL param + reload (see the loader at top of <body>).
+  const u=new URL(location.href); u.searchParams.set('member',slug); location.href=u.toString();
 }
 </script>
 </body>

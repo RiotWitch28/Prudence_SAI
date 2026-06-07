@@ -301,7 +301,7 @@ def aggregate_sod(member, log):
     last = deaccent(member["last_name"]); first = deaccent(member["first_name"])
     personnel = 0.0; nonpersonnel = 0.0; rows = 0; files_used = 0
     by_year = defaultdict(float)
-    payees = defaultdict(lambda: {"amt": 0.0, "n": 0, "txns": [], "cat": ""})
+    payees = defaultdict(lambda: {"amt": 0.0, "n": 0, "txns": [], "cat": "", "by_year": defaultdict(float)})
     matched_orgs = set()
     cat_totals = defaultdict(float)
     cat_vendors = defaultdict(lambda: defaultdict(float))
@@ -365,6 +365,8 @@ def aggregate_sod(member, log):
                     by_year[yr] += amt
                 d = payees[vendor or desc or "(unspecified)"]
                 d["amt"] += amt; d["n"] += 1
+                if yr and "PERSONNEL COMPENSATION" in sub:
+                    d["by_year"][yr] += amt
                 if not d["cat"]:
                     d["cat"] = sub.title()
                 if len(d["txns"]) < 50:
@@ -389,7 +391,8 @@ def aggregate_sod(member, log):
         "personnel": round(personnel, 2), "nonpersonnel": round(nonpersonnel, 2),
         "by_year": {k: round(v, 2) for k, v in sorted(by_year.items())},
         "top_individuals": [{"name": k, "amt": round(v["amt"], 2), "n": v["n"],
-                             "role": v["cat"], "txns": v["txns"]} for k, v in top],
+                             "role": v["cat"], "txns": v["txns"],
+                             "by_year": {yr: round(a, 2) for yr, a in sorted(v["by_year"].items())}} for k, v in top],
         "top_vendors": [], "verification": "from_source",
         "by_category": by_category_out(cat_totals, cat_vendors, cat_n),
         "matched_orgs": sorted(matched_orgs),

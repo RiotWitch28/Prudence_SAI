@@ -9,3 +9,13 @@
   cross-check house (C00842336): local $5,999,344 vs API $6,052,686 -> match (-0.9%)
   wrote /Users/amandakoski/Documents/Claude/Suffrage and Sass/Sovereign AI/data/members/B001324/data.js  (269 KB) in 54s
 ```
+
+## Manual correction — 2026-06-07
+
+Removed a pre-tenure office (MRA) record: legislative-year **2014, −$54.50**, sourced
+from the org match `2014 HON. JOHN CAMPBELL`. Wesley Bell did not take federal office
+until **January 2025**, so this is a misattributed Statement-of-Disbursements row from
+former Rep. John Campbell, not Bell. Office `by_year` 2014 dropped; `total` corrected
+$1,627,119.96 → **$1,627,174.46**; the −$54.50 backed out of `nonpersonnel`
+($297,805.25 → $297,859.75); `matched_orgs` reduced to `2025 HON. WESLEY BELL`.
+Applied to both `data.json` and `data.js`.

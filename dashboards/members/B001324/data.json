@@ -10307,12 +10307,11 @@
    "taxpayer_funded": true,
    "separate_universe": true,
    "caption": "Taxpayer-funded official office spending (MRA). Separate from all campaign money; not reconciled against FEC.",
-   "total": 1627119.96,
+   "total": 1627174.46,
    "count": 555,
    "personnel": 1329314.71,
-   "nonpersonnel": 297805.25,
+   "nonpersonnel": 297859.75,
    "by_year": {
-    "2014": -54.5,
     "2025": 1627174.46
    },
    "top_individuals": [
@@ -12531,7 +12530,6 @@
     }
    ],
    "matched_orgs": [
-    "2014 HON. JOHN  CAMPBELL",
     "2025 HON. WESLEY BELL"
    ]
   }

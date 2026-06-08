@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article One — 119th Congress Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,900;1,400;1,600;1,900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy:        #1e3a5f;
+      --navy-deep:   #122540;
+      --navy-mid:    #2a4f7c;
+      --navy-light:  #3a6ea8;
+      --gold:        #c9963a;
+      --gold-bright: #e8b85a;
+      --gold-pale:   #fdf6e8;
+      --gold-dim:    #a07828;
+      --bg:          #f7f6f3;
+      --bg-warm:     #f2f0eb;
+      --surface:     #ffffff;
+      --border:      rgba(30,58,95,0.10);
+      --border-hover:rgba(30,58,95,0.22);
+      --text:        #0c1828;
+      --text-muted:  #3a4a5c;
+      --text-subtle: #6a7a8c;
+      --dem:         #1a4f8a;
+      --rep:         #a02020;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── PLATFORM BAR ─── */
+    .platform-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 48px;
+      background: var(--navy-deep);
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      gap: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .platform-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .platform-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 5px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 11px;
+      color: var(--navy-deep);
+      letter-spacing: -0.5px;
+      flex: none;
+    }
+
+    .platform-name {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .platform-divider {
+      width: 1px;
+      height: 16px;
+      background: rgba(255,255,255,0.14);
+    }
+
+    .platform-subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+    }
+
+    .platform-nav {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.40);
+      text-decoration: none;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-link:hover { color: rgba(255,255,255,0.80); background: rgba(255,255,255,0.06); }
+    .nav-link.active { color: var(--gold-bright); background: rgba(201,150,58,0.12); }
+
+    /* ─── CONGRESS MASTHEAD ─── */
+    .masthead {
+      background: #080f1e;
+      padding: 80px 32px 56px;
+      margin-top: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .masthead-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .masthead-lines::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 180px;
+      width: 1px; height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(30,58,95,0.12), transparent);
+    }
+
+    .masthead-lines::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 360px;
+      width: 1px; height: 80%;
+      background: linear-gradient(to bottom, transparent, rgba(201,150,58,0.08), transparent);
+    }
+
+    .masthead-watermark {
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(160px, 22vw, 280px);
+      font-weight: 900;
+      line-height: 1;
+      color: rgba(255,255,255,0.025);
+      letter-spacing: -0.05em;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .masthead-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+    }
+
+    .masthead-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .masthead-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 1px;
+      background: var(--gold);
+    }
+
+    .live-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .live-dot::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px rgba(74,222,128,0.6);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .masthead-congress {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(56px, 8vw, 108px);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 6px;
+    }
+
+    .masthead-congress em {
+      display: block;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+      font-size: 0.52em;
+      letter-spacing: -0.01em;
+      margin-top: 10px;
+    }
+
+    .masthead-session {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      color: rgba(255,255,255,0.32);
+      margin-top: 28px;
+      margin-bottom: 48px;
+    }
+
+    .stat-tiles {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .stat-tile {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: 20px 28px;
+      min-width: 150px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .stat-tile:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    .stat-tile-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.95);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-tile-value.gold { color: var(--gold-bright); }
+
+    .stat-tile-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.36);
+    }
+
+    /* ─── FILTER STRIP ─── */
+    .filter-strip {
+      position: sticky;
+      top: 48px;
+      z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 12px rgba(12,24,40,0.06);
+    }
+
+    .filter-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      flex: none;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .filter-sep {
+      width: 1px;
+      height: 20px;
+      background: var(--border);
+      flex: none;
+    }
+
+    .pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.18s;
+      white-space: nowrap;
+    }
+
+    .pill:hover {
+      border-color: var(--navy-light);
+      color: var(--navy);
+      background: rgba(30,58,95,0.05);
+    }
+
+    .pill.active {
+      background: var(--navy-deep);
+      border-color: var(--navy-deep);
+      color: rgba(255,255,255,0.92);
+    }
+
+    .pill.dem-active {
+      background: var(--dem);
+      border-color: var(--dem);
+      color: white;
+    }
+
+    .pill.rep-active {
+      background: var(--rep);
+      border-color: var(--rep);
+      color: white;
+    }
+
+    .pill .count {
+      opacity: 0.6;
+      margin-left: 3px;
+    }
+
+    /* ─── CONTENT ─── */
+    .content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 32px 80px;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    /* ─── PANEL ─── */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .panel-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .panel-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-top: 4px;
+    }
+
+    .panel-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      background: var(--gold-pale);
+      border: 1px solid rgba(201,150,58,0.22);
+      border-radius: 20px;
+      padding: 4px 10px;
+      white-space: nowrap;
+      flex: none;
+    }
+
+    .panel-body { padding: 24px 28px; }
+
+    /* ─── VENDOR BARS ─── */
+    .vendor-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .vendor-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .vendor-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .vendor-rank {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-subtle);
+      flex: none;
+      width: 18px;
+    }
+
+    .vendor-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      flex: 1;
+      min-width: 0;
+      line-height: 1.3;
+    }
+
+    .vendor-sub {
+      display: flex;
+      align-items: center;
+      padding-left: 26px;
+    }
+
+    .vendor-cat {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 7px;
+      white-space: nowrap;
+    }
+
+    .vendor-amount {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--navy-mid);
+      flex: none;
+      min-width: 72px;
+      text-align: right;
+    }
+
+    .vendor-bar-track {
+      height: 5px;
+      background: var(--bg-warm);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .vendor-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--navy-mid), var(--navy-light));
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: left;
+    }
+
+    .vendor-note {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      color: var(--text-subtle);
+      line-height: 1.7;
+    }
+
+    /* ─── FILTER STATUS ─── */
+    .filter-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--text-subtle);
+      margin-bottom: 20px;
+      padding: 8px 12px;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+
+    .filter-status span { color: var(--navy); font-weight: 500; }
+
+    /* ─── CATEGORY BARS ─── */
+    .cat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .cat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .cat-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .cat-dot {
+      width: 8px; height: 8px;
+      border-radius: 2px;
+      flex: none;
+    }
+
+    .cat-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      flex: 1;
+    }
+
+    .cat-amount {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-subtle);
+      flex: none;
+    }
+
+    .cat-pct {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-subtle);
+      flex: none;
+      min-width: 36px;
+      text-align: right;
+    }
+
+    .cat-bar-track {
+      height: 4px;
+      background: var(--bg-warm);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .cat-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .cat-total-note {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      color: var(--text-subtle);
+    }
+
+    .cat-total-note strong {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ─── PARTY SPLIT PANEL ─── */
+    .split-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .split-header {
+      padding: 20px 28px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .split-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .split-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-top: 3px;
+    }
+
+    .split-body {
+      padding: 24px 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .party-block { display: flex; flex-direction: column; gap: 8px; }
+
+    .party-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .party-label.dem { color: var(--dem); }
+    .party-label.rep { color: var(--rep); }
+
+    .party-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .party-amount.dem { color: var(--dem); }
+    .party-amount.rep { color: var(--rep); }
+
+    .party-sub {
+      font-size: 12px;
+      color: var(--text-subtle);
+    }
+
+    .party-bar-row {
+      grid-column: 1 / -1;
+      display: flex;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      gap: 2px;
+    }
+
+    .party-bar-dem { background: var(--dem); transition: flex 0.5s; }
+    .party-bar-rep { background: var(--rep); transition: flex 0.5s; }
+
+    /* ─── MEMBER ROSTER ─── */
+    .roster-section {
+      margin-top: 8px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .section-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+    }
+
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .member-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .member-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+    }
+
+    .member-card.dem::before { background: var(--dem); }
+    .member-card.rep::before { background: var(--rep); }
+
+    .member-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 4px 20px rgba(12,24,40,0.08);
+      transform: translateY(-1px);
+    }
+
+    .member-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      padding-left: 12px;
+    }
+
+    .member-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .member-chips {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex: none;
+    }
+
+    .chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      padding: 3px 7px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .chip.dem { background: rgba(26,79,138,0.10); color: var(--dem); }
+    .chip.rep { background: rgba(160,32,32,0.10); color: var(--rep); }
+    .chip.state { background: var(--bg); color: var(--text-subtle); border: 1px solid var(--border); }
+
+    .member-total {
+      padding-left: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-subtle);
+    }
+
+    .member-total strong {
+      font-size: 14px;
+      color: var(--navy-mid);
+      font-weight: 500;
+      margin-right: 4px;
+    }
+
+    .member-link {
+      padding-left: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .member-link::after {
+      content: '→';
+      transition: transform 0.2s;
+    }
+
+    .member-card:hover .member-link::after { transform: translateX(3px); }
+
+    /* ─── FOOTER ─── */
+    .page-footer {
+      background: var(--navy-deep);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-mark {
+      width: 22px; height: 22px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 9px;
+      color: var(--navy-deep);
+    }
+
+    .footer-name {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.60);
+    }
+
+    .footer-right {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.22);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── PLATFORM BAR ─── -->
+  <header class="platform-bar">
+    <a href="article-one.html" class="platform-logo">
+      <div class="platform-mark">A1</div>
+      <span class="platform-name">Article One</span>
+    </a>
+    <div class="platform-divider"></div>
+    <span class="platform-subtitle">119th Congress Intelligence</span>
+
+    <nav class="platform-nav">
+      <a href="home.html" class="nav-link active">Home</a>
+      <a href="article-one.html" class="nav-link">Members</a>
+      <a href="article-one.html#research" class="nav-link">Research</a>
+    </nav>
+  </header>
+
+  <!-- ─── CONGRESS MASTHEAD ─── -->
+  <section class="masthead">
+    <div class="masthead-lines"></div>
+    <div class="masthead-watermark">119</div>
+
+    <div class="masthead-inner">
+      <div class="masthead-eyebrow">
+        <span class="live-dot">Live Intelligence Dashboard</span>
+        <span style="opacity:0.4;">·</span>
+        <span>Suffrage &amp; Sass · Prudence Analysis System</span>
+      </div>
+
+      <div class="masthead-congress">
+        119th Congress
+        <em>Financial Intelligence Overview</em>
+      </div>
+
+      <div class="masthead-session">
+        2025–2026 Session &nbsp;·&nbsp; Last updated June 2026 &nbsp;·&nbsp; FEC · SOD · House FD sources
+      </div>
+
+      <div class="stat-tiles">
+        <div class="stat-tile">
+          <div class="stat-tile-value">9</div>
+          <div class="stat-tile-label">Members Tracked</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-tile-value">6</div>
+          <div class="stat-tile-label">States Covered</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-tile-value gold">$182.7M</div>
+          <div class="stat-tile-label">Total Spend Analyzed</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-tile-value">4 / 5</div>
+          <div class="stat-tile-label">Democrat · Republican</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-tile-value">18</div>
+          <div class="stat-tile-label">Active Flags</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FILTER STRIP ─── -->
+  <div class="filter-strip" id="filterStrip">
+    <span class="filter-label">Party</span>
+    <div class="filter-group" id="partyGroup">
+      <button class="pill active" data-party="all" onclick="setFilter('party','all')">All Members</button>
+      <button class="pill" data-party="dem" onclick="setFilter('party','dem')">Democrat <span class="count">×4</span></button>
+      <button class="pill" data-party="rep" onclick="setFilter('party','rep')">Republican <span class="count">×5</span></button>
+    </div>
+    <div class="filter-sep"></div>
+    <span class="filter-label">State</span>
+    <div class="filter-group" id="stateGroup">
+      <button class="pill active" data-state="all" onclick="setFilter('state','all')">All States</button>
+      <button class="pill" data-state="TX" onclick="setFilter('state','TX')">TX <span class="count">×3</span></button>
+      <button class="pill" data-state="NY" onclick="setFilter('state','NY')">NY <span class="count">×2</span></button>
+      <button class="pill" data-state="IL" onclick="setFilter('state','IL')">IL</button>
+      <button class="pill" data-state="PA" onclick="setFilter('state','PA')">PA</button>
+      <button class="pill" data-state="MO" onclick="setFilter('state','MO')">MO</button>
+      <button class="pill" data-state="FL" onclick="setFilter('state','FL')">FL</button>
+    </div>
+  </div>
+
+  <!-- ─── MAIN CONTENT ─── -->
+  <main class="content">
+
+    <!-- Party split bar -->
+    <div class="split-panel">
+      <div class="split-header">
+        <div class="split-title">Total Spend by Party</div>
+        <div class="split-meta">Campaign + Office · All Sources · 2013–2026</div>
+      </div>
+      <div class="split-body">
+        <div class="party-block">
+          <div class="party-label dem">Democrat · 4 Members</div>
+          <div class="party-amount dem">$110.0M</div>
+          <div class="party-sub">Bell · Clarke · Doggett · Krishnamoorthi</div>
+        </div>
+        <div class="party-block">
+          <div class="party-label rep">Republican · 5 Members</div>
+          <div class="party-amount rep">$72.8M</div>
+          <div class="party-sub">De La Cruz · Fine · LaLota · Nehls · Reschenthaler</div>
+        </div>
+        <div class="party-bar-row">
+          <div class="party-bar-dem" style="flex: 60;"></div>
+          <div class="party-bar-rep" style="flex: 40;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data grid -->
+    <div class="data-grid">
+
+      <!-- Vendor Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Top 5 Vendors &amp; Consultants</div>
+            <div class="panel-meta" id="vendorPanelMeta">All 9 members · Salary &amp; party transfers excluded</div>
+          </div>
+          <div class="panel-badge">By Disbursement</div>
+        </div>
+        <div class="panel-body">
+          <div class="filter-status" id="filterStatus">
+            Showing: <span>All Members · All States</span>
+          </div>
+          <div class="vendor-list" id="vendorList"></div>
+          <div class="vendor-note">
+            Data source: FEC Schedule B (campaign) + House SOD (office MRA) &nbsp;·&nbsp; Salary &amp; Payroll and Contributions &amp; Transfers categories excluded from vendor rankings &nbsp;·&nbsp; Amounts reflect full available filing history per member
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Spending by Category</div>
+            <div class="panel-meta">All 9 members combined · All sources</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="cat-list" id="catList"></div>
+          <div class="cat-total-note">
+            Total analyzed: <strong>$182.7M</strong> across all active members &amp; entities
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Member Roster -->
+    <div class="roster-section">
+      <div class="section-heading">
+        <div class="section-title">Active Members</div>
+        <div class="section-meta">119th Congress · 9 members tracked</div>
+      </div>
+      <div class="member-grid" id="memberGrid"></div>
+    </div>
+
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="page-footer">
+    <div class="footer-left">
+      <div class="footer-mark">A1</div>
+      <div class="footer-name">Article One</div>
+    </div>
+    <div class="footer-right">
+      Prudence Analysis System · Suffrage &amp; Sass · Public financial records only
+    </div>
+  </footer>
+
+
+  <script>
+    /* ─── DATA ─── */
+
+    const VENDOR_DATA = {
+      all: {
+        all: [
+          { name: 'ADELSTEIN & ASSOCIATES LLC',      total: 6293890, cat: 'Media' },
+          { name: 'TARGETED VICTORY',                total: 2983806, cat: 'Media' },
+          { name: 'GPS IMPACT',                      total: 2814066, cat: 'Media & Strategy' },
+          { name: 'AMERICAN MEDIA AND ADVOCACY GRP', total: 2318495, cat: 'Media' },
+          { name: 'STRATEGIC MEDIA PLACEMENT INC.',  total: 2276742, cat: 'Media' },
+        ],
+        TX: [
+          { name: 'TARGETED VICTORY',                total: 2983806, cat: 'Media' },
+          { name: 'SMART MEDIA GROUP LLC',            total: 1927160, cat: 'Media' },
+          { name: 'STRATEGIC MEDIA PLACEMENT INC.',  total: 1466500, cat: 'Media' },
+          { name: 'FULFILLMENT SOLUTIONS INC.',       total:  995462, cat: 'Admin' },
+          { name: 'GSA PUBLIC BUILDING SERVICE',      total:  724652, cat: 'Admin' },
+        ],
+        NY: [
+          { name: 'AMERICAN MEDIA AND ADVOCACY GRP', total: 2318495, cat: 'Media' },
+          { name: 'LEIDOS DIGITAL SOLUTIONS INC',    total:  792545, cat: 'Admin' },
+          { name: 'UNITED STATES POSTAL SERVICE',    total:  700286, cat: 'Admin' },
+          { name: 'CITI CARDS',                      total:  508457, cat: 'Admin' },
+          { name: '222 LENOX RD LLC',                total:  470650, cat: 'Admin' },
+        ],
+        IL: [
+          { name: 'ADELSTEIN & ASSOCIATES LLC',      total: 6293890, cat: 'Media' },
+          { name: 'SAPPHIRE STRATEGIES',             total: 1891153, cat: 'Consulting' },
+          { name: 'PAYLOCITY CORPORATE TAX',         total: 1193373, cat: 'Admin' },
+          { name: 'PAYLOCITY PAYROLL',               total:  961445, cat: 'Admin' },
+          { name: 'AMERICAN EXPRESS',                total:  563689, cat: 'Admin' },
+        ],
+        PA: [
+          { name: 'TARGETED VICTORY LLC',            total: 1818811, cat: 'Media' },
+          { name: 'AMERICAN EXPRESS',                total: 1204128, cat: 'Admin' },
+          { name: '814 CONSULTING LLC',              total: 1024084, cat: 'Consulting' },
+          { name: 'ADP',                             total:  817953, cat: 'Admin' },
+          { name: 'FULFILLMENT HOUSE',               total:  643062, cat: 'Admin' },
+        ],
+        MO: [
+          { name: 'GPS IMPACT',                      total: 2682091, cat: 'Media & Strategy' },
+          { name: 'DELIVER STRATEGIES, LLC',         total:  422934, cat: 'Media' },
+          { name: 'BERGER HIRSCHBERG STRATEGIES',    total:  374135, cat: 'Fundraising' },
+          { name: 'MEADOWLARK STRATEGIES',           total:  178062, cat: 'Consulting' },
+          { name: 'TUNLAW STRATEGIES',               total:  155437, cat: 'Consulting' },
+        ],
+        FL: [
+          { name: 'STRATEGIC MEDIA PLACEMENT INC.',  total:  810242, cat: 'Media' },
+          { name: 'BIG DOG STRATEGIES, LLC',         total:  474603, cat: 'Consulting' },
+          { name: 'GO BIG MEDIA LLC',                total:  396395, cat: 'Media' },
+          { name: 'THE COEFFICIENT GROUP, LLC',      total:  189121, cat: 'Consulting' },
+          { name: 'FABRIZIO LEE & ASSOCIATES',       total:  121465, cat: 'Polling' },
+        ],
+      },
+      dem: {
+        all: [
+          { name: 'ADELSTEIN & ASSOCIATES LLC',      total: 6293890, cat: 'Media' },
+          { name: 'GPS IMPACT',                      total: 2814066, cat: 'Media & Strategy' },
+          { name: 'SAPPHIRE STRATEGIES',             total: 1891153, cat: 'Consulting' },
+          { name: 'LEIDOS DIGITAL SOLUTIONS INC',    total: 1283642, cat: 'Admin' },
+          { name: 'PAYLOCITY CORPORATE TAX',         total: 1193373, cat: 'Admin' },
+        ],
+      },
+      rep: {
+        all: [
+          { name: 'TARGETED VICTORY',                total: 2983806, cat: 'Media' },
+          { name: 'AMERICAN MEDIA AND ADVOCACY GRP', total: 2318495, cat: 'Media' },
+          { name: 'STRATEGIC MEDIA PLACEMENT INC.',  total: 2276742, cat: 'Media' },
+          { name: 'SMART MEDIA GROUP LLC',            total: 1927160, cat: 'Media' },
+          { name: 'TARGETED VICTORY LLC',            total: 1818811, cat: 'Media' },
+        ],
+      },
+    };
+
+    const CATEGORIES = [
+      { label: 'Salary & Payroll',           total: 59927719, color: '#1e3a5f' },
+      { label: 'Media & Advertising',        total: 34920719, color: '#c9963a' },
+      { label: 'Contributions & Transfers',  total: 27922210, color: '#6b5b95' },
+      { label: 'Administrative & Other',     total: 25802055, color: '#64748b' },
+      { label: 'Fundraising & Operations',   total: 22682940, color: '#2d6a4f' },
+      { label: 'Consulting & Strategy',      total:  4279861, color: '#0d6e6e' },
+      { label: 'Travel & Transportation',    total:  4102454, color: '#8b4513' },
+      { label: 'Events, Polling & Other',    total:  2095302, color: '#94a3b8' },
+    ];
+
+    const MEMBERS = [
+      { name: 'Wesley Bell',           bio: 'B001324', party: 'D', state: 'MO', total: 7626518 },
+      { name: 'Yvette D. Clarke',      bio: 'C001067', party: 'D', state: 'NY', total: 24459284 },
+      { name: 'Monica De La Cruz',     bio: 'D000594', party: 'R', state: 'TX', total: 20339399 },
+      { name: 'Lloyd Doggett',         bio: 'D000399', party: 'D', state: 'TX', total: 25650604 },
+      { name: 'Randy Fine',            bio: 'F000484', party: 'R', state: 'FL', total: 4016601 },
+      { name: 'Raja Krishnamoorthi',   bio: 'K000391', party: 'D', state: 'IL', total: 52243734 },
+      { name: 'Nick LaLota',           bio: 'L000598', party: 'R', state: 'NY', total: 11849816 },
+      { name: 'Troy E. Nehls',         bio: 'N000026', party: 'R', state: 'TX', total: 13181345 },
+      { name: 'Guy Reschenthaler',     bio: 'R000610', party: 'R', state: 'PA', total: 23365955 },
+    ];
+
+    /* ─── STATE ─── */
+    let activeParty = 'all';
+    let activeState = 'all';
+
+    /* ─── RENDER VENDORS ─── */
+    function renderVendors() {
+      const partyData = VENDOR_DATA[activeParty] || VENDOR_DATA.all;
+      const vendors = partyData[activeState] || partyData.all || VENDOR_DATA.all.all;
+
+      const max = vendors[0]?.total || 1;
+
+      const partyLabel = { all: 'All Members', dem: 'Democrats', rep: 'Republicans' }[activeParty];
+      const stateLabel = activeState === 'all' ? 'All States' : activeState;
+
+      document.getElementById('filterStatus').innerHTML =
+        `Showing: <span>${partyLabel} · ${stateLabel}</span>`;
+
+      const memberCount = { all: '9 members', dem: '4 members', rep: '5 members' }[activeParty];
+      const stateCount = activeState === 'all' ? memberCount :
+        { TX: '3 members', NY: '2 members', IL: '1 member', PA: '1 member', MO: '1 member', FL: '1 member' }[activeState] || memberCount;
+      document.getElementById('vendorPanelMeta').textContent =
+        `${stateCount} · Salary & party transfers excluded`;
+
+      const list = document.getElementById('vendorList');
+      list.innerHTML = vendors.map((v, i) => `
+        <div class="vendor-row">
+          <div class="vendor-top">
+            <span class="vendor-rank">${i + 1}</span>
+            <span class="vendor-name">${v.name}</span>
+            <span class="vendor-amount">${fmt(v.total)}</span>
+          </div>
+          <div class="vendor-sub">
+            <span class="vendor-cat">${v.cat}</span>
+          </div>
+          <div class="vendor-bar-track">
+            <div class="vendor-bar-fill" style="width: ${(v.total / max * 100).toFixed(1)}%"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ─── RENDER CATEGORIES ─── */
+    function renderCategories() {
+      const catTotal = CATEGORIES.reduce((s, c) => s + c.total, 0);
+      const list = document.getElementById('catList');
+      list.innerHTML = CATEGORIES.map(c => {
+        const pct = (c.total / catTotal * 100).toFixed(1);
+        return `
+          <div class="cat-row">
+            <div class="cat-top">
+              <div class="cat-dot" style="background:${c.color}"></div>
+              <span class="cat-name">${c.label}</span>
+              <span class="cat-amount">${fmt(c.total)}</span>
+              <span class="cat-pct">${pct}%</span>
+            </div>
+            <div class="cat-bar-track">
+              <div class="cat-bar-fill" style="width:${pct}%; background:${c.color}; opacity:0.75"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* ─── RENDER MEMBERS ─── */
+    function renderMembers() {
+      const grid = document.getElementById('memberGrid');
+      grid.innerHTML = MEMBERS.map(m => `
+        <a class="member-card ${m.party === 'D' ? 'dem' : 'rep'}"
+           href="index.html?member=${m.bio}">
+          <div class="member-top">
+            <div class="member-name">${m.name}</div>
+            <div class="member-chips">
+              <span class="chip ${m.party === 'D' ? 'dem' : 'rep'}">${m.party === 'D' ? 'D' : 'R'}</span>
+              <span class="chip state">${m.state}</span>
+            </div>
+          </div>
+          <div class="member-total"><strong>${fmt(m.total)}</strong> total analyzed</div>
+          <div class="member-link">View Profile</div>
+        </a>
+      `).join('');
+    }
+
+    /* ─── FILTER LOGIC ─── */
+    function setFilter(type, value) {
+      if (type === 'party') {
+        activeParty = value;
+        activeState = 'all';
+        document.querySelectorAll('#stateGroup .pill').forEach(p => {
+          p.classList.toggle('active', p.dataset.state === 'all');
+        });
+        document.querySelectorAll('#partyGroup .pill').forEach(p => {
+          p.classList.remove('active', 'dem-active', 'rep-active');
+          if (p.dataset.party === value) {
+            if (value === 'dem') p.classList.add('dem-active');
+            else if (value === 'rep') p.classList.add('rep-active');
+            else p.classList.add('active');
+          }
+        });
+      } else {
+        activeState = value;
+        activeParty = 'all';
+        document.querySelectorAll('#partyGroup .pill').forEach(p => {
+          p.classList.remove('active', 'dem-active', 'rep-active');
+          if (p.dataset.party === 'all') p.classList.add('active');
+        });
+        document.querySelectorAll('#stateGroup .pill').forEach(p => {
+          p.classList.toggle('active', p.dataset.state === value);
+        });
+      }
+      renderVendors();
+    }
+
+    /* ─── FORMAT ─── */
+    function fmt(n) {
+      if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+      if (n >= 1e3) return '$' + (n / 1e3).toFixed(0) + 'K';
+      return '$' + n.toFixed(0);
+    }
+
+    /* ─── INIT ─── */
+    renderVendors();
+    renderCategories();
+    renderMembers();
+  </script>
+
+</body>
+</html>

@@ -301,8 +301,10 @@
       top: 48px;
       z-index: 100;
       background: var(--surface);
+      border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       padding: 14px 32px;
+      margin: 0 -32px 28px;
       display: flex;
       align-items: center;
       gap: 20px;
@@ -941,27 +943,6 @@
     </div>
   </section>
 
-  <!-- ─── FILTER STRIP ─── -->
-  <div class="filter-strip" id="filterStrip">
-    <span class="filter-label">Party</span>
-    <div class="filter-group" id="partyGroup">
-      <button class="pill active" data-party="all" onclick="setFilter('party','all')">All Members</button>
-      <button class="pill" data-party="dem" onclick="setFilter('party','dem')">Democrat <span class="count">×4</span></button>
-      <button class="pill" data-party="rep" onclick="setFilter('party','rep')">Republican <span class="count">×5</span></button>
-    </div>
-    <div class="filter-sep"></div>
-    <span class="filter-label">State</span>
-    <div class="filter-group" id="stateGroup">
-      <button class="pill active" data-state="all" onclick="setFilter('state','all')">All States</button>
-      <button class="pill" data-state="TX" onclick="setFilter('state','TX')">TX <span class="count">×3</span></button>
-      <button class="pill" data-state="NY" onclick="setFilter('state','NY')">NY <span class="count">×2</span></button>
-      <button class="pill" data-state="IL" onclick="setFilter('state','IL')">IL</button>
-      <button class="pill" data-state="PA" onclick="setFilter('state','PA')">PA</button>
-      <button class="pill" data-state="MO" onclick="setFilter('state','MO')">MO</button>
-      <button class="pill" data-state="FL" onclick="setFilter('state','FL')">FL</button>
-    </div>
-  </div>
-
   <!-- ─── MAIN CONTENT ─── -->
   <main class="content">
 
@@ -986,6 +967,27 @@
           <div class="party-bar-dem" style="flex: 60;"></div>
           <div class="party-bar-rep" style="flex: 40;"></div>
         </div>
+      </div>
+    </div>
+
+    <!-- ─── FILTER STRIP ─── -->
+    <div class="filter-strip" id="filterStrip">
+      <span class="filter-label">Party</span>
+      <div class="filter-group" id="partyGroup">
+        <button class="pill active" data-party="all" onclick="setFilter('party','all')">All Members</button>
+        <button class="pill" data-party="dem" onclick="setFilter('party','dem')">Democrat <span class="count">×4</span></button>
+        <button class="pill" data-party="rep" onclick="setFilter('party','rep')">Republican <span class="count">×5</span></button>
+      </div>
+      <div class="filter-sep"></div>
+      <span class="filter-label">State</span>
+      <div class="filter-group" id="stateGroup">
+        <button class="pill active" data-state="all" onclick="setFilter('state','all')">All States</button>
+        <button class="pill" data-state="TX" onclick="setFilter('state','TX')">TX <span class="count">×3</span></button>
+        <button class="pill" data-state="NY" onclick="setFilter('state','NY')">NY <span class="count">×2</span></button>
+        <button class="pill" data-state="IL" onclick="setFilter('state','IL')">IL</button>
+        <button class="pill" data-state="PA" onclick="setFilter('state','PA')">PA</button>
+        <button class="pill" data-state="MO" onclick="setFilter('state','MO')">MO</button>
+        <button class="pill" data-state="FL" onclick="setFilter('state','FL')">FL</button>
       </div>
     </div>
 

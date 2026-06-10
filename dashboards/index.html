@@ -2230,11 +2230,12 @@ function renderOvCharts(){
     if(!ST.enabled[k])return;
     [...(E[k].top_vendors||[]),...(E[k].top_individuals||[])].forEach(r=>allRows.push({name:r.name,amt:r.amt,k}));
   });
-  // merge same name across entities
-  const merged={};allRows.forEach(r=>{merged[r.name]=(merged[r.name]||0)+r.amt;});
-  const top10=Object.entries(merged).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  // merge same name across entities — normalize so FEC "LAST, FIRST" and SOD "First Last" collapse to one row
+  const merged={};
+  allRows.forEach(r=>{const nk=viNormName(r.name);if(!merged[nk])merged[nk]={name:r.name,amt:0};merged[nk].amt+=r.amt;});
+  const top10=Object.values(merged).sort((a,b)=>b.amt-a.amt).slice(0,10);
   ovCharts.top=new Chart(document.getElementById('cTopVend'),{type:'bar',
-    data:{labels:top10.map(([n])=>n.length>22?n.slice(0,22)+'…':n),datasets:[{data:top10.map(([,v])=>v),backgroundColor:'#2a4f7c',borderRadius:5,borderSkipped:false}]},
+    data:{labels:top10.map(r=>r.name.length>22?r.name.slice(0,22)+'…':r.name),datasets:[{data:top10.map(r=>r.amt),backgroundColor:'#2a4f7c',borderRadius:5,borderSkipped:false}]},
     options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)}}},
       scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},y:{ticks:{color:'#4a5568',font:{size:11}},grid:{display:false}}}}});
 
@@ -2412,13 +2413,15 @@ function buildCrossView(keys){
 
 function showCrossPayee(keys, name){
   // collect all transactions for this payee across selected entities
+  // Normalize name comparison so we catch the same person across FEC ("LAST, FIRST") and SOD ("First Last").
+  const nk=viNormName(name);
   const allTxns=[];
   keys.forEach(k=>{
-    const rec=[...(E[k].top_individuals||[]),...(E[k].top_vendors||[])].find(r=>r.name===name);
+    const rec=[...(E[k].top_individuals||[]),...(E[k].top_vendors||[])].find(r=>viNormName(r.name)===nk);
     if(rec)(rec.txns||[]).forEach(t=>allTxns.push({...t,_entity:META[k].short}));
   });
   const totalAmt=keys.reduce((s,k)=>{
-    const rec=[...(E[k].top_individuals||[]),...(E[k].top_vendors||[])].find(r=>r.name===name);
+    const rec=[...(E[k].top_individuals||[]),...(E[k].top_vendors||[])].find(r=>viNormName(r.name)===nk);
     return s+(rec?rec.amt:0);
   },0);
   document.getElementById('mTitle').textContent=name;
@@ -3313,12 +3316,28 @@ const viParseEnts=str=>str.split(/\s*·\s*/).map(s=>VI_ENT_MAP[s.trim()]).filter
 // Normalize a payee name for cross-entity matching (matches buildCrossView logic).
 const viNormName=n=>{let s=n.toUpperCase().trim();if(s.includes(',')){const[last,...rest]=s.split(',');s=rest.join(' ').trim()+' '+last.trim();}s=s.replace(/\b(JR|SR|II|III|IV|MR|MRS|MS|DR|ESQ|MD|PHD|DBA)\b\.?/g,'');s=s.replace(/\b[A-Z]\b\.?/g,'');return(s.match(/[A-Z]{2,}/g)||[]).sort().join('');};
 
+// FEC top_individuals includes refunds to over-contributing donors, which aren't outflows that
+// "paid" anyone — they're returns. Drop them from salary/staff views so they don't pollute the
+// Salary & Payroll category or the per-year heat map.
+const isContributionRefund=p=>{
+  if(!p)return false;
+  const role=(p.role||'').toLowerCase();
+  if(/refund/.test(role))return true;
+  const txns=p.txns||[];
+  if(txns.length){
+    const refundCount=txns.filter(t=>/refund/i.test(t.purpose||'')).length;
+    if(refundCount===txns.length)return true; // every transaction is a refund
+  }
+  return false;
+};
+
 // Build the Salary & Payroll category from top_individuals across the given entity keys.
 function buildSalaryCategory(entKeys){
   const byPerson={};
   entKeys.forEach(k=>{
     const e=E[k]; if(!e)return;
     (e.top_individuals||[]).forEach(p=>{
+      if(isContributionRefund(p))return;
       const nk=viNormName(p.name);
       if(!byPerson[nk])byPerson[nk]={name:p.name,amt:0,entities:[],byEnt:{},by_year:p.by_year||null,role:p.role||''};
       byPerson[nk].amt+=p.amt;
@@ -3378,18 +3397,20 @@ function buildVendorCategories(){
       m.total+=c.total;
       m.n+=(c.n||0);
       (c.vendors||[]).forEach(v=>{
-        const vm=m.vm[v.name]||(m.vm[v.name]={total:0,ents:{}});
+        // Normalize vendor name so the same company spelled differently across entities collapses to one row.
+        const nk=viNormName(v.name);
+        const vm=m.vm[nk]||(m.vm[nk]={name:v.name,total:0,ents:{}});
         vm.total+=v.total; vm.ents[(META[k]||{}).short||k]=1;
       });
     });
   });
   VI.categories=Object.values(map).sort((a,b)=>b.total-a.total).map(c=>{
-    const allV=Object.entries(c.vm).sort((a,b)=>b[1].total-a[1].total);
+    const allV=Object.values(c.vm).sort((a,b)=>b.total-a.total);
     return {
       id:c.id,label:c.label,icon:c.icon,color:c.color,total:c.total,
       n:c.n,
       vendorCount:allV.length,
-      vendors:allV.slice(0,15).map(([name,v])=>({name,total:v.total,ents:Object.keys(v.ents).join(' · '),note:''}))
+      vendors:allV.slice(0,15).map(v=>({name:v.name,total:v.total,ents:Object.keys(v.ents).join(' · '),note:''}))
     };
   });
   // inject salary from top_individuals
@@ -3622,6 +3643,7 @@ function renderCategorySegment(catId,target){
       const e=E[k]; if(!e||!e.top_individuals)return;
       sourceKinds.add(e.source_type||'');
       (e.top_individuals||[]).forEach(p=>{
+        if(isContributionRefund(p))return;
         const nk=viNormName(p.name);
         const entry=byPerson[nk]||(byPerson[nk]={name:p.name,byYear:{},byYearByEnt:{},byEnt:{},entities:new Set(),roles:{},total:0,undated:0});
         const amt=+p.amt||0;
@@ -3652,21 +3674,41 @@ function renderCategorySegment(catId,target){
     const sourceNote=sourceParts.length?sourceParts.join(' + '):'Source';
 
     const hexToRgb=h=>{h=(h||'').replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');const n=parseInt(h,16);return{r:(n>>16)&255,g:(n>>8)&255,b:n&255};};
-    const entTablesHtml=peopleSorted.length?(()=>{
-      const rows=peopleSorted.map(p=>{
+    // Classify each row as individual vs business. Strategy:
+    //   - Name carries a business-entity suffix (LLC, Inc, Corp, …) or industry keyword → business
+    //   - Else FEC "LAST, FIRST" comma pattern, "HON" honorific, or personnel-coded role → person
+    //   - Else default to business (catches single-word brands like CITIBANK)
+    const isPerson=p=>{
+      const name=(p.name||'').toUpperCase().trim();
+      if(!name)return false;
+      if(/\b(LLC|L\.L\.C\.?|INC\.?|CORP\.?|CORPORATION|LTD\.?|LIMITED|COMPANY|CO\.|LP|LLP|PLC|ASSOC|ASSOCIATES|PARTNERS|GROUP|HOLDINGS|BANK|SOLUTIONS|SERVICES?|COMMITTEE|FUND|PAC|CONSULTING|MEDIA|STRATEGIES|FOUNDATION|TRUST|ENTERPRISES|INTERNATIONAL|UTILITIES|TELECOM|POSTAL|SUPPLIES|PRINTING|EQUIPMENT|TRANSPORTATION|CATERING|HOTELS?|INN|TECHNOLOGIES|STUDIO|GRAPHICS|FCU|AIRLINES|CONSULTANTS|CONSULTANCY|FIRM|AGENCY|STORE|STORES|MARKET|RESTAURANT|VENTURE|VENTURES)\b/.test(name))return false;
+      if(name.includes(','))return true;
+      if(/\bHON\b/.test(name))return true;
+      const role=(p.roles?Object.values(p.roles).join(' '):p.role||'').toLowerCase();
+      if(/(personnel|payroll|salary|wage|bonus|compen)/.test(role))return true;
+      // 2-4 alpha-only words with no digits = likely a person's name (Wesley Bell, Chiekezie O. Chukwuka)
+      const words=name.split(/\s+/);
+      if(words.length>=2&&words.length<=4&&!words.some(w=>/\d/.test(w)))return true;
+      return false;
+    };
+
+    // Build one heat-mapped table for a given subset of people. Same rules as before:
+    // per-year cells blended by entity color, cross-entity row tint, undated fallback, etc.
+    const buildPeopleTable=(arr,label,kindWord)=>{
+      if(!arr.length)return'';
+      const subTotal=arr.reduce((s,p)=>s+p.total,0);
+      const subUndated=arr.reduce((s,p)=>s+(p.undated||0),0);
+      const rows=arr.map(p=>{
         const yrCells=allYears.map(y=>{
           const a=p.byYear[y]||0;
           if(!a)return`<td style="text-align:right;padding:7px 8px;color:#d1d5db;font-size:12px;border-bottom:1px solid #f7f6f3">–</td>`;
           const maxCell=Math.max(...Object.values(p.byYear),1);
-          // Weighted blend of contributing entities' colors — single-entity year = pure entity color,
-          // multi-entity year = muddier mix (e.g. MRA blue + Campaign orange → brown), per user spec.
           const sources=p.byYearByEnt[y]||{};
           const srcKeys=Object.keys(sources);
           let r=0,g=0,b=0,wTot=0;
           srcKeys.forEach(k=>{const rgb=hexToRgb(entColor(k));const w=sources[k];r+=rgb.r*w;g+=rgb.g*w;b+=rgb.b*w;wTot+=w;});
           r=Math.round(r/wTot);g=Math.round(g/wTot);b=Math.round(b/wTot);
           const baseAlpha=0.12+a/maxCell*0.33;
-          // Multi-entity cells get a bump in alpha so they read visibly darker than single-entity cells of similar magnitude.
           const alpha=srcKeys.length>1?Math.min(0.78,baseAlpha*1.55):baseAlpha;
           const bg=`rgba(${r},${g},${b},${alpha.toFixed(3)})`;
           const breakdown=srcKeys.length>1?srcKeys.sort((a,b)=>sources[b]-sources[a]).map(k=>`${entAbbr(k)} ${fmtK(sources[k])}`).join(' + '):'';
@@ -3682,8 +3724,8 @@ function renderCategorySegment(catId,target){
         const roleText=p.roles[bestEntKey]||Object.values(p.roles)[0]||'';
         const yearsActive=Object.values(p.byYear).filter(v=>v>0).length;
         const tenureLabel=yearsActive?`${yearsActive}yr`:(p.undated?'undated':'—');
-        const share=catTotal?p.total/catTotal*100:0;
-        const undatedNote=p.undated&&yearsActive?` <span title="Part of this person's total comes from a source with no transaction dates and is not shown in the year columns" style="font-size:10px;color:#a0aec0;font-weight:600">·&nbsp;+${fmtK(p.undated)} undated</span>`:'';
+        const share=subTotal?p.total/subTotal*100:0;
+        const undatedNote=p.undated&&yearsActive?` <span title="Part of this row's total comes from a source with no transaction dates and is not shown in the year columns" style="font-size:10px;color:#a0aec0;font-weight:600">·&nbsp;+${fmtK(p.undated)} undated</span>`:'';
         return`<tr${isCross?' style="background:#fff8f0"':''}>
           <td style="padding:8px 14px;font-weight:700;font-size:13px;white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmtSODName(p.name)}${isCross?' <span style="font-size:10px;background:#fef3c7;color:#92600a;border-radius:4px;padding:1px 5px;font-weight:700;vertical-align:middle">CROSS</span>':''}</td>
           <td style="padding:8px 10px;font-size:11.5px;color:#718096;white-space:nowrap;border-bottom:1px solid #f7f6f3;max-width:180px;overflow:hidden;text-overflow:ellipsis">${roleText||'—'}</td>
@@ -3694,11 +3736,9 @@ function renderCategorySegment(catId,target){
           <td style="text-align:right;padding:8px 10px;font-size:12px;color:#718096;white-space:nowrap;border-bottom:1px solid #f7f6f3">${share.toFixed(1)}%</td>
         </tr>`;
       }).join('');
-      const entLegend=[...entitiesUsed].map(k=>`<span style="display:inline-block;background:${entColor(k)}1a;color:${entColor(k)};font-size:10px;font-weight:800;padding:2px 6px;border-radius:3px;margin-right:6px;letter-spacing:.03em">${entAbbr(k)}</span><span style="font-size:11px;color:#718096;margin-right:14px">${entShort(k)}</span>`).join('');
-      const undatedFooter=totalUndated?` &nbsp;·&nbsp; ${fmtK(totalUndated)} from sources without transaction dates is included in totals but not in year columns`:'';
+      const undatedFooter=subUndated?` &nbsp;·&nbsp; ${fmtK(subUndated)} from sources without transaction dates is included in totals but not in year columns`:'';
       return`<div style="padding:0 16px 24px">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;color:${cat.color}">All people · ${peopleSorted.length} individuals · ${fmtK(catTotal)}</div>
-        <div style="font-size:11.5px;color:#718096;margin-bottom:10px">Cross-entity rows are highlighted. Year cells are color-coded by source: single entity = that entity's color; multiple entities in the same year = a blended (muddier, darker) color with the totals combined. Hover any cell for the per-entity breakdown.${entitiesUsed.size>1?'<br>':' '}<span style="margin-top:6px;display:inline-block">${entLegend}</span></div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;color:${cat.color}">${label} · ${arr.length} ${kindWord} · ${fmtK(subTotal)}</div>
         <div style="overflow-x:auto;border:1px solid #eaecf2;border-radius:8px">
           <table style="border-collapse:collapse;font-size:13px;white-space:nowrap">
             <thead><tr>
@@ -3714,7 +3754,12 @@ function renderCategorySegment(catId,target){
         </div>
         <div style="font-size:11px;color:#a0aec0;padding:8px 2px">Source: ${sourceNote}${undatedFooter}</div>
       </div>`;
-    })():'';
+    };
+    const individualsList=peopleSorted.filter(isPerson);
+    const businessesList=peopleSorted.filter(p=>!isPerson(p));
+    const entLegend=[...entitiesUsed].map(k=>`<span style="display:inline-block;background:${entColor(k)}1a;color:${entColor(k)};font-size:10px;font-weight:800;padding:2px 6px;border-radius:3px;margin-right:6px;letter-spacing:.03em">${entAbbr(k)}</span><span style="font-size:11px;color:#718096;margin-right:14px">${entShort(k)}</span>`).join('');
+    const legendBlock=peopleSorted.length?`<div style="padding:0 16px 8px;font-size:11.5px;color:#718096">Cross-entity rows are highlighted. Year cells are color-coded by source: single entity = that entity's color; multiple entities in the same year = a blended (muddier, darker) color with the totals combined. Hover any cell for the per-entity breakdown.${entitiesUsed.size>1?'<br>':' '}<span style="margin-top:6px;display:inline-block">${entLegend}</span></div>`:'';
+    const entTablesHtml=legendBlock+buildPeopleTable(individualsList,'Individuals','individuals')+buildPeopleTable(businessesList,'Businesses & Vendors','organizations');
 
     el.innerHTML=`<div class="vi-detail">
       ${headHtml}

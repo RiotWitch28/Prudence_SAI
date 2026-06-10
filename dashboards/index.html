@@ -3599,83 +3599,122 @@ function renderCategorySegment(catId,target){
         </div>
       </div>`:'';
 
-    // Per-entity tables
-    const entTablesHtml=selKeys.map(k=>{
-      const e=E[k]; if(!e)return'';
-      const people=(e.top_individuals||[]).sort((a,b)=>b.amt-a.amt);
-      if(!people.length)return'';
-      const entityTotal=people.reduce((s,p)=>s+p.amt,0);
-      const isSod=e.source_type==='SOD';
-      const staffWithYears=isSod?people.filter(p=>p.by_year&&Object.keys(p.by_year).length>0):[];
-      const allYears=staffWithYears.length?[...new Set(staffWithYears.flatMap(p=>Object.keys(p.by_year)))].sort():[];
-      const entLabel=(META[k]||{}).short||k;
-      const entColor=(META[k]||{}).color||cat.color;
-
-      if(isSod&&allYears.length){
-        const rows=staffWithYears.map(p=>{
-          const personTotal=Object.values(p.by_year).reduce((s,v)=>s+v,0);
-          const share=entityTotal?personTotal/entityTotal*100:0;
-          const maxCell=Math.max(...Object.values(p.by_year),1);
-          const rawTitle=(p.txns&&p.txns.length?p.txns.reduce((best,t)=>t.amount>best.amount?t:best,p.txns[0]).purpose:'');
-          const latestTitle=rawTitle.split(/\s+/).map(w=>w?w[0].toUpperCase()+w.slice(1).toLowerCase():'').join(' ');
-          const yearsActive=allYears.filter(y=>(p.by_year[y]||0)>0).length;
-          const cells=allYears.map(y=>{
-            const a=p.by_year[y]||0;
-            if(!a)return`<td style="text-align:right;padding:7px 8px;color:#d1d5db;font-size:12px;border-bottom:1px solid #f7f6f3">–</td>`;
-            const alphaHex=Math.round((0.12+a/maxCell*0.33)*255).toString(16).padStart(2,'0');
-            return`<td style="text-align:right;padding:7px 8px;font-size:12px;font-weight:600;font-family:ui-monospace,monospace;background:${entColor}${alphaHex};border-bottom:1px solid #f7f6f3">${fmtK(a)}</td>`;
-          }).join('');
-          const isShared=multiEnt&&sharedPeople.some(s=>viNormName(s.name)===viNormName(p.name));
-          return`<tr${isShared?' style="background:#fff8f0"':''}>
-            <td style="padding:8px 14px;font-weight:700;font-size:13px;white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmtSODName(p.name)}${isShared?' <span style="font-size:10px;background:#fef3c7;color:#92600a;border-radius:4px;padding:1px 5px;font-weight:700;vertical-align:middle">CROSS</span>':''}</td>
-            <td style="padding:8px 10px;font-size:11.5px;color:#718096;white-space:nowrap;border-bottom:1px solid #f7f6f3;max-width:160px;overflow:hidden;text-overflow:ellipsis">${latestTitle||'—'}</td>
-            <td style="text-align:center;padding:8px 8px;font-size:11.5px;color:#a0aec0;white-space:nowrap;border-bottom:1px solid #f7f6f3">${yearsActive}yr</td>
-            ${cells}
-            <td style="text-align:right;padding:8px 14px;font-weight:800;font-family:ui-monospace,monospace;color:${entColor};white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmt(personTotal)}</td>
-            <td style="text-align:right;padding:8px 10px;font-size:12px;color:#718096;white-space:nowrap;border-bottom:1px solid #f7f6f3">${share.toFixed(1)}%</td>
-          </tr>`;
-        }).join('');
-        return`<div style="padding:0 16px 24px">
-          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;color:${entColor}">${entLabel} — ${staffWithYears.length} staff · ${fmtK(entityTotal)}</div>
-          <div style="overflow-x:auto;border:1px solid #eaecf2;border-radius:8px">
-            <table style="border-collapse:collapse;font-size:13px;white-space:nowrap">
-              <thead><tr>
-                <th style="${thStyleL}">Name</th><th style="${thStyleL}">Title</th>
-                <th style="text-align:center;padding:8px 8px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:700;font-size:10px;white-space:nowrap;background:#f8fafc">Yrs</th>
-                ${allYears.map(y=>`<th style="${thStyle}">${y}</th>`).join('')}
-                <th style="${thStyle}">Total</th><th style="${thStyle}">%</th>
-              </tr></thead>
-              <tbody>${rows}</tbody>
-            </table>
-          </div>
-          <div style="font-size:11px;color:#a0aec0;padding:8px 2px">Source: House Statement of Disbursements · Personnel Compensation rows only</div>
-        </div>`;
+    // Combined per-person table — pool all selected entities into one view of each person's
+    // tenure with the member: which entities paid them, what they got each year, lifetime total.
+    const deriveBy=p=>{
+      if(p.by_year&&Object.keys(p.by_year).length>0)return p.by_year;
+      if(p.txns&&p.txns.length){
+        const out={};
+        p.txns.forEach(t=>{
+          const y=(t.date||'').slice(0,4);
+          if(/^(19|20)\d{2}$/.test(y))out[y]=(out[y]||0)+(+t.amount||0);
+        });
+        return Object.keys(out).length?out:null;
       }
+      return null;
+    };
+    const titleCase=s=>(s||'').split(/\s+/).map(w=>w?w[0].toUpperCase()+w.slice(1).toLowerCase():'').join(' ');
+    const byPerson={};
+    const entitiesUsed=new Set();
+    const sourceKinds=new Set();
+    let totalUndated=0;
+    selKeys.forEach(k=>{
+      const e=E[k]; if(!e||!e.top_individuals)return;
+      sourceKinds.add(e.source_type||'');
+      (e.top_individuals||[]).forEach(p=>{
+        const nk=viNormName(p.name);
+        const entry=byPerson[nk]||(byPerson[nk]={name:p.name,byYear:{},byYearByEnt:{},byEnt:{},entities:new Set(),roles:{},total:0,undated:0});
+        const amt=+p.amt||0;
+        entry.byEnt[k]=(entry.byEnt[k]||0)+amt;
+        entry.entities.add(k);
+        entitiesUsed.add(k);
+        // Role: track best-paying entity's role for the title column
+        const rawRole=p.role||(p.txns&&p.txns.length?p.txns.reduce((best,t)=>t.amount>best.amount?t:best,p.txns[0]).purpose:'');
+        if(rawRole)entry.roles[k]=titleCase(rawRole);
+        // Per-year (or fall back to undated bucket for FPPC-style sources)
+        const py=deriveBy(p);
+        if(py){Object.entries(py).forEach(([y,a])=>{
+          entry.byYear[y]=(entry.byYear[y]||0)+a;
+          entry.byYearByEnt[y]=entry.byYearByEnt[y]||{};
+          entry.byYearByEnt[y][k]=(entry.byYearByEnt[y][k]||0)+a;
+        });}
+        else{entry.undated+=amt;totalUndated+=amt;}
+        entry.total+=amt;
+      });
+    });
+    const peopleSorted=Object.values(byPerson).sort((a,b)=>b.total-a.total);
+    const allYears=[...new Set(peopleSorted.flatMap(p=>Object.keys(p.byYear)))].sort();
+    const catTotal=peopleSorted.reduce((s,p)=>s+p.total,0);
+    const entAbbr=k=>(META[k]||{}).abbr||k.slice(0,2).toUpperCase();
+    const entShort=k=>(META[k]||{}).short||k;
+    const entColor=k=>(META[k]||{}).color||cat.color;
+    const sourceParts=[...sourceKinds].filter(Boolean).map(s=>s==='SOD'?'House Statement of Disbursements (office)':s.startsWith('FEC')?'FEC committee filings':s);
+    const sourceNote=sourceParts.length?sourceParts.join(' + '):'Source';
 
-      // Non-SOD or no year data: simple list
-      const rows=people.slice(0,20).map(p=>{
-        const share=entityTotal?p.amt/entityTotal*100:0;
-        const isShared=multiEnt&&sharedPeople.some(s=>viNormName(s.name)===viNormName(p.name));
-        return`<tr${isShared?' style="background:#fff8f0"':''}>
-          <td style="padding:8px 14px;font-weight:700;font-size:13px;white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmtSODName(p.name)}${isShared?' <span style="font-size:10px;background:#fef3c7;color:#92600a;border-radius:4px;padding:1px 5px;font-weight:700;vertical-align:middle">CROSS</span>':''}</td>
-          <td style="padding:8px 10px;font-size:11.5px;color:#718096;border-bottom:1px solid #f7f6f3">${p.role||'—'}</td>
-          <td style="text-align:right;padding:8px 14px;font-weight:800;font-family:ui-monospace,monospace;color:${entColor};border-bottom:1px solid #f7f6f3">${fmt(p.amt)}</td>
-          <td style="text-align:right;padding:8px 10px;font-size:12px;color:#718096;border-bottom:1px solid #f7f6f3">${share.toFixed(1)}%</td>
+    const hexToRgb=h=>{h=(h||'').replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');const n=parseInt(h,16);return{r:(n>>16)&255,g:(n>>8)&255,b:n&255};};
+    const entTablesHtml=peopleSorted.length?(()=>{
+      const rows=peopleSorted.map(p=>{
+        const yrCells=allYears.map(y=>{
+          const a=p.byYear[y]||0;
+          if(!a)return`<td style="text-align:right;padding:7px 8px;color:#d1d5db;font-size:12px;border-bottom:1px solid #f7f6f3">–</td>`;
+          const maxCell=Math.max(...Object.values(p.byYear),1);
+          // Weighted blend of contributing entities' colors — single-entity year = pure entity color,
+          // multi-entity year = muddier mix (e.g. MRA blue + Campaign orange → brown), per user spec.
+          const sources=p.byYearByEnt[y]||{};
+          const srcKeys=Object.keys(sources);
+          let r=0,g=0,b=0,wTot=0;
+          srcKeys.forEach(k=>{const rgb=hexToRgb(entColor(k));const w=sources[k];r+=rgb.r*w;g+=rgb.g*w;b+=rgb.b*w;wTot+=w;});
+          r=Math.round(r/wTot);g=Math.round(g/wTot);b=Math.round(b/wTot);
+          const baseAlpha=0.12+a/maxCell*0.33;
+          // Multi-entity cells get a bump in alpha so they read visibly darker than single-entity cells of similar magnitude.
+          const alpha=srcKeys.length>1?Math.min(0.78,baseAlpha*1.55):baseAlpha;
+          const bg=`rgba(${r},${g},${b},${alpha.toFixed(3)})`;
+          const breakdown=srcKeys.length>1?srcKeys.sort((a,b)=>sources[b]-sources[a]).map(k=>`${entAbbr(k)} ${fmtK(sources[k])}`).join(' + '):'';
+          const tip=breakdown?`title="${y}: ${breakdown} = ${fmtK(a)}"`:`title="${y}: ${entAbbr(srcKeys[0])} ${fmtK(a)}"`;
+          return`<td ${tip} style="text-align:right;padding:7px 8px;font-size:12px;font-weight:600;font-family:ui-monospace,monospace;background:${bg};border-bottom:1px solid #f7f6f3">${fmtK(a)}</td>`;
+        }).join('');
+        const entChips=[...p.entities].sort((a,b)=>(p.byEnt[b]||0)-(p.byEnt[a]||0)).map(k=>{
+          const c=entColor(k);
+          return`<span title="${entShort(k)} · ${fmtK(p.byEnt[k]||0)}" style="display:inline-block;background:${c}1a;color:${c};font-size:10px;font-weight:800;padding:2px 6px;border-radius:3px;margin-right:3px;letter-spacing:.03em">${entAbbr(k)}</span>`;
+        }).join('');
+        const isCross=p.entities.size>1;
+        const bestEntKey=Object.entries(p.byEnt).sort((a,b)=>b[1]-a[1])[0][0];
+        const roleText=p.roles[bestEntKey]||Object.values(p.roles)[0]||'';
+        const yearsActive=Object.values(p.byYear).filter(v=>v>0).length;
+        const tenureLabel=yearsActive?`${yearsActive}yr`:(p.undated?'undated':'—');
+        const share=catTotal?p.total/catTotal*100:0;
+        const undatedNote=p.undated&&yearsActive?` <span title="Part of this person's total comes from a source with no transaction dates and is not shown in the year columns" style="font-size:10px;color:#a0aec0;font-weight:600">·&nbsp;+${fmtK(p.undated)} undated</span>`:'';
+        return`<tr${isCross?' style="background:#fff8f0"':''}>
+          <td style="padding:8px 14px;font-weight:700;font-size:13px;white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmtSODName(p.name)}${isCross?' <span style="font-size:10px;background:#fef3c7;color:#92600a;border-radius:4px;padding:1px 5px;font-weight:700;vertical-align:middle">CROSS</span>':''}</td>
+          <td style="padding:8px 10px;font-size:11.5px;color:#718096;white-space:nowrap;border-bottom:1px solid #f7f6f3;max-width:180px;overflow:hidden;text-overflow:ellipsis">${roleText||'—'}</td>
+          <td style="padding:8px 10px;border-bottom:1px solid #f7f6f3;white-space:nowrap">${entChips}</td>
+          <td style="text-align:center;padding:8px 8px;font-size:11.5px;color:#a0aec0;white-space:nowrap;border-bottom:1px solid #f7f6f3">${tenureLabel}</td>
+          ${yrCells}
+          <td style="text-align:right;padding:8px 14px;font-weight:800;font-family:ui-monospace,monospace;color:${cat.color};white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmt(p.total)}${undatedNote}</td>
+          <td style="text-align:right;padding:8px 10px;font-size:12px;color:#718096;white-space:nowrap;border-bottom:1px solid #f7f6f3">${share.toFixed(1)}%</td>
         </tr>`;
       }).join('');
+      const entLegend=[...entitiesUsed].map(k=>`<span style="display:inline-block;background:${entColor(k)}1a;color:${entColor(k)};font-size:10px;font-weight:800;padding:2px 6px;border-radius:3px;margin-right:6px;letter-spacing:.03em">${entAbbr(k)}</span><span style="font-size:11px;color:#718096;margin-right:14px">${entShort(k)}</span>`).join('');
+      const undatedFooter=totalUndated?` &nbsp;·&nbsp; ${fmtK(totalUndated)} from sources without transaction dates is included in totals but not in year columns`:'';
       return`<div style="padding:0 16px 24px">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;color:${entColor}">${entLabel} — ${people.length} individuals · ${fmtK(entityTotal)}</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;color:${cat.color}">All people · ${peopleSorted.length} individuals · ${fmtK(catTotal)}</div>
+        <div style="font-size:11.5px;color:#718096;margin-bottom:10px">Cross-entity rows are highlighted. Year cells are color-coded by source: single entity = that entity's color; multiple entities in the same year = a blended (muddier, darker) color with the totals combined. Hover any cell for the per-entity breakdown.${entitiesUsed.size>1?'<br>':' '}<span style="margin-top:6px;display:inline-block">${entLegend}</span></div>
         <div style="overflow-x:auto;border:1px solid #eaecf2;border-radius:8px">
-          <table style="border-collapse:collapse;font-size:13px;width:100%">
+          <table style="border-collapse:collapse;font-size:13px;white-space:nowrap">
             <thead><tr>
-              <th style="${thStyleL}">Name</th><th style="${thStyleL}">Role</th>
+              <th style="${thStyleL}">Name</th>
+              <th style="${thStyleL}">Role / Title</th>
+              <th style="${thStyleL}">Entities</th>
+              <th style="text-align:center;padding:8px 8px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:700;font-size:10px;white-space:nowrap;background:#f8fafc">Tenure</th>
+              ${allYears.map(y=>`<th style="${thStyle}">${y}</th>`).join('')}
               <th style="${thStyle}">Total</th><th style="${thStyle}">%</th>
             </tr></thead>
             <tbody>${rows}</tbody>
           </table>
         </div>
+        <div style="font-size:11px;color:#a0aec0;padding:8px 2px">Source: ${sourceNote}${undatedFooter}</div>
       </div>`;
-    }).join('');
+    })():'';
 
     el.innerHTML=`<div class="vi-detail">
       ${headHtml}

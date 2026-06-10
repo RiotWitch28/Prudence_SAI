@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U.S. Capitol — Administrative Organization</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #1a2744;
+    --gold:    #c9a84c;
+    --gold-lt: #e8d49a;
+    --cream:   #f7f4ef;
+    --slate:   #3d5068;
+    --mist:    #dde4ee;
+    --red:     #8b1c2b;
+    --ink:     #1a2744;
+    --mid:     #5a6e82;
+    --rule:    #c6cedb;
+  }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  header {
+    text-align: center;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+
+  header::before {
+    content: '★';
+    display: block;
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: .5rem;
+    letter-spacing: .3em;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: .03em;
+    line-height: 1.2;
+  }
+
+  header p {
+    font-size: .85rem;
+    color: var(--mid);
+    margin-top: .4rem;
+    font-weight: 300;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  /* LAYOUT */
+  .chart {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* CONNECTOR lines */
+  .connector-v {
+    width: 2px;
+    height: 28px;
+    background: var(--rule);
+    flex-shrink: 0;
+  }
+
+  .connector-h-wrap {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+  }
+
+  .connector-h-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--h-span, 60%);
+    height: 2px;
+    background: var(--rule);
+  }
+
+  .branch-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    padding: 0 .5rem;
+  }
+
+  .branch-col .connector-v { height: 28px; }
+
+  /* NODE STYLES */
+  .node {
+    border-radius: 4px;
+    padding: .7rem 1.1rem;
+    text-align: center;
+    width: 100%;
+    max-width: 280px;
+    position: relative;
+  }
+
+  .node-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: .15rem;
+  }
+
+  .node-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .node-sub {
+    font-size: .73rem;
+    font-weight: 300;
+    margin-top: .25rem;
+    line-height: 1.4;
+    opacity: .85;
+  }
+
+  /* TIER STYLES */
+  .tier-apex {
+    background: var(--navy);
+    color: #fff;
+    border: 2px solid var(--gold);
+    max-width: 360px;
+    padding: 1rem 1.5rem;
+  }
+  .tier-apex .node-label { color: var(--gold-lt); }
+
+  .tier-chamber {
+    color: #fff;
+    border-radius: 4px;
+    padding: .8rem 1.2rem;
+  }
+  .tier-chamber.senate { background: var(--red); border: 2px solid #c8687a; }
+  .tier-chamber.house  { background: var(--slate); border: 2px solid #7796b4; }
+  .tier-chamber .node-label { color: rgba(255,255,255,.7); }
+
+  .tier-officer {
+    background: #fff;
+    border: 1.5px solid var(--rule);
+    box-shadow: 0 1px 4px rgba(26,39,68,.07);
+    max-width: 220px;
+  }
+  .tier-officer .node-label { color: var(--mid); font-size: .7rem; }
+  .tier-officer .node-title { font-size: .88rem; }
+
+  .tier-admin {
+    background: var(--mist);
+    border: 1.5px solid var(--rule);
+    max-width: 200px;
+  }
+  .tier-admin .node-label { color: var(--mid); font-size: .68rem; }
+  .tier-admin .node-title { font-size: .82rem; }
+
+  .tier-shared {
+    background: #fff;
+    border: 1.5px dashed var(--gold);
+    max-width: 280px;
+  }
+  .tier-shared .node-label { color: var(--gold); }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    border-top: 1px solid var(--rule);
+    padding-top: .5rem;
+    margin: 2rem auto .6rem;
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+  }
+
+  /* MULTI-COLUMN ROWS */
+  .row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .row .branch-col { min-width: 140px; max-width: 220px; }
+
+  /* ARCHITECT SECTION */
+  .aoc-block {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .aoc-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold-lt);
+    margin-bottom: .8rem;
+    text-align: center;
+    letter-spacing: .04em;
+  }
+
+  .aoc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: .6rem;
+  }
+
+  .aoc-item {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 3px;
+    padding: .5rem .7rem;
+    font-size: .75rem;
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.35;
+  }
+
+  .aoc-item strong {
+    display: block;
+    font-size: .68rem;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--gold-lt);
+    margin-bottom: .15rem;
+  }
+
+  /* FOOTNOTE */
+  footer {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-size: .72rem;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .connector-h-wrap::before { width: 80%; }
+    .row { gap: .5rem; }
+    .row .branch-col { min-width: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>U.S. Capitol<br>Administrative Organization</h1>
+  <p>Legislative Branch — Congress of the United States</p>
+</header>
+
+<div class="chart">
+
+  <!-- APEX -->
+  <div class="node tier-apex">
+    <div class="node-label">Legislative Branch</div>
+    <div class="node-title">Congress of the United States</div>
+    <div class="node-sub">118th Congress · Est. Article I, Constitution</div>
+  </div>
+
+  <div class="connector-v"></div>
+
+  <!-- TWO CHAMBERS -->
+  <div class="connector-h-wrap" style="--h-span: 55%;">
+    <div class="branch-col">
+      <div class="connector-v"></div>
+      <div class="node tier-chamber senate">
+        <div class="node-label">Upper Chamber</div>
+        <div class="node-title">United States Senate</div>
+        <div class="node-sub">100 Senators · 6-year terms<br>Presided by VP or President pro tempore</div>
+      </div>
+    </div>
+    <div class="branch-col">
+      <div class="connector-v"></div>
+      <div class="node tier-chamber house">
+        <div class="node-label">Lower Chamber</div>
+        <div class="node-title">U.S. House of Representatives</div>
+        <div class="node-sub">435 Members · 2-year terms<br>Presided by Speaker of the House</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SENATE OFFICERS -->
+  <p class="section-label">Senate Principal Officers</p>
+
+  <div style="width:100%; max-width:700px; display:flex; justify-content:center;">
+    <div class="connector-h-wrap" style="--h-span:85%; width:100%;">
+      <div class="branch-col">
+        <div class="connector-v"></div>
+        <div class="node tier-officer">
+          <div class="node-label">Presiding Officer</div>
+          <div class="node-title">President of the Senate</div>
+          <div class="node-sub">Vice President of the U.S.</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="connector-v"></div>
+        <div class="node tier-officer">
+          <div class="node-label">Elected Officer</div>
+          <div class="node-title">President pro tempore</div>
+          <div class="node-sub">Presides in VP's absence</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="connector-v"></div>
+        <div class="node tier-officer">
+          <div class="node-label">Administrative Head</div>
+          <div class="node-title">Secretary of the Senate</div>
+          <div class="node-sub">Chief legislative, financial & administrative officer</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="connector-v"></div>
+        <div class="node tier-officer">
+          <div class="node-label">Law Enforcement</div>
+          <div class="node-title">Senate Sergeant at Arms</div>
+          <div class="node-sub">Security, protocol, IT</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="connector-v"></div>
+        <div class="node tier-officer">
+          <div class="node-label">Chaplain</div>
+          <div class="node-title">Senate Chaplain</div>
+          <div class="node-sub">Opens sessions with prayer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SENATE ADMIN OFFICES -->
+  <p class="section-label">Senate — Key Administrative Offices</p>
+  <div class="row">
+    <div class="branch-col"><div class="node tier-admin"><div class="node-label">Finance</div><div class="node-title">Senate Disbursing Office</div></div></div>
+    <div class="branch-col"><div class="node tier-admin"><div class="node-label">Records</div><div class="node-title">Office of Public Records</div></div></div>
+    <div class="branch-col"><div class="node tier-admin"><div class="node-label">Research</div><div class="node-title">Senate Library</div></div></div>
+    <div class="branch-col"><div class="node tier-admin"><div class="node-label">Technology</div><div class="node-title">Senate Computer Center</div></div></div>
+    <div class="branch-col"><div class="node tier-admin"><div class="node-label">Printing</div><div class="node-title">Senate Document Room</div></div></div>
+  </div>
+
+  <!-- HOUSE OFFICERS -->
+  <p class="section-label">House Principal Officers</p>
+
+  <div style="width:100%; max-width:700px; display:flex; justify-content:center;">
+    <div class="connector-h-wrap" style="--h-span:85%; width:100%;">
+      <div class="branch-col">
+        <div class="connector-v"></div>
+        <div class="node tier-officer">
+          <div class="node-label">Presiding Officer</div>
+          <div class="node-title">Speaker of the House</div>
+          <div class="node-sub">Elected by full membership; 2nd in presidential succession</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="connector-v"></div>
+        <div class="node tier-officer">
+          <div class="node-label">Administrative Head</div>
+          <div class="node-title">Clerk of the House</div>
+          <div class="node-sub">Legislative records, journal, enrolling bills</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="connector-v"></div>
+        <div class="node tier-officer">
+          <div class="node-label">Law Enforcement</div>
+          <div class="node-title">House Sergeant at Arms</div>
+          <div class="node-sub">Security, protocol, quorum enforcement</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="connector-v"></div>
+        <div class="node tier-officer">
+          <div class="node-label">Finance</div>
+          <div class="node-title">Chief Administrative Officer</div>
+          <div class="node-sub">Operations, payroll, IT, facilities</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="connector-v"></div>
+        <div class="node tier-officer">
+          <div class="node-label">Chaplain</div>
+          <div class="node-title">House Chaplain</div>
+          <div class="node-sub">Opens sessions with prayer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOUSE ADMIN OFFICES -->
+  <p class="section-label">House — Key Administrative Offices</p>
+  <div class="row">
+    <div class="branch-col"><div class="node tier-admin"><div class="node-label">Inspector General</div><div class="node-title">House IG</div><div class="node-sub">Audits, investigations</div></div></div>
+    <div class="branch-col"><div class="node tier-admin"><div class="node-label">Ethics</div><div class="node-title">Committee on Ethics</div><div class="node-sub">Member conduct review</div></div></div>
+    <div class="branch-col"><div class="node tier-admin"><div class="node-label">Finance</div><div class="node-title">House Disbursing Office</div></div></div>
+    <div class="branch-col"><div class="node tier-admin"><div class="node-label">Accessibility</div><div class="node-title">Office of Diversity & Inclusion</div></div></div>
+    <div class="branch-col"><div class="node tier-admin"><div class="node-label">HR</div><div class="node-title">Office of Employee Assistance</div></div></div>
+  </div>
+
+  <!-- JOINT / SHARED OFFICES -->
+  <p class="section-label">Joint & Shared Legislative Offices</p>
+  <div class="row">
+    <div class="branch-col" style="max-width:260px;">
+      <div class="node tier-shared">
+        <div class="node-label">Nonpartisan Research</div>
+        <div class="node-title">Congressional Research Service (CRS)</div>
+        <div class="node-sub">Policy analysis for all Members</div>
+      </div>
+    </div>
+    <div class="branch-col" style="max-width:260px;">
+      <div class="node tier-shared">
+        <div class="node-label">Fiscal Watchdog</div>
+        <div class="node-title">Congressional Budget Office (CBO)</div>
+        <div class="node-sub">Independent budget & economic analysis</div>
+      </div>
+    </div>
+    <div class="branch-col" style="max-width:260px;">
+      <div class="node tier-shared">
+        <div class="node-label">Audit Arm</div>
+        <div class="node-title">Government Accountability Office (GAO)</div>
+        <div class="node-sub">Federal program audits & investigations</div>
+      </div>
+    </div>
+    <div class="branch-col" style="max-width:260px;">
+      <div class="node tier-shared">
+        <div class="node-label">Publishing</div>
+        <div class="node-title">Government Publishing Office (GPO)</div>
+        <div class="node-sub">Congressional Record, Federal Register</div>
+      </div>
+    </div>
+    <div class="branch-col" style="max-width:260px;">
+      <div class="node tier-shared">
+        <div class="node-label">Information</div>
+        <div class="node-title">Library of Congress</div>
+        <div class="node-sub">Research & copyright; world's largest library</div>
+      </div>
+    </div>
+    <div class="branch-col" style="max-width:260px;">
+      <div class="node tier-shared">
+        <div class="node-label">Capitol Police</div>
+        <div class="node-title">U.S. Capitol Police (USCP)</div>
+        <div class="node-sub">Law enforcement; Capitol complex security</div>
+      </div>
+    </div>
+    <div class="branch-col" style="max-width:260px;">
+      <div class="node tier-shared">
+        <div class="node-label">Medical</div>
+        <div class="node-title">Office of the Attending Physician</div>
+        <div class="node-sub">Medical care for Members & Capitol staff</div>
+      </div>
+    </div>
+    <div class="branch-col" style="max-width:260px;">
+      <div class="node tier-shared">
+        <div class="node-label">Accessibility</div>
+        <div class="node-title">Office of Congressional Accessibility</div>
+        <div class="node-sub">ADA compliance across the complex</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARCHITECT OF THE CAPITOL -->
+  <p class="section-label">Architect of the Capitol — Physical Plant & Operations</p>
+
+  <div class="aoc-block">
+    <h3>Architect of the Capitol (AOC)</h3>
+    <div class="aoc-grid">
+      <div class="aoc-item"><strong>Capitol Building</strong>Rotunda, Chambers, Crypt, dome maintenance</div>
+      <div class="aoc-item"><strong>Senate Office Buildings</strong>Russell, Dirksen, Hart</div>
+      <div class="aoc-item"><strong>House Office Buildings</strong>Cannon, Longworth, Rayburn, Ford, O'Neill, Visitors Center</div>
+      <div class="aoc-item"><strong>Capitol Grounds</strong>Olmsted landscape, infrastructure</div>
+      <div class="aoc-item"><strong>Capitol Power Plant</strong>Steam, chilled water, utilities</div>
+      <div class="aoc-item"><strong>Library of Congress Bldgs</strong>Jefferson, Adams, Madison</div>
+      <div class="aoc-item"><strong>U.S. Botanic Garden</strong>Conservatory & grounds</div>
+      <div class="aoc-item"><strong>Capitol Subway System</strong>Senate & House rail links</div>
+      <div class="aoc-item"><strong>Capitol Visitor Center</strong>Emancipation Hall, exhibits</div>
+    </div>
+  </div>
+
+</div><!-- /chart -->
+
+<footer>
+  Sources: House.gov · Senate.gov · aoc.gov · Congress.gov · GAO · CBO · CRS · GPO · LOC<br>
+  Organization reflects the 118th Congress. Some offices omitted for clarity.
+</footer>
+
+</body>
+</html>

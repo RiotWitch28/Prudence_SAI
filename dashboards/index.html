@@ -806,18 +806,16 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
 
 <!-- ARTICLE ONE PLATFORM BAR -->
 <div class="platform-bar">
-  <div class="platform-logo">
+  <a class="platform-logo" href="home.html" title="Back to Article One home">
     <div class="platform-mark">A1</div>
     <div class="platform-name">Article One</div>
-  </div>
+  </a>
   <div class="platform-divider"></div>
   <div class="platform-context">Political Intelligence OS</div>
   <div class="platform-right">
-    <button class="platform-btn" onclick="location.href='article-one.html'">Article One</button>
-    <button class="platform-btn" id="allMembersBtn" onclick="openRoster()">All Members</button>
-    <button class="platform-btn">Export</button>
+    <button class="platform-btn" onclick="location.href='home.html'">Dashboard Home</button>
     <button class="dark-toggle" id="darkToggle" onclick="toggleDark()">☀ Light</button>
-    <div class="platform-member-chip" id="platformMemberChip" onclick="document.getElementById('profileModalBg').classList.add('show')" style="cursor:pointer">
+    <div class="platform-member-chip" id="platformMemberChip" onclick="openRoster()" title="Switch member" style="cursor:pointer">
       <div class="platform-avatar" id="platformAvatar">ES</div>
       <div class="platform-member-name" id="platformMemberName">Swalwell</div>
     </div>
@@ -833,9 +831,8 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
     </div>
     <div class="nav-tabs" id="navTabs">
       <div class="nav-tab active" data-p="overview" onclick="showPage('overview',this)">Financial Overview</div>
-      <div class="nav-tab" data-p="entities" onclick="showPage('entities',this)">Entities</div>
+      <div class="nav-tab" data-p="entities" onclick="showPage('entities',this)">Entity Breakdown</div>
       <div class="nav-tab" data-p="disclosure" onclick="showPage('disclosure',this)">Financial Disclosure</div>
-      <div class="nav-tab" data-p="vendors" onclick="showPage('vendors',this)">Vendor Intelligence</div>
       <div class="nav-tab module-tab" data-p="houseai" onclick="showPage('houseai',this)">⚖ Prudence <span class="nb" id="prudenceBadge">4</span></div>
       <div class="nav-tab" data-p="sources" onclick="showPage('sources',this)">Sources</div>
     </div>
@@ -933,242 +930,18 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
   </div>
   <div id="entCrossPanel"></div>
   <div id="entProfiles"></div>
+
+  <div style="margin-top:32px">
+    <div class="vi-instructions">👇 Click any category below to expand its full breakdown — top vendors, spending concentration, and transaction stats appear right beneath the grid.</div>
+    <div class="sec-label">Spending by category</div>
+    <div class="vi-cat-grid" id="viCatGrid"></div>
+    <div id="viCatDetail"></div>
+  </div>
 </div>
 
 
 <!-- FINANCIAL DISCLOSURE -->
-<div id="page-disclosure" class="page">
-  <div class="page-header">
-    <div class="page-title">Financial Disclosure</div>
-    <div class="page-sub">House Financial Disclosure Report · Filing ID #10066827 · Annual Report 2024 · Filed August 13, 2025 · source linked in the 119th Master List</div>
-  </div>
-
-  <div class="disclosure-hero">
-    <div class="disclosure-hero-title">House Financial Disclosure Report · Filing ID #10066827</div>
-    <div class="disclosure-hero-name">Hon. Eric Swalwell — Annual Financial Disclosure</div>
-    <div class="disclosure-hero-sub">Filing Year: 2024 · Filed: August 13, 2025 · State/District: CA-14 · Status: Member</div>
-    <div class="disclosure-hero-meta">
-      <span class="disclosure-meta-chip">Base Salary <strong>$174,000/yr</strong></span>
-      <span class="disclosure-meta-chip">Outside Income <strong>$31,815</strong></span>
-      <span class="disclosure-meta-chip">Total Liabilities <strong>$1.08M – $5.2M</strong></span>
-      <span class="disclosure-meta-chip">Total Assets <strong>$266K – $565K</strong></span>
-      <span class="disclosure-meta-chip">Estimated Net Worth <strong style="color:var(--red)">-$515K to -$4.9M</strong></span>
-      <span class="disclosure-meta-chip">Flags Identified <strong style="color:var(--red)">6</strong></span>
-    </div>
-  </div>
-
-  <div class="net-worth-block">
-    <div class="net-worth-label">Estimated Net Worth Range</div>
-    <div class="net-worth-range">−$515,004 to −$4,933,997</div>
-    <div class="net-worth-sub">Assets minus liabilities across all disclosed ranges · Both scenarios yield a negative net worth</div>
-  </div>
-
-  <div class="chart-row">
-    <div class="ccard">
-      <div class="ctitle">Liabilities by Creditor</div>
-      <div class="csub">Schedule D · minimum disclosed value of each obligation</div>
-      <div class="cwrap tall"><canvas id="d-liab-creditor"></canvas></div>
-    </div>
-    <div class="ccard">
-      <div class="ctitle">Annual Salary Reality Check</div>
-      <div class="csub">Where the $174,000 salary goes (minimum estimates)</div>
-      <div class="cwrap tall"><canvas id="d-salary-chart"></canvas></div>
-    </div>
-  </div>
-
-  <div class="salary-block">
-    <div class="salary-title">Salary vs. Disclosed Financial Obligations</div>
-    <div style="font-size:11px;color:var(--text-3);margin-bottom:14px">Congressional salary frozen at $174,000 since 2009. All bars shown relative to annual gross salary.</div>
-    <div class="salary-row">
-      <div class="salary-label">Annual Salary (gross)</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:100%;background:#2d6a4f">$174,000</div></div>
-      <div class="salary-value" style="color:var(--green)">$174,000</div>
-    </div>
-    <div class="salary-row">
-      <div class="salary-label">Outside Income (C Street)</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:18%;background:#2a4f7c">$31,815</div></div>
-      <div class="salary-value" style="color:var(--navy-mid)">$31,815</div>
-    </div>
-    <div class="salary-row">
-      <div class="salary-label">Est. Federal Income Tax (~32%)</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:32%;background:#718096">~$55,680</div></div>
-      <div class="salary-value" style="color:var(--text-3)">~$55,680</div>
-    </div>
-    <div class="salary-row">
-      <div class="salary-label">Est. Take-Home Pay</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:68%;background:#b45309">~$118,320</div></div>
-      <div class="salary-value" style="color:var(--amber)">~$118,320</div>
-    </div>
-    <div class="salary-row">
-      <div class="salary-label">Home Loan (min est. payment)</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:35%;background:#9b2335">~$60,804</div></div>
-      <div class="salary-value" style="color:var(--red)">~$60,804</div>
-    </div>
-    <div class="salary-row">
-      <div class="salary-label">Credit Card Debt (combined)</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:17%;background:#9b2335b3">$30K–$100K</div></div>
-      <div class="salary-value" style="color:var(--red)">$30K–$100K</div>
-    </div>
-    <div class="salary-row">
-      <div class="salary-label">Student Loans (outstanding)</div>
-      <div class="salary-bar-track"><div class="salary-bar-fill" style="width:29%;background:#c9963a">$50K–$100K</div></div>
-      <div class="salary-value" style="color:var(--gold)">$50K–$100K</div>
-    </div>
-    <div style="margin-top:12px;padding:10px 12px;background:var(--bg);border-radius:8px;font-size:11px;color:var(--text-3);line-height:1.7">
-      <strong style="color:var(--text)">Key ratio:</strong> At the minimum home loan value ($1M+), estimated annual mortgage payments (~$60,804) consume approximately <strong style="color:var(--red)">35% of gross salary</strong> or <strong style="color:var(--red)">51% of estimated take-home pay</strong> — before credit card payments, student loans, or living expenses. The salary has been frozen since 2009 and has lost ~30% of its purchasing power to inflation since then.
-    </div>
-  </div>
-
-  <div class="sec-label">⚑ Flagged Findings</div>
-  <div class="disc-flag-grid">
-    <div class="disc-flag-card">
-      <div class="disc-flag-header"><div class="disc-flag-title">Findraiser LLC — Chief of Staff as CEO</div><div class="disc-flag-sev high">HIGH</div></div>
-      <div class="disc-flag-amount">$250,001–$500,000</div>
-      <div class="disc-flag-body">Swalwell co-founded Findraiser LLC with his Chief of Staff Yardena Wolf, who serves as CEO. Wolf is paid $163,797/year from taxpayer MRA funds. Findraiser is valued at $250K–$500K on this disclosure. An ethics complaint alleges Swalwell personally pitched the product to fellow lawmakers and staff — potentially using his official position to promote a private business in which he holds a substantial equity stake. The company received $67,400+ from congressional campaigns in 2025–26.</div>
-    </div>
-    <div class="disc-flag-card">
-      <div class="disc-flag-header"><div class="disc-flag-title">Home Loan: $1M–$5M on $174K Salary</div><div class="disc-flag-sev high">HIGH</div></div>
-      <div class="disc-flag-amount">$1,000,001–$5,000,000</div>
-      <div class="disc-flag-body">Apple Federal Credit Union home loan incurred April 2022. At the minimum ($1M), estimated annual mortgage payments consume 35%+ of gross salary — before taxes, credit cards, or student loans. At $5M, the annual obligation would exceed the salary by 175%. Combined with $30K–$100K in credit card debt and $50K–$100K in student loans, total disclosed liabilities range from $1.08M to $5.2M.</div>
-    </div>
-    <div class="disc-flag-card">
-      <div class="disc-flag-header"><div class="disc-flag-title">Private Jet to France — Donor Now Facing Felony Charges</div><div class="disc-flag-sev high">HIGH</div></div>
-      <div class="disc-flag-amount amber">$30,903</div>
-      <div class="disc-flag-body">Stephen Cloobeck gifted private air transportation Burbank → Nice, France valued at $30,903. Cloobeck was a major Democratic donor (Diamond Resorts billionaire). He was arrested on felony witness intimidation charges (May 2026), subsequently left the Democratic Party, and publicly denounced Swalwell.</div>
-    </div>
-    <div class="disc-flag-card amber">
-      <div class="disc-flag-header"><div class="disc-flag-title">Foreign Government Travel — Rwanda → Phuket, Thailand</div><div class="disc-flag-sev medium">NOTABLE</div></div>
-      <div class="disc-flag-amount amber">Govt. of Rwanda · 6 days</div>
-      <div class="disc-flag-body">April 1–6, 2024: Government of Rwanda-paid trip routed SF → Kigali → Phuket, Thailand. Phuket is not a logical transit point between Rwanda and California. All days at "0 days own expense." A second foreign government trip was paid by Qatar (Doha, Nov–Dec 2024).</div>
-    </div>
-    <div class="disc-flag-card amber">
-      <div class="disc-flag-header"><div class="disc-flag-title">Center Forward Travel — Pharma Dark-Money Funded</div><div class="disc-flag-sev medium">NOTABLE</div></div>
-      <div class="disc-flag-amount amber">2 Trips · Middleburg VA + Lisbon, Portugal</div>
-      <div class="disc-flag-body">Two trips sponsored by Center Forward — a 501(c)(4) identified by Kaiser Health News and OpenSecrets as heavily funded by pharmaceutical industry lobbying entities. Includes a 5-day Lisbon, Portugal trip (Jun 2024). Creates a potential conflict for a lawmaker voting on drug pricing legislation.</div>
-    </div>
-    <div class="disc-flag-card purple">
-      <div class="disc-flag-header"><div class="disc-flag-title">Rockbridge Capital Travel — Spouse's Employer</div><div class="disc-flag-sev notable">REVIEW</div></div>
-      <div class="disc-flag-amount purple">Baku, Azerbaijan · 3 days</div>
-      <div class="disc-flag-body">Rockbridge Capital paid for a Sept 13–16, 2024 trip to Baku, Azerbaijan. Schedule C of this disclosure lists "Rockbridge Holdings" as the source of Swalwell's spouse's salary — both are in the same Rockbridge investment firm family. All expenses paid; 0 days at own expense.</div>
-    </div>
-  </div>
-
-  <div class="tcard">
-    <div class="tcard-head"><h3>Schedule A — Assets &amp; Unearned Income</h3></div>
-    <div class="tscroll"><table>
-      <thead><tr><th>Asset</th><th>Owner</th><th>Value Range</th><th>Income Type</th></tr></thead>
-      <tbody>
-        <tr><td>Bank of America</td><td>Self</td><td>$15,001–$50,000</td><td style="color:var(--text-3);font-size:11px">None</td></tr>
-        <tr><td>CA Public Employees Retirement System</td><td>Self</td><td>$1,001–$15,000</td><td style="color:var(--text-3);font-size:11px">Tax-Deferred</td></tr>
-        <tr><td><strong style="color:var(--gold)">Findraiser LLC ⚑</strong><br><span style="font-size:11px;color:var(--text-3)">AI fundraising tool · Pleasanton, CA · Co-founded with Chief of Staff</span></td><td>Self</td><td style="color:var(--gold);font-weight:700">$250,001–$500,000</td><td style="color:var(--text-3);font-size:11px">None</td></tr>
-      </tbody>
-    </table></div>
-  </div>
-
-  <div class="tcard">
-    <div class="tcard-head"><h3>Schedule C — Earned Income</h3></div>
-    <div class="tscroll"><table>
-      <thead><tr><th>Source</th><th>Type</th><th class="num">Amount</th></tr></thead>
-      <tbody>
-        <tr><td><strong>The C Street</strong><br><span style="font-size:11px;color:var(--text-3)">Outside earned income — centrist political nonprofit, DC</span></td><td style="font-size:11px;color:var(--text-3)">Outside Earned Income</td><td class="num" style="color:var(--green)">$31,815</td></tr>
-        <tr><td><strong>Rockbridge Holdings ⚑</strong><br><span style="font-size:11px;color:var(--text-3)">Hotel investment firm — same family as Rockbridge Capital (paid for Azerbaijan trip)</span></td><td style="font-size:11px;color:var(--text-3)">Spouse Salary</td><td class="num" style="color:var(--text-3)">N/A</td></tr>
-      </tbody>
-    </table></div>
-  </div>
-
-  <div class="tcard">
-    <div class="tcard-head"><h3>Schedule D — Liabilities</h3></div>
-    <div class="tscroll"><table>
-      <thead><tr><th>Creditor</th><th>Date</th><th>Type</th><th class="num">Amount Range</th></tr></thead>
-      <tbody>
-        <tr><td>Ed Financial</td><td>May 2006</td><td style="font-size:11px;color:var(--text-3)">Student Loans</td><td class="num" style="color:var(--gold)">$50,001–$100,000</td></tr>
-        <tr><td>Chase Bank</td><td>Oct 2016</td><td style="font-size:11px;color:var(--text-3)">Credit Card</td><td class="num" style="color:var(--red)">$15,001–$50,000</td></tr>
-        <tr><td>American Express</td><td>Oct 2016</td><td style="font-size:11px;color:var(--text-3)">Credit Card</td><td class="num" style="color:var(--red)">$15,001–$50,000</td></tr>
-        <tr><td><strong style="color:var(--red)">Apple Federal Credit Union ⚑</strong></td><td>Apr 2022</td><td style="font-size:11px;color:var(--text-3)">Home Loan</td><td class="num" style="color:var(--red);font-size:15px;font-weight:800">$1,000,001–$5,000,000</td></tr>
-        <tr style="font-weight:700;border-top:2px solid var(--border)"><td colspan="3">TOTAL LIABILITIES RANGE</td><td class="num" style="color:var(--red)">$1,080,004–$5,200,000</td></tr>
-      </tbody>
-    </table></div>
-  </div>
-
-  <div class="tcard">
-    <div class="tcard-head"><h3>Schedule E — Positions Held Outside Government</h3></div>
-    <div class="tscroll"><table>
-      <thead><tr><th>Position</th><th>Organization</th><th>Note</th></tr></thead>
-      <tbody>
-        <tr><td>Board of Visitors, Member</td><td>University of Maryland Francis King Carey School of Law</td><td style="font-size:11px;color:var(--text-3)">Unpaid advisory</td></tr>
-        <tr><td>Advisory Board Member</td><td>Panda Investments</td><td style="font-size:11px;color:var(--text-3)">Investment firm</td></tr>
-        <tr><td><strong style="color:var(--gold)">Member ⚑</strong></td><td><strong style="color:var(--gold)">Findraiser LLC</strong></td><td style="font-size:11px;color:var(--text-3)">Co-founded with Chief of Staff Wolf; valued $250K–$500K</td></tr>
-      </tbody>
-    </table></div>
-  </div>
-
-  <div class="tcard">
-    <div class="tcard-head"><h3>Schedule H — Travel Payments &amp; Reimbursements (2024)</h3><span class="tsub">All trips: 0 days at own expense</span></div>
-    <div style="padding:14px 16px;display:flex;flex-direction:column;gap:8px">
-      <div class="travel-item pharma">
-        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px"><div class="travel-source">Center Forward</div><span class="travel-tag ph">Pharma dark-money funded 501(c)(4)</span></div>
-        <div class="travel-route">📍 Washington, DC → Middleburg, VA → Washington, DC</div>
-        <div class="travel-dates">March 22–23, 2024 · 2 days · Domestic</div>
-      </div>
-      <div class="travel-item foreign-gov">
-        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px"><div class="travel-source">Government of Rwanda ⚑</div><span class="travel-tag fg">Foreign Government</span></div>
-        <div class="travel-route">📍 San Francisco, CA → Kigali, Rwanda → <strong style="color:var(--red)">Phuket, Thailand</strong></div>
-        <div class="travel-dates">April 1–6, 2024 · 6 days · Phuket, Thailand is not a logical transit stop between Rwanda and California</div>
-      </div>
-      <div class="travel-item pharma">
-        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px"><div class="travel-source">Center Forward</div><span class="travel-tag ph">Pharma dark-money funded 501(c)(4)</span></div>
-        <div class="travel-route">📍 Washington, DC → Lisbon, Portugal → Washington, DC</div>
-        <div class="travel-dates">June 16–21, 2024 · 5 days · International</div>
-      </div>
-      <div class="travel-item private">
-        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px"><div class="travel-source">Rockbridge Capital ⚑</div><span class="travel-tag pr">Private Firm · Spouse's Employer Family</span></div>
-        <div class="travel-route">📍 Washington, DC → Baku, Azerbaijan → Washington, DC</div>
-        <div class="travel-dates">September 13–16, 2024 · 3 days</div>
-      </div>
-      <div class="travel-item foreign-gov">
-        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px"><div class="travel-source">Government of Qatar</div><span class="travel-tag fg">Foreign Government</span></div>
-        <div class="travel-route">📍 Washington, DC → Doha, Qatar → Washington, DC</div>
-        <div class="travel-dates">Nov 29 – Dec 3, 2024 · 4 days</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tcard">
-    <div class="tcard-head"><h3>Schedule G — Gifts</h3></div>
-    <div class="tscroll"><table>
-      <thead><tr><th>Source</th><th>Description</th><th class="num">Value</th><th>Note</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong style="color:var(--red)">Stephen Cloobeck ⚑</strong><br><span style="font-size:11px;color:var(--text-3)">Burbank, CA · Hotel billionaire · Former major Democratic donor</span></td>
-          <td style="font-size:12px">Private air transportation: Burbank, CA → Nice, France</td>
-          <td class="num" style="color:var(--red);font-size:16px;font-weight:800">$30,903</td>
-          <td style="font-size:11px;color:var(--text-3)">Cloobeck arrested May 2026 on felony witness intimidation charges. Has since left Democratic Party and publicly denounced Swalwell.</td>
-        </tr>
-      </tbody>
-    </table></div>
-  </div>
-
-  <div class="sec-note info">
-    <strong>Source:</strong> House Financial Disclosure Report, Filing ID #10066827, Hon. Eric Swalwell, Annual Report Filing Year 2024, filed August 13, 2025 — linked from the 119th Master List. Congressional salary per CRS, frozen at $174,000 since 2009. Net worth calculations based on disclosed ranges. Mortgage estimates based on 30-year fixed at 4.5% on minimum loan value. All flags represent analyst observations on publicly reported data. No legal conclusions asserted.
-  </div>
-</div>
-
-
-<!-- VENDOR INTELLIGENCE -->
-<div id="page-vendors" class="page">
-  <div class="page-header">
-    <div class="page-title">Vendor Intelligence</div>
-    <div class="page-sub">Comprehensive analysis of every vendor across all entities · categorized by function · hotel tier classification · legal controversy correlation</div>
-  </div>
-
-  <!-- Instruction banner -->
-  <div class="vi-instructions">👇 Click any category below to expand its full breakdown — top vendors, spending concentration, and transaction stats appear right beneath the grid.</div>
-
-  <div class="vi-ent-filter" id="viEntFilter"></div>
-  <div class="sec-label">Spending by category</div>
-  <div class="vi-cat-grid" id="viCatGrid"></div>
-  <div id="viCatDetail"></div>
-</div>
+<div id="page-disclosure" class="page"></div>
 
 <!-- TIMELINE -->
 <div id="page-timeline" class="page">
@@ -2057,8 +1830,9 @@ function resetPage(id){
   if(id==='entities'){
     selectedEnts=new Set(['office']);
     renderEntView();
-    const cs=document.getElementById('crossSearch');if(cs)cs.value='';
     document.querySelectorAll('#page-entities .itab').forEach(t=>t.classList.toggle('active',t.dataset.tab==='individuals'));
+    VI.activeEnt='all';
+    VI.activeCat='all';
   }
   if(id==='flags'){
     document.querySelectorAll('.flag-pill').forEach(p=>p.classList.toggle('active',p.dataset.sev==='all'));
@@ -2073,11 +1847,6 @@ function resetPage(id){
   }
   if(id==='disclosure'){
     // static section — no filters, accordions, or selections to reset
-  }
-  if(id==='vendors'){
-    // clean slate: no category expanded, entity filter back to All
-    VI.activeEnt='all';
-    VI.activeCat='all';
   }
   if(id==='houseai'){
     // close all ic-open accordions and native <details> panels in both Prudence views
@@ -2096,7 +1865,7 @@ function showPage(id,el){
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   if(el)el.classList.add('active');
-  if(id==='vendors')initVendorIntelligence();
+  if(id==='entities')initVendorIntelligence();
   if(id==='disclosure')initDisclosure();
   window.scrollTo(0,0);
 }
@@ -2107,26 +1876,6 @@ let _discDynamic=false;
 function initDisclosure(){
   if(_discInit)return;
   _discInit=true;
-  if(document.getElementById('d-liab-creditor')){
-    // Swalwell hardcoded charts
-    new Chart(document.getElementById('d-liab-creditor'),{
-      type:'bar',
-      data:{labels:['Apple FCU — Home Loan','Ed Financial — Student Loans','Chase — Credit Card','Amex — Credit Card'],
-        datasets:[{data:[1000001,50001,15001,15001],
-          backgroundColor:['#9b2335','#c9963a','#b45309','#b45309'],borderRadius:5,borderSkipped:false}]},
-      options:{maintainAspectRatio:false,indexAxis:'y',
-        plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)+' (minimum)'}}},
-        scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},
-                y:{ticks:{color:'#4a5568',font:{size:11}},grid:{display:false}}}}
-    });
-    new Chart(document.getElementById('d-salary-chart'),{
-      type:'doughnut',
-      data:{labels:['Est. Take-Home After Tax','Est. Min. Mortgage Payment','Credit Cards (min)','Student Loans (min)','Remaining'],
-        datasets:[{data:[118320,60804,30002,50001,118320-60804-30002-50001],
-          backgroundColor:['#b45309','#9b2335','#9b2335b3','#c9963a','#2d6a4f'],borderWidth:2,borderColor:'#fff'}]},
-      options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#4a5568',font:{size:10},padding:8,boxWidth:12}},tooltip:{callbacks:{label:c=>`${c.label}: ${fmt(c.parsed)}`}}},cutout:'62%'}
-    });
-  }
   if(_discDynamic)initDynDisclosureCharts();
 }
 
@@ -2183,8 +1932,8 @@ function renderDisclosure(){
   if(!el||!fd)return false;
   const esc=s=>String(s==null?'':s).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
   const h=fd.header||{}, s=fd.summary||{};
-  const a=fd.schedule_a||[], b=fd.schedule_b||[], dd=fd.schedule_d||[], c=fd.schedule_c||[], ag=fd.agreements||[], sh=fd.schedule_h||[];
-  const flags=D.flags||[];
+  const a=fd.schedule_a||[], b=fd.schedule_b||[], dd=fd.schedule_d||[], c=fd.schedule_c||[], ag=fd.agreements||[], sh=fd.schedule_h||[], se=fd.schedule_e||[], sg=fd.schedule_g||[];
+  const flags=fd.flags||D.flags||[];
   const rng=(lo,hi)=>'$'+Math.round(lo).toLocaleString()+' – $'+Math.round(hi).toLocaleString();
   const src=fd.source_url?`<a href="${esc(fd.source_url)}" target="_blank" style="color:var(--navy-mid);text-decoration:underline">View source PDF ↗</a>`:'';
   const isMember=(h.status||'').toLowerCase()==='member';
@@ -2333,6 +2082,30 @@ function renderDisclosure(){
     </ul></div></div>`;
   }
 
+  // Schedule E (positions outside government)
+  let schedE='';
+  if(se.length){
+    schedE=`<div class="tcard"><div class="tcard-head"><h3>Schedule E — Positions Held Outside Government</h3></div>
+    <div class="tscroll"><table><thead><tr><th>Position</th><th>Organization</th><th>Note</th></tr></thead>
+    <tbody>${se.map(r=>`<tr><td>${esc(r.position||'')}</td>
+      <td>${esc(r.organization||'')}</td>
+      <td style="font-size:11px;color:var(--text-3)">${esc(r.note||'')}</td></tr>`).join('')}
+    </tbody></table></div></div>`;
+  }
+
+  // Schedule G (gifts)
+  let schedG='';
+  if(sg.length){
+    schedG=`<div class="tcard"><div class="tcard-head"><h3>Schedule G — Gifts</h3></div>
+    <div class="tscroll"><table><thead><tr><th>Source</th><th>Description</th><th class="num">Value</th><th>Note</th></tr></thead>
+    <tbody>${sg.map(r=>`<tr>
+      <td>${esc(r.source||'')}</td>
+      <td style="font-size:12px">${esc(r.description||'')}</td>
+      <td class="num" style="color:var(--red);font-weight:700">${esc(r.value||'')}</td>
+      <td style="font-size:11px;color:var(--text-3)">${esc(r.note||'')}</td></tr>`).join('')}
+    </tbody></table></div></div>`;
+  }
+
   el.innerHTML=`<div class="page-header">
     <div class="page-title">Financial Disclosure</div>
     <div class="page-sub">${filingBadge}</div>
@@ -2343,7 +2116,7 @@ function renderDisclosure(){
     <div class="disclosure-hero-sub">Filing Year: ${esc(h.filing_year||'')} · Filed: ${esc(h.filing_date||'')} · State/District: ${esc(h.state_district||'')} · Status: ${esc(h.status||'')}</div>
     <div class="disclosure-hero-meta">${chips.join('')}</div>
   </div>
-  ${nwBlock}${chartRow}${flagsHtml}${schedA}${schedC}${schedD}${schedH}${schedB}${schedAg}
+  ${nwBlock}${chartRow}${flagsHtml}${schedA}${schedC}${schedD}${schedE}${schedH}${schedG}${schedB}${schedAg}
   <div class="sec-note info"><strong>Source:</strong> House Financial Disclosure Report, Filing ID #${esc(h.filing_id||'—')}, ${esc(h.name||'')}, ${esc(h.filing_type||'')} Filing Year ${esc(h.filing_year||'')}, filed ${esc(h.filing_date||'')}. ${src}
   All flags represent analyst observations on publicly reported data. No legal conclusions asserted.</div>`;
 
@@ -2369,16 +2142,16 @@ function renderDisclosure(){
   if(document.getElementById('navTitle'))document.getElementById('navTitle').textContent=name;
   if(document.getElementById('navSub'))document.getElementById('navSub').textContent=`${state}-${dist} · ${party} · ${congress} Congress`;
   document.title=`Article One · ${state}-${dist} ${last}`;
+  // Financial Disclosure renders for every member (shows placeholder if no FD data)
+  renderDisclosure();
   // Hand-authored narrative tabs are per-member; placeholder them for members not yet authored.
   const bio=new URLSearchParams(location.search).get('member');
   if(bio && bio!=='S001193' && bio!=='swalwell'){
-    renderDisclosure();  // Financial Disclosure rendered from the member's House FD PDF
     // Vendor Intelligence: clicking a category square expands the auto-generated holistic
     // breakdown inline below the grid (Swalwell-only editorial deep-dives don't apply here).
-    const vsub=document.querySelector('#page-vendors .page-sub');
-    if(vsub)vsub.textContent='Every vendor and payee categorized by function — built from this member’s own FEC campaign and House-office disbursements.';
+    // spending by category is now embedded in the entities page — no subtitle to update
     const tl=document.getElementById('page-timeline');
-    if(tl)tl.innerHTML=`<div style="max-width:680px;margin:48px auto;padding:32px;border:1px dashed var(--border);border-radius:12px;text-align:center;color:var(--text-3)"><div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px">Political Timeline — not yet authored</div>This section is written per member. ${name}'s timeline hasn't been added yet. The other tabs (Overview, Entities, Vendor Intelligence, Financial Disclosure, Sources) are live from ${name}'s filings.</div>`;
+    if(tl)tl.innerHTML=`<div style="max-width:680px;margin:48px auto;padding:32px;border:1px dashed var(--border);border-radius:12px;text-align:center;color:var(--text-3)"><div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px">Political Timeline — not yet authored</div>This section is written per member. ${name}'s timeline hasn't been added yet. The other tabs (Overview, Entities, Financial Disclosure, Sources) are live from ${name}'s filings.</div>`;
   }
 })();
 
@@ -2534,6 +2307,8 @@ function renderEntView(){
     cross.style.display='';
     buildCrossView([...selectedEnts]);
   }
+  VI.activeCat='all';
+  initVendorIntelligence();
 }
 
 const isConsultant=role=>/consult/i.test(role||'');
@@ -2620,50 +2395,7 @@ function buildCrossView(keys){
       </div>
     </div>
 
-    <div class="cross-section-head">
-      <div class="csh-icon" style="background:#d8f0e5">👤</div>
-      <span class="csh-title">Shared individuals</span>
-      <span class="csh-sub">— people paid by multiple selected entities</span>
-    </div>
-    <div class="tcard" style="margin-bottom:14px">
-      <div class="tcard-head"><h3>Shared employees & payees</h3><span class="tsub">${sharedPeople.length} individual${sharedPeople.length!==1?'s':''} in common</span></div>
-      <div class="tscroll"><table><thead><tr>
-        <th>Name</th>${sharedAmtCols}<th class="num">Total</th>
-      </tr></thead><tbody>${peopleRowsHtml}</tbody></table></div>
-    </div>
-
-    <div class="cross-section-head">
-      <div class="csh-icon" style="background:#fef3c7">🏢</div>
-      <span class="csh-title">Shared vendors</span>
-      <span class="csh-sub">— organizations paid by multiple selected entities</span>
-    </div>
-    <div class="tcard" style="margin-bottom:14px">
-      <div class="tcard-head"><h3>Shared organizations</h3><span class="tsub">${sharedVendors.length} vendor${sharedVendors.length!==1?'s':''} in common</span></div>
-      <div class="tscroll"><table><thead><tr>
-        <th>Vendor</th>${sharedAmtCols}<th class="num">Total</th>
-      </tr></thead><tbody>${vendRowsHtml}</tbody></table></div>
-    </div>
-
-    <div class="cross-section-head">
-      <div class="csh-icon" style="background:#eef3fa">📋</div>
-      <span class="csh-title">All payees combined</span>
-      <span class="csh-sub">— every payee across selected entities, sorted by total</span>
-    </div>
-    <div class="tcard">
-      <div class="tcard-head">
-        <h3>Combined payee list</h3>
-        <span class="tsub" id="crossAllCount">${combinedSorted.length} unique payees</span>
-        <input class="tsearch" id="crossSearch" placeholder="Search name…" oninput="filterCrossAll()" style="margin-left:auto">
-      </div>
-      <div class="tscroll"><table id="crossAllTable"><thead><tr>
-        <th>Name</th><th>Entities</th><th>Category</th><th class="num">Total</th>
-      </tr></thead><tbody></tbody></table></div>
-    </div>`;
-
-  // store data for search
-  cross._allRows=combinedSorted;
-  cross._keys=keys;
-  renderCrossAllTable(combinedSorted, keys);
+  `;
 
   // draw comparison bar chart
   const cv=document.getElementById('cross-cmp-chart');
@@ -2676,28 +2408,6 @@ function buildCrossView(keys){
         scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},
                 y:{ticks:{color:'#4a5568',font:{weight:'600',size:11}},grid:{display:false}}}}});
   }
-}
-
-function renderCrossAllTable(rows, keys){
-  const tb=document.querySelector('#crossAllTable tbody');
-  if(!tb)return;
-  const keysToUse=keys||document.getElementById('entCrossPanel')._keys||[];
-  tb.innerHTML=rows.slice(0,200).map(r=>`
-    <tr onclick='showCrossPayee(${JSON.stringify(keysToUse)}, ${JSON.stringify(r.name)})'>
-      <td style="font-weight:600">${r.name}${r.entities.length>1?` <span class="shared-badge">shared</span>`:''}</td>
-      <td style="font-size:12px">${r.entities.map(k=>`<span style="display:inline-block;color:${META[k].color};font-weight:600;margin-right:6px;white-space:nowrap">${META[k].short}</span>`).join('')}</td>
-      <td style="color:#718096">${r.rows[r.entities[0]]?.role||r.rows[r.entities[0]]?.cat||''}</td>
-      <td class="num" style="font-weight:700">${fmt(r.total)}</td>
-    </tr>`).join('');
-  const cnt=document.getElementById('crossAllCount');
-  if(cnt)cnt.textContent=`${rows.length} unique payees`;
-}
-
-function filterCrossAll(){
-  const cross=document.getElementById('entCrossPanel');
-  const q=(document.getElementById('crossSearch')?.value||'').toLowerCase().trim();
-  const rows=q?(cross._allRows||[]).filter(r=>r.name.toLowerCase().includes(q)):cross._allRows||[];
-  renderCrossAllTable(rows, cross._keys);
 }
 
 function showCrossPayee(keys, name){
@@ -2834,10 +2544,6 @@ function buildEntities(){
           <div class="cwrap"><canvas id="ecat-${k}"></canvas></div>
         </div>
       </div>
-      <div id="${k}-ind">
-        ${inds.length?tableHtml(k,inds,'ind'):'<p style="color:var(--muted);padding:16px">No individual payee data.</p>'}
-      </div>
-      ${vends.length?`<div id="${k}-org" style="margin-top:14px">${tableHtml(k,vends,'org')}</div>`:''}
     `;
     profs.appendChild(prof);
   });
@@ -3435,17 +3141,18 @@ const VI = {
   activeCat: 'all',
   charts: {},
 
-  categories: [
+  // Raw editorial categories — never mutated; buildVendorCategories derives VI.categories from this
+  _rawCategories: [
     {
       id:'media', label:'Media & Advertising', icon:'📺', color:'#2a4f7c',
       total:6364831,
       desc:'TV/digital ads, video production, creative strategy, social media',
       vendors:[
-        {name:'The Tucker Group',            total:2022327, ents:'House · Pres · PAC', note:'Primary media firm · 2012–present · longest-running vendor relationship across 14 years'},
-        {name:'Berger Hirschberg Strategies', total:1675934, ents:'House · Pres',       note:'Fundraising & media strategy · joined 2018 · now second-largest media relationship'},
+        {name:'The Tucker Group',            total:2022327, ents:'House Campaign · Pres · PAC', note:'Primary media firm · 2012–present · longest-running vendor relationship across 14 years'},
+        {name:'Berger Hirschberg Strategies', total:1675934, ents:'House Campaign · Pres',       note:'Fundraising & media strategy · joined 2018 · now second-largest media relationship'},
         {name:'Screen Strategies Media',      total:754982,  ents:'Gov',                note:'Governor campaign TV advertising · largest single-entity media buy'},
-        {name:'BCOM Solutions LLC',           total:747794,  ents:'House · Gov',        note:'Media buying · cross-entity presence in both House and Governor committees'},
-        {name:'Veracity Media',               total:403994,  ents:'House · PAC',        note:'Digital advertising · House + Remedy PAC'},
+        {name:'BCOM Solutions LLC',           total:747794,  ents:'House Campaign · Gov',        note:'Media buying · cross-entity presence in both House and Governor committees'},
+        {name:'Veracity Media',               total:403994,  ents:'House Campaign · PAC',        note:'Digital advertising · House + Remedy PAC'},
         {name:'True Blue Digital',            total:347419,  ents:'Gov',                note:'Digital advertising · Governor race'},
         {name:'Google LLC',                   total:108638,  ents:'Pres',               note:'Paid search / YouTube advertising during presidential run'},
         {name:'Facebook',                     total:102326,  ents:'Pres',               note:'Social media advertising · 2019 presidential campaign'},
@@ -3461,11 +3168,11 @@ const VI = {
       total:3735000,
       desc:'Online donation processing, voter data, compliance software, payroll, DC fundraising',
       vendors:[
-        {name:'DCCC (contributions & fees)',      total:1783000, ents:'House · PAC',  note:'Party committee payments: contributions, transfers, and joint fundraising fees'},
-        {name:'Molly Allen Associates',           total:557546,  ents:'House',        note:'DC fundraising consultant · 2012–present · one of the longest-tenured relationships'},
-        {name:'ActBlue Technical Services',       total:631000,  ents:'House · Gov · PAC', note:'Online donation processing · cross-entity · largest digital fundraising infrastructure vendor'},
-        {name:'PrimePay',                         total:537829,  ents:'House',        note:'Payroll processing · largest recurring operational vendor'},
-        {name:'NGP VAN Inc',                      total:495000,  ents:'House · Pres · PAC', note:'Voter data, CRM & compliance software · every controlled federal entity'},
+        {name:'DCCC (contributions & fees)',      total:1783000, ents:'House Campaign · PAC',  note:'Party committee payments: contributions, transfers, and joint fundraising fees'},
+        {name:'Molly Allen Associates',           total:557546,  ents:'House Campaign',        note:'DC fundraising consultant · 2012–present · one of the longest-tenured relationships'},
+        {name:'ActBlue Technical Services',       total:631000,  ents:'House Campaign · Gov · PAC', note:'Online donation processing · cross-entity · largest digital fundraising infrastructure vendor'},
+        {name:'PrimePay',                         total:537829,  ents:'House Campaign',        note:'Payroll processing · largest recurring operational vendor'},
+        {name:'NGP VAN Inc',                      total:495000,  ents:'House Campaign · Pres · PAC', note:'Voter data, CRM & compliance software · every controlled federal entity'},
         {name:'Washington Suite Life',            total:31000,   ents:'PAC',          note:'Fundraising event venue/services · Remedy PAC'},
       ]
     },
@@ -3485,12 +3192,12 @@ const VI = {
       total:1130167,
       desc:'Outside legal counsel across all entities · $1.13M+ total · spikes align with controversy timeline',
       vendors:[
-        {name:'Coblentz Patch Duffy & Bass LLP',   total:357000, ents:'House · Gov',       note:'SF litigation firm · largest single legal payee · peaked 2021 ($99K) after Fang disclosure'},
+        {name:'Coblentz Patch Duffy & Bass LLP',   total:357000, ents:'House Campaign · Gov',       note:'SF litigation firm · largest single legal payee · peaked 2021 ($99K) after Fang disclosure'},
         {name:'Law Office of Sara Azari',           total:313251, ents:'Gov',               note:'Criminal defense specialist · $313K as "Campaign Legal Compliance" · surrounds resignation'},
-        {name:'Miller & Olson LLP',                 total:103901, ents:'House · Pres · PAC',note:'Election law · only firm billing all three controlled federal entities'},
-        {name:'Greenberg Traurig LLP',              total:75000,  ents:'House · PAC',       note:'Major national firm · accelerating 2024–25'},
-        {name:'Whitney Burns (Financial Compliance)',total:197532, ents:'House · Pres · PAC',note:'Standing financial-compliance consultant · 59 payments 2012–2022 · treasurer-level role billed by every federal committee'},
-        {name:'Other / misc outside counsel',        total:83483,  ents:'House · Gov',        note:'Remaining smaller legal engagements across entities'},
+        {name:'Miller & Olson LLP',                 total:103901, ents:'House Campaign · Pres · PAC',note:'Election law · only firm billing all three controlled federal entities'},
+        {name:'Greenberg Traurig LLP',              total:75000,  ents:'House Campaign · PAC',       note:'Major national firm · accelerating 2024–25'},
+        {name:'Whitney Burns (Financial Compliance)',total:197532, ents:'House Campaign · Pres · PAC',note:'Standing financial-compliance consultant · 59 payments 2012–2022 · treasurer-level role billed by every federal committee'},
+        {name:'Other / misc outside counsel',        total:83483,  ents:'House Campaign · Gov',        note:'Remaining smaller legal engagements across entities'},
       ]
     },
     {
@@ -3504,9 +3211,9 @@ const VI = {
       total:780000,
       desc:'Airline travel, booking services across House campaign and PAC',
       vendors:[
-        {name:'United Airlines',  total:706779, ents:'House · PAC', note:'Dominant carrier · 56 payments · House + PAC'},
+        {name:'United Airlines',  total:706779, ents:'House Campaign · PAC', note:'Dominant carrier · 56 payments · House + PAC'},
         {name:'American Airlines',total:67710,  ents:'Pres · PAC',  note:'Presidential and PAC travel'},
-        {name:'Hotels.com',       total:5905,   ents:'House',       note:'Online travel booking'},
+        {name:'Hotels.com',       total:5905,   ents:'House Campaign',       note:'Online travel booking'},
       ]
     },
     {
@@ -3514,7 +3221,7 @@ const VI = {
       total:275598,
       desc:'Executive and personal protection services',
       vendors:[
-        {name:'Global Guardian', total:275598, ents:'House', note:'Executive / personal protection · $275K from House campaign · unusually large for a House member'},
+        {name:'Global Guardian', total:275598, ents:'House Campaign', note:'Executive / personal protection · $275K from House campaign · unusually large for a House member'},
       ]
     },
     {
@@ -3522,13 +3229,15 @@ const VI = {
       total:2787500,
       desc:'Inter-committee transfers, state party contributions, candidate committee donations',
       vendors:[
-        {name:'Swalwell for America (Presidential)',    total:1000365, ents:'House',      note:'Transfer from House committee to presidential campaign'},
-        {name:'Testing the Waters / Swalwell for America', total:700000, ents:'House',    note:'Exploratory transfer · later returned in full'},
+        {name:'Swalwell for America (Presidential)',    total:1000365, ents:'House Campaign',      note:'Transfer from House committee to presidential campaign'},
+        {name:'Testing the Waters / Swalwell for America', total:700000, ents:'House Campaign',    note:'Exploratory transfer · later returned in full'},
         {name:'Iowa Democratic Party',                 total:87500,   ents:'Pres',        note:'State party contribution during presidential run'},
         {name:'Candidate committee contributions (PAC)',total:600000, ents:'PAC',         note:'Remedy PAC contributions to Democratic candidates across multiple cycles'},
       ]
     },
   ],
+
+  categories: [], // populated by buildVendorCategories on each render
 
   hotels: [
     // ICONIC LUXURY
@@ -3597,14 +3306,70 @@ const TIER_BG={
 let viChart=null;
 function destroyViChart(){if(viChart){try{viChart.destroy();}catch(e){}viChart=null;}}
 
-// Build VI.categories from the loaded member's own FEC/SOD data (per-entity by_category),
-// respecting the active entity filter. Returns false for members without by_category
-// (e.g. Swalwell's legacy hardcoded dataset), leaving the existing VI.categories intact.
+// Maps the short display labels used in vendor ents strings back to entity keys
+const VI_ENT_MAP={'House Campaign':'house','House':'house','Pres':'pres','PAC':'pac','Gov':'gov','Office':'office','House Office (MRA)':'office','House Office':'office'};
+const viParseEnts=str=>str.split(/\s*·\s*/).map(s=>VI_ENT_MAP[s.trim()]).filter(Boolean);
+
+// Normalize a payee name for cross-entity matching (matches buildCrossView logic).
+const viNormName=n=>{let s=n.toUpperCase().trim();if(s.includes(',')){const[last,...rest]=s.split(',');s=rest.join(' ').trim()+' '+last.trim();}s=s.replace(/\b(JR|SR|II|III|IV|MR|MRS|MS|DR|ESQ|MD|PHD|DBA)\b\.?/g,'');s=s.replace(/\b[A-Z]\b\.?/g,'');return(s.match(/[A-Z]{2,}/g)||[]).sort().join('');};
+
+// Build the Salary & Payroll category from top_individuals across the given entity keys.
+function buildSalaryCategory(entKeys){
+  const byPerson={};
+  entKeys.forEach(k=>{
+    const e=E[k]; if(!e)return;
+    (e.top_individuals||[]).forEach(p=>{
+      const nk=viNormName(p.name);
+      if(!byPerson[nk])byPerson[nk]={name:p.name,amt:0,entities:[],byEnt:{},by_year:p.by_year||null,role:p.role||''};
+      byPerson[nk].amt+=p.amt;
+      byPerson[nk].entities.push(k);
+      byPerson[nk].byEnt[k]=p.amt;
+    });
+  });
+  const all=Object.values(byPerson).sort((a,b)=>b.amt-a.amt);
+  const total=all.reduce((s,p)=>s+p.amt,0);
+  return {
+    id:'salary', label:'Salary & Payroll', icon:'👥', color:'#1e3a5f',
+    total,
+    vendors:all.map(p=>({
+      name:p.name, total:p.amt,
+      ents:p.entities.map(k=>(META[k]||{}).short||k).join(' · '),
+      shared:p.entities.length>1,
+      entities:p.entities, byEnt:p.byEnt,
+      by_year:p.by_year, role:p.role
+    }))
+  };
+}
+
 function buildVendorCategories(){
   const hasBC=ORDER.some(k=>E[k]&&E[k].by_category);
-  VI.dataDriven=hasBC;   // true = member has structured by_category data (auto analysis); false = Swalwell legacy editorial
-  if(!hasBC)return false;
-  const ents=VI.activeEnt==='all'?ORDER:[VI.activeEnt];
+  VI.dataDriven=hasBC;
+
+  if(!hasBC){
+    // Legacy editorial path: filter _rawCategories by selectedEnts intersection
+    const sel=(selectedEnts&&selectedEnts.size)?selectedEnts:new Set(ORDER);
+    VI.categories=VI._rawCategories.map(cat=>{
+      // Hotels are House-campaign-era data; show when house is selected (or all)
+      if(cat.id==='hotels'){
+        const visible=sel.has('house')||sel.size===ORDER.length;
+        return visible?{...cat}:null;
+      }
+      const filteredVendors=cat.vendors.filter(v=>{
+        const vEnts=viParseEnts(v.ents||'');
+        return vEnts.length===0||vEnts.some(k=>sel.has(k));
+      });
+      if(!filteredVendors.length)return null;
+      const total=filteredVendors.reduce((s,v)=>s+v.total,0);
+      return {...cat,total,vendors:filteredVendors};
+    }).filter(Boolean).sort((a,b)=>b.total-a.total);
+    // inject salary from top_individuals
+    const salEnts=(selectedEnts&&selectedEnts.size)?[...selectedEnts].filter(k=>ORDER.includes(k)):ORDER;
+    const sal=buildSalaryCategory(salEnts);
+    if(sal.total>0){VI.categories=VI.categories.filter(c=>c.id!=='salary');VI.categories.push(sal);VI.categories.sort((a,b)=>b.total-a.total);}
+    return true;
+  }
+
+  const ents=(selectedEnts&&selectedEnts.size)?[...selectedEnts].filter(k=>ORDER.includes(k)):ORDER;
   const map={};
   ents.forEach(k=>{
     const e=E[k]; if(!e||!e.by_category)return;
@@ -3622,31 +3387,22 @@ function buildVendorCategories(){
     const allV=Object.entries(c.vm).sort((a,b)=>b[1].total-a[1].total);
     return {
       id:c.id,label:c.label,icon:c.icon,color:c.color,total:c.total,
-      n:c.n,                       // total transactions in this category (data-driven members only)
-      vendorCount:allV.length,     // distinct vendors seen across the active entity filter
+      n:c.n,
+      vendorCount:allV.length,
       vendors:allV.slice(0,15).map(([name,v])=>({name,total:v.total,ents:Object.keys(v.ents).join(' · '),note:''}))
     };
   });
+  // inject salary from top_individuals
+  const sal=buildSalaryCategory(ents);
+  if(sal.total>0){VI.categories=VI.categories.filter(c=>c.id!=='salary');VI.categories.push(sal);VI.categories.sort((a,b)=>b.total-a.total);}
   return true;
 }
 
 function initVendorIntelligence(){
-  const ef=document.getElementById('viEntFilter');
-  if(!ef)return;
-  buildVendorCategories();   // refresh categories for the current entity filter (no-op for legacy data)
-  const pills=[{k:'all',label:'All entities',color:'#1a2433'}]
-    .concat(ORDER.map(k=>({k,label:(META[k]||{}).short||k,color:(META[k]||{}).color||'#64748b'})));
-  ef.innerHTML=pills.map(({k,label,color})=>`<div class="vi-ent-pill${VI.activeEnt===k?' active':''}"
-    onclick="viSetEnt('${k}')" style="${VI.activeEnt===k?'background:'+color+';border-color:'+color:''}">${label}</div>`).join('');
-
+  if(!document.getElementById('viCatGrid'))return;
+  buildVendorCategories();
   renderViCatGrid();
   renderViCatDetail();
-}
-
-function viSetEnt(k){
-  VI.activeEnt=k;
-  VI.activeCat='all';
-  initVendorIntelligence();
 }
 
 function viSelectCat(id){
@@ -3812,82 +3568,122 @@ function renderCategorySegment(catId,target){
     <div style="position:relative;height:${Math.min(topV.length,10)*34+20}px"><canvas id="catSegCanvas"></canvas></div>
   </div>`;
 
-  // ── salary: chart full-width on top, per-person yearly table below ──
+  // ── salary: always built from top_individuals via buildSalaryCategory ──
   const isSalary=catId==='salary';
-  const officeEnt=isSalary?ORDER.map(k=>E[k]).find(e=>e&&e.source_type==='SOD'):null;
-  const staff=officeEnt?
-    (officeEnt.top_individuals||[]).filter(p=>p.by_year&&Object.keys(p.by_year).length>0).sort((a,b)=>b.amt-a.amt):
-    [];
-  const hasYearData=staff.length>0;
-
-  if(isSalary&&!hasYearData){
-    // Salary category but no per-year data available — show chart + honest note
-    el.innerHTML=`<div class="vi-detail">
-      ${headHtml}
-      ${statCardsHtml}
-      ${insightHtml}
-      ${chartSectionHtml('Top staff by total compensation')}
-      <div style="padding:0 16px 20px">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a0aec0;margin-bottom:10px">Staff — annual compensation by year</div>
-        <div style="background:#f8fafc;border:1px solid #eaecf2;border-radius:8px;padding:24px 20px;text-align:center">
-          <div style="font-size:22px;margin-bottom:8px">📅</div>
-          <div style="font-size:14px;font-weight:700;color:#4a5568;margin-bottom:6px">Not enough tenure data</div>
-          <div style="font-size:13px;color:#718096;line-height:1.6;max-width:380px;margin:0 auto">This member hasn't been in office long enough to show a meaningful year-over-year pay breakdown. Check back as more Statement of Disbursements filings accumulate.</div>
-        </div>
-      </div>
-    </div>`;
-  } else if(isSalary&&hasYearData){
-    const allYears=[...new Set(staff.flatMap(p=>Object.keys(p.by_year)))].sort();
+  if(isSalary){
+    const selKeys=(selectedEnts&&selectedEnts.size)?[...selectedEnts].filter(k=>ORDER.includes(k)):ORDER;
+    const multiEnt=selKeys.length>1;
+    const sharedPeople=cat.vendors.filter(v=>v.shared);
     const thStyle='text-align:right;padding:8px 10px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;background:#f8fafc';
     const thStyleL='text-align:left;padding:8px 14px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;background:#f8fafc';
 
-    const salaryRows=staff.map(p=>{
-      const personTotal=Object.values(p.by_year).reduce((s,v)=>s+v,0);
-      const share=cat.total?personTotal/cat.total*100:0;
-      const maxCell=Math.max(...Object.values(p.by_year),1);
-      // latest title: highest-amount txn purpose (salary payments are the biggest), title-cased
-      const rawTitle=(p.txns&&p.txns.length?p.txns.reduce((best,t)=>t.amount>best.amount?t:best,p.txns[0]).purpose:'');
-      const latestTitle=rawTitle.split(/\s+/).map(w=>w?w[0].toUpperCase()+w.slice(1).toLowerCase():'').join(' ');
-      const yearsActive=allYears.filter(y=>(p.by_year[y]||0)>0).length;
-      const cells=allYears.map(y=>{
-        const a=p.by_year[y]||0;
-        if(!a)return`<td style="text-align:right;padding:7px 8px;color:#d1d5db;font-size:12px;border-bottom:1px solid #f7f6f3">–</td>`;
-        // subtle heat: opacity 12%–45% of category color using hex alpha
-        const alphaHex=Math.round((0.12+a/maxCell*0.33)*255).toString(16).padStart(2,'0');
-        return`<td style="text-align:right;padding:7px 8px;font-size:12px;font-weight:600;font-family:ui-monospace,monospace;background:${cat.color}${alphaHex};border-bottom:1px solid #f7f6f3">${fmtK(a)}</td>`;
+    // Shared people table (multi-entity only)
+    const sharedHtml=multiEnt&&sharedPeople.length?`
+      <div style="padding:0 16px 20px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#9b2335;margin-bottom:10px">
+          👥 Paid by multiple selected entities — ${sharedPeople.length} person${sharedPeople.length!==1?'s':''}
+        </div>
+        <div style="overflow-x:auto;border:1px solid #f5dde0;border-radius:8px">
+          <table style="border-collapse:collapse;font-size:13px;width:100%">
+            <thead><tr>
+              <th style="${thStyleL}">Name</th>
+              ${selKeys.map(k=>`<th style="${thStyle}">${(META[k]||{}).short||k}</th>`).join('')}
+              <th style="${thStyle}">Combined</th>
+            </tr></thead>
+            <tbody>${sharedPeople.map(p=>`<tr>
+              <td style="padding:8px 14px;font-weight:700;font-size:13px;white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmtSODName(p.name)}</td>
+              ${selKeys.map(k=>`<td style="text-align:right;padding:7px 10px;font-size:12px;font-family:ui-monospace,monospace;border-bottom:1px solid #f7f6f3;${p.byEnt[k]?'font-weight:600':'color:#d1d5db'}">${p.byEnt[k]?fmtK(p.byEnt[k]):'–'}</td>`).join('')}
+              <td style="text-align:right;padding:8px 14px;font-weight:800;font-family:ui-monospace,monospace;color:#9b2335;border-bottom:1px solid #f7f6f3">${fmtK(p.total)}</td>
+            </tr>`).join('')}</tbody>
+          </table>
+        </div>
+      </div>`:'';
+
+    // Per-entity tables
+    const entTablesHtml=selKeys.map(k=>{
+      const e=E[k]; if(!e)return'';
+      const people=(e.top_individuals||[]).sort((a,b)=>b.amt-a.amt);
+      if(!people.length)return'';
+      const entityTotal=people.reduce((s,p)=>s+p.amt,0);
+      const isSod=e.source_type==='SOD';
+      const staffWithYears=isSod?people.filter(p=>p.by_year&&Object.keys(p.by_year).length>0):[];
+      const allYears=staffWithYears.length?[...new Set(staffWithYears.flatMap(p=>Object.keys(p.by_year)))].sort():[];
+      const entLabel=(META[k]||{}).short||k;
+      const entColor=(META[k]||{}).color||cat.color;
+
+      if(isSod&&allYears.length){
+        const rows=staffWithYears.map(p=>{
+          const personTotal=Object.values(p.by_year).reduce((s,v)=>s+v,0);
+          const share=entityTotal?personTotal/entityTotal*100:0;
+          const maxCell=Math.max(...Object.values(p.by_year),1);
+          const rawTitle=(p.txns&&p.txns.length?p.txns.reduce((best,t)=>t.amount>best.amount?t:best,p.txns[0]).purpose:'');
+          const latestTitle=rawTitle.split(/\s+/).map(w=>w?w[0].toUpperCase()+w.slice(1).toLowerCase():'').join(' ');
+          const yearsActive=allYears.filter(y=>(p.by_year[y]||0)>0).length;
+          const cells=allYears.map(y=>{
+            const a=p.by_year[y]||0;
+            if(!a)return`<td style="text-align:right;padding:7px 8px;color:#d1d5db;font-size:12px;border-bottom:1px solid #f7f6f3">–</td>`;
+            const alphaHex=Math.round((0.12+a/maxCell*0.33)*255).toString(16).padStart(2,'0');
+            return`<td style="text-align:right;padding:7px 8px;font-size:12px;font-weight:600;font-family:ui-monospace,monospace;background:${entColor}${alphaHex};border-bottom:1px solid #f7f6f3">${fmtK(a)}</td>`;
+          }).join('');
+          const isShared=multiEnt&&sharedPeople.some(s=>viNormName(s.name)===viNormName(p.name));
+          return`<tr${isShared?' style="background:#fff8f0"':''}>
+            <td style="padding:8px 14px;font-weight:700;font-size:13px;white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmtSODName(p.name)}${isShared?' <span style="font-size:10px;background:#fef3c7;color:#92600a;border-radius:4px;padding:1px 5px;font-weight:700;vertical-align:middle">CROSS</span>':''}</td>
+            <td style="padding:8px 10px;font-size:11.5px;color:#718096;white-space:nowrap;border-bottom:1px solid #f7f6f3;max-width:160px;overflow:hidden;text-overflow:ellipsis">${latestTitle||'—'}</td>
+            <td style="text-align:center;padding:8px 8px;font-size:11.5px;color:#a0aec0;white-space:nowrap;border-bottom:1px solid #f7f6f3">${yearsActive}yr</td>
+            ${cells}
+            <td style="text-align:right;padding:8px 14px;font-weight:800;font-family:ui-monospace,monospace;color:${entColor};white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmt(personTotal)}</td>
+            <td style="text-align:right;padding:8px 10px;font-size:12px;color:#718096;white-space:nowrap;border-bottom:1px solid #f7f6f3">${share.toFixed(1)}%</td>
+          </tr>`;
+        }).join('');
+        return`<div style="padding:0 16px 24px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;color:${entColor}">${entLabel} — ${staffWithYears.length} staff · ${fmtK(entityTotal)}</div>
+          <div style="overflow-x:auto;border:1px solid #eaecf2;border-radius:8px">
+            <table style="border-collapse:collapse;font-size:13px;white-space:nowrap">
+              <thead><tr>
+                <th style="${thStyleL}">Name</th><th style="${thStyleL}">Title</th>
+                <th style="text-align:center;padding:8px 8px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:700;font-size:10px;white-space:nowrap;background:#f8fafc">Yrs</th>
+                ${allYears.map(y=>`<th style="${thStyle}">${y}</th>`).join('')}
+                <th style="${thStyle}">Total</th><th style="${thStyle}">%</th>
+              </tr></thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>
+          <div style="font-size:11px;color:#a0aec0;padding:8px 2px">Source: House Statement of Disbursements · Personnel Compensation rows only</div>
+        </div>`;
+      }
+
+      // Non-SOD or no year data: simple list
+      const rows=people.slice(0,20).map(p=>{
+        const share=entityTotal?p.amt/entityTotal*100:0;
+        const isShared=multiEnt&&sharedPeople.some(s=>viNormName(s.name)===viNormName(p.name));
+        return`<tr${isShared?' style="background:#fff8f0"':''}>
+          <td style="padding:8px 14px;font-weight:700;font-size:13px;white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmtSODName(p.name)}${isShared?' <span style="font-size:10px;background:#fef3c7;color:#92600a;border-radius:4px;padding:1px 5px;font-weight:700;vertical-align:middle">CROSS</span>':''}</td>
+          <td style="padding:8px 10px;font-size:11.5px;color:#718096;border-bottom:1px solid #f7f6f3">${p.role||'—'}</td>
+          <td style="text-align:right;padding:8px 14px;font-weight:800;font-family:ui-monospace,monospace;color:${entColor};border-bottom:1px solid #f7f6f3">${fmt(p.amt)}</td>
+          <td style="text-align:right;padding:8px 10px;font-size:12px;color:#718096;border-bottom:1px solid #f7f6f3">${share.toFixed(1)}%</td>
+        </tr>`;
       }).join('');
-      return`<tr>
-        <td style="padding:8px 14px;font-weight:700;font-size:13px;white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmtSODName(p.name)}</td>
-        <td style="padding:8px 10px;font-size:11.5px;color:#718096;white-space:nowrap;border-bottom:1px solid #f7f6f3;max-width:160px;overflow:hidden;text-overflow:ellipsis">${latestTitle||'—'}</td>
-        <td style="text-align:center;padding:8px 8px;font-size:11.5px;color:#a0aec0;white-space:nowrap;border-bottom:1px solid #f7f6f3">${yearsActive}yr</td>
-        ${cells}
-        <td style="text-align:right;padding:8px 14px;font-weight:800;font-family:ui-monospace,monospace;color:${cat.color};white-space:nowrap;border-bottom:1px solid #f7f6f3">${fmt(personTotal)}</td>
-        <td style="text-align:right;padding:8px 10px;font-size:12px;color:#718096;white-space:nowrap;border-bottom:1px solid #f7f6f3">${share.toFixed(1)}%</td>
-      </tr>`;
+      return`<div style="padding:0 16px 24px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;color:${entColor}">${entLabel} — ${people.length} individuals · ${fmtK(entityTotal)}</div>
+        <div style="overflow-x:auto;border:1px solid #eaecf2;border-radius:8px">
+          <table style="border-collapse:collapse;font-size:13px;width:100%">
+            <thead><tr>
+              <th style="${thStyleL}">Name</th><th style="${thStyleL}">Role</th>
+              <th style="${thStyle}">Total</th><th style="${thStyle}">%</th>
+            </tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      </div>`;
     }).join('');
 
     el.innerHTML=`<div class="vi-detail">
       ${headHtml}
       ${statCardsHtml}
       ${insightHtml}
+      ${sharedHtml}
       ${chartSectionHtml('Top staff by total compensation')}
-      <div style="padding:0 16px 20px">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a0aec0;margin-bottom:10px">Staff — annual compensation by year · top ${staff.length} by total</div>
-        <div style="overflow-x:auto;border:1px solid #eaecf2;border-radius:8px">
-          <table style="border-collapse:collapse;font-size:13px;white-space:nowrap">
-            <thead><tr>
-              <th style="${thStyleL}">Name</th>
-              <th style="${thStyleL}">Latest Title</th>
-              <th style="text-align:center;padding:8px 8px;border-bottom:2px solid #eaecf2;color:#718096;font-weight:700;font-size:10px;white-space:nowrap;background:#f8fafc">Yrs</th>
-              ${allYears.map(y=>`<th style="${thStyle}">${y}</th>`).join('')}
-              <th style="${thStyle}">Total</th>
-              <th style="${thStyle}">%</th>
-            </tr></thead>
-            <tbody>${salaryRows}</tbody>
-          </table>
-        </div>
-        <div style="font-size:11px;color:#a0aec0;padding:8px 2px">Source: House Statement of Disbursements · Personnel Compensation rows only</div>
-      </div>
+      ${entTablesHtml}
     </div>`;
 
   } else {
@@ -3931,11 +3727,31 @@ function renderCategorySegment(catId,target){
 
   const cv=document.getElementById('catSegCanvas');
   if(cv&&chartData.length){
-    catSegChart=new Chart(cv,{type:'bar',
-      data:{labels:chartLabels,datasets:[{data:chartData,backgroundColor:cat.color+'cc',borderColor:cat.color,borderWidth:1,borderRadius:5,borderSkipped:false}]},
-      options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)}}},
-        scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},
-                y:{ticks:{color:'#4a5568',font:{size:11,weight:'600'}},grid:{display:false}}}}});
+    // Salary chart: stack per-entity contributions so users can see how each person's pay splits across entities
+    if(catId==='salary'){
+      const top=topV.slice(0,10);
+      const entKeys=(selectedEnts&&selectedEnts.size)?[...selectedEnts].filter(k=>ORDER.includes(k)):ORDER;
+      const datasets=entKeys.map(k=>({
+        label:(META[k]||{}).short||k,
+        data:top.map(v=>(v.byEnt&&v.byEnt[k])||0),
+        backgroundColor:((META[k]||{}).color||cat.color)+'cc',
+        borderColor:(META[k]||{}).color||cat.color,
+        borderWidth:1,borderRadius:4,borderSkipped:false,stack:'pay'
+      }));
+      catSegChart=new Chart(cv,{type:'bar',
+        data:{labels:chartLabels,datasets},
+        options:{maintainAspectRatio:false,indexAxis:'y',
+          plugins:{legend:{display:entKeys.length>1,position:'top',labels:{font:{size:11,weight:'600'},boxWidth:12}},
+                   tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${fmt(c.parsed.x)}`}}},
+          scales:{x:{stacked:true,ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},
+                  y:{stacked:true,ticks:{color:'#4a5568',font:{size:11,weight:'600'}},grid:{display:false}}}}});
+    } else {
+      catSegChart=new Chart(cv,{type:'bar',
+        data:{labels:chartLabels,datasets:[{data:chartData,backgroundColor:cat.color+'cc',borderColor:cat.color,borderWidth:1,borderRadius:5,borderSkipped:false}]},
+        options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)}}},
+          scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},
+                  y:{ticks:{color:'#4a5568',font:{size:11,weight:'600'}},grid:{display:false}}}}});
+    }
   }
 }
 

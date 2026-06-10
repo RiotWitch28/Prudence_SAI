@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suffrage & Sass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,900;1,400;1,600;1,900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:           #F2EBE0;
+      --bg-surface:   #E8DFD2;
+
+      --teal:         #008C7E;
+      --teal-bright:  #00B8A4;
+      --teal-dim:     #006058;
+
+      --orange:       #C87010;
+      --orange-bright: #E88C20;
+
+      --merlot:       #8E2845;
+      --merlot-light: #A83358;
+      --merlot-dark:  #6A1C33;
+
+      --text:         #0C1828;
+      --text-muted:   #3D3830;
+      --text-subtle:  #7A7268;
+      --border:       rgba(12,24,40,0.10);
+      --border-hover: rgba(12,24,40,0.22);
+
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── GRAIN OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(242, 235, 224, 0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--teal);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      font-size: 12px !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+      color: var(--teal) !important;
+      border: 1px solid rgba(0, 140, 126, 0.35) !important;
+      padding: 8px 20px !important;
+      border-radius: 40px !important;
+      transition: background 0.2s, border-color 0.2s, color 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: rgba(0, 140, 126, 0.10) !important;
+      border-color: var(--teal) !important;
+      color: var(--teal) !important;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 80% 10%, rgba(40, 80, 216, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 50% at 10% 80%, rgba(0, 140, 126, 0.06) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 85% 88%, rgba(120, 32, 184, 0.06) 0%, transparent 50%),
+        var(--bg);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--teal);
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(72px, 10vw, 152px);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      margin-bottom: 40px;
+    }
+
+    .hero-headline .line-1 {
+      display: block;
+      color: var(--text);
+    }
+
+    .hero-headline .line-2 {
+      display: block;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--merlot);
+      -webkit-text-stroke: 0;
+    }
+
+    .hero-headline .line-2 .amp {
+      color: var(--teal);
+    }
+
+    .hero-sub-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .hero-tagline {
+      max-width: 420px;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    .hero-tagline strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-meta {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 20px;
+    }
+
+    .hero-scroll {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .hero-scroll:hover { color: var(--teal); }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--teal), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* ─── MARQUEE ─── */
+    .marquee-strip {
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      white-space: nowrap;
+      background: var(--bg-surface);
+    }
+
+    .marquee-inner {
+      display: inline-flex;
+      animation: marquee 28s linear infinite;
+    }
+
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 24px;
+      padding: 0 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .marquee-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTION SHARED ─── */
+    section {
+      padding: 100px 48px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 48px;
+      color: var(--text);
+    }
+
+    .section-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--em-color, var(--teal));
+    }
+
+    /* ─── PROJECTS ─── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      gap: 20px;
+    }
+
+    .project-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .project-card:hover { transform: translateY(-4px); }
+
+    .project-card.featured {
+      grid-column: 1 / -1;
+    }
+
+    .card-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .project-card:hover .card-bg { transform: scale(1.04); }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(6, 10, 20, 0.97) 0%,
+        rgba(6, 10, 20, 0.70) 40%,
+        rgba(6, 10, 20, 0.10) 100%
+      );
+      transition: opacity 0.3s;
+    }
+
+    .project-card:hover .card-overlay {
+      background: linear-gradient(
+        to top,
+        rgba(6, 10, 20, 0.98) 0%,
+        rgba(6, 10, 20, 0.78) 45%,
+        rgba(6, 10, 20, 0.15) 100%
+      );
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 2;
+      padding: 40px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .card-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 40px;
+      border: 1px solid;
+    }
+
+    .tag-teal   { color: var(--teal-bright);  border-color: rgba(0,184,164,0.40); background: rgba(0,184,164,0.12); }
+    .tag-orange { color: var(--orange-bright); border-color: rgba(232,140,32,0.40); background: rgba(232,140,32,0.12); }
+    .tag-merlot { color: #E8A0B0;            border-color: rgba(232,160,176,0.40); background: rgba(232,160,176,0.12); }
+    .tag-blue   { color: var(--teal-bright);  border-color: rgba(0,184,164,0.40); background: rgba(0,184,164,0.12); }
+    .tag-amber  { color: var(--orange-bright); border-color: rgba(232,140,32,0.40); background: rgba(232,140,32,0.12); }
+    .tag-violet { color: #E8A0B0;            border-color: rgba(232,160,176,0.40); background: rgba(232,160,176,0.12); }
+    .tag-mag    { color: #E8A0B0;            border-color: rgba(232,160,176,0.40); background: rgba(232,160,176,0.12); }
+    .tag-muted  { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.20); background: rgba(255,255,255,0.06); }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+
+    .featured .card-title  { font-size: clamp(32px, 3.5vw, 52px); }
+    .standard .card-title  { font-size: clamp(22px, 2.5vw, 34px); }
+    .compact  .card-title  { font-size: clamp(18px, 2vw, 26px); }
+
+    .card-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.72);
+      max-width: 500px;
+      transform: translateY(0);
+      opacity: 1;
+      transition: color 0.3s ease;
+    }
+
+    .project-card:hover .card-desc {
+      color: rgba(255, 255, 255, 0.90);
+    }
+
+    .card-arrow {
+      position: absolute;
+      top: 36px;
+      right: 40px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 18px;
+      transition: background 0.3s, border-color 0.3s, color 0.3s, transform 0.3s;
+    }
+
+    .project-card:hover .card-arrow {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: var(--bg);
+      transform: rotate(45deg);
+    }
+
+    /* Card heights */
+    .featured  { min-height: 480px; }
+    .standard  { min-height: 380px; }
+    .compact   { min-height: 280px; }
+
+    /* Card gradients — merlot family */
+    .bg-sovereign {
+      background:
+        radial-gradient(ellipse 70% 55% at 85% 10%, rgba(200, 80, 110, 0.45) 0%, transparent 58%),
+        radial-gradient(ellipse 50% 45% at 10% 85%, rgba(80, 8, 28, 0.50) 0%, transparent 55%),
+        linear-gradient(135deg, #8E2845 0%, #7A2040 100%);
+    }
+
+    .bg-prudence {
+      background:
+        radial-gradient(ellipse 65% 55% at 20% 20%, rgba(220, 100, 130, 0.35) 0%, transparent 58%),
+        radial-gradient(ellipse 50% 45% at 85% 80%, rgba(60, 5, 22, 0.55) 0%, transparent 55%),
+        linear-gradient(135deg, #7A1E38 0%, #6A1830 100%);
+    }
+
+    .bg-swalwell {
+      background:
+        radial-gradient(ellipse 65% 55% at 80% 15%, rgba(210, 90, 115, 0.45) 0%, transparent 58%),
+        radial-gradient(ellipse 45% 45% at 15% 80%, rgba(100, 15, 40, 0.45) 0%, transparent 55%),
+        linear-gradient(135deg, #9A2E50 0%, #882545 100%);
+    }
+
+    .bg-coming {
+      background: linear-gradient(135deg, #E8DFD2 0%, #DEDAD0 100%);
+      border: 1px solid var(--border);
+    }
+
+    /* ─── ABOUT ─── */
+    #about {
+      border-top: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .about-text p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .about-text p em {
+      color: var(--teal);
+      font-style: normal;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .stat-box {
+      background: var(--bg-surface);
+      padding: 32px;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .stat-num span { color: var(--teal); }
+    .stat-box:nth-child(2) .stat-num { color: var(--merlot); }
+    .stat-box:nth-child(2) .stat-num span { color: var(--merlot); }
+    .stat-box:nth-child(3) .stat-num span { color: var(--orange); }
+    .stat-box:nth-child(4) .stat-num { color: var(--teal); }
+
+    .stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ─── STACK ─── */
+    .stack-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .stack-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      padding: 6px 16px;
+      border-radius: 40px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .stack-pill:hover {
+      border-color: var(--teal-dim);
+      color: var(--teal);
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .contact-left .section-title {
+      margin-bottom: 16px;
+    }
+
+    .contact-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 380px;
+      line-height: 1.7;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 36px;
+      background: var(--teal);
+      color: var(--bg);
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--teal-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0, 140, 126, 0.30);
+    }
+
+    .btn-arrow { font-size: 18px; transition: transform 0.2s; }
+    .btn-primary:hover .btn-arrow { transform: translateX(4px); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .footer-logo span { color: var(--teal); }
+
+    .footer-copy {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: var(--text-subtle);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--teal); }
+
+    /* ─── COMING SOON CARD ─── */
+    .coming-inner {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 40px;
+    }
+
+    .coming-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px dashed var(--text-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-subtle);
+      font-size: 20px;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .project-card:hover .coming-icon {
+      border-color: var(--merlot);
+      color: var(--merlot);
+    }
+
+    .coming-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      #hero { padding: 0 24px 64px; }
+      section { padding: 64px 24px; }
+      footer { padding: 28px 24px; }
+
+      .nav-links { gap: 20px; }
+      .nav-cta { display: none !important; }
+
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.featured { grid-column: 1; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+
+      .hero-sub-row { flex-direction: column; align-items: flex-start; }
+      .hero-meta { align-items: flex-start; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links li:not(:last-child) { display: none; }
+      .hero-headline { letter-spacing: -0.02em; }
+      .about-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav id="main-nav">
+    <a href="#" class="nav-logo">S<span>&</span>S</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section id="hero" style="max-width:100%; padding:0 48px 80px;">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Political Technology &middot; Civic Data &middot; AI Systems</p>
+      <h1 class="hero-headline">
+        <span class="line-1">Suffrage</span>
+        <span class="line-2"><span class="amp">&amp;</span> Sass.</span>
+      </h1>
+      <div class="hero-sub-row">
+        <p class="hero-tagline">
+          A studio at the intersection of <strong>democracy and technology.</strong>
+          Building the tools that make <strong>civic power legible</strong>
+          — one dashboard at a time.
+        </p>
+        <div class="hero-meta">
+          <a href="#work" class="hero-scroll">
+            <span>Scroll to explore</span>
+            <div class="scroll-line"></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MARQUEE ─── -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-inner">
+      <!-- repeated twice for seamless loop -->
+      <span class="marquee-item">Democracy<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Transparency<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Accountability<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Civic Data<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Political Finance<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Legislative AI<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Suffrage &amp; Sass<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Open Government<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Democracy<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Transparency<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Accountability<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Civic Data<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Political Finance<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Legislative AI<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Suffrage &amp; Sass<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Open Government<span class="marquee-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- ─── WORK ─── -->
+  <section id="work">
+    <p class="section-label">Selected Work</p>
+    <h2 class="section-title">Projects that <em>move the needle</em></h2>
+
+    <div class="projects-grid">
+
+      <!-- ARTICLE ONE — featured -->
+      <a href="../article-one.html" class="project-card featured" aria-label="Article One">
+        <div class="card-bg bg-sovereign"></div>
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <div class="card-tags">
+            <span class="card-tag tag-teal">Congressional Intelligence</span>
+            <span class="card-tag tag-blue">Political Finance</span>
+            <span class="card-tag tag-muted">FEC · SOD · FPPC</span>
+          </div>
+          <h3 class="card-title">Article One</h3>
+          <p class="card-desc">
+            A platform for congressional financial intelligence. Maps the complete financial
+            universe of individual Members of Congress — campaign committees, office spending,
+            PACs, and more — cross-referenced from primary sources to surface what stays invisible.
+          </p>
+        </div>
+        <div class="card-arrow">↗</div>
+      </a>
+
+      <!-- COMING SOON -->
+      <a href="#contact" class="project-card featured bg-coming" aria-label="More coming soon">
+        <div class="coming-inner">
+          <div class="coming-icon">+</div>
+          <p class="coming-label">More coming soon</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ─── ABOUT ─── -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label">About</p>
+        <h2 class="section-title" style="margin-bottom:32px;">Built with<br><em>purpose</em> & precision.</h2>
+        <p>
+          Suffrage &amp; Sass is an independent studio making <strong>civic technology</strong>
+          that anyone can use. The work sits at the edge of data journalism, political science,
+          and AI — with a design sensibility that insists on clarity over complexity.
+        </p>
+        <p>
+          Every project starts with one question: <strong>who benefits from this staying opaque?</strong>
+          Then we build the opposite of that.
+        </p>
+        <p>
+          Powered by <em>FEC data</em>, <em>Congressional records</em>, <em>PACER filings</em>,
+          and a conviction that <strong>democracy works better when people can see the machine.</strong>
+        </p>
+        <div class="stack-pills">
+          <span class="stack-pill">Claude API</span>
+          <span class="stack-pill">FEC Data</span>
+          <span class="stack-pill">OpenSecrets</span>
+          <span class="stack-pill">CourtListener</span>
+          <span class="stack-pill">HTML / CSS / JS</span>
+          <span class="stack-pill">Python</span>
+          <span class="stack-pill">PACER / RECAP</span>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="stat-num">3<span>+</span></div>
+          <div class="stat-label">Active Projects</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num"><span>$</span>B</div>
+          <div class="stat-label">Campaign Finance Tracked</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">100<span>%</span></div>
+          <div class="stat-label">Non-partisan</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num"><span>∞</span></div>
+          <div class="stat-label">Caffeination Level</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ─── -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="contact-left">
+        <p class="section-label">Contact</p>
+        <h2 class="section-title" style="--em-color: var(--orange);">Let's build something<br><em>worth building.</em></h2>
+        <p class="contact-sub">
+          Have a civic tech project, data question, or just want to talk
+          about the intersection of democracy and AI? The door is open.
+        </p>
+      </div>
+      <a href="mailto:sufferagesass@icloud.com" class="btn-primary">
+        Get in touch
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <a href="#" class="footer-logo">Suffrage <span>&</span> Sass</a>
+    <p class="footer-copy">&copy; 2026 &mdash; Political Technology for the People</p>
+    <ul class="footer-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    // Nav scroll state
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Subtle card entrance animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.project-card').forEach((card, i) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(24px)';
+      card.style.transition = `opacity 0.6s ease ${i * 0.1}s, transform 0.6s ease ${i * 0.1}s`;
+      observer.observe(card);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
-  "sample": "10-member working set (expandable)",
+  "sample": "14-member working set (expandable)",
   "source": "119th_MASTER_LIST.xlsx",
-  "count": 10,
+  "count": 14,
   "members": [
     {
       "bioguide_id": "S001193",
@@ -485,6 +485,196 @@
       "sod_match": {
         "first": "YVETTE",
         "last": "CLARKE"
+      }
+    },
+    {
+      "bioguide_id": "B001281",
+      "full_name": "Joyce Beatty",
+      "state": "OH",
+      "district": 3,
+      "party": "Democrat",
+      "gender": "F",
+      "committees": [
+        "House Committee on Financial Services",
+        "House Committee on Financial Services — Financial Institutions",
+        "House Committee on Financial Services — National Security, Illicit Finance, and International Financial Institutions"
+      ],
+      "fec_ids": {
+        "house_campaign": "H2OH03125",
+        "leadership_pac": null,
+        "other_pac": null,
+        "senate_run": null,
+        "president_run": null
+      },
+      "ran_state_office": "Yes",
+      "which_state_office": "State Representative",
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10068996.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/10060258.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10053853.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2021/10048353.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2020/10043705.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2020/30011915.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2019/10037845.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2019/30008542.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://beatty.house.gov",
+        "campaign_website": null
+      },
+      "status": "Sitting (B001281)",
+      "dashboard_built": false,
+      "first_name": "Joyce",
+      "last_name": "Beatty",
+      "sod_match": {
+        "first": "JOYCE",
+        "last": "BEATTY"
+      }
+    },
+    {
+      "bioguide_id": "F000483",
+      "full_name": "Laura Friedman",
+      "state": "CA",
+      "district": 30,
+      "party": "Democrat",
+      "gender": "F",
+      "committees": [
+        "House Committee on Science, Space, and Technology",
+        "House Committee on Transportation and Infrastructure",
+        "House Committee on Science, Space, and Technology — Energy",
+        "House Committee on Transportation and Infrastructure — Economic Development, Public Buildings, and Emergency Management",
+        "House Committee on Transportation and Infrastructure — Highways and Transit",
+        "House Committee on Transportation and Infrastructure — Railroads, Pipelines, and Hazardous Materials",
+        "House Committee on Transportation and Infrastructure — Water Resources and Environment"
+      ],
+      "fec_ids": {
+        "house_campaign": "H4CA30149",
+        "leadership_pac": null,
+        "other_pac": null,
+        "senate_run": null,
+        "president_run": null
+      },
+      "ran_state_office": "Yes",
+      "which_state_office": "State Assembly",
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10076422.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034563.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20034355.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032250.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20032051.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10076423.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10066927.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10059948.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/30021196.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://friedman.house.gov",
+        "campaign_website": "https://a43.asmdc.org/"
+      },
+      "status": "Sitting (F000483)",
+      "dashboard_built": false,
+      "first_name": "Laura",
+      "last_name": "Friedman",
+      "sod_match": {
+        "first": "LAURA",
+        "last": "FRIEDMAN"
+      }
+    },
+    {
+      "bioguide_id": "C001087",
+      "full_name": "Rick Crawford",
+      "state": "AR",
+      "district": 1,
+      "party": "Republican",
+      "gender": "M",
+      "committees": [
+        "House Committee on Agriculture",
+        "House Committee on Transportation and Infrastructure",
+        "House Permanent Select Committee on Intelligence",
+        "House Committee on Agriculture — General Farm Commodities, Risk Management, and Credit",
+        "House Committee on Transportation and Infrastructure — Highways and Transit",
+        "House Committee on Transportation and Infrastructure — Water Resources and Environment"
+      ],
+      "fec_ids": {
+        "house_campaign": "H0AR01083",
+        "leadership_pac": null,
+        "other_pac": "C00493783",
+        "senate_run": null,
+        "president_run": null
+      },
+      "ran_state_office": "No",
+      "which_state_office": null,
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10067531.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/10057567.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10054652.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2021/10050577.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2021/10048088.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2020/10040737.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2020/30012342.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2019/10038266.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2019/30008949.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://crawford.house.gov",
+        "campaign_website": null
+      },
+      "status": "Sitting (C001087)",
+      "dashboard_built": false,
+      "first_name": "Eric",
+      "last_name": "Crawford",
+      "sod_match": {
+        "first": "ERIC",
+        "last": "CRAWFORD"
+      }
+    },
+    {
+      "bioguide_id": "G000594",
+      "full_name": "Ernest Gonzales",
+      "state": "TX",
+      "district": 23,
+      "party": "Republican",
+      "gender": "M",
+      "committees": [],
+      "fec_ids": {
+        "house_campaign": "H0TX35015",
+        "leadership_pac": null,
+        "other_pac": null,
+        "senate_run": null,
+        "president_run": null
+      },
+      "ran_state_office": "No",
+      "which_state_office": null,
+      "disclosures": {
+        "most_recent": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10071965.pdf",
+        "other": [
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2026/10079695.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2026/9115731.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/8220870.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/10062766.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2023/8220239.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10062263.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/10054512.pdf",
+          "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2022/30018894.pdf"
+        ]
+      },
+      "links": {
+        "gov_website": "https://gonzales.house.gov",
+        "campaign_website": null
+      },
+      "status": "Left during 119th (G000594)",
+      "dashboard_built": false,
+      "first_name": "Ernest",
+      "last_name": "Gonzales",
+      "sod_match": {
+        "first": "ERNEST",
+        "last": "GONZALES"
       }
     }
   ]

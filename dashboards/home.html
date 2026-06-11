@@ -976,6 +976,93 @@
       text-transform: uppercase;
       color: rgba(255,255,255,0.22);
     }
+
+    /* ─── ROLE COMPENSATION PANEL ─── */
+    .comp-body { padding: 24px 28px; }
+    .comp-split {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+    }
+    .comp-col {
+      flex: 1;
+      min-width: 0;
+    }
+    #compDemCol { padding-right: 28px; }
+    #compRepCol { padding-left: 28px; }
+    .comp-col.hidden { display: none; }
+    .comp-divider {
+      width: 1px;
+      background: var(--border);
+      align-self: stretch;
+      flex: none;
+    }
+    .comp-divider.hidden { display: none; }
+    .comp-col-header {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+      border-bottom: 2px solid;
+    }
+    .comp-col-header.dem { color: var(--dem); border-color: var(--dem); }
+    .comp-col-header.rep { color: var(--rep); border-color: var(--rep); }
+    .comp-col-rows { display: flex; flex-direction: column; gap: 18px; }
+    .comp-col-row { display: flex; flex-direction: column; gap: 5px; }
+    .comp-col-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .comp-col-bar-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .comp-track {
+      flex: 1;
+      height: 6px;
+      background: var(--bg-warm);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .comp-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .comp-fill.dem { background: var(--dem); }
+    .comp-fill.rep { background: var(--rep); }
+    .comp-bar-stat {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      flex: none;
+      min-width: 44px;
+      text-align: right;
+    }
+    .comp-bar-n {
+      font-size: 9px;
+      color: var(--text-subtle);
+      font-weight: 400;
+      margin-left: 4px;
+      min-width: 44px;
+    }
+    .comp-footer {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      color: var(--text-subtle);
+      line-height: 1.7;
+    }
   </style>
 </head>
 <body>
@@ -1069,6 +1156,184 @@
         <div class="party-bar-row">
           <div class="party-bar-dem" style="flex: 53;"></div>
           <div class="party-bar-rep" style="flex: 47;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ROLE COMPENSATION PANEL ─── -->
+    <div class="split-panel" id="compPanel" style="margin-bottom:28px;">
+      <div class="split-header">
+        <div class="split-title">Key Staff Compensation</div>
+        <div class="split-meta">Avg Annual Salary · House Office Disbursements · Active Members</div>
+      </div>
+      <div class="comp-body">
+        <div class="comp-split">
+
+          <!-- DEMOCRAT column -->
+          <div class="comp-col" id="compDemCol">
+            <div class="comp-col-header dem">Democrat</div>
+            <div class="comp-col-rows">
+              <div class="comp-col-row">
+                <div class="comp-col-role">Chief of Staff</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill dem" style="width:73.7%;"></div></div>
+                  <span class="comp-bar-stat">$166K</span><span class="comp-bar-n">5 mbr</span>
+                </div>
+              </div>
+              <div class="comp-col-row">
+                <div class="comp-col-role">Legislative Director</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill dem" style="width:48.1%;"></div></div>
+                  <span class="comp-bar-stat">$108K</span><span class="comp-bar-n">4 mbr</span>
+                </div>
+              </div>
+              <div class="comp-col-row">
+                <div class="comp-col-role">Communications Director</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill dem" style="width:37.7%;"></div></div>
+                  <span class="comp-bar-stat">$85K</span><span class="comp-bar-n">4 mbr</span>
+                </div>
+              </div>
+              <div class="comp-col-row">
+                <div class="comp-col-role">Scheduler</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill dem" style="width:25.3%;"></div></div>
+                  <span class="comp-bar-stat">$57K</span><span class="comp-bar-n">3 mbr</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- divider -->
+          <div class="comp-divider" id="compDivider"></div>
+
+          <!-- REPUBLICAN column -->
+          <div class="comp-col" id="compRepCol">
+            <div class="comp-col-header rep">Republican</div>
+            <div class="comp-col-rows">
+              <div class="comp-col-row">
+                <div class="comp-col-role">Chief of Staff</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill rep" style="width:69.8%;"></div></div>
+                  <span class="comp-bar-stat">$157K</span><span class="comp-bar-n">6 mbr</span>
+                </div>
+              </div>
+              <div class="comp-col-row">
+                <div class="comp-col-role">Legislative Director</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill rep" style="width:29.1%;"></div></div>
+                  <span class="comp-bar-stat">$66K</span><span class="comp-bar-n">5 mbr</span>
+                </div>
+              </div>
+              <div class="comp-col-row">
+                <div class="comp-col-role">Communications Director</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill rep" style="width:35.4%;"></div></div>
+                  <span class="comp-bar-stat">$80K</span><span class="comp-bar-n">5 mbr</span>
+                </div>
+              </div>
+              <div class="comp-col-row">
+                <div class="comp-col-role">Scheduler</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill rep" style="width:28.3%;"></div></div>
+                  <span class="comp-bar-stat">$64K</span><span class="comp-bar-n">5 mbr</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="comp-footer">
+          Avg annual salary = office disbursements + overlapping campaign payments ÷ years active · Scale: $225K max · 2 members excluded (insufficient data): Friedman (D), LaLota (R)
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ROLE TENURE PANEL ─── -->
+    <div class="split-panel" style="margin-bottom:28px;">
+      <div class="split-header">
+        <div class="split-title">Key Staff Tenure</div>
+        <div class="split-meta">Avg Years in Role · House Office Records · Active Members</div>
+      </div>
+      <div class="comp-body">
+        <div class="comp-split">
+
+          <!-- DEMOCRAT column -->
+          <div class="comp-col" id="tenDemCol">
+            <div class="comp-col-header dem">Democrat</div>
+            <div class="comp-col-rows">
+              <div class="comp-col-row">
+                <div class="comp-col-role">Chief of Staff</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill dem" style="width:50%;"></div></div>
+                  <span class="comp-bar-stat">6.0 yr</span><span class="comp-bar-n">5 mbr</span>
+                </div>
+              </div>
+              <div class="comp-col-row">
+                <div class="comp-col-role">Legislative Director</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill dem" style="width:45.8%;"></div></div>
+                  <span class="comp-bar-stat">5.5 yr</span><span class="comp-bar-n">4 mbr</span>
+                </div>
+              </div>
+              <div class="comp-col-row">
+                <div class="comp-col-role">Communications Director</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill dem" style="width:35%;"></div></div>
+                  <span class="comp-bar-stat">4.2 yr</span><span class="comp-bar-n">5 mbr</span>
+                </div>
+              </div>
+              <div class="comp-col-row">
+                <div class="comp-col-role">Scheduler</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill dem" style="width:39.2%;"></div></div>
+                  <span class="comp-bar-stat">4.7 yr</span><span class="comp-bar-n">3 mbr</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- divider -->
+          <div class="comp-divider"></div>
+
+          <!-- REPUBLICAN column -->
+          <div class="comp-col" id="tenRepCol">
+            <div class="comp-col-header rep">Republican</div>
+            <div class="comp-col-rows">
+              <div class="comp-col-row">
+                <div class="comp-col-role">Chief of Staff</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill rep" style="width:44.2%;"></div></div>
+                  <span class="comp-bar-stat">5.3 yr</span><span class="comp-bar-n">6 mbr</span>
+                </div>
+              </div>
+              <div class="comp-col-row">
+                <div class="comp-col-role">Legislative Director</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill rep" style="width:39.2%;"></div></div>
+                  <span class="comp-bar-stat">4.7 yr</span><span class="comp-bar-n">6 mbr</span>
+                </div>
+              </div>
+              <div class="comp-col-row">
+                <div class="comp-col-role">Communications Director</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill rep" style="width:16.7%;"></div></div>
+                  <span class="comp-bar-stat">2.0 yr</span><span class="comp-bar-n">5 mbr</span>
+                </div>
+              </div>
+              <div class="comp-col-row">
+                <div class="comp-col-role">Scheduler</div>
+                <div class="comp-col-bar-line">
+                  <div class="comp-track"><div class="comp-fill rep" style="width:38.3%;"></div></div>
+                  <span class="comp-bar-stat">4.6 yr</span><span class="comp-bar-n">5 mbr</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="comp-footer">
+          Tenure = years with recorded office disbursements from 2013 onward · Scale: 12yr max · 2 members excluded (insufficient data): Friedman (D), LaLota (R)
         </div>
       </div>
     </div>
@@ -1419,6 +1684,22 @@
       const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       try { localStorage.setItem('a1-theme', next); } catch (e) {}
+    }
+
+    /* ─── COMP FILTER ─── */
+    function setCompFilter(party, btn) {
+      document.querySelectorAll('#compPartyFilter .pill').forEach(p => {
+        p.classList.remove('active', 'dem-active', 'rep-active');
+      });
+      if (party === 'dem') btn.classList.add('dem-active');
+      else if (party === 'rep') btn.classList.add('rep-active');
+      else btn.classList.add('active');
+      const demCol  = document.getElementById('compDemCol');
+      const repCol  = document.getElementById('compRepCol');
+      const divider = document.getElementById('compDivider');
+      demCol.classList.toggle('hidden',  party === 'rep');
+      repCol.classList.toggle('hidden',  party === 'dem');
+      divider.classList.toggle('hidden', party !== 'all');
     }
 
     /* ─── INIT ─── */

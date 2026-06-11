@@ -486,6 +486,10 @@ body.dark .REVIEW .flag-sev{background:#0d1520;color:var(--navy-mid)}
 .roster-card.stub:hover{border-color:var(--border);box-shadow:none;background:var(--bg)}
 .rc-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--navy-mid));display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;flex:none;letter-spacing:-.5px}
 .roster-card.active .rc-avatar{background:linear-gradient(135deg,var(--gold),#e8b85a);color:var(--navy-deep)}
+/* Member photos (unitedstates/images). Layered over the initials avatar; if the
+   image fails to load it removes itself, revealing the initials underneath. */
+.platform-avatar,.nav-brand .mark,.rc-avatar{position:relative;overflow:hidden}
+.platform-avatar>img,.nav-brand .mark>img,.rc-avatar>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
 .rc-body{flex:1;min-width:0}
 .rc-name{font-size:14px;font-weight:700;color:var(--text);line-height:1.2}
 .rc-meta{font-size:11.5px;color:var(--text-3);margin-top:3px}
@@ -983,7 +987,7 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
 <!-- MEMBER DETAIL MODAL -->
 <div class="modal-bg" id="profileModalBg">
   <div class="modal" style="max-width:1040px;max-height:92vh">
-    <div class="mh"><div><div class="mt">Member Profile</div><div class="ms">119th Congress · CA-14 · financial disclosures · committee assignments · career timeline</div></div><div class="x" id="profileMClose">×</div></div>
+    <div class="mh"><div><div class="mt">Member Profile</div><div class="ms" id="profModalSub">119th Congress · financial disclosures · committee assignments · career timeline</div></div><div class="x" id="profileMClose">×</div></div>
     <div class="mb" style="padding:20px"><div id="profileContent"></div></div>
   </div>
 </div>
@@ -2135,17 +2139,32 @@ function renderDisclosure(){
   const dist =m['District']||m.district||'';
   const party=m['Party']||m.party||'';
   const congress=m['Congress']||m.congress||'119th';
+  // URL slug → Bioguide ID. Swalwell's legacy slug 'swalwell' maps to S001193; every
+  // other member uses the Bioguide directly. Bioguide drives the unitedstates/images photo.
+  const slug=new URLSearchParams(location.search).get('member')||'';
+  const bioguide = slug==='swalwell' ? 'S001193' : (/^[A-Z]\d{6}$/.test(slug) ? slug : '');
+  function setAvatar(el, size){
+    if(!el) return;
+    el.textContent = initials;
+    if(!bioguide) return;
+    const img = document.createElement('img');
+    img.src = `https://unitedstates.github.io/images/congress/${size}/${bioguide}.jpg`;
+    img.alt = '';
+    img.loading = 'lazy';
+    img.onerror = () => img.remove();
+    el.appendChild(img);
+  }
   const pill=document.getElementById('memberPill');if(pill)pill.innerHTML=`<div class="av">${initials}</div><div class="nm">${name}</div><div class="ds">${state}-${dist}</div>`;
-  if(document.getElementById('platformAvatar'))document.getElementById('platformAvatar').textContent=initials;
+  setAvatar(document.getElementById('platformAvatar'), '225x275');
   if(document.getElementById('platformMemberName'))document.getElementById('platformMemberName').textContent=last;
-  if(document.getElementById('navMark'))document.getElementById('navMark').textContent=initials;
+  setAvatar(document.getElementById('navMark'), '225x275');
   if(document.getElementById('navTitle'))document.getElementById('navTitle').textContent=name;
   if(document.getElementById('navSub'))document.getElementById('navSub').textContent=`${state}-${dist} · ${party} · ${congress} Congress`;
   document.title=`Article One · ${state}-${dist} ${last}`;
   // Financial Disclosure renders for every member (shows placeholder if no FD data)
   renderDisclosure();
   // Hand-authored narrative tabs are per-member; placeholder them for members not yet authored.
-  const bio=new URLSearchParams(location.search).get('member');
+  const bio=slug;
   if(bio && bio!=='S001193' && bio!=='swalwell'){
     // Vendor Intelligence: clicking a category square expands the auto-generated holistic
     // breakdown inline below the grid (Swalwell-only editorial deep-dives don't apply here).
@@ -2975,65 +2994,259 @@ function renderTl(cat,containerId){
 renderTl('all');
 
 
-// ── MEMBER PROFILE ──
+// ── state reference metadata (unitedstates/python-us → data/states.json) ──
+// Loaded once; powers full state name + jurisdiction details in the member profile.
+// Degrades gracefully: if the fetch fails (e.g. opened from file://) the profile
+// simply keeps the bare "ST-NN" code and the State & district card says so.
+window.STATES_BY_ABBR=window.STATES_BY_ABBR||null;
+window.statesReady=(window.statesReady)||fetch('data/states.json')
+  .then(r=>r.ok?r.json():null)
+  .then(j=>{
+    if(j&&j.states){const map={};j.states.forEach(s=>{map[s.abbr]=s;});window.STATES_BY_ABBR=map;}
+    return window.STATES_BY_ABBR;
+  })
+  .catch(()=>null);
+
+// Per-member metadata from the 119th Master List (data/members.json), keyed by
+// Bioguide. Powers the data-driven Member Profile so it is no longer hardcoded to
+// any one member. Degrades gracefully if the fetch fails.
+window.MEMBERS_BY_BIO=window.MEMBERS_BY_BIO||null;
+window.membersReady=(window.membersReady)||fetch('data/members.json')
+  .then(r=>r.ok?r.json():null)
+  .then(j=>{ if(j&&j.members)window.MEMBERS_BY_BIO=j.members; return window.MEMBERS_BY_BIO; })
+  .catch(()=>null);
+
+// ── MEMBER PROFILE (data-driven — never member-hardcoded) ──
+// Sources, in priority order: a per-member curated OVERRIDE (only for data that
+// exists in no structured source, e.g. Swalwell's committees/socials), then the
+// 119th Master List (data/members.json via window.MEMBERS_BY_BIO), then this
+// member's own data.js (D.member / D.entities), then a graceful blank.
 (function(){
-  const m=D.member,name=(m['First Name']||'Eric')+' '+(m['Last Name']||'Swalwell');
-  const initials=((m['First Name']||'E')[0]+(m['Last Name']||'S')[0]).toUpperCase();
-  const h=document.getElementById('profileContent');
-  h.innerHTML=`<div class="member-hero">
-    <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
-      <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#1e3a5f,#2a4f7c);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;flex:none">${initials}</div>
-      <div class="info"><h1>${name}</h1>
-        <div class="msub">${m['Party']||'Democrat'} · ${m['State']||'CA'}-${m['District']||'14'} · Elected ${m['Year Elected to Current Seat']||'—'} · Term ends ${m['Year Current Term Ends']||'—'}</div>
-        <div class="mlinks">
-          ${m['Official Government Website']?`<a class="mchip" target="_blank" href="${m['Official Government Website']}">🏛 Official site</a>`:''}
-          ${m['Campaign Website']?`<a class="mchip" target="_blank" href="${m['Campaign Website']}">🗳 Campaign</a>`:''}
-          ${m['Most Recent House Financial Disclosure']?`<a class="mchip" target="_blank" href="${m['Most Recent House Financial Disclosure']}">📄 Latest disclosure</a>`:''}
-        </div>
-      </div>
-    </div></div>
-  <div class="detail-grid">
-    <div class="dcard"><h4>Committee assignments</h4>
-      ${['House Judiciary Committee','House Homeland Security Committee — Ranking Member, Subcommittee on Cybersecurity & Infrastructure Protection'].map(c=>`<div class="drow"><span>${c}</span></div>`).join('')}
-      <div style="font-size:11px;color:#f59e0b;margin-top:8px">⚠ Resigned from Congress April 14, 2026</div>
-    </div>
-    <div class="dcard"><h4>FEC identifiers</h4>
-      ${[['House campaign',m['FEC ID - House Campaign']||'H2CA15094'],['Leadership PAC','C00566059 (Remedy PAC)'],['Presidential','C00701698'],['Outside PAC','C00528174'],['CA Governor (FPPC)','1485146']].map(([k,v])=>`<div class="drow"><span class="dk">${k}</span><span class="dv" style="font-family:monospace;font-size:12px">${v}</span></div>`).join('')}
-    </div>
-    <div class="dcard"><h4>Contact & social</h4>
-      ${[
-        ['DC Office Phone','(202) 225-5065',null],
-        ['District Office Phone','(510) 370-3322 · Castro Valley, CA',null],
+  const m=D.member||{};
+  const first=m['First Name']||m.first_name||'';
+  const last =m['Last Name'] ||m.last_name ||'';
+  const name=((first+' '+last).trim())||m.full_name||'Member';
+  const initials=(((first[0]||'')+(last[0]||'')).toUpperCase())||(name[0]||'?').toUpperCase();
+  // State/district normalized across capitalized (Swalwell) + member-v1 lowercase keys.
+  const abbr=((m['State']||m.state||'')+'').toUpperCase()||'—';
+  const district=((m['District']||m.district||'')+'')||'—';
+  // Bioguide drives the unitedstates/images photo + the Master List lookup.
+  const _pSlug=new URLSearchParams(location.search).get('member')||'';
+  const bio=_pSlug==='swalwell'?'S001193':(/^[A-Z]\d{6}$/.test(_pSlug)?_pSlug:(_pSlug==='S001193'?'S001193':''));
+  const photoTag=bio?`<img src="https://unitedstates.github.io/images/congress/225x275/${bio}.jpg" alt="" loading="lazy" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block">`:'';
+  // The career timeline (TL_EVENTS) is a hand-authored Swalwell-only dataset; there is
+  // no structured per-member source, so other members get a placeholder instead.
+  const isSwalwell=bio==='S001193';
+
+  // Curated data not present in any structured source. Scoped per-bioguide, so it
+  // can NEVER leak onto another member's profile.
+  const OVERRIDE={
+    'S001193':{
+      committees:['House Judiciary Committee','House Homeland Security Committee — Ranking Member, Subcommittee on Cybersecurity & Infrastructure Protection'],
+      committees_note:'Resigned from Congress April 14, 2026',
+      contact:[
+        ['Phone (DC office)','(202) 225-5065',null],
+        ['District office','(510) 370-3322 · Castro Valley, CA',null],
         ['Official website','swalwell.house.gov','https://swalwell.house.gov'],
-        ['Twitter/X (official)','@RepSwalwell','https://x.com/repswalwell'],
+        ['Twitter/X (official)','@RepSwalwell','https://x.com/RepSwalwell'],
         ['Twitter/X (personal)','@ericswalwell','https://x.com/ericswalwell'],
         ['Instagram (official)','@repswalwell','https://www.instagram.com/repswalwell/'],
         ['Instagram (personal)','@ericswalwell','https://www.instagram.com/ericswalwell/'],
         ['Facebook','CongressmanEricSwalwell','https://www.facebook.com/CongressmanEricSwalwell/'],
-      ].map(([k,v,url])=>`<div class="drow"><span class="dk">${k}</span><span class="dv">${url?`<a href="${url}" target="_blank" style="color:#2a4f7c">${v}</a>`:v}</span></div>`).join('')}
+      ],
+    },
+  };
+
+  const esc=s=>String(s==null?'':s).replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+  const drow=(k,v,url,mono)=>`<div class="drow"><span class="dk">${esc(k)}</span><span class="dv"${mono?' style="font-family:monospace;font-size:12px"':''}>${url?`<a href="${esc(url)}" target="_blank" rel="noopener" style="color:#2a4f7c">${esc(v)}</a>`:esc(v)}</span></div>`;
+  const setHTML=(id,html)=>{const el=document.getElementById(id);if(el)el.innerHTML=html;};
+  const setText=(id,t)=>{const el=document.getElementById(id);if(el)el.textContent=t;};
+  const dash='<span style="color:var(--text-3)">—</span>';
+  // Some Master List URL fields hold several ';'-separated links — use the first.
+  const firstUrl=u=>String(u||'').split(/[;\n]/)[0].trim();
+  const cleanUrl=u=>firstUrl(u).replace(/^https?:\/\//,'').replace(/\/$/,'');
+  // Ensure an href has a protocol so it isn't treated as a relative link.
+  const linkUrl=u=>{u=firstUrl(u);return u&&!/^https?:\/\//i.test(u)?'https://'+u:u;};
+
+  // Normalize a social value (full URL or bare handle) → {display,url}.
+  function social(raw,base,kind){
+    raw=String(raw||'').trim(); if(!raw)return null;
+    let url,handle;
+    if(/^https?:\/\//i.test(raw)){url=raw;handle=raw.replace(/\/+$/,'').split('/').pop().replace(/^@/,'');}
+    else{handle=raw.replace(/^@/,'');url=base+encodeURIComponent(handle);}
+    let display;
+    if(kind==='facebook')display=/^\d+$/.test(handle)?'Facebook page':handle;
+    else if(kind==='youtube')display=handle;
+    else display='@'+handle;
+    return {display,url};
+  }
+
+  function committeeList(P){
+    const ov=OVERRIDE[bio];
+    if(ov&&ov.committees)return ov.committees;
+    if(P.committees&&P.committees.length)return P.committees;
+    if(Array.isArray(m.committees)&&m.committees.length)return m.committees;
+    return [];
+  }
+  function contactRows(P){
+    const ov=OVERRIDE[bio];
+    if(ov&&ov.contact)return ov.contact;
+    const r=[];
+    if(P.phone)r.push(['Phone (DC office)',P.phone,null]);
+    if(P.office)r.push(['DC office',P.office,null]);
+    const gw=P.gov_website||m['Official Government Website']||(m.links&&m.links.gov_website);
+    const cw=P.campaign_website||m['Campaign Website']||(m.links&&m.links.campaign_website);
+    if(gw)r.push(['Official website',cleanUrl(gw),linkUrl(gw)]);
+    if(cw)r.push(['Campaign website',cleanUrl(cw),linkUrl(cw)]);
+    const add=(label,raw,base,kind)=>{const s=social(raw,base,kind);if(s)r.push([label,s.display,s.url]);};
+    add('Twitter/X (official)',P.twitter_official,'https://x.com/');
+    add('Twitter/X (personal)',P.twitter_personal,'https://x.com/');
+    add('Instagram (official)',P.instagram_official,'https://instagram.com/');
+    add('Instagram (personal)',P.instagram_personal,'https://instagram.com/');
+    add('Facebook',P.facebook,'https://facebook.com/','facebook');
+    add('YouTube',P.youtube,'https://youtube.com/','youtube');
+    return r;
+  }
+  function fecRows(P){
+    const rows=[],seen=new Set();
+    // Per-member committees from this member's own financial universe (D.entities).
+    ORDER.forEach(k=>{const e=E[k];if(!e||!e.id)return;const st=String(e.source_type||'');if(/SOD/i.test(st))return;
+      const id=String(e.id).replace(/^CalAccess-/,'');if(seen.has(id))return;seen.add(id);
+      const label=(META[k]&&META[k].short)||e.label||k;rows.push([label,id+(/FPPC/i.test(st)?' · FPPC':'')]);});
+    // Supplement with Master List IDs not represented as a tracked entity. Skip the
+    // House campaign when a 'house' entity already supplies its committee ID (avoids
+    // showing the committee ID and candidate ID under near-identical labels).
+    const sup=[['Leadership PAC',P.fec_leadership],['Other PAC',P.fec_other_pac],['Senate run',P.fec_senate],['Presidential run',P.fec_president]];
+    if(!E.house)sup.unshift(['House campaign',P.fec_house]);
+    sup.forEach(([label,id])=>{if(id&&!seen.has(id)){seen.add(id);rows.push([label,id]);}});
+    if(String(P.ran_state_office||'').toLowerCase().startsWith('y')&&P.state_office){
+      const lbl=P.state_office+(P.state_office_state?` (${P.state_office_state})`:'');
+      if(!rows.some(x=>x[0]===lbl))rows.push([lbl,'state-level run']);
+    }
+    return rows;
+  }
+  function discList(P){
+    const recent=P.fd_recent||m['Most Recent House Financial Disclosure']||'';
+    const others=(P.fd_others&&P.fd_others.length)?P.fd_others:String(m['Other Financial Disclosure Docs']||'').split(';').map(s=>s.trim()).filter(Boolean);
+    return [recent,...others].filter(Boolean);
+  }
+  // Label a disclosure by the filing type + year encoded in its clerk.house.gov URL.
+  // ptr-pdfs = Periodic Transaction Report; financial-pdfs = annual/other FD report.
+  function discLabel(u,i){
+    const url=String(u||'').trim();
+    const yr=(url.match(/\/(20\d{2})\//)||[])[1]||'';
+    const kind=/\/ptr-pdfs\//i.test(url)?'Periodic Transaction Report':'Financial Disclosure';
+    return kind+(yr?` — ${yr}`:'')+(i===0?' (most recent)':'');
+  }
+
+  // Fill every data-driven card. Called once synchronously (Master List may be
+  // absent → entities/data.js/override still render), then again once it loads.
+  function applyMaster(P){
+    P=P||{};
+    setText('profName',P.full_name||name);
+    setText('profElected',P.year_elected||m['Year Elected to Current Seat']||'—');
+    setText('profTermEnds',P.term_ends||m['Year Current Term Ends']||'—');
+    const links=[];
+    const gw=P.gov_website||m['Official Government Website']||(m.links&&m.links.gov_website);
+    const cw=P.campaign_website||m['Campaign Website']||(m.links&&m.links.campaign_website);
+    const fd=P.fd_recent||m['Most Recent House Financial Disclosure'];
+    if(gw)links.push(`<a class="mchip" target="_blank" rel="noopener" href="${esc(linkUrl(gw))}">🏛 Official site</a>`);
+    if(cw)links.push(`<a class="mchip" target="_blank" rel="noopener" href="${esc(linkUrl(cw))}">🗳 Campaign</a>`);
+    if(fd)links.push(`<a class="mchip" target="_blank" rel="noopener" href="${esc(linkUrl(fd))}">📄 Latest disclosure</a>`);
+    setHTML('profLinks',links.join(''));
+    // committees
+    const cl=committeeList(P),note=(OVERRIDE[bio]||{}).committees_note;
+    const cHtml=(cl.length?cl.map(c=>{const sub=c.indexOf('—')>=0;return `<div class="drow" style="${sub?'padding-left:14px;':''}"><span style="${sub?'color:var(--text-3);font-size:12px':''}">${esc(c)}</span></div>`;}).join('')
+      :'<div style="color:var(--text-3);font-size:12px">No committee assignments listed.</div>')
+      +(note?`<div style="font-size:11px;color:#f59e0b;margin-top:8px">⚠ ${esc(note)}</div>`:'');
+    setHTML('profCommittees',cHtml);
+    // FEC identifiers
+    const fr=fecRows(P);
+    setHTML('profFec',fr.length?fr.map(([k,v])=>drow(k,v,null,true)).join(''):dash);
+    // contact & social
+    const cr=contactRows(P);
+    setHTML('profContact',cr.length?cr.map(([k,v,u])=>drow(k,v,u)).join(''):dash);
+    // financial disclosures
+    const dl=discList(P);
+    setHTML('profDisc',dl.length?dl.map((u,i)=>`<div class="drow"><a target="_blank" rel="noopener" href="${esc(linkUrl(u))}" style="color:#2a4f7c">${esc(discLabel(u,i))} ↗</a></div>`).join(''):dash);
+  }
+
+  const h=document.getElementById('profileContent');
+  h.innerHTML=`<div class="member-hero">
+    <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
+      <div style="position:relative;overflow:hidden;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#1e3a5f,#2a4f7c);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;flex:none">${esc(initials)}${photoTag}</div>
+      <div class="info"><h1 id="profName">${esc(name)}</h1>
+        <div class="msub">${esc(m['Party']||m.party||'')} · <span id="profStateLabel"></span>${esc(abbr)}-${esc(district)} · Elected <span id="profElected">—</span> · Term ends <span id="profTermEnds">—</span></div>
+        <div class="mlinks" id="profLinks"></div>
+      </div>
+    </div></div>
+  <div class="detail-grid">
+    <div class="dcard"><h4>Committee assignments</h4><div id="profCommittees"></div></div>
+    <div class="dcard"><h4>FEC identifiers</h4><div id="profFec"></div></div>
+    <div class="dcard"><h4>State &amp; district</h4>
+      <div id="profStateInner"><div style="font-size:12px;color:var(--text-3)">Loading state reference…</div></div>
+      <div style="font-size:10.5px;color:var(--text-3);margin-top:8px">Source: unitedstates/python-us · Census TIGER 2010</div>
     </div>
-    <div class="dcard"><h4>Financial disclosures</h4>
-      ${[m['Most Recent House Financial Disclosure'],...(m['Other Financial Disclosure Docs']||'').split(';')].filter(Boolean).map((u,i)=>`<div class="drow"><a target="_blank" href="${u.trim()}" style="color:#2a4f7c">Disclosure ${i===0?'(most recent)':'doc '+(i+1)} ↗</a></div>`).join('')||'<span style="color:#a0aec0">—</span>'}
-    </div>
+    <div class="dcard"><h4>Contact &amp; social</h4><div id="profContact"></div></div>
+    <div class="dcard"><h4>Financial disclosures</h4><div id="profDisc"></div></div>
   </div>
   <div style="margin-top:28px">
     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:12px">
       Political Career Timeline
       <span style="flex:1;height:1px;background:var(--border-soft);display:block"></span>
     </div>
-    <div style="font-size:12.5px;color:var(--text-3);margin-bottom:14px;line-height:1.6">Comprehensive chronology of career milestones, elections, controversies, legislation, and personal events · 1980–2026 · click any card to expand</div>
+    ${isSwalwell?`<div style="font-size:12.5px;color:var(--text-3);margin-bottom:14px;line-height:1.6">Comprehensive chronology of career milestones, elections, controversies, legislation, and personal events · 1980–2026 · click any card to expand</div>
     <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
       <input id="modalTlSearch" style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);padding:7px 13px;font-size:13px;color:var(--text);outline:none;width:220px;transition:border-color var(--t)" placeholder="Search events…" oninput="renderTl(modalTlActiveCat,'modalTlContainer')">
       <div style="display:flex;gap:6px;flex-wrap:wrap" id="modalTlFilterBar"></div>
     </div>
-    <div id="modalTlContainer"></div>
+    <div id="modalTlContainer"></div>`
+    :`<div style="max-width:720px;padding:24px;border:1px dashed var(--border);border-radius:12px;color:var(--text-3);font-size:13px;line-height:1.6">A hand-authored career timeline hasn't been added for ${esc(name)} yet. Everything above is built live from primary sources — the 119th Master List, FEC filings, House disbursements, and Census reference data.</div>`}
   </div>`;
-  // render timeline into modal
-  window.modalTlActiveCat='all';
-  const modalCats=[{cat:'all',label:'All'},{cat:'election',label:'🗳 Elections'},{cat:'career',label:'💼 Career'},{cat:'committee',label:'🏛 Committee'},{cat:'campaign',label:'📣 Campaigns'},{cat:'controversy',label:'⚠ Controversies'},{cat:'legislation',label:'📋 Legislation'},{cat:'personal',label:'👤 Personal'}];
-  const mfb=document.getElementById('modalTlFilterBar');
-  if(mfb)mfb.innerHTML=modalCats.map(c=>`<div class="tl-pill${c.cat==='all'?' active':''}" data-cat="${c.cat}" onclick="modalTlActiveCat='${c.cat}';document.querySelectorAll('#modalTlFilterBar .tl-pill').forEach(p=>p.classList.toggle('active',p.dataset.cat==='${c.cat}'));renderTl('${c.cat}','modalTlContainer')">${c.label}</div>`).join('');
-  renderTl('all','modalTlContainer');
+  // The timeline UI only exists for Swalwell; other members get the placeholder above.
+  if(isSwalwell){
+    window.modalTlActiveCat='all';
+    const modalCats=[{cat:'all',label:'All'},{cat:'election',label:'🗳 Elections'},{cat:'career',label:'💼 Career'},{cat:'committee',label:'🏛 Committee'},{cat:'campaign',label:'📣 Campaigns'},{cat:'controversy',label:'⚠ Controversies'},{cat:'legislation',label:'📋 Legislation'},{cat:'personal',label:'👤 Personal'}];
+    const mfb=document.getElementById('modalTlFilterBar');
+    if(mfb)mfb.innerHTML=modalCats.map(c=>`<div class="tl-pill${c.cat==='all'?' active':''}" data-cat="${c.cat}" onclick="modalTlActiveCat='${c.cat}';document.querySelectorAll('#modalTlFilterBar .tl-pill').forEach(p=>p.classList.toggle('active',p.dataset.cat==='${c.cat}'));renderTl('${c.cat}','modalTlContainer')">${c.label}</div>`).join('');
+    renderTl('all','modalTlContainer');
+  }
+
+  // Fill the full state name (hero) + State & district card from data/states.json.
+  function fillState(map){
+    const st=map&&map[abbr];
+    const label=document.getElementById('profStateLabel');
+    const inner=document.getElementById('profStateInner');
+    if(st){
+      if(label)label.textContent=st.name+' · ';
+      if(inner){
+        const tz=(st.time_zones||[]).map(z=>z.replace(/^America\//,'').replace(/_/g,' ')).join(', ')||'—';
+        const cd=st.shapefile_urls&&st.shapefile_urls.cd;
+        const rows=[
+          ['State',`${st.name} (${st.abbr})`,null],
+          ['AP style',st.ap_abbr||'—',null],
+          ['Capital',st.capital||'—',null],
+          ['Time zone',tz,null],
+          ['FIPS',st.fips||'—',null],
+          ['District',`${st.abbr}-${district}`,null],
+          ['Census shapefile',cd?'Congressional district ↗':'—',cd],
+        ];
+        inner.innerHTML=rows.map(([k,v,url])=>`<div class="drow"><span class="dk">${k}</span><span class="dv">${url?`<a href="${url}" target="_blank" rel="noopener" style="color:#2a4f7c">${v}</a>`:v}</span></div>`).join('');
+      }
+    } else if(inner){
+      inner.innerHTML=`<div class="drow"><span class="dk">District</span><span class="dv">${abbr}-${district}</span></div>`
+        +`<div style="font-size:11px;color:var(--text-3);margin-top:6px">State reference data unavailable.</div>`;
+    }
+  }
+  if(window.STATES_BY_ABBR){fillState(window.STATES_BY_ABBR);}
+  else if(window.statesReady){window.statesReady.then(fillState);}
+
+  // Fill data-driven cards now (entities/data.js/override), then again from the
+  // Master List once it loads. Idempotent — safe to call twice.
+  applyMaster(window.MEMBERS_BY_BIO&&bio?window.MEMBERS_BY_BIO[bio]:null);
+  if(window.membersReady){window.membersReady.then(()=>{applyMaster(window.MEMBERS_BY_BIO&&bio?window.MEMBERS_BY_BIO[bio]:null);});}
+  // Generic modal subtitle (no member-specific hardcoding).
+  setText('profModalSub',`119th Congress · ${abbr}-${district} · financial disclosures · committee assignments · career timeline`);
 })();
 
 // ── SOURCES ──
@@ -4318,8 +4531,10 @@ function renderRoster(){
   g.innerHTML=MEMBER_ROSTER.map(m=>{
     const isActive=m.slug===ACTIVE_MEMBER;
     const partyColor=m.party==='D'?'#1a56a0':m.party==='R'?'#9b2335':'#4a5568';
+    const bio=m.slug==='swalwell'?'S001193':(/^[A-Z]\d{6}$/.test(m.slug)?m.slug:'');
+    const photoTag=bio?`<img src="https://unitedstates.github.io/images/congress/225x275/${bio}.jpg" alt="" loading="lazy" onerror="this.remove()">`:'';
     return `<div class="roster-card${isActive?' active':''}${!m.hasData?' stub':''}" onclick="${m.hasData?`selectMember('${m.slug}')`:''}" style="${m.hasData?'':'cursor:default'}">
-      <div class="rc-avatar">${m.initials}</div>
+      <div class="rc-avatar">${m.initials}${photoTag}</div>
       <div class="rc-body">
         <div class="rc-name">${m.name}</div>
         <div class="rc-meta">${m.state}-${m.district} &nbsp;·&nbsp; <span style="color:${partyColor};font-weight:700">${m.partyFull}</span> &nbsp;·&nbsp; ${m.congress}</div>

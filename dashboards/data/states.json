@@ -1,0 +1,1546 @@
+{
+  "generated_from": "unitedstates/python-us v4.0.0.dev0",
+  "shapefile_vintage": "Census TIGER 2010",
+  "count": 59,
+  "states": [
+    {
+      "fips": "01",
+      "abbr": "AL",
+      "name": "Alabama",
+      "ap_abbr": "Ala.",
+      "capital": "Montgomery",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago"
+      ],
+      "statehood_year": 1819,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_01_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_01_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_01_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_01_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_01_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_01_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_01_bg10.zip"
+      }
+    },
+    {
+      "fips": "02",
+      "abbr": "AK",
+      "name": "Alaska",
+      "ap_abbr": "Alaska",
+      "capital": "Juneau",
+      "capital_tz": "America/Anchorage",
+      "time_zones": [
+        "America/Anchorage",
+        "America/Adak"
+      ],
+      "statehood_year": 1959,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": false,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_02_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_02_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_02_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_02_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_02_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_02_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_02_bg10.zip"
+      }
+    },
+    {
+      "fips": "04",
+      "abbr": "AZ",
+      "name": "Arizona",
+      "ap_abbr": "Ariz.",
+      "capital": "Phoenix",
+      "capital_tz": "America/Phoenix",
+      "time_zones": [
+        "America/Phoenix"
+      ],
+      "statehood_year": 1912,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_04_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_04_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_04_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_04_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_04_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_04_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_04_bg10.zip"
+      }
+    },
+    {
+      "fips": "05",
+      "abbr": "AR",
+      "name": "Arkansas",
+      "ap_abbr": "Ark.",
+      "capital": "Little Rock",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago"
+      ],
+      "statehood_year": 1836,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_05_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_05_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_05_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_05_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_05_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_05_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_05_bg10.zip"
+      }
+    },
+    {
+      "fips": "06",
+      "abbr": "CA",
+      "name": "California",
+      "ap_abbr": "Calif.",
+      "capital": "Sacramento",
+      "capital_tz": "America/Los_Angeles",
+      "time_zones": [
+        "America/Los_Angeles"
+      ],
+      "statehood_year": 1850,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_06_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_06_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_06_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_06_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_06_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_06_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_06_bg10.zip"
+      }
+    },
+    {
+      "fips": "08",
+      "abbr": "CO",
+      "name": "Colorado",
+      "ap_abbr": "Colo.",
+      "capital": "Denver",
+      "capital_tz": "America/Denver",
+      "time_zones": [
+        "America/Denver"
+      ],
+      "statehood_year": 1876,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_08_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_08_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_08_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_08_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_08_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_08_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_08_bg10.zip"
+      }
+    },
+    {
+      "fips": "09",
+      "abbr": "CT",
+      "name": "Connecticut",
+      "ap_abbr": "Conn.",
+      "capital": "Hartford",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1788,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_09_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_09_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_09_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_09_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_09_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_09_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_09_bg10.zip"
+      }
+    },
+    {
+      "fips": "10",
+      "abbr": "DE",
+      "name": "Delaware",
+      "ap_abbr": "Del.",
+      "capital": "Dover",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1787,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_10_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_10_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_10_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_10_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_10_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_10_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_10_bg10.zip"
+      }
+    },
+    {
+      "fips": "12",
+      "abbr": "FL",
+      "name": "Florida",
+      "ap_abbr": "Fla.",
+      "capital": "Tallahassee",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York",
+        "America/Chicago"
+      ],
+      "statehood_year": 1845,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_12_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_12_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_12_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_12_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_12_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_12_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_12_bg10.zip"
+      }
+    },
+    {
+      "fips": "13",
+      "abbr": "GA",
+      "name": "Georgia",
+      "ap_abbr": "Ga.",
+      "capital": "Atlanta",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1788,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_13_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_13_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_13_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_13_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_13_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_13_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_13_bg10.zip"
+      }
+    },
+    {
+      "fips": "15",
+      "abbr": "HI",
+      "name": "Hawaii",
+      "ap_abbr": "Hawaii",
+      "capital": "Honolulu",
+      "capital_tz": "Pacific/Honolulu",
+      "time_zones": [
+        "Pacific/Honolulu"
+      ],
+      "statehood_year": 1959,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": false,
+      "is_continental": false,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_15_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_15_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_15_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_15_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_15_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_15_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_15_bg10.zip"
+      }
+    },
+    {
+      "fips": "16",
+      "abbr": "ID",
+      "name": "Idaho",
+      "ap_abbr": "Idaho",
+      "capital": "Boise",
+      "capital_tz": "America/Denver",
+      "time_zones": [
+        "America/Denver",
+        "America/Los_Angeles"
+      ],
+      "statehood_year": 1890,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_16_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_16_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_16_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_16_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_16_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_16_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_16_bg10.zip"
+      }
+    },
+    {
+      "fips": "17",
+      "abbr": "IL",
+      "name": "Illinois",
+      "ap_abbr": "Ill.",
+      "capital": "Springfield",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago"
+      ],
+      "statehood_year": 1818,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_17_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_17_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_17_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_17_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_17_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_17_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_17_bg10.zip"
+      }
+    },
+    {
+      "fips": "18",
+      "abbr": "IN",
+      "name": "Indiana",
+      "ap_abbr": "Ind.",
+      "capital": "Indianapolis",
+      "capital_tz": "America/Indiana/Indianapolis",
+      "time_zones": [
+        "America/Chicago",
+        "America/Indiana/Indianapolis",
+        "America/Indianapolis",
+        "America/Indiana/Winamac",
+        "America/Indiana/Vincennes",
+        "America/Indiana/Vevay",
+        "America/Indiana/Tell_City",
+        "America/Indiana/Petersburg",
+        "America/Indiana/Marengo",
+        "America/Indiana/Knox",
+        "America/Knox_IN",
+        "America/New_York"
+      ],
+      "statehood_year": 1816,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_18_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_18_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_18_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_18_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_18_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_18_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_18_bg10.zip"
+      }
+    },
+    {
+      "fips": "19",
+      "abbr": "IA",
+      "name": "Iowa",
+      "ap_abbr": "Iowa",
+      "capital": "Des Moines",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago"
+      ],
+      "statehood_year": 1846,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_19_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_19_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_19_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_19_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_19_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_19_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_19_bg10.zip"
+      }
+    },
+    {
+      "fips": "20",
+      "abbr": "KS",
+      "name": "Kansas",
+      "ap_abbr": "Kan.",
+      "capital": "Topeka",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago",
+        "America/Denver"
+      ],
+      "statehood_year": 1861,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_20_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_20_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_20_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_20_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_20_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_20_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_20_bg10.zip"
+      }
+    },
+    {
+      "fips": "21",
+      "abbr": "KY",
+      "name": "Kentucky",
+      "ap_abbr": "Ky.",
+      "capital": "Frankfort",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/Chicago",
+        "America/New_York",
+        "America/Kentucky/Louisville",
+        "America/Kentucky/Monticello"
+      ],
+      "statehood_year": 1792,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": true,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_21_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_21_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_21_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_21_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_21_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_21_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_21_bg10.zip"
+      }
+    },
+    {
+      "fips": "22",
+      "abbr": "LA",
+      "name": "Louisiana",
+      "ap_abbr": "La.",
+      "capital": "Baton Rouge",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago"
+      ],
+      "statehood_year": 1812,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_22_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_22_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_22_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_22_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_22_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_22_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_22_bg10.zip"
+      }
+    },
+    {
+      "fips": "23",
+      "abbr": "ME",
+      "name": "Maine",
+      "ap_abbr": "Maine",
+      "capital": "Augusta",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1820,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_23_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_23_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_23_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_23_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_23_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_23_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_23_bg10.zip"
+      }
+    },
+    {
+      "fips": "24",
+      "abbr": "MD",
+      "name": "Maryland",
+      "ap_abbr": "Md.",
+      "capital": "Annapolis",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1788,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_24_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_24_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_24_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_24_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_24_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_24_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_24_bg10.zip"
+      }
+    },
+    {
+      "fips": "25",
+      "abbr": "MA",
+      "name": "Massachusetts",
+      "ap_abbr": "Mass.",
+      "capital": "Boston",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1788,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": true,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_25_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_25_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_25_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_25_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_25_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_25_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_25_bg10.zip"
+      }
+    },
+    {
+      "fips": "26",
+      "abbr": "MI",
+      "name": "Michigan",
+      "ap_abbr": "Mich.",
+      "capital": "Lansing",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York",
+        "America/Chicago"
+      ],
+      "statehood_year": 1837,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_26_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_26_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_26_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_26_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_26_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_26_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_26_bg10.zip"
+      }
+    },
+    {
+      "fips": "27",
+      "abbr": "MN",
+      "name": "Minnesota",
+      "ap_abbr": "Minn.",
+      "capital": "Saint Paul",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago"
+      ],
+      "statehood_year": 1858,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_27_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_27_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_27_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_27_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_27_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_27_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_27_bg10.zip"
+      }
+    },
+    {
+      "fips": "28",
+      "abbr": "MS",
+      "name": "Mississippi",
+      "ap_abbr": "Miss.",
+      "capital": "Jackson",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago"
+      ],
+      "statehood_year": 1817,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_28_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_28_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_28_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_28_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_28_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_28_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_28_bg10.zip"
+      }
+    },
+    {
+      "fips": "29",
+      "abbr": "MO",
+      "name": "Missouri",
+      "ap_abbr": "Mo.",
+      "capital": "Jefferson City",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago"
+      ],
+      "statehood_year": 1821,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_29_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_29_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_29_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_29_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_29_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_29_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_29_bg10.zip"
+      }
+    },
+    {
+      "fips": "30",
+      "abbr": "MT",
+      "name": "Montana",
+      "ap_abbr": "Mont.",
+      "capital": "Helena",
+      "capital_tz": "America/Denver",
+      "time_zones": [
+        "America/Denver"
+      ],
+      "statehood_year": 1889,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_30_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_30_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_30_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_30_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_30_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_30_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_30_bg10.zip"
+      }
+    },
+    {
+      "fips": "31",
+      "abbr": "NE",
+      "name": "Nebraska",
+      "ap_abbr": "Neb.",
+      "capital": "Lincoln",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago",
+        "America/Denver"
+      ],
+      "statehood_year": 1867,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_31_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_31_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_31_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_31_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_31_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_31_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_31_bg10.zip"
+      }
+    },
+    {
+      "fips": "32",
+      "abbr": "NV",
+      "name": "Nevada",
+      "ap_abbr": "Nev.",
+      "capital": "Carson City",
+      "capital_tz": "America/Los_Angeles",
+      "time_zones": [
+        "America/Los_Angeles",
+        "America/Denver"
+      ],
+      "statehood_year": 1864,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_32_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_32_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_32_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_32_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_32_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_32_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_32_bg10.zip"
+      }
+    },
+    {
+      "fips": "33",
+      "abbr": "NH",
+      "name": "New Hampshire",
+      "ap_abbr": "N.H.",
+      "capital": "Concord",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1788,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_33_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_33_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_33_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_33_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_33_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_33_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_33_bg10.zip"
+      }
+    },
+    {
+      "fips": "34",
+      "abbr": "NJ",
+      "name": "New Jersey",
+      "ap_abbr": "N.J.",
+      "capital": "Trenton",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1787,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_34_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_34_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_34_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_34_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_34_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_34_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_34_bg10.zip"
+      }
+    },
+    {
+      "fips": "35",
+      "abbr": "NM",
+      "name": "New Mexico",
+      "ap_abbr": "N.M.",
+      "capital": "Santa Fe",
+      "capital_tz": "America/Denver",
+      "time_zones": [
+        "America/Denver"
+      ],
+      "statehood_year": 1912,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_35_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_35_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_35_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_35_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_35_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_35_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_35_bg10.zip"
+      }
+    },
+    {
+      "fips": "36",
+      "abbr": "NY",
+      "name": "New York",
+      "ap_abbr": "N.Y.",
+      "capital": "Albany",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1788,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_36_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_36_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_36_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_36_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_36_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_36_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_36_bg10.zip"
+      }
+    },
+    {
+      "fips": "37",
+      "abbr": "NC",
+      "name": "North Carolina",
+      "ap_abbr": "N.C.",
+      "capital": "Raleigh",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1789,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_37_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_37_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_37_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_37_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_37_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_37_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_37_bg10.zip"
+      }
+    },
+    {
+      "fips": "38",
+      "abbr": "ND",
+      "name": "North Dakota",
+      "ap_abbr": "N.D.",
+      "capital": "Bismarck",
+      "capital_tz": "America/North_Dakota/Center",
+      "time_zones": [
+        "America/Chicago",
+        "America/Denver",
+        "America/North_Dakota/Beulah",
+        "America/North_Dakota/Center",
+        "America/North_Dakota/New_Salem"
+      ],
+      "statehood_year": 1889,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_38_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_38_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_38_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_38_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_38_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_38_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_38_bg10.zip"
+      }
+    },
+    {
+      "fips": "39",
+      "abbr": "OH",
+      "name": "Ohio",
+      "ap_abbr": "Ohio",
+      "capital": "Columbus",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1803,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_39_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_39_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_39_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_39_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_39_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_39_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_39_bg10.zip"
+      }
+    },
+    {
+      "fips": "40",
+      "abbr": "OK",
+      "name": "Oklahoma",
+      "ap_abbr": "Okla.",
+      "capital": "Oklahoma City",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago"
+      ],
+      "statehood_year": 1907,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_40_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_40_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_40_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_40_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_40_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_40_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_40_bg10.zip"
+      }
+    },
+    {
+      "fips": "41",
+      "abbr": "OR",
+      "name": "Oregon",
+      "ap_abbr": "Ore.",
+      "capital": "Salem",
+      "capital_tz": "America/Los_Angeles",
+      "time_zones": [
+        "America/Los_Angeles",
+        "America/Boise"
+      ],
+      "statehood_year": 1859,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_41_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_41_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_41_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_41_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_41_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_41_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_41_bg10.zip"
+      }
+    },
+    {
+      "fips": "42",
+      "abbr": "PA",
+      "name": "Pennsylvania",
+      "ap_abbr": "Pa.",
+      "capital": "Harrisburg",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1787,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": true,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_42_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_42_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_42_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_42_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_42_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_42_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_42_bg10.zip"
+      }
+    },
+    {
+      "fips": "44",
+      "abbr": "RI",
+      "name": "Rhode Island",
+      "ap_abbr": "R.I.",
+      "capital": "Providence",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1790,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_44_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_44_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_44_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_44_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_44_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_44_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_44_bg10.zip"
+      }
+    },
+    {
+      "fips": "45",
+      "abbr": "SC",
+      "name": "South Carolina",
+      "ap_abbr": "S.C.",
+      "capital": "Columbia",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1788,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_45_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_45_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_45_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_45_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_45_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_45_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_45_bg10.zip"
+      }
+    },
+    {
+      "fips": "46",
+      "abbr": "SD",
+      "name": "South Dakota",
+      "ap_abbr": "S.D.",
+      "capital": "Pierre",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago",
+        "America/Denver"
+      ],
+      "statehood_year": 1889,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_46_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_46_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_46_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_46_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_46_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_46_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_46_bg10.zip"
+      }
+    },
+    {
+      "fips": "47",
+      "abbr": "TN",
+      "name": "Tennessee",
+      "ap_abbr": "Tenn.",
+      "capital": "Nashville",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago",
+        "America/New_York"
+      ],
+      "statehood_year": 1796,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_47_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_47_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_47_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_47_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_47_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_47_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_47_bg10.zip"
+      }
+    },
+    {
+      "fips": "48",
+      "abbr": "TX",
+      "name": "Texas",
+      "ap_abbr": "Texas",
+      "capital": "Austin",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago",
+        "America/Denver"
+      ],
+      "statehood_year": 1845,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_48_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_48_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_48_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_48_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_48_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_48_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_48_bg10.zip"
+      }
+    },
+    {
+      "fips": "49",
+      "abbr": "UT",
+      "name": "Utah",
+      "ap_abbr": "Utah",
+      "capital": "Salt Lake City",
+      "capital_tz": "America/Denver",
+      "time_zones": [
+        "America/Denver"
+      ],
+      "statehood_year": 1896,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_49_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_49_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_49_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_49_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_49_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_49_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_49_bg10.zip"
+      }
+    },
+    {
+      "fips": "50",
+      "abbr": "VT",
+      "name": "Vermont",
+      "ap_abbr": "Vt.",
+      "capital": "Montpelier",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1791,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_50_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_50_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_50_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_50_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_50_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_50_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_50_bg10.zip"
+      }
+    },
+    {
+      "fips": "51",
+      "abbr": "VA",
+      "name": "Virginia",
+      "ap_abbr": "Va.",
+      "capital": "Richmond",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1788,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": true,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_51_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_51_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_51_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_51_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_51_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_51_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_51_bg10.zip"
+      }
+    },
+    {
+      "fips": "53",
+      "abbr": "WA",
+      "name": "Washington",
+      "ap_abbr": "Wash.",
+      "capital": "Olympia",
+      "capital_tz": "America/Los_Angeles",
+      "time_zones": [
+        "America/Los_Angeles"
+      ],
+      "statehood_year": 1889,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_53_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_53_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_53_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_53_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_53_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_53_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_53_bg10.zip"
+      }
+    },
+    {
+      "fips": "54",
+      "abbr": "WV",
+      "name": "West Virginia",
+      "ap_abbr": "W.Va.",
+      "capital": "Charleston",
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": 1863,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_54_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_54_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_54_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_54_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_54_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_54_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_54_bg10.zip"
+      }
+    },
+    {
+      "fips": "55",
+      "abbr": "WI",
+      "name": "Wisconsin",
+      "ap_abbr": "Wis.",
+      "capital": "Madison",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago"
+      ],
+      "statehood_year": 1848,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_55_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_55_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_55_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_55_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_55_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_55_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_55_bg10.zip"
+      }
+    },
+    {
+      "fips": "56",
+      "abbr": "WY",
+      "name": "Wyoming",
+      "ap_abbr": "Wyo.",
+      "capital": "Cheyenne",
+      "capital_tz": "America/Denver",
+      "time_zones": [
+        "America/Denver"
+      ],
+      "statehood_year": 1890,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_56_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_56_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_56_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_56_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_56_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_56_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_56_bg10.zip"
+      }
+    },
+    {
+      "fips": "60",
+      "abbr": "AS",
+      "name": "American Samoa",
+      "ap_abbr": null,
+      "capital": "Pago Pago",
+      "capital_tz": "Pacific/Samoa",
+      "time_zones": [
+        "Pacific/Samoa"
+      ],
+      "statehood_year": null,
+      "is_territory": true,
+      "is_obsolete": false,
+      "is_contiguous": false,
+      "is_continental": false,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_60_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_60_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_60_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_60_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_60_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_60_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_60_bg10.zip"
+      }
+    },
+    {
+      "fips": "66",
+      "abbr": "GU",
+      "name": "Guam",
+      "ap_abbr": null,
+      "capital": "Hag\u00e5t\u00f1a",
+      "capital_tz": "Pacific/Guam",
+      "time_zones": [
+        "Pacific/Guam"
+      ],
+      "statehood_year": null,
+      "is_territory": true,
+      "is_obsolete": false,
+      "is_contiguous": false,
+      "is_continental": false,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_66_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_66_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_66_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_66_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_66_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_66_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_66_bg10.zip"
+      }
+    },
+    {
+      "fips": "69",
+      "abbr": "MP",
+      "name": "Northern Mariana Islands",
+      "ap_abbr": null,
+      "capital": "Saipan",
+      "capital_tz": "Pacific/Guam",
+      "time_zones": [
+        "Pacific/Guam"
+      ],
+      "statehood_year": null,
+      "is_territory": true,
+      "is_obsolete": false,
+      "is_contiguous": false,
+      "is_continental": false,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_69_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_69_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_69_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_69_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_69_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_69_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_69_bg10.zip"
+      }
+    },
+    {
+      "fips": "72",
+      "abbr": "PR",
+      "name": "Puerto Rico",
+      "ap_abbr": null,
+      "capital": "San Juan",
+      "capital_tz": "America/Puerto_Rico",
+      "time_zones": [
+        "America/Puerto_Rico"
+      ],
+      "statehood_year": null,
+      "is_territory": true,
+      "is_obsolete": false,
+      "is_contiguous": false,
+      "is_continental": false,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_72_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_72_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_72_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_72_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_72_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_72_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_72_bg10.zip"
+      }
+    },
+    {
+      "fips": "78",
+      "abbr": "VI",
+      "name": "Virgin Islands",
+      "ap_abbr": null,
+      "capital": "Charlotte Amalie",
+      "capital_tz": "America/Puerto_Rico",
+      "time_zones": [
+        "America/Puerto_Rico"
+      ],
+      "statehood_year": null,
+      "is_territory": true,
+      "is_obsolete": false,
+      "is_contiguous": false,
+      "is_continental": false,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_78_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_78_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_78_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_78_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_78_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_78_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_78_bg10.zip"
+      }
+    },
+    {
+      "fips": "11",
+      "abbr": "DC",
+      "name": "District of Columbia",
+      "ap_abbr": "D.C.",
+      "capital": null,
+      "capital_tz": "America/New_York",
+      "time_zones": [
+        "America/New_York"
+      ],
+      "statehood_year": null,
+      "is_territory": false,
+      "is_obsolete": false,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": {
+        "tract": "https://www2.census.gov/geo/tiger/TIGER2010/TRACT/2010/tl_2010_11_tract10.zip",
+        "cd": "https://www2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_11_cd111.zip",
+        "county": "https://www2.census.gov/geo/tiger/TIGER2010/COUNTY/2010/tl_2010_11_county10.zip",
+        "state": "https://www2.census.gov/geo/tiger/TIGER2010/STATE/2010/tl_2010_11_state10.zip",
+        "zcta": "https://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_11_zcta510.zip",
+        "block": "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_11_tabblock10.zip",
+        "blockgroup": "https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_11_bg10.zip"
+      }
+    },
+    {
+      "fips": null,
+      "abbr": "DK",
+      "name": "Dakota",
+      "ap_abbr": null,
+      "capital": "Yankton",
+      "capital_tz": "America/Chicago",
+      "time_zones": [
+        "America/Chicago"
+      ],
+      "statehood_year": null,
+      "is_territory": false,
+      "is_obsolete": true,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": null
+    },
+    {
+      "fips": null,
+      "abbr": "OL",
+      "name": "Orleans",
+      "ap_abbr": null,
+      "capital": null,
+      "capital_tz": null,
+      "time_zones": [
+        "America/Chicago"
+      ],
+      "statehood_year": null,
+      "is_territory": false,
+      "is_obsolete": true,
+      "is_contiguous": true,
+      "is_continental": true,
+      "is_commonwealth": false,
+      "shapefile_urls": null
+    },
+    {
+      "fips": null,
+      "abbr": "PI",
+      "name": "Philippine Islands",
+      "ap_abbr": null,
+      "capital": null,
+      "capital_tz": null,
+      "time_zones": [
+        "Asia/Singapore"
+      ],
+      "statehood_year": null,
+      "is_territory": false,
+      "is_obsolete": true,
+      "is_contiguous": false,
+      "is_continental": false,
+      "is_commonwealth": false,
+      "shapefile_urls": null
+    }
+  ]
+}

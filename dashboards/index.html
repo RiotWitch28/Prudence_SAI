@@ -1641,9 +1641,10 @@ const META={
 };
 // Any present entity without explicit META gets a neutral fallback (keeps new members from crashing).
 Object.keys(E).forEach(k=>{if(!META[k])META[k]={color:'#64748b',bg:'linear-gradient(135deg,#64748b,#475569)',short:(E[k]&&E[k].label)||k,abbr:(String(k)[0]||'?').toUpperCase()};});
-// ORDER is now derived from the entities this member actually has (preferred order first).
+// ORDER = entities this member actually has (for charts/totals). CARD_ORDER = fixed slot layout for the Entities selector.
 const __PREF=['office','house','pac','pres','senate','gov','other_pac','outside_pac'];
 const ORDER=[...__PREF.filter(k=>E[k]),...Object.keys(E).filter(k=>!__PREF.includes(k))];
+const CARD_ORDER=['office','house','pac','pres','senate','gov','other_pac','outside_pac'];
 
 // ── MEMBER ROSTER (declared early to avoid TDZ) ──
 var ACTIVE_MEMBER=(function(){var b=new URLSearchParams(location.search).get('member');return (!b||b==='S001193')?'swalwell':b;})();
@@ -2185,31 +2186,29 @@ document.getElementById('yrBar').onclick=ev=>{
 // ── STAT CARDS ──
 function renderStatCards(){
   const g=document.getElementById('statGrid');g.innerHTML='';
+  const univTotal=ORDER.reduce((s,k)=>s+entTotal(k),0);
   ORDER.forEach(k=>{
-    const m=META[k],e=E[k],on=ST.enabled[k];
+    const m=META[k],e=E[k];
     const t=entTotal(k);
+    const pct=univTotal>0?((t/univTotal)*100).toFixed(1):'—';
     let sub='';
     if(k==='gov')sub=`own-campaign spend · gross ${fmtK(e.gross_total)}`;
     else if(k==='office')sub=`personnel ${fmtK(e.personnel)} · non-personnel ${fmtK(e.nonpersonnel)}`;
     else if(k==='outside_pac')sub=e.dormant?'currently dormant':`IE ${fmt(e.schedule_e)} spent about member`;
     else sub=`${(e.count||0).toLocaleString()} transactions`;
     const c=document.createElement('div');
-    c.className='stat-card'+(on?'':' dimmed');
+    c.className='stat-card';
     c.style.borderTopColor=m.color;
     c.innerHTML=`<div class="stat-label">${m.short}${e.controlled===false?'<span class="stat-badge" style="background:#f7f6f3;color:#718096">outside</span>':''}</div>
       <div class="stat-value" style="color:${m.color}">${fmtK(t)}</div>
       <div class="stat-sub">${sub}</div>
       <div style="margin-top:8px;display:flex;align-items:center;gap:6px">
         <span class="prov-dot ${e.verification}"></span>
-        <span style="font-size:11px;color:#a0aec0">${on?'included in universe':'excluded'}</span>
-        <span style="margin-left:auto;font-size:11px;color:${on?'#2d6a4f':'#a0aec0'};cursor:pointer;font-weight:600" onclick="toggleEnt('${k}',event)">${on?'✓ on':'off'}</span>
+        <span style="font-size:11px;color:#a0aec0">${pct}% of universe</span>
       </div>`;
-    c.onclick=(ev)=>{if(ev.target.style.cursor==='pointer'||ev.target.onclick)return;showPage('entities',document.querySelector('.nav-tab[data-p=entities]'));setTimeout(()=>activateEntCard(k),50);};
     g.appendChild(c);
   });
 }
-
-function toggleEnt(k,ev){ev.stopPropagation();ST.enabled[k]=!ST.enabled[k];save();renderStatCards();renderOvCharts();renderVendTable();}
 
 // ── OVERVIEW CHARTS ──
 let ovCharts={};
@@ -2494,10 +2493,18 @@ function buildEntities(){
   const sel=document.getElementById('entSelector');
   const profs=document.getElementById('entProfiles');
   sel.innerHTML='';profs.innerHTML='';
-  ORDER.forEach(k=>{
+  CARD_ORDER.forEach(k=>{
     const m=META[k],e=E[k];
     // selector card
     const c=document.createElement('div');
+    if(!e){
+      // entity doesn't exist for this member — greyed-out placeholder
+      c.className='ent-sel-card';c.dataset.k=k;
+      c.style.cssText='opacity:0.35;pointer-events:none;filter:grayscale(1)';
+      c.innerHTML=`<div class="esl">${m.short}</div><div class="esv" style="color:${m.color}">—</div><div class="ess">not available</div>`;
+      sel.appendChild(c);
+      return;
+    }
     c.className='ent-sel-card';c.dataset.k=k;
     c.innerHTML=`<div class="esl">${m.short}</div><div class="esv" style="color:${m.color}">${fmtK(e.total)}</div><div class="ess">${e.source_type}</div>`;
     c.innerHTML+=`<div class="echeck">✓</div>`;
@@ -3863,8 +3870,9 @@ function renderCategorySegment(catId,target){
         entry.byEnt[k]=(entry.byEnt[k]||0)+amt;
         entry.entities.add(k);
         entitiesUsed.add(k);
-        // Role: track best-paying entity's role for the title column
-        const rawRole=p.role||(p.txns&&p.txns.length?p.txns.reduce((best,t)=>t.amount>best.amount?t:best,p.txns[0]).purpose:'');
+        // Role: prefer actual job title from highest-value txn purpose over the SOD budget category in p.role
+        const txnTitle=p.txns&&p.txns.length?p.txns.reduce((best,t)=>t.amount>best.amount?t:best,p.txns[0]).purpose:'';
+        const rawRole=txnTitle||p.role||'';
         if(rawRole)entry.roles[k]=titleCase(rawRole);
         // Per-year (or fall back to undated bucket for FPPC-style sources)
         const py=deriveBy(p);

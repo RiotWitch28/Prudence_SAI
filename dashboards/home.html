@@ -4,12 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Article One — 119th Congress Dashboard</title>
+  <script>
+    /* Set theme before paint to avoid a flash of the wrong palette. */
+    (function () {
+      var t;
+      try { t = localStorage.getItem('a1-theme'); } catch (e) {}
+      if (!t) {
+        t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,900;1,400;1,600;1,900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
+      color-scheme: light;
       --navy:        #1e3a5f;
       --navy-deep:   #122540;
       --navy-mid:    #2a4f7c;
@@ -31,6 +43,28 @@
       --radius-sm: 6px;
       --radius-md: 12px;
       --radius-lg: 20px;
+    }
+
+    /* ─── DARK THEME ─── */
+    /* The platform bar, masthead, and footer are intentionally dark in both
+       themes; these overrides re-tone the page surfaces, text, and accents. */
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --navy:        #4a78b0;
+      --navy-mid:    #5e8fc9;
+      --navy-light:  #84b0e0;
+      --gold-pale:   rgba(201,150,58,0.14);
+      --gold-dim:    #d8a94a;
+      --bg:          #0c1420;
+      --bg-warm:     #1d2c3f;
+      --surface:     #13202f;
+      --border:      rgba(255,255,255,0.08);
+      --border-hover:rgba(255,255,255,0.18);
+      --text:        #e7eef6;
+      --text-muted:  #a9b8c9;
+      --text-subtle: #74849a;
+      --dem:         #5b9bd5;
+      --rep:         #e07070;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -134,6 +168,35 @@
 
     .nav-link:hover { color: rgba(255,255,255,0.80); background: rgba(255,255,255,0.06); }
     .nav-link.active { color: var(--gold-bright); background: rgba(201,150,58,0.12); }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      margin-left: 8px;
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      line-height: 1;
+      color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s, border-color 0.2s;
+    }
+
+    .theme-toggle:hover {
+      color: var(--gold-bright);
+      background: rgba(201,150,58,0.10);
+      border-color: rgba(201,150,58,0.40);
+    }
+
+    .theme-icon-sun  { display: none; }
+    .theme-icon-moon { display: inline; }
+    html[data-theme="dark"] .theme-icon-sun  { display: inline; }
+    html[data-theme="dark"] .theme-icon-moon { display: none; }
 
     /* ─── CONGRESS MASTHEAD ─── */
     .masthead {
@@ -929,6 +992,11 @@
     <nav class="platform-nav">
       <a href="home.html" class="nav-link active">Home</a>
       <a href="article-one.html" class="nav-link">Members</a>
+      <button class="theme-toggle" id="themeToggle" type="button" onclick="toggleTheme()"
+              aria-label="Toggle dark mode" title="Toggle dark / light theme">
+        <span class="theme-icon-sun">☀</span>
+        <span class="theme-icon-moon">☾</span>
+      </button>
     </nav>
   </header>
 
@@ -967,7 +1035,7 @@
           <div class="stat-tile-label">Total Spend Analyzed</div>
         </div>
         <div class="stat-tile">
-          <div class="stat-tile-value">4 / 5</div>
+          <div class="stat-tile-value">6 / 7</div>
           <div class="stat-tile-label">Democrat · Republican</div>
         </div>
         <div class="stat-tile">
@@ -989,18 +1057,18 @@
       </div>
       <div class="split-body">
         <div class="party-block">
-          <div class="party-label dem">Democrat · 4 Members</div>
-          <div class="party-amount dem">$110.0M</div>
-          <div class="party-sub">Bell · Clarke · Doggett · Krishnamoorthi</div>
+          <div class="party-label dem">Democrat · 6 Members</div>
+          <div class="party-amount dem">$137.8M</div>
+          <div class="party-sub">Beatty · Bell · Clarke · Doggett · Friedman · Krishnamoorthi</div>
         </div>
         <div class="party-block">
-          <div class="party-label rep">Republican · 5 Members</div>
-          <div class="party-amount rep">$72.8M</div>
-          <div class="party-sub">De La Cruz · Fine · LaLota · Nehls · Reschenthaler</div>
+          <div class="party-label rep">Republican · 7 Members</div>
+          <div class="party-amount rep">$109.5M</div>
+          <div class="party-sub">Crawford · De La Cruz · Fine · Gonzales · LaLota · Nehls · Reschenthaler</div>
         </div>
         <div class="party-bar-row">
-          <div class="party-bar-dem" style="flex: 60;"></div>
-          <div class="party-bar-rep" style="flex: 40;"></div>
+          <div class="party-bar-dem" style="flex: 56;"></div>
+          <div class="party-bar-rep" style="flex: 44;"></div>
         </div>
       </div>
     </div>
@@ -1010,17 +1078,20 @@
       <span class="filter-label">Party</span>
       <div class="filter-group" id="partyGroup">
         <button class="pill active" data-party="all" onclick="setFilter('party','all')">All Members</button>
-        <button class="pill" data-party="dem" onclick="setFilter('party','dem')">Democrat <span class="count">×4</span></button>
-        <button class="pill" data-party="rep" onclick="setFilter('party','rep')">Republican <span class="count">×5</span></button>
+        <button class="pill" data-party="dem" onclick="setFilter('party','dem')">Democrat <span class="count">×6</span></button>
+        <button class="pill" data-party="rep" onclick="setFilter('party','rep')">Republican <span class="count">×7</span></button>
       </div>
       <div class="filter-sep"></div>
       <span class="filter-label">State</span>
       <div class="filter-group" id="stateGroup">
         <button class="pill active" data-state="all" onclick="setFilter('state','all')">All States</button>
-        <button class="pill" data-state="TX" onclick="setFilter('state','TX')">TX <span class="count">×3</span></button>
+        <button class="pill" data-state="TX" onclick="setFilter('state','TX')">TX <span class="count">×4</span></button>
         <button class="pill" data-state="NY" onclick="setFilter('state','NY')">NY <span class="count">×2</span></button>
+        <button class="pill" data-state="OH" onclick="setFilter('state','OH')">OH</button>
         <button class="pill" data-state="IL" onclick="setFilter('state','IL')">IL</button>
         <button class="pill" data-state="PA" onclick="setFilter('state','PA')">PA</button>
+        <button class="pill" data-state="CA" onclick="setFilter('state','CA')">CA</button>
+        <button class="pill" data-state="AR" onclick="setFilter('state','AR')">AR</button>
         <button class="pill" data-state="MO" onclick="setFilter('state','MO')">MO</button>
         <button class="pill" data-state="FL" onclick="setFilter('state','FL')">FL</button>
       </div>
@@ -1034,7 +1105,7 @@
         <div class="panel-header">
           <div>
             <div class="panel-title">Top 5 Vendors &amp; Consultants</div>
-            <div class="panel-meta" id="vendorPanelMeta">All 9 members · Salary &amp; party transfers excluded</div>
+            <div class="panel-meta" id="vendorPanelMeta">All 13 members · Salary &amp; party transfers excluded</div>
           </div>
           <div class="panel-badge">By Disbursement</div>
         </div>
@@ -1054,13 +1125,13 @@
         <div class="panel-header">
           <div>
             <div class="panel-title">Spending by Category</div>
-            <div class="panel-meta">All 9 members combined · All sources</div>
+            <div class="panel-meta">All 13 members combined · All sources</div>
           </div>
         </div>
         <div class="panel-body">
           <div class="cat-list" id="catList"></div>
           <div class="cat-total-note">
-            Total analyzed: <strong>$182.7M</strong> across all active members &amp; entities
+            Total analyzed: <strong>$247.2M</strong> across all active members &amp; entities
           </div>
         </div>
       </div>
@@ -1071,7 +1142,7 @@
     <div class="roster-section">
       <div class="section-heading">
         <div class="section-title">Active Members</div>
-        <div class="section-meta">119th Congress · 9 members tracked</div>
+        <div class="section-meta">119th Congress · 13 members tracked</div>
       </div>
       <div class="member-grid" id="memberGrid"></div>
     </div>
@@ -1097,17 +1168,17 @@
       all: {
         all: [
           { name: 'ADELSTEIN & ASSOCIATES LLC',      total: 6293890, cat: 'Media' },
-          { name: 'TARGETED VICTORY',                total: 2983806, cat: 'Media' },
+          { name: 'TARGETED VICTORY',                total: 3933708, cat: 'Media' },
           { name: 'GPS IMPACT',                      total: 2814066, cat: 'Media & Strategy' },
           { name: 'AMERICAN MEDIA AND ADVOCACY GRP', total: 2318495, cat: 'Media' },
           { name: 'STRATEGIC MEDIA PLACEMENT INC.',  total: 2276742, cat: 'Media' },
         ],
         TX: [
-          { name: 'TARGETED VICTORY',                total: 2983806, cat: 'Media' },
+          { name: 'TARGETED VICTORY',                total: 3933708, cat: 'Media' },
           { name: 'SMART MEDIA GROUP LLC',            total: 1927160, cat: 'Media' },
           { name: 'STRATEGIC MEDIA PLACEMENT INC.',  total: 1466500, cat: 'Media' },
+          { name: 'MCCLESKEY MEDIA STRATEGIES',      total: 1346978, cat: 'Media' },
           { name: 'FULFILLMENT SOLUTIONS INC.',       total:  995462, cat: 'Admin' },
-          { name: 'GSA PUBLIC BUILDING SERVICE',      total:  724652, cat: 'Admin' },
         ],
         NY: [
           { name: 'AMERICAN MEDIA AND ADVOCACY GRP', total: 2318495, cat: 'Media' },
@@ -1115,6 +1186,13 @@
           { name: 'UNITED STATES POSTAL SERVICE',    total:  700286, cat: 'Admin' },
           { name: 'CITI CARDS',                      total:  508457, cat: 'Admin' },
           { name: '222 LENOX RD LLC',                total:  470650, cat: 'Admin' },
+        ],
+        OH: [
+          { name: 'ANGERHOLZER BROZ CONSULTING LLC', total: 1047477, cat: 'Consulting' },
+          { name: 'COUNTERPOINT MESSAGING LLC',      total:  945850, cat: 'Media' },
+          { name: 'RT ADVISORS, LLC',                total:  248101, cat: 'Consulting' },
+          { name: 'FLETCHER ROWLEY',                 total:  192602, cat: 'Legal' },
+          { name: 'NEW ALBANY COUNTRY CLUB',         total:  190542, cat: 'Events' },
         ],
         IL: [
           { name: 'ADELSTEIN & ASSOCIATES LLC',      total: 6293890, cat: 'Media' },
@@ -1129,6 +1207,20 @@
           { name: '814 CONSULTING LLC',              total: 1024084, cat: 'Consulting' },
           { name: 'ADP',                             total:  817953, cat: 'Admin' },
           { name: 'FULFILLMENT HOUSE',               total:  643062, cat: 'Admin' },
+        ],
+        CA: [
+          { name: 'NM MARKETING',                   total:  340908, cat: 'Media' },
+          { name: 'WESTWEST DIGITAL',                total:  189094, cat: 'Media' },
+          { name: 'ANGERHOLZER BROZ CONSULTING LLC', total:  119763, cat: 'Consulting' },
+          { name: 'CAPITOL COMPLIANCE ASSOCIATES',   total:  118846, cat: 'Admin' },
+          { name: 'AMERICAN EXPRESS',                total:  111367, cat: 'Admin' },
+        ],
+        AR: [
+          { name: 'STRATEGIC MEDIA',                 total:  655983, cat: 'Media' },
+          { name: 'KLF & COMPANY',                   total:  347159, cat: 'Consulting' },
+          { name: 'STRATEGIC MEDIA SERVICES INC.',   total:  283026, cat: 'Media' },
+          { name: 'SECURITY BANKCARD CENTER INC.',   total:  162358, cat: 'Admin' },
+          { name: 'WINFREY & COMPANY',               total:  159873, cat: 'Consulting' },
         ],
         MO: [
           { name: 'GPS IMPACT',                      total: 2682091, cat: 'Media & Strategy' },
@@ -1156,7 +1248,7 @@
       },
       rep: {
         all: [
-          { name: 'TARGETED VICTORY',                total: 2983806, cat: 'Media' },
+          { name: 'TARGETED VICTORY',                total: 3933708, cat: 'Media' },
           { name: 'AMERICAN MEDIA AND ADVOCACY GRP', total: 2318495, cat: 'Media' },
           { name: 'STRATEGIC MEDIA PLACEMENT INC.',  total: 2276742, cat: 'Media' },
           { name: 'SMART MEDIA GROUP LLC',            total: 1927160, cat: 'Media' },
@@ -1177,11 +1269,15 @@
     ];
 
     const MEMBERS = [
+      { name: 'Joyce Beatty',          bio: 'B001281', party: 'D', state: 'OH', total: 23936913 },
       { name: 'Wesley Bell',           bio: 'B001324', party: 'D', state: 'MO', total: 7626518 },
       { name: 'Yvette D. Clarke',      bio: 'C001067', party: 'D', state: 'NY', total: 24459284 },
+      { name: 'Rick Crawford',         bio: 'C001087', party: 'R', state: 'AR', total: 21032490 },
       { name: 'Monica De La Cruz',     bio: 'D000594', party: 'R', state: 'TX', total: 20339399 },
       { name: 'Lloyd Doggett',         bio: 'D000399', party: 'D', state: 'TX', total: 25650604 },
       { name: 'Randy Fine',            bio: 'F000484', party: 'R', state: 'FL', total: 4016601 },
+      { name: 'Laura Friedman',        bio: 'F000483', party: 'D', state: 'CA', total: 3860534 },
+      { name: 'Ernest Gonzales',       bio: 'G000594', party: 'R', state: 'TX', total: 15687125 },
       { name: 'Raja Krishnamoorthi',   bio: 'K000391', party: 'D', state: 'IL', total: 52243734 },
       { name: 'Nick LaLota',           bio: 'L000598', party: 'R', state: 'NY', total: 11849816 },
       { name: 'Troy E. Nehls',         bio: 'N000026', party: 'R', state: 'TX', total: 13181345 },
@@ -1205,9 +1301,9 @@
       document.getElementById('filterStatus').innerHTML =
         `Showing: <span>${partyLabel} · ${stateLabel}</span>`;
 
-      const memberCount = { all: '9 members', dem: '4 members', rep: '5 members' }[activeParty];
+      const memberCount = { all: '13 members', dem: '6 members', rep: '7 members' }[activeParty];
       const stateCount = activeState === 'all' ? memberCount :
-        { TX: '3 members', NY: '2 members', IL: '1 member', PA: '1 member', MO: '1 member', FL: '1 member' }[activeState] || memberCount;
+        { TX: '4 members', NY: '2 members', OH: '1 member', IL: '1 member', PA: '1 member', CA: '1 member', AR: '1 member', MO: '1 member', FL: '1 member' }[activeState] || memberCount;
       document.getElementById('vendorPanelMeta').textContent =
         `${stateCount} · Salary & party transfers excluded`;
 
@@ -1316,6 +1412,13 @@
       if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
       if (n >= 1e3) return '$' + (n / 1e3).toFixed(0) + 'K';
       return '$' + n.toFixed(0);
+    }
+
+    /* ─── THEME TOGGLE ─── */
+    function toggleTheme() {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('a1-theme', next); } catch (e) {}
     }
 
     /* ─── INIT ─── */

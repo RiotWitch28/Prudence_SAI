@@ -822,6 +822,168 @@ body.dark .status-chip.personal-chip.neg{background:#1f0a0e}
 .airec-in .txt{font-size:12.5px;color:var(--text-2);line-height:1.6}
 .airec-in .row.decide{background:var(--bg);border:1px dashed var(--border);border-radius:var(--radius);padding:10px 12px}
 .airec-in .row.decide .lbl{color:var(--navy-mid)}
+
+/* ── DISTRICT OVERVIEW ── */
+.dist-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:14px}
+.dist-2col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:900px){.dist-2col{grid-template-columns:1fr}}
+
+.dist-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-sm)}
+.dist-card-head{margin-bottom:12px}
+.dist-card-title{font-size:13px;font-weight:700;color:var(--text)}
+.dist-card-sub{font-size:11.5px;color:var(--text-3);margin-top:2px}
+
+.dist-map-card{position:relative;background:linear-gradient(180deg,var(--surface),var(--bg));border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;box-shadow:var(--shadow-sm);min-height:360px;display:flex;flex-direction:column}
+.dist-map-wrap{flex:1;position:relative;border-radius:var(--radius);background:#f0f3f7;border:1px solid var(--border-soft);overflow:hidden;min-height:280px}
+body.dark .dist-map-wrap{background:#0b1320}
+.dist-map-wrap svg{display:block;width:100%;height:100%}
+.dist-map-state{fill:rgba(74,144,217,.06);stroke:var(--muted);stroke-width:1.2;vector-effect:non-scaling-stroke}
+body.dark .dist-map-state{fill:rgba(74,144,217,.08);stroke:#3a4555}
+.dist-map-dist{fill:var(--gold);fill-opacity:.85;stroke:var(--navy-deep);stroke-width:1.4;vector-effect:non-scaling-stroke;filter:drop-shadow(0 2px 6px rgba(30,58,95,.18))}
+.dist-map-foot{font-size:10.5px;color:var(--text-3);margin-top:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dist-map-legend{display:inline-flex;align-items:center;gap:5px}
+.dist-map-legend .sw{width:14px;height:10px;border-radius:2px;display:inline-block}
+
+.dist-ctx-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-sm)}
+.dist-ctx-rows{display:flex;flex-direction:column;gap:14px}
+.dist-ctx-row{display:flex;flex-direction:column;gap:6px}
+.dist-ctx-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.dist-ctx-label{font-size:12px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px}
+.dist-ctx-icon{font-size:13px;opacity:.7}
+.dist-ctx-delta{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:10px}
+.dist-ctx-delta.up{background:var(--green-bg);color:var(--green)}
+.dist-ctx-delta.dn{background:var(--red-bg);color:var(--red)}
+.dist-ctx-delta.flat{background:var(--bg);color:var(--text-3)}
+.dist-ctx-3bar{display:grid;grid-template-columns:78px 1fr 90px;gap:8px;align-items:center;font-size:11px}
+.dist-ctx-3bar .nm{color:var(--text-3);font-weight:600}
+.dist-ctx-3bar.dist .nm{color:var(--navy);font-weight:700}
+body.dark .dist-ctx-3bar.dist .nm{color:var(--navy-mid)}
+.dist-ctx-3bar .track{height:14px;background:var(--bg);border-radius:4px;overflow:hidden}
+.dist-ctx-3bar .fill{height:100%;background:var(--muted);border-radius:4px;transition:width var(--t)}
+.dist-ctx-3bar.dist .fill{background:linear-gradient(90deg,var(--navy) 0%,var(--navy-mid) 100%)}
+.dist-ctx-3bar.state .fill{background:var(--slate-light)}
+.dist-ctx-3bar.us .fill{background:var(--muted)}
+.dist-ctx-3bar .vv{text-align:right;font-weight:700;color:var(--text);font-feature-settings:"tnum"}
+
+.dist-pyr-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-sm)}
+.dist-pyr-wrap{position:relative;height:340px;margin-top:6px}
+.dist-pyr-legend{display:flex;justify-content:center;gap:18px;font-size:11px;color:var(--text-3);margin-top:6px}
+.dist-pyr-legend .sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:middle}
+
+.dist-edu{display:grid;grid-template-columns:1fr;gap:14px}
+.dist-edu-bar{display:flex;height:38px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin:6px 0 10px}
+.dist-edu-seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;min-width:0;overflow:hidden;white-space:nowrap;transition:flex var(--t)}
+.dist-edu-seg.l{background:#9b2335}
+.dist-edu-seg.h{background:#b45309}
+.dist-edu-seg.s{background:#c9963a}
+.dist-edu-seg.b{background:#2a4f7c}
+.dist-edu-seg.g{background:#1e3a5f}
+.dist-edu-rows{display:flex;flex-direction:column;gap:8px}
+.dist-edu-row{display:grid;grid-template-columns:14px 1fr auto auto;gap:10px;align-items:center;font-size:12px}
+.dist-edu-dot{width:11px;height:11px;border-radius:3px}
+.dist-edu-name{color:var(--text);font-weight:600}
+.dist-edu-pct{font-weight:800;color:var(--text);font-feature-settings:"tnum";text-align:right}
+.dist-edu-delta{font-size:10.5px;font-weight:600;padding:1px 6px;border-radius:8px;min-width:50px;text-align:center;background:var(--bg);color:var(--text-3)}
+.dist-edu-delta.up{background:var(--green-bg);color:var(--green)}
+.dist-edu-delta.dn{background:var(--red-bg);color:var(--red)}
+
+.dist-house-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.dist-house-grid{grid-template-columns:1fr}}
+.dist-house-tile{background:var(--bg);border:1px solid var(--border-soft);border-radius:var(--radius);padding:14px 16px}
+.dist-house-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--text-3);margin-bottom:6px}
+.dist-house-val{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.3px;font-feature-settings:"tnum"}
+.dist-house-sub{font-size:11px;color:var(--text-3);margin-top:4px}
+.dist-house-bar{display:flex;height:24px;border-radius:6px;overflow:hidden;border:1px solid var(--border);margin-top:6px}
+.dist-house-bar .own{background:#2a4f7c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.dist-house-bar .rent{background:#c9963a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+
+.dist-home-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.dist-home-tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;border-top:3px solid transparent}
+.dist-home-tile.bb{border-top-color:var(--navy-mid)}
+.dist-home-tile.fb{border-top-color:var(--green)}
+.dist-home-tile.lg{border-top-color:var(--gold)}
+.dist-home-tile.vt{border-top-color:var(--red)}
+.dist-home-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--text-3);margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.dist-home-val{font-size:24px;font-weight:800;color:var(--text);letter-spacing:-.4px;font-feature-settings:"tnum"}
+.dist-home-track{height:5px;background:var(--bg);border-radius:3px;margin-top:8px;position:relative;overflow:visible}
+.dist-home-fill{height:100%;border-radius:3px}
+.dist-home-fill.bb{background:linear-gradient(90deg,var(--navy),var(--navy-mid))}
+.dist-home-fill.fb{background:linear-gradient(90deg,#1f5740,#2d6a4f)}
+.dist-home-fill.lg{background:linear-gradient(90deg,#a67a25,var(--gold))}
+.dist-home-fill.vt{background:linear-gradient(90deg,#7a1828,var(--red))}
+.dist-home-mark{position:absolute;top:-3px;width:2px;height:11px;background:var(--text)}
+.dist-home-sub{font-size:10.5px;color:var(--text-3);margin-top:6px}
+
+.dist-hero{position:relative;background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 65%,var(--navy-mid) 100%);color:#fff;border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:20px;box-shadow:var(--shadow);overflow:hidden}
+.dist-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(201,150,58,.22) 0%,transparent 70%);pointer-events:none}
+.dist-hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%);pointer-events:none}
+.dist-hero-top{display:flex;align-items:center;gap:10px;margin-bottom:14px;position:relative;z-index:1}
+.dist-hero-eyebrow{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);opacity:.9}
+.dist-hero-source{margin-left:auto;font-size:10.5px;color:rgba(255,255,255,.6);font-weight:500}
+.dist-hero-source strong{color:var(--gold-light);font-weight:700}
+.dist-hero-main{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap;position:relative;z-index:1}
+.dist-hero-code{font-size:48px;font-weight:900;letter-spacing:-1.5px;line-height:1;color:#fff;font-feature-settings:"tnum"}
+.dist-hero-meta{flex:1;min-width:220px}
+.dist-hero-state{font-size:22px;font-weight:800;letter-spacing:-.3px;color:#fff;margin-bottom:2px}
+.dist-hero-sub{font-size:12.5px;color:rgba(255,255,255,.65);font-weight:500;line-height:1.55}
+.dist-hero-stats{display:flex;gap:18px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);margin-top:18px;padding-top:14px;position:relative;z-index:1}
+.dist-hero-kpi{display:flex;flex-direction:column;gap:2px;min-width:120px}
+.dist-hero-kpi .k{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.55)}
+.dist-hero-kpi .v{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px;font-feature-settings:"tnum"}
+.dist-hero-kpi .v.gold{color:var(--gold-light)}
+
+.dist-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:22px}
+.dist-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;transition:all var(--t);border-top:3px solid var(--border);box-shadow:var(--shadow-sm);position:relative}
+.dist-stat:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-top-color:var(--navy-mid)}
+.dist-stat-label{font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.dist-stat-icon{font-size:13px;opacity:.7}
+.dist-stat-value{font-size:24px;font-weight:800;color:var(--text);line-height:1;letter-spacing:-.5px;font-feature-settings:"tnum"}
+.dist-stat-foot{margin-top:10px;font-size:11px;color:var(--text-3);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.dist-stat-delta{display:inline-flex;align-items:center;gap:4px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:2px 8px;font-size:10.5px;font-weight:700;color:var(--text-3)}
+.dist-stat-delta.up{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+.dist-stat-delta.dn{background:var(--red-bg);border-color:var(--red);color:var(--red)}
+
+.dist-demo-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:900px){.dist-demo-grid{grid-template-columns:1fr}}
+.dist-demo-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-sm)}
+.dist-stack{display:flex;height:36px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin:10px 0 14px}
+.dist-stack-seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;min-width:0;transition:flex var(--t);overflow:hidden;white-space:nowrap}
+.dist-stack-seg.w{background:#2a4f7c}
+.dist-stack-seg.b{background:#9b2335}
+.dist-stack-seg.a{background:#c9963a}
+.dist-stack-seg.h{background:#2d6a4f}
+.dist-stack-seg.o{background:#718096}
+.dist-demo-rows{display:flex;flex-direction:column;gap:10px}
+.dist-demo-row{display:grid;grid-template-columns:14px 1fr auto auto;gap:10px;align-items:center;font-size:12px;color:var(--text-2)}
+.dist-demo-dot{width:11px;height:11px;border-radius:3px}
+.dist-demo-label{color:var(--text);font-weight:600}
+.dist-demo-val{font-weight:700;color:var(--text);font-feature-settings:"tnum"}
+.dist-demo-delta{font-size:10.5px;font-weight:600;padding:1px 6px;border-radius:8px;background:var(--bg);color:var(--text-3);min-width:50px;text-align:center}
+.dist-demo-delta.up{background:var(--green-bg);color:var(--green)}
+.dist-demo-delta.dn{background:var(--red-bg);color:var(--red)}
+.dist-demo-foot{font-size:10.5px;color:var(--text-3);font-style:italic;margin-top:8px;line-height:1.5}
+
+.dist-cmp-grid{display:flex;flex-direction:column;gap:10px}
+.dist-cmp-row{display:grid;grid-template-columns:1fr auto auto auto;gap:14px;align-items:center;padding:10px 12px;background:var(--bg);border-radius:8px;border:1px solid var(--border-soft)}
+.dist-cmp-metric{font-size:12px;font-weight:600;color:var(--text)}
+.dist-cmp-val{font-size:13px;font-weight:800;color:var(--navy);font-feature-settings:"tnum"}
+body.dark .dist-cmp-val{color:var(--navy-mid)}
+.dist-cmp-vs{font-size:11px;color:var(--text-3)}
+.dist-cmp-delta{font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;min-width:60px;text-align:center}
+.dist-cmp-delta.up{background:var(--green-bg);color:var(--green)}
+.dist-cmp-delta.dn{background:var(--red-bg);color:var(--red)}
+.dist-cmp-delta.flat{background:var(--bg);color:var(--text-3)}
+
+.dist-empty{padding:48px 32px;text-align:center;background:var(--surface);border:1px dashed var(--border);border-radius:var(--radius-lg);color:var(--text-3);font-size:13.5px;line-height:1.6}
+.dist-empty strong{color:var(--text);display:block;font-size:15px;margin-bottom:6px;font-weight:700}
+.dist-empty .codes{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px}
+.dist-empty .codes span{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:3px 9px;font-size:11px;font-weight:600;color:var(--navy);font-family:ui-monospace,Menlo,monospace}
+@media(max-width:640px){
+  .dist-hero{padding:18px 18px}
+  .dist-hero-code{font-size:38px}
+  .dist-hero-state{font-size:18px}
+  .dist-cmp-row{grid-template-columns:1fr auto;row-gap:4px}
+}
 </style>
 </head>
 <body>
@@ -853,7 +1015,8 @@ body.dark .status-chip.personal-chip.neg{background:#1f0a0e}
       <div><div class="title" id="navTitle">Eric Swalwell</div><div class="sub" id="navSub">CA-14 · D · 119th Congress</div></div>
     </div>
     <div class="nav-tabs" id="navTabs">
-      <div class="nav-tab active" data-p="overview" onclick="showPage('overview',this)">Financial Overview</div>
+      <div class="nav-tab active" data-p="district" onclick="showPage('district',this)">District Overview</div>
+      <div class="nav-tab" data-p="overview" onclick="showPage('overview',this)">Financial Overview</div>
       <div class="nav-tab" data-p="entities" onclick="showPage('entities',this)">Entity Breakdown</div>
       <div class="nav-tab" data-p="disclosure" onclick="showPage('disclosure',this)">Financial Disclosure</div>
       <div class="nav-tab module-tab" data-p="houseai" onclick="showPage('houseai',this)">⚖ Prudence <span class="nb" id="prudenceBadge">4</span></div>
@@ -862,8 +1025,17 @@ body.dark .status-chip.personal-chip.neg{background:#1f0a0e}
   </div>
 </nav>
 
+<!-- DISTRICT OVERVIEW -->
+<div id="page-district" class="page active">
+  <div class="page-header">
+    <div class="page-title">District Overview</div>
+    <div class="page-sub">Who this member represents — Census ACS 5-year 2023 demographics, the district on the map, and how it compares to its state and the U.S.</div>
+  </div>
+  <div id="distContent"><div class="dist-empty"><strong>Loading district data…</strong>Pulling Census ACS 5-year 2023 from <code>data/districts.json</code>.</div></div>
+</div>
+
 <!-- OVERVIEW -->
-<div id="page-overview" class="page active">
+<div id="page-overview" class="page">
   <div class="page-header">
     <div class="page-title" id="ovTitle">Financial Universe Overview</div>
     <div class="page-sub">All publicly-available political financial data for this member · rebuilt from primary sources · click any card or use filters below</div>
@@ -1703,6 +1875,9 @@ function resetPage(id){
   if(id==='disclosure'){
     // static section — no filters, accordions, or selections to reset
   }
+  if(id==='district'){
+    // static section — no filters or selections to reset
+  }
   if(id==='houseai'){
     // close all ic-open accordions and native <details> panels in both Prudence views
     document.querySelectorAll('#page-houseai .ic-open').forEach(el=>el.classList.remove('ic-open'));
@@ -1722,6 +1897,7 @@ function showPage(id,el){
   if(el)el.classList.add('active');
   if(id==='entities')initVendorIntelligence();
   if(id==='disclosure')initDisclosure();
+  if(id==='district')initDistrict();
   window.scrollTo(0,0);
 }
 
@@ -3310,9 +3486,10 @@ renderTl('all');
 // Loaded once; powers District Profile card in the member profile modal.
 // Keyed by "STATE-DISTRICT" (e.g. "OH-3"). Degrades gracefully if fetch fails.
 window.DISTRICTS=window.DISTRICTS||null;
-window.districtsReady=(window.districtsReady)||fetch('data/districts.json')
+window.DISTRICTS_PAYLOAD=window.DISTRICTS_PAYLOAD||null;
+window.districtsReady=(window.districtsReady)||fetch('data/districts.json?v='+Date.now(),{cache:'no-store'})
   .then(r=>r.ok?r.json():null)
-  .then(j=>{if(j&&j.districts){window.DISTRICTS=j.districts;}return window.DISTRICTS;})
+  .then(j=>{if(j){window.DISTRICTS_PAYLOAD=j;if(j.districts)window.DISTRICTS=j.districts;}return window.DISTRICTS_PAYLOAD;})
   .catch(()=>null);
 
 // ── state reference metadata (unitedstates/python-us → data/states.json) ──
@@ -4858,11 +5035,402 @@ function renderMediaIntelligence(target){
   },50);
 }
 
+// ── DISTRICT OVERVIEW (Census ACS 5-year + TIGERweb boundary) ──
+let _distInit=false;
+let _distPyrChart=null;
+
+function initDistrict(){
+  if(_distInit)return;
+  _distInit=true;
+  const m=D.member||{};
+  const abbr=((m['State']||m.state||'')+'').toUpperCase();
+  const district=((m['District']||m.district||'')+'');
+  const key=`${abbr}-${district}`;
+  const party=(m['Party']||m.party||'').toUpperCase();
+  const partyFull=party==='D'?'Democrat':party==='R'?'Republican':party==='I'?'Independent':party||'—';
+
+  const ready=Promise.all([
+    window.DISTRICTS_PAYLOAD?Promise.resolve(window.DISTRICTS_PAYLOAD):(window.districtsReady||Promise.resolve(null)),
+    window.STATES_BY_ABBR?Promise.resolve(window.STATES_BY_ABBR):(window.statesReady||Promise.resolve(null)),
+  ]);
+  ready.then(([payload,states])=>renderDistrict(key,abbr,district,party,partyFull,payload||window.DISTRICTS_PAYLOAD,states||window.STATES_BY_ABBR));
+}
+
+function renderDistrict(key,abbr,distNum,party,partyFull,PAYLOAD,STATES){
+  const root=document.getElementById('distContent');
+  if(!root)return;
+  const DISTRICTS=PAYLOAD&&PAYLOAD.districts||null;
+  const NAT=PAYLOAD&&PAYLOAD.national||null;
+  const STATE_CTX_MAP=PAYLOAD&&PAYLOAD.states||null;
+  const d=DISTRICTS&&DISTRICTS[key];
+  const st=STATES&&STATES[abbr];
+  const stateFips=(d&&d.state_fips)||(st&&st.fips)||null;
+  const stCtx=STATE_CTX_MAP&&stateFips?STATE_CTX_MAP[stateFips]:null;
+
+  if(!d){
+    const sample=DISTRICTS?Object.keys(DISTRICTS).sort():[];
+    root.innerHTML=`<div class="dist-empty">
+      <strong>Census data not yet ingested for ${key||'this district'}</strong>
+      Article One currently has ACS 5-year 2023 demographics + TIGER boundaries loaded for ${sample.length} districts from the Active member cohort. This member's district will be filled when its block is run through the Census build script.
+      ${sample.length?`<div class="codes">${sample.map(k=>`<span>${k}</span>`).join('')}</div>`:''}
+    </div>`;
+    return;
+  }
+
+  const stateName=st?st.name:abbr;
+  const tz=st&&st.time_zones?st.time_zones.map(z=>z.replace(/^America\//,'').replace(/_/g,' ')).join(' / '):'';
+  const capital=st?st.capital:'';
+
+  // ── HERO ──
+  const hero=`<div class="dist-hero">
+    <div class="dist-hero-top">
+      <div class="dist-hero-eyebrow">Congressional District · 119th Congress</div>
+      <div class="dist-hero-source">Census <strong>ACS 5-year 2023</strong></div>
+    </div>
+    <div class="dist-hero-main">
+      <div class="dist-hero-code">${key}</div>
+      <div class="dist-hero-meta">
+        <div class="dist-hero-state">${stateName}</div>
+        <div class="dist-hero-sub">${capital?'State capital '+capital+' · ':''}${tz?'tz '+tz+' · ':''}Represented by <strong style="color:#fff">${(function(){const m=D.member||{};const n=((m['First Name']||m.first_name||'')+' '+(m['Last Name']||m.last_name||'')).trim();if(n)return n;const t=(document.getElementById('navTitle')||{}).textContent;return (t&&t.trim())||m.full_name||'this member';})()}</strong> <span style="color:${party==='D'?'#9fc4ff':party==='R'?'#ff9aa6':'rgba(255,255,255,.7)'};font-weight:700">(${partyFull})</span></div>
+      </div>
+    </div>
+    <div class="dist-hero-stats">
+      <div class="dist-hero-kpi"><div class="k">Population</div><div class="v">${d.population.toLocaleString()}</div></div>
+      <div class="dist-hero-kpi"><div class="k">Median HH income</div><div class="v gold">$${d.median_household_income.toLocaleString()}</div></div>
+      <div class="dist-hero-kpi"><div class="k">Bachelor's+</div><div class="v">${d.bachelors_plus_pct}%</div></div>
+      <div class="dist-hero-kpi"><div class="k">Poverty</div><div class="v">${d.poverty_pct}%</div></div>
+      <div class="dist-hero-kpi"><div class="k">Unemployment</div><div class="v">${d.unemployment_pct}%</div></div>
+    </div>
+  </div>`;
+
+  // ── METRIC METADATA (shared by stat cards + context bars) ──
+  const METRICS=[
+    {id:'income',  label:'Median household income',   icon:'💰', fmt:v=>v==null?'—':'$'+Math.round(v).toLocaleString(), get:r=>r.median_household_income, higherBetter:true},
+    {id:'edu',     label:"Bachelor's degree or higher",icon:'🎓', fmt:v=>v==null?'—':v.toFixed(1)+'%',                    get:r=>r.bachelors_plus_pct,        higherBetter:true},
+    {id:'poverty', label:'Poverty rate',               icon:'⚠',  fmt:v=>v==null?'—':v.toFixed(1)+'%',                    get:r=>r.poverty_pct,                higherBetter:false},
+    {id:'unemp',   label:'Unemployment rate',          icon:'📉', fmt:v=>v==null?'—':v.toFixed(1)+'%',                    get:r=>r.unemployment_pct,           higherBetter:false},
+    {id:'pop',     label:'Population',                 icon:'👥', fmt:v=>v==null?'—':v.toLocaleString(),                  get:r=>r.population,                 higherBetter:null},
+  ];
+
+  // ── STAT CARDS (no peer ranks; show Δ vs U.S. instead) ──
+  // Population is suppressed for the delta (a single district vs the whole country
+  // is always ~-100% and not informative); we show U.S. median age instead.
+  const usDelta=(rid)=>{
+    if(!NAT)return '';
+    if(rid==='pop'){
+      const us=NAT.population;
+      return us?`<span class="dist-stat-delta">U.S. avg/district ≈ ${Math.round(us/435).toLocaleString()}</span>`:'';
+    }
+    const M=METRICS.find(x=>x.id===rid);
+    const v=M.get(d),uv=M.get(NAT);
+    if(v==null||uv==null||uv===0)return '';
+    const pp=Math.round((v-uv)/uv*100);
+    if(Math.abs(pp)<2)return `<span class="dist-stat-delta">≈ U.S. avg</span>`;
+    const cls=M.higherBetter===null?'':((pp>0)===M.higherBetter?'up':'dn');
+    return `<span class="dist-stat-delta ${cls}">${pp>0?'+':''}${pp}% vs U.S.</span>`;
+  };
+  const statCards=METRICS.map(M=>{
+    const v=M.get(d);
+    return `<div class="dist-stat">
+      <div class="dist-stat-label"><span class="dist-stat-icon">${M.icon}</span>${M.label}</div>
+      <div class="dist-stat-value">${M.fmt(v)}</div>
+      <div class="dist-stat-foot">${usDelta(M.id)}</div>
+    </div>`;
+  }).join('');
+
+  // ── MAP (SVG, equirectangular projection) ──
+  const mapSvg=(()=>{
+    const geom=d.boundary, stGeom=stCtx&&stCtx.boundary;
+    if(!geom)return `<div class="dist-empty" style="padding:30px 18px">District boundary unavailable.</div>`;
+    const collect=(g)=>{
+      const out=[];
+      if(!g)return out;
+      if(g.type==='Polygon')out.push(g.coordinates);
+      else if(g.type==='MultiPolygon')g.coordinates.forEach(p=>out.push(p));
+      return out;
+    };
+    const polys=[];
+    collect(stGeom).forEach(p=>polys.push({rings:p,kind:'state'}));
+    collect(geom).forEach(p=>polys.push({rings:p,kind:'dist'}));
+    if(!polys.length)return `<div class="dist-empty" style="padding:30px 18px">District boundary unavailable.</div>`;
+    // Use STATE bbox if available so the district sits inside its state; else district bbox.
+    const bboxSrc=stGeom?[stGeom]:[geom];
+    let minLon=180,minLat=90,maxLon=-180,maxLat=-90;
+    bboxSrc.forEach(g=>{
+      collect(g).forEach(rings=>rings.forEach(ring=>ring.forEach(([lon,lat])=>{
+        if(lon<minLon)minLon=lon;if(lon>maxLon)maxLon=lon;
+        if(lat<minLat)minLat=lat;if(lat>maxLat)maxLat=lat;
+      })));
+    });
+    // Latitude-corrected equirectangular (avoids horizontal stretch at higher latitudes).
+    const midLat=(minLat+maxLat)/2;
+    const lonScale=Math.cos(midLat*Math.PI/180);
+    const W=800,H=540,PAD=16;
+    const dx=(maxLon-minLon)*lonScale, dy=(maxLat-minLat);
+    const sx=(W-PAD*2)/dx, sy=(H-PAD*2)/dy;
+    const s=Math.min(sx,sy);
+    const offX=PAD+((W-PAD*2)-dx*s)/2, offY=PAD+((H-PAD*2)-dy*s)/2;
+    const proj=([lon,lat])=>{
+      const x=offX+(lon-minLon)*lonScale*s;
+      const y=offY+(maxLat-lat)*s;
+      return x.toFixed(1)+','+y.toFixed(1);
+    };
+    const ringPath=(ring)=>'M'+ring.map(proj).join(' L')+'Z';
+    const polyPath=(rings)=>rings.map(ringPath).join(' ');
+    const paths=polys.map(p=>`<path class="dist-map-${p.kind}" d="${polyPath(p.rings)}"/>`).join('');
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">${paths}</svg>`;
+  })();
+
+  // ── DISTRICT-IN-CONTEXT (district vs state vs national) ──
+  // Skip population — comparing one district's pop to a state or country is nonsensical
+  // (and the bar visually flatlines next to massive denominators).
+  const ctxRows=METRICS.filter(M=>M.id!=='pop').map(M=>{
+    const v=M.get(d), sv=stCtx?M.get(stCtx):null, uv=NAT?M.get(NAT):null;
+    if(v==null)return '';
+    const vals=[v,sv,uv].filter(x=>x!=null);
+    const max=Math.max(...vals);
+    const pct=x=>x==null?0:Math.max(2,Math.min(100,x/max*100));
+    let delta='';
+    if(uv!=null&&uv!==0){
+      const pp=Math.round((v-uv)/uv*100);
+      if(Math.abs(pp)<2)delta=`<span class="dist-ctx-delta flat">≈ U.S.</span>`;
+      else{
+        const cls=M.higherBetter===null?'flat':((pp>0)===M.higherBetter?'up':'dn');
+        delta=`<span class="dist-ctx-delta ${cls}">${pp>0?'+':''}${pp}% vs U.S.</span>`;
+      }
+    }
+    return `<div class="dist-ctx-row">
+      <div class="dist-ctx-head">
+        <div class="dist-ctx-label"><span class="dist-ctx-icon">${M.icon}</span>${M.label}</div>
+        ${delta}
+      </div>
+      <div class="dist-ctx-3bar dist"><div class="nm">${key}</div><div class="track"><div class="fill" style="width:${pct(v)}%"></div></div><div class="vv">${M.fmt(v)}</div></div>
+      ${sv!=null?`<div class="dist-ctx-3bar state"><div class="nm">${stateName}</div><div class="track"><div class="fill" style="width:${pct(sv)}%"></div></div><div class="vv">${M.fmt(sv)}</div></div>`:''}
+      ${uv!=null?`<div class="dist-ctx-3bar us"><div class="nm">United States</div><div class="track"><div class="fill" style="width:${pct(uv)}%"></div></div><div class="vv">${M.fmt(uv)}</div></div>`:''}
+    </div>`;
+  }).filter(Boolean).join('');
+
+  // ── EDUCATION LADDER ──
+  const ed=d.education||{}, edUs=NAT&&NAT.education||{};
+  const EDU=[
+    {k:'less_than_hs_pct', name:'Less than high school',          cls:'l'},
+    {k:'hs_pct',           name:'High school diploma / GED',      cls:'h'},
+    {k:'some_college_pct', name:"Some college or associate's",    cls:'s'},
+    {k:'bachelors_pct',    name:"Bachelor's",                     cls:'b'},
+    {k:'graduate_pct',     name:'Graduate / professional degree', cls:'g'},
+  ];
+  const eduSegs=EDU.map(t=>{const v=ed[t.k];if(v==null||v<=0)return '';return `<div class="dist-edu-seg ${t.cls}" style="flex:${v}">${v>=8?v.toFixed(0)+'%':''}</div>`;}).join('');
+  const eduRows=EDU.map(t=>{
+    const v=ed[t.k], uv=edUs[t.k];
+    if(v==null)return '';
+    let delta='';
+    if(uv!=null){
+      const diff=v-uv;
+      if(Math.abs(diff)<1)delta=`<span class="dist-edu-delta">≈ U.S.</span>`;
+      else if(diff>0)delta=`<span class="dist-edu-delta up">+${diff.toFixed(1)} pp</span>`;
+      else            delta=`<span class="dist-edu-delta dn">${diff.toFixed(1)} pp</span>`;
+    }
+    const dotColor={l:'#9b2335',h:'#b45309',s:'#c9963a',b:'#2a4f7c',g:'#1e3a5f'}[t.cls];
+    return `<div class="dist-edu-row">
+      <div class="dist-edu-dot" style="background:${dotColor}"></div>
+      <div class="dist-edu-name">${t.name}</div>
+      <div class="dist-edu-pct">${v.toFixed(1)}%</div>
+      ${delta}
+    </div>`;
+  }).filter(Boolean).join('');
+
+  // ── HOUSING ──
+  const h=d.housing||{}, hUs=NAT&&NAT.housing||{};
+  const ownPct=h.owner_pct||0, rentPct=h.renter_pct||0;
+  const housingCard=`<div class="dist-card">
+    <div class="dist-card-head"><div class="dist-card-title">Housing snapshot</div><div class="dist-card-sub">Tenure split, typical home value, typical rent · ACS 5-year 2023</div></div>
+    <div class="dist-house-grid">
+      <div class="dist-house-tile" style="grid-column:1/-1">
+        <div class="dist-house-label">Owner vs renter</div>
+        <div class="dist-house-bar">
+          ${ownPct?`<div class="own" style="flex:${ownPct}">${ownPct.toFixed(0)}% own</div>`:''}
+          ${rentPct?`<div class="rent" style="flex:${rentPct}">${rentPct.toFixed(0)}% rent</div>`:''}
+        </div>
+        <div class="dist-house-sub">U.S. average · ${(hUs.owner_pct||0).toFixed(0)}% own / ${(hUs.renter_pct||0).toFixed(0)}% rent</div>
+      </div>
+      <div class="dist-house-tile">
+        <div class="dist-house-label">Median home value</div>
+        <div class="dist-house-val">${h.median_home_value!=null?'$'+h.median_home_value.toLocaleString():'—'}</div>
+        <div class="dist-house-sub">${hUs.median_home_value!=null?'U.S. $'+hUs.median_home_value.toLocaleString():''}</div>
+      </div>
+      <div class="dist-house-tile">
+        <div class="dist-house-label">Median gross rent</div>
+        <div class="dist-house-val">${h.median_rent!=null?'$'+h.median_rent.toLocaleString()+'/mo':'—'}</div>
+        <div class="dist-house-sub">${hUs.median_rent!=null?'U.S. $'+hUs.median_rent.toLocaleString()+'/mo':''}</div>
+      </div>
+    </div>
+  </div>`;
+
+  // ── AT HOME tiles (foreign-born, non-English, veterans, broadband) ──
+  const ah=d.at_home||{}, ahUs=NAT&&NAT.at_home||{};
+  const tile=(cls,icon,label,v,uv,suffix='%')=>{
+    if(v==null)return '';
+    const w=Math.max(2,Math.min(100,v));
+    const mark=uv!=null?`<div class="dist-home-mark" style="left:${Math.max(0,Math.min(100,uv))}%"></div>`:'';
+    return `<div class="dist-home-tile ${cls}">
+      <div class="dist-home-label">${icon} ${label}</div>
+      <div class="dist-home-val">${v.toFixed(1)}${suffix}</div>
+      <div class="dist-home-track"><div class="dist-home-fill ${cls}" style="width:${w}%"></div>${mark}</div>
+      <div class="dist-home-sub">U.S. ${uv!=null?uv.toFixed(1)+suffix:'—'} ${uv!=null?'(black tick)':''}</div>
+    </div>`;
+  };
+  const atHomeGrid=`<div class="dist-home-grid">
+    ${tile('fb','🌍','Foreign-born',  ah.foreign_born_pct, ahUs.foreign_born_pct)}
+    ${tile('lg','🗣','Non-English at home',ah.non_english_pct, ahUs.non_english_pct)}
+    ${tile('vt','🎖','Veterans (18+)',  ah.veterans_pct,     ahUs.veterans_pct)}
+    ${tile('bb','📶','Broadband subscription',ah.broadband_pct, ahUs.broadband_pct)}
+  </div>`;
+
+  // ── ASSEMBLE ──
+  root.innerHTML=`
+    ${hero}
+
+    <div class="sec-label">District snapshot · Δ shown vs U.S. average</div>
+    <div class="dist-stat-grid">${statCards}</div>
+
+    <div class="sec-label">${stateName} · the district on the map</div>
+    <div class="sec-note info">Light blue outline = ${stateName} (state). Gold polygon = ${key} (this district). Boundary from <strong>Census TIGERweb</strong>, 119th Congressional Districts, simplified for display (~75 vertices).</div>
+    <div class="dist-2col">
+      <div class="dist-map-card">
+        <div class="dist-card-head"><div class="dist-card-title">${key} within ${stateName}</div><div class="dist-card-sub">Geographic context for the represented population</div></div>
+        <div class="dist-map-wrap">${mapSvg}</div>
+        <div class="dist-map-foot">
+          <span class="dist-map-legend"><span class="sw" style="background:var(--gold);border:1px solid var(--navy-deep)"></span>${key}</span>
+          <span class="dist-map-legend"><span class="sw" style="background:rgba(74,144,217,.18);border:1px solid var(--muted)"></span>${stateName}</span>
+          <span style="margin-left:auto">Source: Census TIGERweb · 119th CDs</span>
+        </div>
+      </div>
+      <div class="dist-ctx-card">
+        <div class="dist-card-head"><div class="dist-card-title">District in context</div><div class="dist-card-sub">${key} vs ${stateName} vs the United States · ACS 5-year 2023</div></div>
+        <div class="dist-ctx-rows">${ctxRows}</div>
+      </div>
+    </div>
+
+    <div class="sec-label">Composition · race &amp; ethnicity</div>
+    <div class="sec-note info">Per the Census Bureau, <strong>Hispanic origin is an ethnicity</strong> (not a race) — people of any race may also identify as Hispanic, so the bars below may sum above 100%. The race stacked bar is shown separately for that reason.</div>
+    ${(()=>{const rc=d.race_ethnicity||{};
+      const stk=Math.min(100,(rc.white||0)+(rc.black||0)+(rc.asian||0));
+      const oth=Math.max(0,100-stk);
+      const stack=`<div class="dist-stack">
+        ${rc.white?`<div class="dist-stack-seg w" style="flex:${rc.white}">${rc.white>=8?rc.white+'%':''}</div>`:''}
+        ${rc.black?`<div class="dist-stack-seg b" style="flex:${rc.black}">${rc.black>=8?rc.black+'%':''}</div>`:''}
+        ${rc.asian?`<div class="dist-stack-seg a" style="flex:${rc.asian}">${rc.asian>=8?rc.asian+'%':''}</div>`:''}
+        ${oth>1?`<div class="dist-stack-seg o" style="flex:${oth}">${oth>=8?oth.toFixed(0)+'%':''}</div>`:''}
+      </div>`;
+      const usRc=(NAT&&NAT.race_ethnicity)||{};
+      const dRow=(name,cls,val,uv)=>{
+        if(val==null)return '';
+        let delta='';
+        if(uv!=null){const diff=val-uv;
+          if(Math.abs(diff)<1)delta='<span class="dist-demo-delta">≈ U.S.</span>';
+          else if(diff>0)delta=`<span class="dist-demo-delta up">+${diff.toFixed(1)} pp</span>`;
+          else            delta=`<span class="dist-demo-delta dn">${diff.toFixed(1)} pp</span>`;
+        }
+        const dotColor={w:'#2a4f7c',b:'#9b2335',a:'#c9963a',h:'#2d6a4f'}[cls];
+        return `<div class="dist-demo-row"><div class="dist-demo-dot" style="background:${dotColor}"></div><div class="dist-demo-label">${name}</div><div class="dist-demo-val">${val.toFixed(1)}%</div>${delta}</div>`;
+      };
+      return `<div class="dist-demo-grid">
+        <div class="dist-demo-card">
+          <div style="font-size:13px;font-weight:700;margin-bottom:4px">Race composition</div>
+          <div style="font-size:11.5px;color:var(--text-3);margin-bottom:4px">Single-race share of the district population</div>
+          ${stack}
+          <div class="dist-demo-rows">
+            ${dRow('White (non-overlapping)','w',rc.white,usRc.white)}
+            ${dRow('Black or African American','b',rc.black,usRc.black)}
+            ${dRow('Asian','a',rc.asian,usRc.asian)}
+            ${oth>1?`<div class="dist-demo-row"><div class="dist-demo-dot" style="background:#718096"></div><div class="dist-demo-label">Other / multiracial</div><div class="dist-demo-val">${oth.toFixed(1)}%</div><div class="dist-demo-delta">—</div></div>`:''}
+          </div>
+          <div class="dist-demo-foot">Δ vs U.S. average (percentage points). "≈ U.S." = within 1 pp.</div>
+        </div>
+        <div class="dist-demo-card">
+          <div style="font-size:13px;font-weight:700;margin-bottom:4px">Hispanic ethnicity</div>
+          <div style="font-size:11.5px;color:var(--text-3);margin-bottom:14px">Share who identify as Hispanic or Latino, of any race</div>
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px">
+            <div style="font-size:36px;font-weight:800;color:var(--green);line-height:1;font-feature-settings:&quot;tnum&quot;">${(rc.hispanic||0).toFixed(1)}%</div>
+            ${usRc.hispanic!=null?`<div style="font-size:11.5px;color:var(--text-3)">U.S. ${usRc.hispanic.toFixed(1)}%</div>`:''}
+          </div>
+          <div style="background:var(--bg);border-radius:6px;height:10px;position:relative;overflow:hidden;margin-bottom:8px">
+            <div style="background:linear-gradient(90deg,#2d6a4f,#52b788);height:100%;width:${Math.min(100,rc.hispanic||0)}%;border-radius:6px"></div>
+            ${usRc.hispanic!=null?`<div style="position:absolute;top:-2px;left:${Math.min(100,usRc.hispanic)}%;width:2px;height:14px;background:var(--text)"></div>`:''}
+          </div>
+          <div style="font-size:10.5px;color:var(--text-3)">Black vertical mark = U.S. average share.</div>
+        </div>
+      </div>`;})()}
+
+    <div class="sec-label">Population · age pyramid</div>
+    <div class="sec-note info">Each bar = share of <em>district total population</em>. Male on the left, female on the right. Built from ACS table B01001 (sex by age) and grouped into 10-year buckets.</div>
+    <div class="dist-pyr-card">
+      <div class="dist-card-head"><div class="dist-card-title">Age &amp; sex distribution</div><div class="dist-card-sub">${key} · median age ${d.median_age!=null?d.median_age:'—'} (U.S. ${NAT&&NAT.median_age!=null?NAT.median_age:'—'})</div></div>
+      <div class="dist-pyr-wrap"><canvas id="distPyrChart"></canvas></div>
+      <div class="dist-pyr-legend">
+        <span><span class="sw" style="background:#2a4f7c"></span>Male</span>
+        <span><span class="sw" style="background:#c9963a"></span>Female</span>
+      </div>
+    </div>
+
+    <div class="sec-label">Education attainment · the full ladder</div>
+    <div class="sec-note info">Among adults 25 and older. Δ shown is district share minus U.S. share (percentage points).</div>
+    <div class="dist-card">
+      <div class="dist-card-head"><div class="dist-card-title">${key} education ladder</div><div class="dist-card-sub">Bachelor's-or-higher headline = ${d.bachelors_plus_pct}% (U.S. ${NAT?NAT.bachelors_plus_pct:'—'}%)</div></div>
+      <div class="dist-edu-bar">${eduSegs}</div>
+      <div class="dist-edu-rows">${eduRows}</div>
+    </div>
+
+    <div class="sec-label">Housing</div>
+    ${housingCard}
+
+    <div class="sec-label">At home</div>
+    <div class="sec-note info">Tile bars show the district's share of the indicator; the black vertical tick shows the U.S. average for that same indicator.</div>
+    ${atHomeGrid}
+
+    <div style="font-size:11px;color:var(--text-3);margin-top:22px;padding:12px 14px;background:var(--bg);border:1px solid var(--border-soft);border-radius:var(--radius-sm);line-height:1.6">
+      <strong style="color:var(--text)">Sources:</strong> Demographics from ${d.source||'Census ACS 5-year 2023'} · <a href="https://api.census.gov/data/2023/acs/acs5" target="_blank" rel="noopener" style="color:var(--navy-mid)">api.census.gov ↗</a> · Boundary geometry from <a href="https://tigerweb.geo.census.gov/" target="_blank" rel="noopener" style="color:var(--navy-mid)">Census TIGERweb ↗</a> (119th Congressional Districts, simplified). State and U.S. context columns are state-level and national-level ACS values from the same vintage. No comparison against the other ${(DISTRICTS?Object.keys(DISTRICTS).length:0)-1} Article One districts — those are not weight-neutral and become noisy as more members are added.
+    </div>
+  `;
+
+  // ── Age pyramid (back-to-back horizontal bars; males negated for left side) ──
+  const ap=d.age_pyramid;
+  if(ap&&ap.buckets){
+    if(_distPyrChart){_distPyrChart.destroy();_distPyrChart=null;}
+    const apUs=NAT&&NAT.age_pyramid;
+    const labels=ap.buckets;
+    const males=ap.male.map(v=>-v); // negative → bars extend leftward
+    const females=ap.female;
+    // round up to next 2-percentage-point tick so the x-axis terminates cleanly
+    const rawMax=Math.max(...ap.male,...ap.female,apUs?Math.max(...apUs.male,...apUs.female):0);
+    const maxAbs=Math.ceil(rawMax/2)*2;
+    _distPyrChart=new Chart(document.getElementById('distPyrChart'),{
+      type:'bar',
+      data:{labels,datasets:[
+        {label:'Male',  data:males,  backgroundColor:'#2a4f7c',borderRadius:3,borderSkipped:false,stack:'s'},
+        {label:'Female',data:females,backgroundColor:'#c9963a',borderRadius:3,borderSkipped:false,stack:'s'},
+      ]},
+      options:{
+        maintainAspectRatio:false,indexAxis:'y',
+        plugins:{
+          legend:{display:false},
+          tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${Math.abs(c.parsed.x).toFixed(2)}% of district pop.`}},
+        },
+        scales:{
+          x:{stacked:false,min:-maxAbs,max:maxAbs,ticks:{color:'#718096',font:{size:10.5},callback:v=>Math.abs(v)+'%'},grid:{color:'#eaecf2'}},
+          y:{stacked:false,ticks:{color:'#4a5568',font:{size:11,weight:'600'}},grid:{display:false}},
+        },
+      },
+    });
+  }
+}
+
 // ── INIT ──
 buildYrPills();
 buildEntities();
 renderStatCards();
 renderOvCharts();
+initDistrict();
 window.scrollTo(0,0);
 
 // ── dark / light toggle ──

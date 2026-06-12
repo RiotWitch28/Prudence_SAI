@@ -1,0 +1,217 @@
+{
+  "generated_at": "2026-06-12T00:01:21Z",
+  "vintage": "ACS 5-year 2023",
+  "source_url": "https://api.census.gov/data/2023/acs/acs5",
+  "districts": {
+    "OH-3": {
+      "population": 785542,
+      "median_household_income": 70890,
+      "median_age": null,
+      "bachelors_plus_pct": 44.6,
+      "poverty_pct": 15.9,
+      "unemployment_pct": 4.9,
+      "race_ethnicity": {
+        "white": 55.6,
+        "black": 28.2,
+        "asian": 5.3,
+        "hispanic": 6.6
+      },
+      "source": "Census ACS 5-year 2023"
+    },
+    "MO-1": {
+      "population": 759116,
+      "median_household_income": 60099,
+      "median_age": null,
+      "bachelors_plus_pct": 37.2,
+      "poverty_pct": 16.4,
+      "unemployment_pct": 5.4,
+      "race_ethnicity": {
+        "white": 42.5,
+        "black": 46.0,
+        "asian": 3.4,
+        "hispanic": 4.5
+      },
+      "source": "Census ACS 5-year 2023"
+    },
+    "NY-9": {
+      "population": 749197,
+      "median_household_income": 74202,
+      "median_age": null,
+      "bachelors_plus_pct": 37.7,
+      "poverty_pct": 17.7,
+      "unemployment_pct": 7.5,
+      "race_ethnicity": {
+        "white": 34.3,
+        "black": 42.4,
+        "asian": 8.4,
+        "hispanic": 11.3
+      },
+      "source": "Census ACS 5-year 2023"
+    },
+    "AR-1": {
+      "population": 753522,
+      "median_household_income": 51951,
+      "median_age": null,
+      "bachelors_plus_pct": 17.7,
+      "poverty_pct": 18.6,
+      "unemployment_pct": 6.5,
+      "race_ethnicity": {
+        "white": 75.0,
+        "black": 16.8,
+        "asian": 0.6,
+        "hispanic": 4.1
+      },
+      "source": "Census ACS 5-year 2023"
+    },
+    "TX-37": {
+      "population": 770624,
+      "median_household_income": 93313,
+      "median_age": null,
+      "bachelors_plus_pct": 61.8,
+      "poverty_pct": 11.1,
+      "unemployment_pct": 4.3,
+      "race_ethnicity": {
+        "white": 63.3,
+        "black": 6.7,
+        "asian": 9.2,
+        "hispanic": 27.9
+      },
+      "source": "Census ACS 5-year 2023"
+    },
+    "TX-15": {
+      "population": 776234,
+      "median_household_income": 57557,
+      "median_age": null,
+      "bachelors_plus_pct": 22.4,
+      "poverty_pct": 23.8,
+      "unemployment_pct": 6.4,
+      "race_ethnicity": {
+        "white": 44.8,
+        "black": 1.4,
+        "asian": 1.2,
+        "hispanic": 81.4
+      },
+      "source": "Census ACS 5-year 2023"
+    },
+    "CA-30": {
+      "population": 744924,
+      "median_household_income": 89166,
+      "median_age": null,
+      "bachelors_plus_pct": 50.6,
+      "poverty_pct": 12.9,
+      "unemployment_pct": 8.0,
+      "race_ethnicity": {
+        "white": 59.8,
+        "black": 3.9,
+        "asian": 12.8,
+        "hispanic": 23.5
+      },
+      "source": "Census ACS 5-year 2023"
+    },
+    "FL-6": {
+      "population": 796745,
+      "median_household_income": 61872,
+      "median_age": null,
+      "bachelors_plus_pct": 24.6,
+      "poverty_pct": 14.1,
+      "unemployment_pct": 4.8,
+      "race_ethnicity": {
+        "white": 74.9,
+        "black": 11.2,
+        "asian": 1.5,
+        "hispanic": 12.4
+      },
+      "source": "Census ACS 5-year 2023"
+    },
+    "TX-23": {
+      "population": 757759,
+      "median_household_income": 76344,
+      "median_age": null,
+      "bachelors_plus_pct": 30.8,
+      "poverty_pct": 14.1,
+      "unemployment_pct": 4.6,
+      "race_ethnicity": {
+        "white": 52.8,
+        "black": 3.7,
+        "asian": 2.4,
+        "hispanic": 63.1
+      },
+      "source": "Census ACS 5-year 2023"
+    },
+    "IL-8": {
+      "population": 749409,
+      "median_household_income": 98112,
+      "median_age": null,
+      "bachelors_plus_pct": 39.8,
+      "poverty_pct": 7.5,
+      "unemployment_pct": 4.6,
+      "race_ethnicity": {
+        "white": 58.7,
+        "black": 4.8,
+        "asian": 13.5,
+        "hispanic": 24.9
+      },
+      "source": "Census ACS 5-year 2023"
+    },
+    "NY-1": {
+      "population": 778379,
+      "median_household_income": 134743,
+      "median_age": null,
+      "bachelors_plus_pct": 47.6,
+      "poverty_pct": 6.0,
+      "unemployment_pct": 4.7,
+      "race_ethnicity": {
+        "white": 76.1,
+        "black": 4.7,
+        "asian": 5.2,
+        "hispanic": 15.1
+      },
+      "source": "Census ACS 5-year 2023"
+    },
+    "TX-22": {
+      "population": 807871,
+      "median_household_income": 107377,
+      "median_age": null,
+      "bachelors_plus_pct": 45.9,
+      "poverty_pct": 7.9,
+      "unemployment_pct": 4.9,
+      "race_ethnicity": {
+        "white": 50.5,
+        "black": 11.9,
+        "asian": 14.1,
+        "hispanic": 29.3
+      },
+      "source": "Census ACS 5-year 2023"
+    },
+    "PA-14": {
+      "population": 760119,
+      "median_household_income": 66147,
+      "median_age": null,
+      "bachelors_plus_pct": 26.6,
+      "poverty_pct": 11.9,
+      "unemployment_pct": 5.5,
+      "race_ethnicity": {
+        "white": 91.8,
+        "black": 3.1,
+        "asian": 0.7,
+        "hispanic": 1.6
+      },
+      "source": "Census ACS 5-year 2023"
+    },
+    "CA-14": {
+      "population": 743389,
+      "median_household_income": 139901,
+      "median_age": null,
+      "bachelors_plus_pct": 47.1,
+      "poverty_pct": 6.9,
+      "unemployment_pct": 4.8,
+      "race_ethnicity": {
+        "white": 30.2,
+        "black": 5.6,
+        "asian": 38.7,
+        "hispanic": 24.6
+      },
+      "source": "Census ACS 5-year 2023"
+    }
+  }
+}

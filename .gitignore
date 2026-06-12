@@ -8,5 +8,6 @@ _source-data/fec_secrets.txt.txt
 *.secret
 fec_secrets*
 build/.venv/
+build/.env
 **/fd_source.pdf
 build/*.log

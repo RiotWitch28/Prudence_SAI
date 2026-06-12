@@ -2956,6 +2956,15 @@ function renderTl(cat,containerId){
 renderTl('all');
 
 
+// ── district demographics (Census ACS 5-year 2023 → data/districts.json) ──
+// Loaded once; powers District Profile card in the member profile modal.
+// Keyed by "STATE-DISTRICT" (e.g. "OH-3"). Degrades gracefully if fetch fails.
+window.DISTRICTS=window.DISTRICTS||null;
+window.districtsReady=(window.districtsReady)||fetch('data/districts.json')
+  .then(r=>r.ok?r.json():null)
+  .then(j=>{if(j&&j.districts){window.DISTRICTS=j.districts;}return window.DISTRICTS;})
+  .catch(()=>null);
+
 // ── state reference metadata (unitedstates/python-us → data/states.json) ──
 // Loaded once; powers full state name + jurisdiction details in the member profile.
 // Degrades gracefully: if the fetch fails (e.g. opened from file://) the profile
@@ -3151,6 +3160,7 @@ window.membersReady=(window.membersReady)||fetch('data/members.json')
     </div>
     <div class="dcard"><h4>Contact &amp; social</h4><div id="profContact"></div></div>
     <div class="dcard"><h4>Financial disclosures</h4><div id="profDisc"></div></div>
+    <div class="dcard"><h4>District profile</h4><div id="profDistrict"><div style="font-size:12px;color:var(--text-3)">Loading district data…</div></div></div>
   </div>
   <div style="margin-top:28px">
     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:12px">
@@ -3202,6 +3212,34 @@ window.membersReady=(window.membersReady)||fetch('data/members.json')
   }
   if(window.STATES_BY_ABBR){fillState(window.STATES_BY_ABBR);}
   else if(window.statesReady){window.statesReady.then(fillState);}
+
+  function fillDistrict(map){
+    const el=document.getElementById('profDistrict');
+    if(!el)return;
+    const key=`${abbr}-${district}`;
+    const d=map&&map[key];
+    if(!d){el.innerHTML=`<div style="font-size:12px;color:var(--text-3)">No ACS data for ${key}.</div>`;return;}
+    const fmt=v=>v==null?'—':v;
+    const fmtPct=v=>v==null?'—':`${v}%`;
+    const fmtPop=v=>v==null?'—':v.toLocaleString();
+    const fmtInc=v=>v==null?'—':`$${v.toLocaleString()}`;
+    const re=d.race_ethnicity||{};
+    const raceRows=Object.entries({
+      'White':re.white,'Black / African American':re.black,
+      'Asian':re.asian,'Hispanic / Latino':re.hispanic
+    }).filter(([,v])=>v!=null)
+      .map(([k,v])=>`<div class="drow"><span class="dk">${k}</span><span class="dv">${fmtPct(v)}</span></div>`).join('');
+    el.innerHTML=`
+      <div class="drow"><span class="dk">Population</span><span class="dv">${fmtPop(d.population)}</span></div>
+      <div class="drow"><span class="dk">Median household income</span><span class="dv">${fmtInc(d.median_household_income)}</span></div>
+      <div class="drow"><span class="dk">Bachelor's degree or higher</span><span class="dv">${fmtPct(d.bachelors_plus_pct)}</span></div>
+      <div class="drow"><span class="dk">Poverty rate</span><span class="dv">${fmtPct(d.poverty_pct)}</span></div>
+      <div class="drow"><span class="dk">Unemployment rate</span><span class="dv">${fmtPct(d.unemployment_pct)}</span></div>
+      ${raceRows}
+      <div style="font-size:10.5px;color:var(--text-3);margin-top:8px">Source: ${d.source||'Census ACS 5-year 2023'}</div>`;
+  }
+  if(window.DISTRICTS){fillDistrict(window.DISTRICTS);}
+  else if(window.districtsReady){window.districtsReady.then(fillDistrict);}
 
   // Fill data-driven cards now (entities/data.js/override), then again from the
   // Master List once it loads. Idempotent — safe to call twice.

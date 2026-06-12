@@ -302,8 +302,16 @@ tbody tr:hover{background:var(--bg);cursor:pointer}
 .flag-pill[data-sev=HIGH].active{background:var(--red);border-color:var(--red)}
 .flag-pill[data-sev=NOTABLE].active{background:var(--amber);border-color:var(--amber)}
 .flag-pill[data-sev=REVIEW].active{background:var(--navy-mid);border-color:var(--navy-mid)}
+.flag-pill[data-src=all].active{background:var(--text);border-color:var(--text)}
+.flag-pill[data-src=Data].active{background:var(--red);border-color:var(--red)}
+.flag-pill[data-src=Disclosure].active{background:#5b21b6;border-color:#5b21b6}
+.flag-pill[data-src=Prudence].active{background:var(--gold);border-color:var(--gold)}
 .flag-pill .fc{font-size:10px;font-weight:800;background:rgba(0,0,0,.12);border-radius:10px;padding:1px 6px}
 .flag-pill.active .fc{background:rgba(255,255,255,.25)}
+.flag-src-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:10px;margin-right:8px;vertical-align:middle}
+.flag-src-badge.Data{background:#fee2e6;color:#9b2335}
+.flag-src-badge.Disclosure{background:#ede4f7;color:#5b21b6}
+.flag-src-badge.Prudence{background:var(--gold-pale);color:#8a6a1a}
 
 .flag-card{background:var(--surface);border:1px solid var(--border);border-left:4px solid;border-radius:var(--radius-lg);margin-bottom:10px;overflow:hidden;transition:box-shadow var(--t);box-shadow:var(--shadow-sm)}
 .flag-card.HIGH{border-left-color:var(--red)}
@@ -718,7 +726,11 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
 .shai-foot{margin-top:18px;padding:12px 16px;background:var(--bg);border:1px dashed var(--border);border-radius:var(--radius);font-size:11.5px;color:var(--text-3);line-height:1.55}
 .ai-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,var(--gold),#e8b85a);color:var(--navy-deep);font-size:10px;font-weight:800;padding:2px 9px;border-radius:20px;letter-spacing:.03em}
 /* Prudence — sub-navigation */
-.shai-subnav{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.shai-subnav-header{margin-bottom:20px}
+.shai-subnav-header .shai-subnav{margin-bottom:8px}
+.shai-subnav{display:flex;gap:10px;flex-wrap:wrap}
+.prud-about-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--text-3);text-decoration:none;letter-spacing:.02em;transition:color var(--t)}
+.prud-about-link:hover{color:var(--navy-mid)}
 .shai-subpill{flex:1;min-width:240px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 18px;cursor:pointer;transition:all var(--t);display:flex;gap:12px;align-items:flex-start;box-shadow:var(--shadow-sm)}
 .shai-subpill:hover{border-color:var(--navy-mid);box-shadow:var(--shadow)}
 .shai-subpill.active{border-color:var(--navy);box-shadow:0 0 0 2px rgba(30,58,95,.15);background:#f7f6f3}
@@ -748,6 +760,12 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
 .status-chip.flags-chip .status-chip-count{color:var(--red)}
 .status-chip.prudence-chip{border-left:3px solid var(--gold);background:var(--gold-pale)}
 .status-chip.prudence-chip .status-chip-count{color:var(--amber)}
+.status-chip.personal-chip{border-left:3px solid #5b21b6;background:#f5f0fb}
+.status-chip.personal-chip .status-chip-count{color:#5b21b6;font-size:18px}
+.status-chip.personal-chip.neg{border-left-color:#9b2335;background:#fbf0f2}
+.status-chip.personal-chip.neg .status-chip-count{color:#9b2335}
+body.dark .status-chip.personal-chip{background:#160a1f}
+body.dark .status-chip.personal-chip.neg{background:#1f0a0e}
 
 /* ── FLAG PREVIEW (top HIGH flags on overview) ── */
 .flag-preview-section{margin-bottom:28px}
@@ -817,6 +835,7 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
   <div class="platform-divider"></div>
   <div class="platform-context">Political Intelligence OS</div>
   <div class="platform-right">
+    <button class="platform-btn" onclick="location.href='about-prudence.html'">About Prudence</button>
     <button class="platform-btn" onclick="location.href='home.html'">Dashboard Home</button>
     <button class="dark-toggle" id="darkToggle" onclick="toggleDark()">☀ Light</button>
     <div class="platform-member-chip" id="platformMemberChip" onclick="openRoster()" title="Switch member" style="cursor:pointer">
@@ -867,12 +886,21 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
       </div>
       <div class="status-chip-arrow">→</div>
     </div>
-    <div class="status-chip prudence-chip" onclick="showPage('houseai',document.querySelector('.nav-tab[data-p=houseai]'))">
+    <div class="status-chip prudence-chip" id="statusPrudenceChip" onclick="showPage('houseai',document.querySelector('.nav-tab[data-p=houseai]'))" style="display:none">
       <div class="status-chip-icon">⚖</div>
       <div class="status-chip-body">
         <div class="status-chip-label">Prudence Findings</div>
-        <div class="status-chip-count" id="statusPrudenceCount">5</div>
-        <div class="status-chip-detail">2 for review · 3 need context — <strong>0 allegations</strong></div>
+        <div class="status-chip-count" id="statusPrudenceCount">—</div>
+        <div class="status-chip-detail" id="statusPrudenceDetail">—</div>
+      </div>
+      <div class="status-chip-arrow">→</div>
+    </div>
+    <div class="status-chip personal-chip" id="statusPersonalChip" onclick="showPage('disclosure',document.querySelector('.nav-tab[data-p=disclosure]'))" style="display:none">
+      <div class="status-chip-icon">💼</div>
+      <div class="status-chip-body">
+        <div class="status-chip-label">Personal Finance</div>
+        <div class="status-chip-count" id="statusPersonalCount">—</div>
+        <div class="status-chip-detail" id="statusPersonalDetail">Loading…</div>
       </div>
       <div class="status-chip-arrow">→</div>
     </div>
@@ -909,10 +937,25 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
     </div>
   </div>
 
-  <!-- Flags section -->
+  <!-- Cross-entity vendors — the "universe" connective tissue -->
+  <div class="sec-label" style="margin-top:28px">Cross-entity payees</div>
+  <div class="sec-note info">Payees that appear in more than one of this member's entities — where money flows out to the same name from two or more pots. The single clearest signal of how the entities connect as one universe.</div>
+  <div class="ccard" id="crossEntCard" style="margin-bottom:8px">
+    <div class="ctitle">Paid by 2+ entities</div>
+    <div class="csub" id="crossEntSub">Cumulative across all years · individuals and organizations · click row to compare</div>
+    <div id="crossEntBody" style="padding:4px 0 0"></div>
+  </div>
+
+  <!-- Travel & gifts cross-cut — MRA + every campaign + FD gifts + sponsored trips, one view -->
+  <div class="sec-label" style="margin-top:28px">Travel &amp; gifts — across the universe</div>
+  <div class="sec-note info">Pulls travel and meal spending from every entity together with gifts received and sponsor-funded trips from the Financial Disclosure. The behavior is the same across pots — this is the only view that shows it as one number.</div>
+  <div id="tgPanel" style="margin-bottom:8px"></div>
+
+  <!-- Findings inbox · unifies Data flags + Disclosure flags + Prudence findings -->
   <div class="flag-preview-section" id="flagPreviewSection" style="margin-top:32px">
-    <div class="sec-label" style="margin:0 0 10px">Flags & Data Integrity</div>
-    <div class="sec-note warn" style="margin-bottom:16px">Every flag is generated from the data · click to expand · mark reviewed to track your analysis</div>
+    <div class="sec-label" style="margin:0 0 10px">Findings inbox · all sources</div>
+    <div class="sec-note warn" style="margin-bottom:16px">One feed across Data flags, Disclosure flags, and Prudence findings · filter by source or severity · click to expand or jump to detail</div>
+    <div class="flag-source-bar" id="flagSourceBar" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px"></div>
     <div class="flag-filter-bar" id="flagFilterBarOv"></div>
     <div id="flagListOv"></div>
   </div>
@@ -1031,27 +1074,26 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
   </div>
 
   <!-- sub-navigation: two screens -->
-  <div class="shai-subnav">
-    <div class="shai-subpill active" id="subpill-spending" onclick="showShaiView('spending',this)">
-      <div class="sp-ico">💵</div>
-      <div><div class="sp-t">① MRA Spending &amp; Rules Check</div><div class="sp-d">Taxpayer money screened line-by-line against the Members' Handbook &amp; House Rules.</div></div>
+  <div class="shai-subnav-header">
+    <div class="shai-subnav">
+      <div class="shai-subpill active" id="subpill-spending" onclick="showShaiView('spending',this)">
+        <div class="sp-ico">💵</div>
+        <div><div class="sp-t">MRA Spending &amp; Rules Check</div><div class="sp-d">Taxpayer money screened line-by-line against the Members' Handbook &amp; House Rules.</div></div>
+      </div>
+      <div class="shai-subpill" id="subpill-structure" onclick="showShaiView('structure',this)">
+        <div class="sp-ico">🧭</div>
+        <div><div class="sp-t">Workplace Structure &amp; Power-Imbalance Screen</div><div class="sp-d">Office staffing structure screened against published research on what enables workplace abuse.</div></div>
+      </div>
+      <div class="shai-subpill" id="subpill-situational" onclick="showShaiView('situational',this)">
+        <div class="sp-ico">🔎</div>
+        <div><div class="sp-t">Situational Analysis</div><div class="sp-d">Findraiser / Wolf / Gomez situation cross-checked against ethics rules, workplace policy, and financial data.</div></div>
+      </div>
+      <div class="shai-subpill" id="subpill-reform" onclick="showShaiView('reform',this)">
+        <div class="sp-ico">🏛️</div>
+        <div><div class="sp-t">Reform Options <span class="ai-badge" style="vertical-align:middle">🤖 AI</span></div><div class="sp-d">AI-generated reform recommendations drawn from the findings — for a human to weigh and decide.</div></div>
+      </div>
     </div>
-    <div class="shai-subpill" id="subpill-structure" onclick="showShaiView('structure',this)">
-      <div class="sp-ico">🧭</div>
-      <div><div class="sp-t">② Workplace Structure &amp; Power-Imbalance Screen</div><div class="sp-d">Office staffing structure screened against published research on what enables workplace abuse.</div></div>
-    </div>
-    <div class="shai-subpill" id="subpill-situational" onclick="showShaiView('situational',this)">
-      <div class="sp-ico">🔎</div>
-      <div><div class="sp-t">③ Situational Analysis</div><div class="sp-d">Findraiser / Wolf / Gomez situation cross-checked against ethics rules, workplace policy, and financial data.</div></div>
-    </div>
-    <div class="shai-subpill" id="subpill-reform" onclick="showShaiView('reform',this)">
-      <div class="sp-ico">🏛️</div>
-      <div><div class="sp-t">④ Reform Options <span class="ai-badge" style="vertical-align:middle">🤖 AI</span></div><div class="sp-d">AI-generated reform recommendations drawn from the findings — for a human to weigh and decide.</div></div>
-    </div>
-    <div class="shai-subpill" id="subpill-about" onclick="showShaiView('about',this)">
-      <div class="sp-ico">⚖</div>
-      <div><div class="sp-t">⑤ About Prudence &amp; Change History</div><div class="sp-d">How Prudence works, the principles that bind her, and the record of major changes.</div></div>
-    </div>
+    <a class="prud-about-link" href="about-prudence.html">ⓘ About Prudence</a>
   </div>
 
   <!-- ============ VIEW 1: SPENDING ============ -->
@@ -1529,88 +1571,6 @@ body.dark .sev-badge.context{background:#0d1520;color:var(--navy-mid)}
   </div><!-- /shai-reform -->
 
   <!-- ============ VIEW 4: ABOUT & CHANGE HISTORY ============ -->
-  <div class="shai-view" id="shai-about">
-    <div class="shai-hero">
-      <div class="eyebrow">⚖ Prudence · Operating Principles</div>
-      <h2>About Prudence &amp; Change History</h2>
-      <p>Prudence is an AI decision-support system for the legislative branch. She evaluates large, diverse datasets against a defined body of rules, laws, policies, and procedures, identifies risk, and lays out the options. <strong>Prudence advises; a qualified human decides — always.</strong> This screen explains the principles that bind her and records every major change to her analysis.</p>
-    </div>
-
-    <div class="prud-principles">
-      <div class="prud-pcard">
-        <div class="pp-ico">🤝</div>
-        <div class="pp-t">Human-in-the-loop, without exception</div>
-        <div class="pp-d">Prudence never makes or executes a decision affecting a person's benefits, job, or rights. She surfaces risk and options; a human with the right authority makes the call. This is the deliberate inverse of automated systems that cut people off without a human ever reviewing the data.</div>
-      </div>
-      <div class="prud-pcard">
-        <div class="pp-ico">⚖️</div>
-        <div class="pp-t">Non-partisan by construction</div>
-        <div class="pp-d">Political party may be used only to sort, filter, and gather data. It never carries weight that favors one party or person on partisan grounds. No output may favor — or appear to favor — a party or individual on partisan grounds.</div>
-      </div>
-      <div class="prud-pcard">
-        <div class="pp-ico">🕊️</div>
-        <div class="pp-t">Grounded in <em>Magnifica Humanitas</em></div>
-        <div class="pp-d">In the spirit of Pope Leo XIV's 2026 encyclical on AI and the human person: every person has inalienable worth and is never a mere data point; human nuance and weakness are not defects to be corrected; technology must be directed toward what humanizes rather than dehumanizes.</div>
-      </div>
-      <div class="prud-pcard">
-        <div class="pp-ico">📏</div>
-        <div class="pp-d-t pp-t">Bounded by the provided rules</div>
-        <div class="pp-d">Prudence reasons only within the rules, laws, policies, and procedures supplied to her — the Members' Handbook, House Rules, and published research frameworks. Where a rule is unclear or silent, she says so rather than guessing.</div>
-      </div>
-    </div>
-
-    <div class="shai-meta">
-      <h3>How a refresh works</h3>
-      <ul>
-        <li>On the instruction <strong>"refresh the Prudence analysis,"</strong> the source folders are re-read: the House Admin rules and the research-paper frameworks.</li>
-        <li>The data is screened against those rules; risks are identified and framed as options for a human.</li>
-        <li>The relevant screen above is updated, and any <strong>major</strong> change is logged to the history below.</li>
-      </ul>
-      <div class="docs">
-        <span>House Admin — rules &amp; handbooks</span>
-        <span>Research papers — risk frameworks</span>
-        <span>Statement of Disbursements</span>
-        <span>FEC filings</span>
-      </div>
-    </div>
-
-    <div class="sec-label" style="margin-top:24px">Change history — major changes &amp; additions</div>
-    <div class="shai-disclaim">
-      <strong>This is a read-only record.</strong> You can read how Prudence's analysis has changed over time, but this is not a way to roll the dashboard back to an older version. Newest changes are at the top.<br>
-      <em>To find this anytime:</em> open the Prudence tab and click <strong>"③ About Prudence &amp; Change History."</strong>
-    </div>
-
-    <div class="prud-timeline">
-      <div class="prud-event">
-        <div class="pe-date">June 5, 2026</div>
-        <div class="pe-body">
-          <div class="pe-title">Added Reform Options screen (AI-generated recommendations)</div>
-          <div class="pe-desc">Re-examined both analysis screens through Prudence's lens and added a third screen, <strong>Reform Options</strong>, surfacing five non-partisan reform recommendations drawn from the findings (purpose codes on disbursements, the year-end allowance incentive, duplicate-payment detection, machine-readable SOD fields, a voluntary OCWR structure self-assessment). Every recommendation is clearly and repeatedly labeled an <strong>AI-generated recommendation for a human to decide</strong> — not adopted policy.</div>
-          <div class="pe-by">Triggered by Amanda Koski (custodian)</div>
-        </div>
-      </div>
-      <div class="prud-event">
-        <div class="pe-date">June 5, 2026</div>
-        <div class="pe-body">
-          <div class="pe-title">Prudence module formalized in the dashboard</div>
-          <div class="pe-desc">The "Sovereign House AI" module was formalized as <strong>Prudence</strong>, with its two analysis screens (MRA Spending &amp; Rules Check; Workplace Structure &amp; Power-Imbalance Screen) and this About &amp; Change History screen. Prudence was bound to a written operating charter grounding her in human-in-the-loop decision-making, non-partisanship, and <em>Magnifica Humanitas</em>.</div>
-          <div class="pe-by">Triggered by Amanda Koski (custodian)</div>
-        </div>
-      </div>
-      <div class="prud-event">
-        <div class="pe-date">June 5, 2026</div>
-        <div class="pe-body">
-          <div class="pe-title">Prudence established</div>
-          <div class="pe-desc">Prudence was created as a decision-support system for the legislative branch, with a charter defining what she will and will not do, which rules govern her, and how her changes are recorded.</div>
-          <div class="pe-by">Triggered by Amanda Koski (custodian)</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="shai-foot">
-      <span class="ai-badge">🤖 Prudence</span> &nbsp;The full operating charter lives in the project at <code>_prudence/PRUDENCE_CHARTER.md</code>; the complete machine-readable change log lives at <code>_prudence/CHANGELOG.md</code>. This screen mirrors the major entries for human readers.
-    </div>
-  </div><!-- /shai-about -->
 
 </div><!-- /prudence-swalwell -->
 
@@ -1718,7 +1678,9 @@ function dated(k){return Object.keys(E[k].by_year||{}).some(y=>+y>1990);}
 function resetPage(id){
   if(id==='overview'){
     document.querySelectorAll('.flag-card.open').forEach(c=>c.classList.remove('open'));
-    document.querySelectorAll('.flag-card.open').forEach(c=>c.classList.remove('open'));
+    window.flagSourceFilter='all';
+    flagFilter='all';
+    if(typeof renderFlags==='function')renderFlags();
   }
   if(id==='entities'){
     selectedEnts=new Set(['office']);
@@ -2101,6 +2063,219 @@ function renderStatCards(){
 // ── OVERVIEW CHARTS ──
 let ovCharts={};
 function destroyOv(){Object.values(ovCharts).forEach(c=>{try{c.destroy();}catch(e){}});ovCharts={};}
+// Travel & gifts cross-cut — combines FEC entity travel/meal txns, the MRA
+// Travel role total, FD Schedule G (gifts), and FD Schedule H (sponsored trips)
+// into one view. The same behavior (travel, hosting, hosted-by) sits in three
+// separate filings; this is the only place it adds up.
+function renderTravelGifts(){
+  const host=document.getElementById('tgPanel');
+  if(!host)return;
+  const RE=/(TRAVEL|AIRFARE|AIRLINE|AIRPORT|FLIGHT|LODGING|HOTEL|TAXI|UBER|LYFT|MILEAGE|CAR SERVICE|RENTAL CAR|MEAL|MEALS|FOOD)/i;
+  // 1. FEC entity travel/meal totals (scan transaction purposes)
+  const entRows=[];
+  ORDER.forEach(k=>{
+    if(!ST.enabled[k])return;
+    const v=E[k].top_vendors||[];
+    let tot=0,n=0;
+    v.forEach(vd=>(vd.txns||[]).forEach(t=>{if(t.purpose&&RE.test(t.purpose)){tot+=(t.amount||0);n++;}}));
+    if(tot>0)entRows.push({k,total:tot,n});
+  });
+  // 2. MRA travel via office.top_individuals role='Travel' (gov p-card rolls everything to one payee)
+  const off=E.office;
+  if(off&&ST.enabled.office){
+    const mra=(off.top_individuals||[]).filter(r=>r.role==='Travel').reduce((s,r)=>s+r.amt,0);
+    if(mra>0)entRows.push({k:'office',total:mra,n:null,mra:true});
+  }
+  entRows.sort((a,b)=>b.total-a.total);
+  const totalSpend=entRows.reduce((s,r)=>s+r.total,0);
+
+  // 3. Gifts (FD Schedule G)
+  const gifts=(D.disclosure&&D.disclosure.schedule_g)||[];
+  let giftTotal=0;
+  gifts.forEach(g=>{const m=String(g.value||'').match(/\$([\d,]+)/);if(m)giftTotal+=parseInt(m[1].replace(/,/g,''),10);});
+
+  // 4. Sponsored trips (FD Schedule H)
+  const trips=(D.disclosure&&D.disclosure.schedule_h)||[];
+  const foreignKeyword=/(government of|ministry|embassy|kingdom of|republic of)/i;
+  const isForeignGov=t=>foreignKeyword.test(String(t.source||''));
+  const foreignCount=trips.filter(isForeignGov).length;
+
+  // KPI tiles
+  const kpiHtml=`<div class="tg-kpis">
+    <div class="tg-kpi"><div class="tg-kpi-l">Travel &amp; meals</div><div class="tg-kpi-n">${fmtK(totalSpend)}</div><div class="tg-kpi-s">across ${entRows.length} entit${entRows.length===1?'y':'ies'} · taxpayer + political</div></div>
+    <div class="tg-kpi"><div class="tg-kpi-l">Gifts received</div><div class="tg-kpi-n">${giftTotal?'$'+giftTotal.toLocaleString():'—'}</div><div class="tg-kpi-s">${gifts.length} disclosed gift${gifts.length===1?'':'s'} · FD Schedule G</div></div>
+    <div class="tg-kpi"><div class="tg-kpi-l">Sponsored trips</div><div class="tg-kpi-n">${trips.length}</div><div class="tg-kpi-s">${foreignCount?`${foreignCount} foreign-government-funded`:'FD Schedule H'}</div></div>
+  </div>`;
+
+  // Per-entity travel bar — visual normalization to the largest row
+  const maxR=Math.max(1,...entRows.map(r=>r.total));
+  const entHtml=entRows.length?`<div class="tg-card">
+    <div class="ctitle">Travel &amp; meal spend, by entity</div>
+    <div class="csub">FEC transaction purposes matching TRAVEL / LODGING / MEALS / FOOD / etc · MRA via Travel role</div>
+    <div class="tg-bars">${entRows.map(r=>{const m=META[r.k];const pct=Math.round(r.total/maxR*100);return `<div class="tg-bar-row">
+      <div class="tg-bar-lbl"><span class="tg-bar-dot" style="background:${m.color}"></span>${m.short}${r.mra?' · <span style="color:var(--text-3);font-weight:500">taxpayer</span>':''}</div>
+      <div class="tg-bar-track"><div class="tg-bar-fill" style="width:${pct}%;background:${m.color}"></div></div>
+      <div class="tg-bar-amt">${fmt(r.total)}${r.n?` <span style="color:var(--text-3);font-weight:500;font-size:11px">· ${r.n} txns</span>`:''}</div>
+    </div>`;}).join('')}</div></div>`:'';
+
+  // Sponsored trips list
+  const fmtDate=s=>{if(!s)return '';const m=String(s).match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(!m)return s;const mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m[1]-1];return `${mo} ${+m[2]}, ${m[3]}`;};
+  const tripHtml=trips.length?`<div class="tg-card">
+    <div class="ctitle">Sponsored / privately-funded trips</div>
+    <div class="csub">Travel paid for by an outside sponsor · FD Schedule H · foreign-government sponsors highlighted</div>
+    <div class="tg-trip-list">${trips.map(t=>{const fg=isForeignGov(t);return `<div class="tg-trip${fg?' foreign':''}">
+      <div class="tg-trip-date">${fmtDate(t.date_from)}${t.date_to?` → ${fmtDate(t.date_to)}`:''}</div>
+      <div class="tg-trip-dest">${t.destination||'—'}</div>
+      <div class="tg-trip-src">${fg?'🌐 ':''}${t.source||'—'}</div>
+    </div>`;}).join('')}</div></div>`:'';
+
+  // Gifts list
+  const giftHtml=gifts.length?`<div class="tg-card">
+    <div class="ctitle">Gifts received</div>
+    <div class="csub">FD Schedule G · accepted gifts above reporting threshold</div>
+    <div class="tg-gift-list">${gifts.map(g=>`<div class="tg-gift">
+      <div class="tg-gift-src">${g.source||'—'}</div>
+      <div class="tg-gift-desc">${g.description||'—'}</div>
+      <div class="tg-gift-val">${g.value||'—'}</div>
+    </div>`).join('')}</div></div>`:'';
+
+  host.innerHTML=`<style>
+    .tg-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+    .tg-kpi{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--navy-mid);border-radius:var(--radius-lg);padding:14px 16px;box-shadow:var(--shadow-sm)}
+    .tg-kpi-l{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3)}
+    .tg-kpi-n{font-size:24px;font-weight:800;color:var(--text);margin:4px 0 2px;letter-spacing:-.3px;line-height:1}
+    .tg-kpi-s{font-size:11.5px;color:var(--text-3)}
+    .tg-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+    .tg-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;box-shadow:var(--shadow-sm)}
+    .tg-bars{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+    .tg-bar-row{display:grid;grid-template-columns:140px 1fr auto;gap:10px;align-items:center;font-size:12.5px}
+    .tg-bar-lbl{color:var(--text);font-weight:600;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .tg-bar-dot{width:8px;height:8px;border-radius:50%;flex:none}
+    .tg-bar-track{height:8px;background:#eef1f6;border-radius:4px;overflow:hidden}
+    .tg-bar-fill{height:100%;border-radius:4px;transition:width .3s}
+    .tg-bar-amt{font-weight:700;color:var(--text);white-space:nowrap;text-align:right;min-width:130px}
+    .tg-trip-list,.tg-gift-list{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+    .tg-trip{display:grid;grid-template-columns:170px 1fr 1fr;gap:10px;padding:10px 12px;background:#f7f6f3;border:1px solid var(--border-soft);border-radius:8px;font-size:12.5px;align-items:center}
+    .tg-trip.foreign{background:#fbf0f2;border-color:#e6c6cb}
+    .tg-trip-date{color:var(--text-3);font-weight:600;font-size:11.5px}
+    .tg-trip-dest{color:var(--text);font-weight:600}
+    .tg-trip-src{color:var(--text-2)}
+    .tg-trip.foreign .tg-trip-src{color:#9b2335;font-weight:700}
+    .tg-gift{display:grid;grid-template-columns:1.2fr 2fr auto;gap:10px;padding:10px 12px;background:#fbf0f2;border:1px solid #e6c6cb;border-radius:8px;font-size:12.5px;align-items:center}
+    .tg-gift-src{font-weight:700;color:var(--text)}
+    .tg-gift-desc{color:var(--text-2)}
+    .tg-gift-val{font-weight:800;color:#9b2335;white-space:nowrap}
+    @media(max-width:880px){.tg-kpis,.tg-grid{grid-template-columns:1fr}.tg-trip{grid-template-columns:1fr}}
+    body.dark .tg-bar-track{background:#2a3142}
+    body.dark .tg-trip{background:#1b2030;border-color:#2a3142}
+    body.dark .tg-trip-date{color:#a0aec0}
+    body.dark .tg-trip-src{color:#cbd5e0}
+    body.dark .tg-trip.foreign{background:#2a141a;border-color:#5c2933}
+    body.dark .tg-trip.foreign .tg-trip-src{color:#ff8a9b}
+    body.dark .tg-gift{background:#2a141a;border-color:#5c2933}
+    body.dark .tg-gift-desc{color:#cbd5e0}
+    body.dark .tg-gift-val{color:#ff8a9b}
+  </style>
+  ${kpiHtml}
+  <div class="tg-grid">${entHtml}${tripHtml}</div>
+  ${giftHtml}`;
+}
+
+// Personal Finance status chip — pulls net worth, gifts, and outside positions
+// out of Disclosure so the personal side sits at the same eye level as Flags and
+// Prudence on Overview. Hidden when the member's FD is image-only / unparsed.
+function renderPersonalFinanceChip(){
+  const chip=document.getElementById('statusPersonalChip');
+  if(!chip)return;
+  const fd=D.disclosure||{};
+  const s=fd.summary||{};
+  const gifts=fd.schedule_g||[];
+  const positions=fd.schedule_e||[];
+  const hasNW=(s.net_low!=null&&s.net_high!=null)&&(s.net_low!==0||s.net_high!==0);
+  const hasAny=hasNW||gifts.length||positions.length||(fd.schedule_a||[]).length;
+  if(!hasAny){chip.style.display='none';return;}
+  chip.style.display='';
+  const countEl=document.getElementById('statusPersonalCount');
+  const detailEl=document.getElementById('statusPersonalDetail');
+  const fmtNW=n=>(n<0?'−':'')+'$'+(Math.abs(n)>=1e6?(Math.abs(n)/1e6).toFixed(1)+'M':Math.round(Math.abs(n)/1e3)+'K');
+  // headline number = net-worth midpoint when known, else asset midpoint
+  let headline='—', neg=false;
+  if(hasNW){
+    const lo=s.net_low, hi=s.net_high;
+    neg=(lo<0&&hi<0);
+    headline=fmtNW(lo)+' to '+fmtNW(hi);
+  }else if(s.asset_low!=null||s.asset_high!=null){
+    headline=fmtNW(s.asset_low||0)+' assets';
+  }
+  chip.classList.toggle('neg',neg);
+  countEl.textContent=headline;
+  // detail line: gifts + outside positions + headline liability driver
+  const parts=[];
+  if(neg)parts.push('<strong style="color:#9b2335">Negative net worth</strong>');
+  if(gifts.length){
+    // sum gift values from "$30,903.00" style strings
+    let total=0;gifts.forEach(g=>{const m=String(g.value||'').match(/\$([\d,]+)/);if(m)total+=parseInt(m[1].replace(/,/g,''),10);});
+    parts.push(gifts.length+' gift'+(gifts.length===1?'':'s')+(total?' · $'+total.toLocaleString():''));
+  }
+  if(positions.length)parts.push(positions.length+' outside role'+(positions.length===1?'':'s'));
+  detailEl.innerHTML=parts.length?parts.join(' · '):'Disclosure available';
+}
+
+// Cross-entity payees — the universe connective tissue. Surfaces every payee
+// paid by 2+ of this member's entities, with per-entity amounts and combined total.
+function renderCrossEntityVendors(){
+  const body=document.getElementById('crossEntBody');
+  if(!body)return;
+  const sub=document.getElementById('crossEntSub');
+  // collect: name -> {display, byEnt:{k:amt}, total}
+  const bag={};
+  ORDER.forEach(k=>{
+    if(!ST.enabled[k])return;
+    [...(E[k].top_vendors||[]),...(E[k].top_individuals||[])].forEach(r=>{
+      const nk=viNormName(r.name); if(!nk)return;
+      if(!bag[nk])bag[nk]={display:r.name,byEnt:{},total:0};
+      bag[nk].byEnt[k]=(bag[nk].byEnt[k]||0)+r.amt;
+      bag[nk].total+=r.amt;
+      // prefer the longer/more-spelled-out name string for display
+      if(r.name && r.name.length>bag[nk].display.length)bag[nk].display=r.name;
+    });
+  });
+  const shared=Object.values(bag).filter(x=>Object.keys(x.byEnt).length>=2).sort((a,b)=>b.total-a.total);
+  if(sub)sub.textContent=shared.length
+    ? `${shared.length} payee${shared.length===1?'':'s'} appear in 2 or more entities · ranked by combined total`
+    : 'No payees overlap between this member’s entities.';
+  if(!shared.length){
+    body.innerHTML='<div style="padding:18px 4px;color:var(--text-3);font-size:13px">No payees received money from more than one of this member’s entities. Each entity’s spending stays within its own vendor universe.</div>';
+    return;
+  }
+  const top=shared.slice(0,12);
+  const row=x=>{
+    const chips=Object.keys(x.byEnt)
+      .sort((a,b)=>x.byEnt[b]-x.byEnt[a])
+      .map(k=>`<span class="ce-chip" style="background:${META[k].color}1a;color:${META[k].color};border:1px solid ${META[k].color}55"><span class="ce-chip-abbr" style="background:${META[k].color}">${META[k].abbr}</span>${META[k].short} · ${fmtK(x.byEnt[k])}</span>`)
+      .join('');
+    const nm=x.display.length>54?x.display.slice(0,54)+'…':x.display;
+    return `<tr><td style="padding:10px 8px;font-weight:600;color:var(--text)">${nm}</td>
+      <td style="padding:10px 8px"><div class="ce-chips">${chips}</div></td>
+      <td class="num" style="padding:10px 8px;font-weight:700;color:var(--text);white-space:nowrap">${fmt(x.total)}</td></tr>`;
+  };
+  body.innerHTML=`<style>
+    .ce-chips{display:flex;flex-wrap:wrap;gap:6px}
+    .ce-chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:3px 8px 3px 3px;border-radius:999px;line-height:1.4}
+    .ce-chip-abbr{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;color:#fff;font-size:9.5px;font-weight:700}
+    #crossEntCard table{width:100%;border-collapse:collapse;font-size:13px}
+    #crossEntCard thead th{text-align:left;font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;padding:8px;border-bottom:1px solid var(--border)}
+    #crossEntCard thead th.num{text-align:right}
+    #crossEntCard tbody tr{border-bottom:1px solid #f1f3f7}
+    #crossEntCard tbody tr:last-child{border-bottom:none}
+  </style>
+  <table>
+    <thead><tr><th style="width:28%">Payee</th><th>Paid by</th><th class="num" style="width:130px">Combined</th></tr></thead>
+    <tbody>${top.map(row).join('')}</tbody>
+  </table>
+  ${shared.length>12?`<div style="padding:10px 4px 0;font-size:12px;color:var(--text-3)">Showing top 12 of ${shared.length} shared payees — full list lives in the Entities compare view.</div>`:''}`;
+}
+
 function renderOvCharts(){
   destroyOv();
   const ks=ORDER.filter(k=>ST.enabled[k]);
@@ -2144,6 +2319,10 @@ function renderOvCharts(){
     data:{labels:top10.map(r=>r.name.length>22?r.name.slice(0,22)+'…':r.name),datasets:[{data:top10.map(r=>r.amt),backgroundColor:'#2a4f7c',borderRadius:5,borderSkipped:false}]},
     options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.x)}}},
       scales:{x:{ticks:{color:'#a0aec0',callback:v=>fmtK(v)},grid:{color:'#eaecf2'}},y:{ticks:{color:'#4a5568',font:{size:11}},grid:{display:false}}}}});
+
+  renderCrossEntityVendors();
+  renderTravelGifts();
+  renderPersonalFinanceChip();
 
   // SOD category bars
   const sod=E.office;
@@ -2377,6 +2556,27 @@ function drawEntCharts(k){
           tooltip:{callbacks:{label:c=>`${c.label}: ${fmt(c.parsed)}`}}}}});
   }
 }
+// Per-entity connective tissue: for a given entity k, return its payees that
+// also appear in other entities (ranked by combined total), so the entity
+// profile can show "this vendor is also paid by your Leadership PAC" inline
+// without needing the multi-select compare view.
+function entityCrossRefs(k, limit){
+  limit=limit||8;
+  const bag={};
+  ORDER.forEach(kk=>{
+    [...(E[kk].top_vendors||[]),...(E[kk].top_individuals||[])].forEach(r=>{
+      const nk=viNormName(r.name); if(!nk)return;
+      if(!bag[nk])bag[nk]={display:r.name,here:0,others:{},total:0};
+      if(kk===k){bag[nk].here+=r.amt;}
+      else{bag[nk].others[kk]=(bag[nk].others[kk]||0)+r.amt;}
+      bag[nk].total+=r.amt;
+      if(r.name && r.name.length>bag[nk].display.length)bag[nk].display=r.name;
+    });
+  });
+  return Object.values(bag).filter(x=>x.here>0 && Object.keys(x.others).length>=1)
+    .sort((a,b)=>b.total-a.total).slice(0,limit);
+}
+
 function buildEntities(){
   const sel=document.getElementById('entSelector');
   const profs=document.getElementById('entProfiles');
@@ -2461,10 +2661,49 @@ function buildEntities(){
           <div class="cwrap"><canvas id="ecat-${k}"></canvas></div>
         </div>
       </div>
+      ${renderEntCrossRefBlock(k)}
     `;
     profs.appendChild(prof);
   });
   renderEntView();
+}
+
+function renderEntCrossRefBlock(k){
+  const rows=entityCrossRefs(k,8);
+  if(!rows.length)return `<div class="ccard" style="margin-bottom:14px">
+    <div class="ctitle">Connected across the universe</div>
+    <div class="csub">No payees in this entity overlap with any other entity for this member — its vendor universe is self-contained.</div>
+  </div>`;
+  const total=Object.keys(E).length;
+  const here=META[k]?.short||k;
+  const chipsFor=(others)=>Object.keys(others).sort((a,b)=>others[b]-others[a]).map(ok=>{
+    const m=META[ok]; if(!m)return '';
+    return `<span class="ent-xref-chip" onclick="event.stopPropagation();activateEntCard('${ok}');document.getElementById('page-entities').scrollIntoView({behavior:'smooth',block:'start'})" style="background:${m.color}1a;color:${m.color};border:1px solid ${m.color}55"><span class="ent-xref-abbr" style="background:${m.color}">${m.abbr}</span>${m.short} · ${fmtK(others[ok])}</span>`;
+  }).join('');
+  return `<div class="ccard" style="margin-bottom:14px">
+    <style>
+      .ent-xref-chips{display:flex;flex-wrap:wrap;gap:6px}
+      .ent-xref-chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:3px 8px 3px 3px;border-radius:999px;line-height:1.4;cursor:pointer;transition:transform var(--t)}
+      .ent-xref-chip:hover{transform:translateY(-1px)}
+      .ent-xref-abbr{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;color:#fff;font-size:9.5px;font-weight:700}
+      .ent-xref-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+      .ent-xref-table th{text-align:left;font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;padding:8px;border-bottom:1px solid var(--border)}
+      .ent-xref-table th.num{text-align:right}
+      .ent-xref-table tbody tr{border-bottom:1px solid #f1f3f7}
+      .ent-xref-table tbody tr:last-child{border-bottom:none}
+      .ent-xref-table td{padding:10px 8px;vertical-align:top}
+    </style>
+    <div class="ctitle">Connected across the universe</div>
+    <div class="csub">${rows.length} of ${here}'s top payees also flow to other entities · click a chip to open that entity</div>
+    <table class="ent-xref-table">
+      <thead><tr><th style="width:30%">Payee</th><th class="num" style="width:120px">From ${here}</th><th>Also paid by</th></tr></thead>
+      <tbody>${rows.map(r=>{const nm=r.display.length>52?r.display.slice(0,52)+'…':r.display;return `<tr>
+        <td style="font-weight:600;color:var(--text)">${nm}</td>
+        <td class="num" style="font-weight:700;color:var(--text);white-space:nowrap;text-align:right">${fmt(r.here)}</td>
+        <td><div class="ent-xref-chips">${chipsFor(r.others)}</div></td>
+      </tr>`;}).join('')}</tbody>
+    </table>
+  </div>`;
 }
 function tableHtml(k,rows,kind){
   return `<div class="tcard"><div class="tcard-head"><h3>${kind==='ind'?'Individual payees':'Organizational vendors'}</h3><span class="tsub">Top ${rows.length} · click row for transactions</span></div>
@@ -2620,6 +2859,21 @@ const FLAG_REVIEWED_KEY='swalwell_flags_reviewed_v1';
   if(D.flags && __isSwalwell){
     D.flags.push(...legalFlags);
   }
+  // Prudence Phase 3 is not yet built for other members. Hide the Swalwell-only
+  // Prudence content for everyone else and show a placeholder so the tab is
+  // honest about what's available.
+  if(!__isSwalwell){
+    const sw=document.getElementById('prudence-swalwell');
+    if(sw)sw.classList.remove('active');
+    const houseai=document.getElementById('page-houseai');
+    if(houseai && !document.getElementById('prudencePlaceholder')){
+      const ph=document.createElement('div');
+      ph.id='prudencePlaceholder';
+      ph.style.cssText='padding:60px 40px;text-align:center;background:var(--surface);border:1px dashed var(--border);border-radius:var(--radius-lg);margin:24px 0';
+      ph.innerHTML='<div style="font-size:32px;margin-bottom:12px">⚖</div><div style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px">Prudence analysis not yet available for this member</div><div style="font-size:13.5px;color:var(--text-3);max-width:540px;margin:0 auto;line-height:1.6">Prudence is currently published for Rep. Swalwell as the reference case. Per-member Prudence (Phase 3) is in development — each office will get its own MRA Spending &amp; Rules Check and Workplace Structure Screen against the same frameworks.</div>';
+      houseai.appendChild(ph);
+    }
+  }
 })();
 
 // Extended justification + data integrity steps keyed by flag title
@@ -2748,30 +3002,126 @@ function toggleFlagOpen(idx){
   const el=document.getElementById('flag-'+idx);
   if(el)el.classList.toggle('open');
 }
+// Source filter for the unified findings inbox. 'all' = every source.
+window.flagSourceFilter=window.flagSourceFilter||'all';
+
+// Pull Prudence findings out of the rendered #page-houseai DOM. Returns the
+// review+context items only — passes are excluded so the inbox stays actionable.
+function collectPrudenceFindings(){
+  const out=[];
+  // Only scrape the active member's Prudence section. For non-Swalwell members
+  // the Prudence wrapper is display:none and shouldn't leak into the inbox.
+  const active=document.querySelector('#page-houseai .prudence-member-content.active');
+  if(!active)return out;
+  active.querySelectorAll('.check').forEach((el,i)=>{
+    const sev=el.dataset.sev; if(sev==='pass')return;
+    const ttl=el.querySelector('.ttl')?.innerText?.trim()||'(untitled)';
+    const amt=el.querySelector('.amt')?.innerText?.trim()||'';
+    // Body excerpt = first .row's text AFTER its .lbl, so we don't run "Rule"
+    // or "Why this matters" into the sentence as one word.
+    let body='';
+    const firstRow=el.querySelector('.body .row');
+    if(firstRow){
+      const clone=firstRow.cloneNode(true);
+      clone.querySelectorAll('.lbl').forEach(l=>l.remove());
+      body=clone.innerText.trim().replace(/\s+/g,' ');
+    }else{
+      body=(el.querySelector('.body')?.innerText||'').trim().replace(/\s+/g,' ');
+    }
+    const view=el.closest('.shai-view')?.id||'';
+    const id='prud-'+i;
+    if(!el.id)el.id=id;
+    out.push({source:'Prudence', severity: sev==='review'?'NOTABLE':'REVIEW', title:ttl, amt, body:body.slice(0,160), view, targetId: el.id});
+  });
+  return out;
+}
+
 function renderFlags(){
   const counts={HIGH:0,NOTABLE:0,REVIEW:0};
   D.flags.forEach(f=>counts[f.severity]=(counts[f.severity]||0)+1);
-  const visible=flagFilter==='all'?D.flags:D.flags.filter(f=>f.severity===flagFilter);
 
-  // update status row chips
+  // Build unified inbox from three sources.
+  const discFlags=(D.disclosure&&D.disclosure.flags)||[];
+  const prudFindings=collectPrudenceFindings();
+  const unified=[
+    ...D.flags.map((f,i)=>({source:'Data', severity:f.severity, title:f.title, body:f.body, _data:f, _idx:i})),
+    ...discFlags.map(f=>({source:'Disclosure', severity:f.severity, title:f.title, body:f.body})),
+    ...prudFindings,
+  ];
+  const srcCounts={Data:D.flags.length, Disclosure:discFlags.length, Prudence:prudFindings.length};
+  const totalAll=unified.length;
+  // severity counts apply to the source-filtered set so the pills feel honest
+  const sourced=window.flagSourceFilter==='all'?unified:unified.filter(x=>x.source===window.flagSourceFilter);
+  const sevCounts={HIGH:0,NOTABLE:0,REVIEW:0};
+  sourced.forEach(x=>{if(sevCounts[x.severity]!=null)sevCounts[x.severity]++;});
+  const visibleUnified=flagFilter==='all'?sourced:sourced.filter(x=>x.severity===flagFilter);
+
+  // update status row chips — Data Flags chip stays scoped to D.flags (Prudence
+  // and Disclosure already have their own real estate; avoid double-counting).
   const scEl=document.getElementById('statusFlagCount');
   const sdEl=document.getElementById('statusFlagDetail');
   if(scEl)scEl.textContent=D.flags.length+' flags';
   if(sdEl)sdEl.textContent=(counts.HIGH||0)+' HIGH · '+(counts.NOTABLE||0)+' NOTABLE · '+(counts.REVIEW||0)+' REVIEW';
-  // update prudence nav badge
+  // update prudence nav badge + status chip from live DOM counts
+  const active=document.querySelector('#page-houseai .prudence-member-content.active');
+  const allChecks=active?active.querySelectorAll('.check'):[];
+  let pPass=0,pReview=0,pContext=0;
+  allChecks.forEach(c=>{const s=c.dataset.sev;if(s==='pass')pPass++;else if(s==='review')pReview++;else if(s==='context')pContext++;});
+  const pTotalNonPass=pReview+pContext;
   const pb=document.getElementById('prudenceBadge');
-  if(pb)pb.textContent=(2+3); // review + context from MRA screen
+  if(pb){if(pTotalNonPass){pb.textContent=pTotalNonPass;pb.style.display='';}else{pb.style.display='none';}}
+  const pchip=document.getElementById('statusPrudenceChip');
+  if(pchip){
+    if(allChecks.length===0){
+      pchip.style.display='none';
+    }else{
+      pchip.style.display='';
+      document.getElementById('statusPrudenceCount').textContent=pTotalNonPass;
+      document.getElementById('statusPrudenceDetail').innerHTML=`${pReview} for review · ${pContext} context · ${pPass} clean — <strong>0 allegations</strong>`;
+    }
+  }
 
-  // filter bar (inside full section)
-  const filterBarHtml=[{sev:'all',label:'All flags'},{sev:'HIGH',label:'High'},{sev:'NOTABLE',label:'Notable'},{sev:'REVIEW',label:'Review'}]
+  // SOURCE pill bar
+  const srcBar=document.getElementById('flagSourceBar');
+  if(srcBar){
+    const srcPill=(src,label,n)=>`<div class="flag-pill${window.flagSourceFilter===src?' active':''}" data-src="${src}" onclick="window.flagSourceFilter='${src}';renderFlags()">${label}<span class="fc">${n}</span></div>`;
+    srcBar.innerHTML=[
+      srcPill('all','All sources',totalAll),
+      srcPill('Data','Data flags',srcCounts.Data),
+      srcPill('Disclosure','Disclosure',srcCounts.Disclosure),
+      srcPill('Prudence','Prudence',srcCounts.Prudence),
+    ].join('');
+  }
+
+  // SEVERITY pill bar (within the current source filter)
+  const filterBarHtml=[{sev:'all',label:'All severities'},{sev:'HIGH',label:'High'},{sev:'NOTABLE',label:'Notable / Review'},{sev:'REVIEW',label:'Context / Lower'}]
     .map(({sev,label})=>`<div class="flag-pill${flagFilter===sev?' active':''}" data-sev="${sev}" onclick="flagFilter='${sev}';renderFlags()">
-      ${label}<span class="fc">${sev==='all'?D.flags.length:counts[sev]||0}</span>
+      ${label}<span class="fc">${sev==='all'?sourced.length:sevCounts[sev]||0}</span>
     </div>`).join('');
   const fbOv=document.getElementById('flagFilterBarOv');if(fbOv)fbOv.innerHTML=filterBarHtml;
 
   const listEl=document.getElementById('flagListOv');
   if(!listEl)return;
-  listEl.innerHTML=visible.map((f,i)=>{
+  // Compact renderer for Disclosure + Prudence (no FLAG_CHECKS / drill machinery).
+  const compactCard=(x)=>{
+    const goAction=x.source==='Prudence'
+      ? `<span class="flag-action-btn primary" onclick="event.stopPropagation();showPage('houseai',document.querySelector('.nav-tab[data-p=houseai]'));setTimeout(()=>{const v='${x.view}';if(v){const map={'shai-spending':'spending','shai-structure':'structure','shai-situational':'situational','shai-reform':'reform'};const k=map[v];if(k)showShaiView(k,document.getElementById('subpill-'+k));}const el=document.getElementById('${x.targetId}');if(el){el.setAttribute('open','');el.scrollIntoView({behavior:'smooth',block:'center'});}},120)">→ Open in Prudence</span>`
+      : `<span class="flag-action-btn primary" onclick="event.stopPropagation();showPage('disclosure',document.querySelector('.nav-tab[data-p=disclosure]'))">→ Open Disclosure</span>`;
+    return `<div class="flag-card ${x.severity}">
+      <div class="flag-summary" style="cursor:default">
+        <span class="flag-sev">${x.severity}</span>
+        <div style="flex:1;min-width:0">
+          <div class="flag-title"><span class="flag-src-badge ${x.source}">${x.source}</span>${x.title}${x.amt?` <span style="color:var(--text-3);font-weight:600;font-size:11.5px">· ${x.amt}</span>`:''}</div>
+          <div class="flag-preview">${(x.body||'').slice(0,160)}${(x.body||'').length>160?'…':''}</div>
+        </div>
+        <div style="flex:none">${goAction}</div>
+      </div>
+    </div>`;
+  };
+  listEl.innerHTML=visibleUnified.map((x)=>{
+    if(x.source!=='Data')return compactCard(x);
+    // Full-feature Data flag card (original behavior)
+    const f=x._data; const i=x._idx;
     const idx=D.flags.indexOf(f);
     const rev=flagReviewed.has(idx);
     const hasDrill=f.drill&&E[f.drill.entity];
@@ -2798,7 +3148,7 @@ function renderFlags(){
       <div class="flag-summary" onclick="toggleFlagOpen(${idx})">
         <span class="flag-sev">${f.severity}</span>
         <div style="flex:1;min-width:0">
-          <div class="flag-title">${f.title}</div>
+          <div class="flag-title"><span class="flag-src-badge Data">Data</span>${f.title}</div>
           <div class="flag-preview">${f.body.slice(0,90)}${f.body.length>90?'…':''}</div>
         </div>
         ${rev?'<span style="font-size:11px;color:#2d6a4f;font-weight:600;flex:none">✓ Reviewed</span>':''}

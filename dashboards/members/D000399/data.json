@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-06-07T08:06:39",
+ "generated_at": "2026-06-11T14:06:04",
  "schema": "member-v1",
  "member": {
   "bioguide_id": "D000399",
@@ -9459,7 +9459,20 @@
        "amount": 263.94,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2015": 935.62,
+      "2016": 168411.0,
+      "2017": 168411.0,
+      "2018": 168411.0,
+      "2019": 168411.0,
+      "2020": 173930.53,
+      "2021": 184624.45,
+      "2022": 202304.43,
+      "2023": 212100.0,
+      "2024": 212175.56,
+      "2025": 206264.68
+     }
     },
     {
      "name": "CISSELL AFTON M",
@@ -9817,7 +9830,18 @@
        "amount": 56424.99,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2017": 19061.12,
+      "2018": 50377.82,
+      "2019": 63361.09,
+      "2020": 70500.02,
+      "2021": 89305.53,
+      "2022": 114888.89,
+      "2023": 141333.37,
+      "2024": 153388.91,
+      "2025": 174399.99
+     }
     },
     {
      "name": "GSA PUBLIC BUILDING SERVICE",
@@ -10175,7 +10199,8 @@
        "amount": 6703.53,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {}
     },
     {
      "name": "TAU JOCELYN D.",
@@ -10379,7 +10404,14 @@
        "amount": 35000.01,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2021": 583.33,
+      "2022": 125000.0,
+      "2023": 156601.54,
+      "2024": 169388.88,
+      "2025": 151222.26
+     }
     },
     {
      "name": "LEIDOS DIGITAL SOLUTIONS INC",
@@ -10737,7 +10769,8 @@
        "amount": 400.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {}
     },
     {
      "name": "RICKLING MARK T.",
@@ -10948,7 +10981,14 @@
        "amount": 27916.66,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2021": 71111.14,
+      "2022": 89722.22,
+      "2023": 99222.21,
+      "2024": 104444.4,
+      "2025": 111083.33
+     }
     },
     {
      "name": "VELIZ MARYELLEN G",
@@ -11229,7 +11269,16 @@
        "amount": 10000.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2015": 6617.89,
+      "2016": 48066.63,
+      "2017": 61544.4,
+      "2018": 73622.22,
+      "2019": 79999.96,
+      "2020": 81277.75,
+      "2021": 60833.33
+     }
     },
     {
      "name": "MOLOF DOUGLAS W",
@@ -11545,7 +11594,17 @@
        "amount": 15000.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2015": 238.89,
+      "2016": 48038.85,
+      "2017": 55027.81,
+      "2018": 58266.63,
+      "2019": 61177.74,
+      "2020": 62000.0,
+      "2021": 60000.0,
+      "2022": 48905.55
+     }
     },
     {
      "name": "STOTESBERY KATHERINE A.",
@@ -11868,7 +11927,16 @@
        "amount": 22500.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2017": 17475.02,
+      "2018": 50994.47,
+      "2019": 59377.76,
+      "2020": 70944.47,
+      "2021": 73833.36,
+      "2022": 98888.9,
+      "2023": 18083.34
+     }
     },
     {
      "name": "DE LA PENA SEBASTIAN",
@@ -12065,7 +12133,14 @@
        "amount": 24999.99,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2021": 15244.45,
+      "2022": 63227.78,
+      "2023": 78388.87,
+      "2024": 86694.46,
+      "2025": 93277.74
+     }
     },
     {
      "name": "HON LLOYD DOGGETT",
@@ -12423,7 +12498,8 @@
        "amount": 342.8,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {}
     },
     {
      "name": "TORETTO COURTNEY B",
@@ -12767,7 +12843,18 @@
        "amount": 15500.01,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2015": 2485.56,
+      "2016": 14327.76,
+      "2017": 34997.22,
+      "2018": 43511.1,
+      "2019": 31666.62,
+      "2020": 46516.63,
+      "2021": 50066.63,
+      "2022": 64705.56,
+      "2023": 6372.22
+     }
     },
     {
      "name": "BATZ-FLORES VANESA L.",
@@ -12971,7 +13058,14 @@
        "amount": 17499.99,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2021": 18844.45,
+      "2022": 49711.11,
+      "2023": 63433.31,
+      "2024": 70016.63,
+      "2025": 74611.07
+     }
     },
     {
      "name": "UNITED STATES POSTAL SERVICE",
@@ -13329,7 +13423,8 @@
        "amount": 1676.38,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {}
     },
     {
      "name": "HARRIS ANGELA N.",
@@ -13512,7 +13607,13 @@
        "amount": 18750.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2022": 34786.12,
+      "2023": 71288.89,
+      "2024": 73266.67,
+      "2025": 77083.33
+     }
     },
     {
      "name": "TORRES ALEXIS I.",
@@ -13639,7 +13740,12 @@
        "amount": 2187.5,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2023": 60111.13,
+      "2024": 92555.57,
+      "2025": 86979.15
+     }
     },
     {
      "name": "SMITH JILLIAN B.",
@@ -13955,7 +14061,12 @@
        "amount": 22500.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2023": 56097.25,
+      "2024": 78388.9,
+      "2025": 85333.31
+     }
     },
     {
      "name": "ZUNIGA STEPHANIE",
@@ -14138,7 +14249,14 @@
        "amount": 2000.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2021": 16644.46,
+      "2022": 50044.43,
+      "2023": 63433.31,
+      "2024": 70016.63,
+      "2025": 19833.32
+     }
     },
     {
      "name": "GOLDEN PRISCILLA",
@@ -14335,7 +14453,14 @@
        "amount": 3000.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2017": 39494.48,
+      "2018": 44022.23,
+      "2019": 47000.0,
+      "2020": 50777.8,
+      "2021": 25138.9
+     }
     },
     {
      "name": "MATA JOHANA C",
@@ -14518,7 +14643,14 @@
        "amount": 4000.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2019": 23622.2,
+      "2020": 39533.29,
+      "2021": 46538.88,
+      "2022": 58322.21,
+      "2023": 31416.66
+     }
     },
     {
      "name": "BERLTEX REAL ESTATE HOLDING INC",
@@ -14876,7 +15008,8 @@
        "amount": 2620.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {}
     },
     {
      "name": "RUBOSS DANIEL J",
@@ -15024,7 +15157,13 @@
        "amount": 4000.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2018": 23405.55,
+      "2019": 75516.62,
+      "2020": 82688.86,
+      "2021": 9555.56
+     }
     },
     {
      "name": "CALAWAY LEE A",
@@ -15179,7 +15318,13 @@
        "amount": 14499.99,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2015": 7888.89,
+      "2016": 62016.63,
+      "2017": 59999.95,
+      "2018": 31194.44
+     }
     },
     {
      "name": "DC TELECOM TOLLS (TRANSFER)",
@@ -15537,7 +15682,8 @@
        "amount": 800.31,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {}
     },
     {
      "name": "GURAK ERIN E",
@@ -15657,7 +15803,12 @@
        "amount": 16250.01,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2018": 40377.76,
+      "2019": 62766.71,
+      "2020": 50388.92
+     }
     },
     {
      "name": "DEPT OF HOMELAND SECURITY",
@@ -16015,7 +16166,8 @@
        "amount": 202.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {}
     },
     {
      "name": "GUERRA ABIGAIL",
@@ -16142,7 +16294,13 @@
        "amount": 15750.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2022": 3120.0,
+      "2023": 20750.02,
+      "2024": 55361.1,
+      "2025": 64027.75
+     }
     },
     {
      "name": "HUNT MEGHAN A.",
@@ -16241,7 +16399,12 @@
        "amount": 19333.33,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2023": 213.89,
+      "2024": 66022.24,
+      "2025": 75222.21
+     }
     },
     {
      "name": "SMITH DANIEL J",
@@ -16333,7 +16496,12 @@
        "amount": 5000.0,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2016": 12458.34,
+      "2017": 73277.8,
+      "2018": 52111.08
+     }
     },
     {
      "name": "TYLER AMANDA R",
@@ -16432,7 +16600,11 @@
        "amount": 8353.5,
        "pdf": ""
       }
-     ]
+     ],
+     "by_year": {
+      "2015": 7805.56,
+      "2016": 126395.14
+     }
     }
    ],
    "top_vendors": [],
@@ -16866,682 +17038,5 @@
    "id": "OFFICE-D000399",
    "file": "data/sod_raw/*DETAIL*.csv"
   }
- ],
- "disclosure": {
-  "source_url": "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2024/10066436.pdf",
-  "filing_id": "10066436",
-  "pages": 14,
-  "header": {
-   "name": "Hon. Lloyd Doggett",
-   "status": "Member",
-   "state_district": "TX37",
-   "filing_type": "Annual Report",
-   "filing_year": "2024",
-   "filing_date": "08/12/2025",
-   "filing_id": "10066436"
-  },
-  "counts": {
-   "schedule_a": 37,
-   "schedule_b": 40,
-   "schedule_c": 2,
-   "schedule_d": 0,
-   "schedule_e": 0,
-   "schedule_g": 0,
-   "schedule_h": 1,
-   "agreements": 0
-  },
-  "schedule_a": [
-   {
-    "asset": "Akre Focus - Institutional (AKRIX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$250,001 - $500,000",
-    "income_type": "Capital Gains",
-    "income": "$15,001 - $50,000"
-   },
-   {
-    "asset": "Artisan High Income Fund - Institutional Shares (APHFX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$100,001 - $250,000",
-    "income_type": "Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "Berkshire Hathaway Inc. New (BRK.B)",
-    "type": "ST",
-    "owner": null,
-    "value": "$50,001 - $100,000",
-    "income_type": "None",
-    "income": null
-   },
-   {
-    "asset": "Brown Advisory Global Leaders Investor (BAFLX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$500,001 - $1,000,000",
-    "income_type": "Capital Gains, Dividends",
-    "income": "$2,501 - $5,000"
-   },
-   {
-    "asset": "Brown Advisory Sustainable Growth Fd Inst Shs (BAFWX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$1,000,001 - $5,000,000",
-    "income_type": "Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "Calvert Small Cap Fund Class I (CSVIX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$500,001 - $1,000,000",
-    "income_type": "Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "Coca-Cola Company (KO)",
-    "type": "ST",
-    "owner": null,
-    "value": "$100,001 - $250,000",
-    "income_type": "Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "Congressional Federal Credit Union",
-    "type": "BA",
-    "owner": null,
-    "value": "$15,001 - $50,000",
-    "income_type": "Interest",
-    "income": "$1 - $200"
-   },
-   {
-    "asset": "Edgewood Growth Fund Insti (EGFIX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$500,001 - $1,000,000",
-    "income_type": "Capital Gains, Dividends",
-    "income": "$100,001 - $1,000,000"
-   },
-   {
-    "asset": "Hartford Schroders International Stock Fund (SCIEX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$250,001 - $500,000",
-    "income_type": "Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "Home Depot, Inc. (HD)",
-    "type": "ST",
-    "owner": null,
-    "value": "$500,001 - $1,000,000",
-    "income_type": "Dividends",
-    "income": "$15,001 - $50,000"
-   },
-   {
-    "asset": "Johnson & Johnson (JNJ)",
-    "type": "ST",
-    "owner": null,
-    "value": "$100,001 - $250,000",
-    "income_type": "Dividends",
-    "income": "$2,501 - $5,000"
-   },
-   {
-    "asset": "Metropolitan West Unconstrained Bond Fd Cl I Shs (MWCIX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$100,001 - $250,000",
-    "income_type": "Capital Gains, Dividends",
-    "income": "$15,001 - $50,000"
-   },
-   {
-    "asset": "Mutual Shares Corporation Cl Z (MUTHX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$250,001 - $500,000",
-    "income_type": "Capital Gains, Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "Nuveen Intermediate Duration Municipal Bond Fund Class R (NUVBX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$100,001 - $250,000",
-    "income_type": "Capital Gains, Dividends",
-    "income": "$2,501 - $5,000"
-   },
-   {
-    "asset": "Oakmark International Fund Investor Class (OAKIX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$500,001 - $1,000,000",
-    "income_type": "Capital Gains, Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "PPG Industries, Inc. (PPG)",
-    "type": "ST",
-    "owner": null,
-    "value": "$250,001 - $500,000",
-    "income_type": "Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "Prosperity Bank",
-    "type": "BA",
-    "owner": null,
-    "value": "$15,001 - $50,000",
-    "income_type": "Interest",
-    "income": "$201 - $1,000"
-   },
-   {
-    "asset": "Rental Property #3",
-    "type": "RP",
-    "owner": null,
-    "value": "$1,000,001 - $5,000,000",
-    "income_type": "Rent",
-    "income": "$15,001 - $50,000"
-   },
-   {
-    "asset": "Schwab International Index Fund - Select Shares (SWISX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$250,001 - $500,000",
-    "income_type": "Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "Schwab Premier Bank",
-    "type": "BA",
-    "owner": null,
-    "value": "$50,001 - $100,000",
-    "income_type": "Dividends",
-    "income": "$201 - $1,000"
-   },
-   {
-    "asset": "Schwab Short-Term Bond Index Fund",
-    "type": "MF",
-    "owner": null,
-    "value": "$15,001 - $50,000",
-    "income_type": "Dividends",
-    "income": "$2,501 - $5,000"
-   },
-   {
-    "asset": "TIAA-CREF Retirement - Stock Fund",
-    "type": "MF",
-    "owner": null,
-    "value": "$50,001 - $100,000",
-    "income_type": "Tax-Deferred",
-    "income": null
-   },
-   {
-    "asset": "TIAA-CREF Retirement- Real Estate Fund",
-    "type": "MF",
-    "owner": null,
-    "value": "$50,001 - $100,000",
-    "income_type": "Tax-Deferred",
-    "income": null
-   },
-   {
-    "asset": "Vanguard Extended Market ETF (VXF)",
-    "type": "EF",
-    "owner": null,
-    "value": "$100,001 - $250,000",
-    "income_type": "Dividends",
-    "income": "$1,001 - $2,500"
-   },
-   {
-    "asset": "Vanguard Growth ETF (VUG)",
-    "type": "EF",
-    "owner": null,
-    "value": "$1,000,001 - $5,000,000",
-    "income_type": "Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "Vanguard Intermediate-Term Investment Grade Fund Admiral Shrs (VFIDX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$100,001 - $250,000",
-    "income_type": "Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "Vanguard Limited-Term Tax-Exempt Fd Admiral Shs (VMLUX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$500,001 - $1,000,000",
-    "income_type": "Capital Gains, Dividends",
-    "income": "$15,001 - $50,000"
-   },
-   {
-    "asset": "Vanguard Mid-Cap Value ETF (VOE)",
-    "type": "EF",
-    "owner": null,
-    "value": "$500,001 - $1,000,000",
-    "income_type": "Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "Vanguard Money Market Reserves Federal Money Market Fund (VMFXX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$15,001 - $50,000",
-    "income_type": "Dividends",
-    "income": "$201 - $1,000"
-   },
-   {
-    "asset": "Vanguard PRIMECAP Fund Admiral Shares (VPMAX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$1,000,001 - $5,000,000",
-    "income_type": "Capital Gains, Dividends",
-    "income": "$100,001 - $1,000,000"
-   },
-   {
-    "asset": "Vanguard Short Term Investment-Grade Admiral (VFSUX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$100,001 - $250,000",
-    "income_type": "Dividends",
-    "income": "$2,501 - $5,000"
-   },
-   {
-    "asset": "Vanguard Small-Cap ETF (VB)",
-    "type": "EF",
-    "owner": null,
-    "value": "$250,001 - $500,000",
-    "income_type": "Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "Vanguard Total Bond Market Index Admiral (VBTLX)",
-    "type": "MF",
-    "owner": null,
-    "value": "$250,001 - $500,000",
-    "income_type": "Dividends",
-    "income": "$5,001 - $15,000"
-   },
-   {
-    "asset": "Vanguard U.S. Growth Fund Admiral",
-    "type": "MF",
-    "owner": null,
-    "value": "$500,001 - $1,000,000",
-    "income_type": "Capital Gains, Dividends",
-    "income": "$15,001 - $50,000"
-   },
-   {
-    "asset": "Vanguard Windsor II Fund",
-    "type": "MF",
-    "owner": null,
-    "value": "$250,001 - $500,000",
-    "income_type": "Capital Gains, Dividends",
-    "income": "$15,001 - $50,000"
-   },
-   {
-    "asset": "WisdomTree US Dividend Growth ETF",
-    "type": "EF",
-    "owner": null,
-    "value": "$1,000,001 - $5,000,000",
-    "income_type": "Capital Gains, Dividends",
-    "income": "$15,001 - $50,000"
-   }
-  ],
-  "schedule_b": [
-   {
-    "asset": "Johnson & Johnson Common Stock (JNJ)",
-    "type": "ST",
-    "owner": null,
-    "date": "03/05/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "PPG Industries, Inc. Common Stock (PPG)",
-    "type": "ST",
-    "owner": null,
-    "date": "03/12/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Coca-Cola Company (KO)",
-    "type": "ST",
-    "owner": null,
-    "date": "04/01/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Home Depot, Inc. (HD)",
-    "type": "ST",
-    "owner": null,
-    "date": "06/13/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "International Business Machines Corporation Common Stock (IBM)",
-    "type": "ST",
-    "owner": null,
-    "date": "06/10/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Coca-Cola Company (KO)",
-    "type": "ST",
-    "owner": null,
-    "date": "07/01/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Home Depot, Inc. (HD)",
-    "type": "ST",
-    "owner": null,
-    "date": "09/12/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "International Business Machines Corporation Common Stock (IBM)",
-    "type": "ST",
-    "owner": null,
-    "date": "09/10/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Coca-Cola Company (KO)",
-    "type": "ST",
-    "owner": null,
-    "date": "10/01/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Coca-Cola Company (KO)",
-    "type": "ST",
-    "owner": null,
-    "date": "12/16/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "PPG Industries, Inc. Common Stock (PPG)",
-    "type": "ST",
-    "owner": null,
-    "date": "12/12/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Johnson & Johnson Common Stock (JNJ)",
-    "type": "ST",
-    "owner": null,
-    "date": "12/10/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "3800 Kennelwood",
-    "type": "RP",
-    "owner": null,
-    "date": "05/20/2024",
-    "tx_type": "S",
-    "amount": "$1,000,001 - $5,000,000"
-   },
-   {
-    "asset": "Akre Focus - Institutional (AKRIX)",
-    "type": "MF",
-    "owner": null,
-    "date": "10/02/2024",
-    "tx_type": "S (partial)",
-    "amount": "$50,001 - $100,000"
-   },
-   {
-    "asset": "American Century Ultra Investor Class (TWCUX)",
-    "type": "MF",
-    "owner": null,
-    "date": "12/17/2024",
-    "tx_type": "P",
-    "amount": "$15,001 - $50,000"
-   },
-   {
-    "asset": "Brown Advisory Sustainable Growth Fd Inst Shs (BAFWX)",
-    "type": "MF",
-    "owner": null,
-    "date": "12/13/2024",
-    "tx_type": "P",
-    "amount": "$50,001 - $100,000"
-   },
-   {
-    "asset": "Mutual Shares Corporation Cl Z (MUTHX)",
-    "type": "MF",
-    "owner": null,
-    "date": "12/20/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Schwab International Index Fund - Select Shares (SWISX)",
-    "type": "MF",
-    "owner": null,
-    "date": "12/15/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Schwab Short-Term Bond Index Fund (SWSBX)",
-    "type": "MF",
-    "owner": null,
-    "date": "12/03/2024",
-    "tx_type": "S (partial)",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Brown Advisory Small-Cap Fundamental Value Fund - Institutional Shares (BAUUX)",
-    "type": "MF",
-    "owner": null,
-    "date": "12/20/2024",
-    "tx_type": "P",
-    "amount": "$100,001 - $250,000"
-   },
-   {
-    "asset": "Oakmark International Fund Investor Class (OAKIX)",
-    "type": "MF",
-    "owner": null,
-    "date": "05/20/2024",
-    "tx_type": "S (partial)",
-    "amount": "$15,001 - $50,000"
-   },
-   {
-    "asset": "Vanguard Specialized Portfolios Energy Fund (VGENX)",
-    "type": "MF",
-    "owner": null,
-    "date": "12/30/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Vanguard PRIMECAP Fund Admiral Shares (VPMAX)",
-    "type": "MF",
-    "owner": null,
-    "date": "12/18/2024",
-    "tx_type": "P",
-    "amount": "$100,001 - $250,000"
-   },
-   {
-    "asset": "Vanguard U.S. Growth Fund Admiral Shares (VWUAX)",
-    "type": "MF",
-    "owner": null,
-    "date": "12/18/2024",
-    "tx_type": "P",
-    "amount": "$15,001 - $50,000"
-   },
-   {
-    "asset": "Vanguard Money Market Reserves Federal Money Market Fund (VMFXX)",
-    "type": "MF",
-    "owner": null,
-    "date": "12/18/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Hartford Schroders International Stock Fund (SCIEX)",
-    "type": "MF",
-    "owner": null,
-    "date": "03/18/2024",
-    "tx_type": "P",
-    "amount": "$50,001 - $100,000"
-   },
-   {
-    "asset": "PIMCO Income Fund Insti Class (PIMIX)",
-    "type": "MF",
-    "owner": null,
-    "date": "12/20/2024",
-    "tx_type": "P",
-    "amount": "$15,001 - $50,000"
-   },
-   {
-    "asset": "Schwab Prime Advantage Money Fund- Investor Shares (SWVXX)",
-    "type": "MF",
-    "owner": null,
-    "date": "07/02/2024",
-    "tx_type": "P",
-    "amount": "$15,001 - $50,000"
-   },
-   {
-    "asset": "Schwab Prime Advantage Money Fund- Investor Shares (SWVXX)",
-    "type": "MF",
-    "owner": null,
-    "date": "03/18/2024",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Schwab U.S. Aggregate Bond Index Fund (SWAGX)",
-    "type": "MF",
-    "owner": null,
-    "date": "10/04/2024",
-    "tx_type": "S (partial)",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Vanguard Specialized Portfolios, Vanguard Dividend Growth Fund (VDIGX)",
-    "type": "MF",
-    "owner": null,
-    "date": "03/27/2025",
-    "tx_type": "P",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Vanguard Long-Term Investment Grade Fund Admiral Shrs (VWETX)",
-    "type": "MF",
-    "owner": null,
-    "date": "12/31/2024",
-    "tx_type": "S (partial)",
-    "amount": "$100,001 - $250,000"
-   },
-   {
-    "asset": "Vanguard Intermediate-Term Tax-Exempt Fd Admiral Shs (VWIUX)",
-    "type": "MF",
-    "owner": null,
-    "date": "05/10/2024",
-    "tx_type": "S (partial)",
-    "amount": "$15,001 - $50,000"
-   },
-   {
-    "asset": "Vanguard Limited-Term Tax-Exempt Fd Admiral Shs (VMLUX)",
-    "type": "MF",
-    "owner": null,
-    "date": "04/10/2024",
-    "tx_type": "S (partial)",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "Vanguard Limited-Term Tax-Exempt Fd Admiral Shs (VMLUX)",
-    "type": "MF",
-    "owner": null,
-    "date": "04/10/2024",
-    "tx_type": "S (partial)",
-    "amount": "$1,001 - $15,000"
-   },
-   {
-    "asset": "NYLI PineStone International Equity Fund Class I (FCIUX)",
-    "type": "MF",
-    "owner": null,
-    "date": "03/18/2024",
-    "tx_type": "S",
-    "amount": "$15,001 - $50,000"
-   },
-   {
-    "asset": "Vanguard Extended Market Index Fd Admiral Shs (VEXAX)",
-    "type": "MF",
-    "owner": null,
-    "date": "03/05/2024",
-    "tx_type": "E",
-    "amount": "$100,001 - $250,000"
-   },
-   {
-    "asset": "Vanguard Mid-Cap Value Index Fd Admiral (VMVAX)",
-    "type": "MF",
-    "owner": null,
-    "date": "03/05/2024",
-    "tx_type": "E",
-    "amount": "$500,001 - $1,000,000"
-   },
-   {
-    "asset": "Vanguard Total International Stock Index Fd Admiral (VTIAX)",
-    "type": "MF",
-    "owner": null,
-    "date": "03/05/2024",
-    "tx_type": "E",
-    "amount": "$500,001 - $1,000,000"
-   },
-   {
-    "asset": "Vanguard Extended Market ETF (VXF)",
-    "type": "EF",
-    "owner": null,
-    "date": "03/05/2024",
-    "tx_type": "E",
-    "amount": "$100,001 - $250,000"
-   }
-  ],
-  "schedule_c": [
-   {
-    "source": "Texas ERS/JRS State Legislative/Judicial Annuity $69,995.00",
-    "type": null,
-    "amount": null
-   },
-   {
-    "source": "Education Consultant",
-    "type": "Spouse",
-    "amount": "N/A"
-   }
-  ],
-  "schedule_d": [],
-  "schedule_e": [],
-  "schedule_g": [],
-  "schedule_h": [
-   [
-    "Denmark (MECEA)",
-    "05/24/2024",
-    "06/04/2024",
-    "Washington, D.C. - Copenhagen - Washington, D.C.",
-    "4"
-   ]
-  ],
-  "agreements": [],
-  "summary": {
-   "asset_low": 12060037,
-   "asset_high": 39600000,
-   "liability_low": 0,
-   "liability_high": 0,
-   "net_low": 12060037,
-   "net_high": 39600000
-  }
- }
+ ]
 }

@@ -13,6 +13,60 @@ short title, and a plain-language description of what changed and why.
 
 ---
 
+## 2026-06-11 — Agent Specification v2: Prudence becomes a team, with adversarial review
+
+**What changed:** The agent spec (`_prudence/PRUDENCE_AGENT.md`) was revised to v2,
+same day as v1, with four additions. (1) **Evidence & Retrieval Protocol (§6)** —
+rules may only be cited as located verbatim quotes; every number must be re-traced
+from source at writing time; no falling back to general knowledge. (2)
+**Corroboration & Escalation Doctrine (§7)** — each severity now has explicit proof
+requirements; findings that don't meet them are demoted or withdrawn, and review
+can only confirm or demote, never escalate. (3) **The Agent Roster & Orchestration
+(§8)** — Prudence now runs as a team of six real subagents: three Analysts (rules,
+structure, composition) draft findings independently and in parallel, then every
+finding must survive an adversarial **Review Chain** — an Advocate who constructs
+the strongest innocent explanation and tries to kill the finding, an Equity Auditor
+who independently runs the party-flip and allegation scans, and a Citation Verifier
+who re-traces every quote and number. Surviving challenges are published alongside
+the finding, not hidden. (4) **Module 2 expanded** into the Workplace Structure &
+Human-Risk Screen with two lenses: the existing risk-factor lens (EEOC 2016,
+Sinnamon, CRS R46262) and a new healthy-structure lens that will compare offices
+against peer-reviewed research on successful workplace structures and why they
+work. The healthy-structure lens is **not-assessable until that literature is
+filed** under `_research/papers/workplace-structures/` — Prudence does not reason
+from general knowledge. Output schema bumped to `prudence-v2` (findings now carry
+a published `review` block recording the challenge and its answer).
+
+**Why:** Nothing should reach a human reviewer that has not been independently
+challenged first. Separating the analysts from the reviewers — as distinct agents
+that cannot see each other's reasoning — makes the challenge genuinely
+independent, and embodies the Charter's plurality-of-considerations principle in
+the system's own architecture. The healthy-structure lens gives the workplace
+screen its constructive counterpart: knowing what protective structures look
+like, not only what dangerous ones do.
+
+---
+
+## 2026-06-11 — Established the Prudence Agent Specification (v1)
+
+**What changed:** Prudence gained an operational layer beneath the Charter:
+`_prudence/PRUDENCE_AGENT.md`. It defines the per-member analysis pipeline — the
+run command ("run Prudence on <member>"), the four analysis modules (MRA Spending
+& Rules Check; Workplace Structure & Power-Imbalance Screen; Vendor Composition
+Screen; platform-level Reform Options), the mandatory self-checks (including the
+party-flip test), the `prudence-v1` output schema written to each member's
+`prudence.js`/`prudence.json`, the shared severity vocabulary, and the verbatim
+module disclaimers. The spec is self-contained so it can later serve as the
+system prompt for a headless automated pipeline.
+
+**Why:** Until now the Prudence analysis was hand-authored and existed for one
+member only. This spec turns Prudence into a repeatable per-member analysis that
+applies the same rules, framing, and honesty requirements to every member alike —
+including regenerating the original member through the same pipeline. The Charter
+remains binding and prevails over the spec wherever the two could conflict.
+
+---
+
 ## 2026-06-06 — Added retrieval & AI-integrity frameworks; filed the founding encyclical
 
 **What changed:** Five reference documents that Prudence should reason within were

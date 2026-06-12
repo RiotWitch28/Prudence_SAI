@@ -25,6 +25,17 @@ it is the operating constitution and governs everything below.
 - Supporting reference: `_reference/`
 - Data: `data/`, `_source-data/`
 
+### Command: "run Prudence on <member>" / "run Prudence on all members"
+The per-member analysis pipeline. Follow **`_prudence/PRUDENCE_AGENT.md`** (the
+agent spec, v2) exactly. Prudence runs as a team of real subagents (defined in
+`Documents/Claude/.claude/agents/prudence-*.md`): three Analysts draft module
+findings in parallel, then every finding must survive the Review Chain
+(`prudence-advocate`, `prudence-equity-auditor`, `prudence-citation-verifier`)
+per the spec's survival rules (§8.3). The orchestrator (main session) is the only
+writer: `dashboards/members/<bioguide>/prudence.js` + `.json` (never into
+`data.js`/`data.json`), changelog for major changes, then report — including what
+the Review Chain withdrew or demoted.
+
 ### Command: "refresh the Prudence analysis"
 When the user says this, follow the workflow in Charter §4:
 1. Re-read `_reference/House Admin/` and `_research/papers/`.
